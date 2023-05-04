@@ -7,14 +7,12 @@
     border: 1px solid;
     transition: 0.2s;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    font-weight: lighter;
 }
 
 .join-button:hover {
     background-color: black;
     color: white;
     border-color: white;
-    font-weight: lighter;
     box-shadow: 0 0 15px black;
 }
 

@@ -1,4 +1,4 @@
-.join-button{
+#join-button{
     padding-top: 5px;
     padding-bottom: 5px;
     padding-left: 15px;
@@ -9,13 +9,13 @@
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-.join-button:hover {
+#join-button:hover {
     background-color: black;
     color: white;
     border-color: white;
     box-shadow: 0 0 15px black;
 }
 
-.update-message {
+#update-message {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }

@@ -102,14 +102,3 @@
       float: none;
     }
   }
-
-  @media screen and (max-width: 400px) {
-    .sidebar {
-      width: 100%;
-      display: flex;
-    }
-
-    .sidebar div:nth-of-type(1) {flex-grow: 1;}
-    .sidebar div:nth-of-type(2) {flex-grow: 1;}
-
-  }

@@ -117,3 +117,7 @@
   .second-playlist {
     margin-top: 20px;
   }
+
+  .playlist {
+    border-radius: 10px;
+  }

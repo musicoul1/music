@@ -6,8 +6,8 @@
   --header-height: 3rem;
   
   /*===== Colores =====*/
-  --first-color: #3664F4;
-  --dark-color: #070D1F;
+  --first-color: #a80000;
+  --dark-color: #000000;
   --dark-color-alt: #282B3A;
   --white-color: #E6E7E9;
 
@@ -131,8 +131,8 @@ img {
   cursor: pointer;
 }
 
-.nav__img {
-  /* display: -webkit-box;
+/* .nav__img {
+  display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
@@ -144,8 +144,8 @@ img {
   height: 56px;
   background-color: var(--first-color);
   border-radius: 50%;
-  overflow: hidden; */
-}
+  overflow: hidden;
+} */
 
 .nav__img img {
   width: 46px;

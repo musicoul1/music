@@ -20,6 +20,22 @@
   --z-fixed: 100;
 }
 
+.jm_btn{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-top: 30px;
+  margin: 20px;
+}
+
+.jm_content{
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  background-color: black;
+  color: white;
+  border: 1px solid white 
+}
+
 
 @media screen and (min-width: 768px) {
   :root {

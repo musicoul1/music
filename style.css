@@ -1,0 +1,89 @@
+*{
+    margin: 0%;
+    padding: 0%;
+}
+
+nav{
+    background-color: black;
+    height: 60px;
+    width: 100%;
+}
+
+.nav_musicoulname{
+    height: 20px;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.nav_more{
+    float: right;
+    height: 25px;
+    margin-top: 16px;   
+    margin-right: 20px;
+}
+
+/* Side Navigation Menu */
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: #111; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  }
+  
+/* The navigation menu links */
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+    color: #f1f1f1;
+  }
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+
+  /* Sidebar Logo */
+.sidebar_logo {
+    margin-top: 0px;
+    height: 60px;
+    margin-left: 30px;
+    
+  } 
+
+.sidebar_brandname{
+    color: white;
+    font-family: 'montserrat';
+    font-weight: 500;
+    font-size: 18px;
+    margin-top: 10px;
+    margin-left: 30px;
+    margin-bottom: 30px;
+}
+
+.sidebar_links {
+    text-decoration: none;
+    font-family: montserrat, monospace;
+    font-family: 'poppins';
+}
+
+.sidebar_names{
+    font-size: 18px;
+}

@@ -87,3 +87,44 @@ nav{
 .sidebar_names{
     font-size: 18px;
 }
+
+/* Announcement Tab */
+
+.an_tab{
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: fit-content;
+  padding: 15px;
+  background-color: rgb(230, 230, 230);
+  border-radius: 50px;
+  margin-top: 10px;
+  margin-left: 2.5%;
+}
+
+.an_heading{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.an_head{
+  font-family: montserrat;
+  font-weight: 1000;
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.an_content{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.an_contenttext{
+  font-family: montserrat;
+  font-weight: 500;
+}

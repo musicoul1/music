@@ -96,7 +96,6 @@ nav{
   align-items: center;
   width: 95%;
   height: auto;
-  padding: 0px;
   background-color: rgb(230, 230, 230);
   border-radius: 50px;
   margin-top: 16px;
@@ -127,6 +126,8 @@ nav{
 }
 
 .an_contenttext{
+  text-align: center;
   font-family: montserrat;
   font-weight: 500;
+  margin: 0px 16px 16px 16px;
 }

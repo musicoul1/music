@@ -95,9 +95,9 @@ nav{
   justify-content: center;
   align-items: center;
   width: 90%;
+  background-color: rgb(230, 230, 230);
   height: fit-content;
   padding: 15px;
-  background-color: rgb(230, 230, 230);
   border-radius: 50px;
   margin-top: 10px;
   margin-left: 2.5%;

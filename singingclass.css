@@ -127,6 +127,7 @@ nav{
     color: white;
     border: solid 2px rgb(194, 0, 0);
     margin-right: 12px;
+    cursor: pointer;
     transition: 0.2s;
 }
 
@@ -157,6 +158,7 @@ nav{
     color: rgb(194, 0, 0);
     border: solid 2px rgb(194, 0, 0);
     margin-left: 12px;
+    cursor: pointer;
     transition: 0.2s;
 }
 
@@ -170,6 +172,63 @@ nav{
     padding: 10px 36px 10px 36px;
 }
 
+/* Class Recording Feature */
+.cr_feature{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 300px;
+    border-radius: 50px 50px 0px 0px;
+    background-color:black;
+}
+
+.cr_head{
+    text-align: center;
+    color: white;
+    font-family: montserrat;
+    font-size: 20px;
+    margin-top: -50px;
+    margin-bottom: 30px;
+}
+
+.cr_head1{
+    text-align: center;
+    color: white;
+    font-family: montserrat;
+    font-size: 24px;
+    margin-top: -30px;
+    margin-bottom: 45px;
+}
+
+.cr_butlink{
+    text-decoration: none;
+}
+
+.cr_but{
+    padding: 20px 60px 20px 60px;
+    font-size: 25px;
+    font-family: montserrat;
+    font-weight: 1000;
+    background-color: white;
+    border: solid 2px white;
+    border-radius: 40px;
+    cursor: pointer;
+    border: white;
+    box-shadow: 0 0 10px white;
+    transition: 0.2s;
+}
+
+.cr_but:hover{
+    background-color:black;
+    border: solid 2px white;
+    box-shadow: 0 0 15px white;
+    color: white;
+}
+
+
+
 @media screen and (max-width: 748px) {
 
 /* Join Buttons */
@@ -180,6 +239,7 @@ nav{
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    margin-bottom: 54px;
 }
 
 .cbut{
@@ -202,5 +262,7 @@ nav{
     width: 354px;
     font-size: 18px;
 }
+
+
 
 }

@@ -155,7 +155,7 @@ nav{
 
 .singclass_tab{
   display: flex;
-  width: 450px;
+  width: 95%;
   height: auto;
   margin-left: 2.5%;
   background-color:white;
@@ -195,7 +195,7 @@ nav{
 
 .tablaclass_tab{
   display: flex;
-  width: 450px;
+  width: 95%;
   height: auto;
   margin-left: 2.5%;
   background-color:white;

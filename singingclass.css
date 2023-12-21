@@ -168,20 +168,38 @@ nav{
     padding: 10px 36px 10px 36px;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (max-width: 1000px) {
 
 /* Join Buttons */
 
-.cbut{
-    display: block;
+.callbutton{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
 }
 
+.cbut{
+    width: 340px;
+    margin-left: 0px;
+}
+
+.cbut:hover{
+    width: 354px;
+    font-size: 18px;
+}
+
 .mbut{
-    display: block;
-    justify-content: center;
-    align-items: center;
+    margin-top: 16px;
+    width: 340px;
+    margin-left: -12px;
+    margin-right: 0px
+}
+
+.mbut:hover{
+    width: 354px;
+    font-size: 18px;
 }
 
 }

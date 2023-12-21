@@ -130,3 +130,103 @@ nav{
   font-weight: 500;
   margin: 0px 16px 18px 16px;
 }
+
+/* Class Tab */
+.class_tab{
+  display: inline-block;
+  width: 95%;
+  height: auto;
+  margin-top: 24px;
+  margin-left: 2.5%;
+  background-color: black;
+  border-radius: 30px;
+}
+
+.ct_head{
+  text-align: center;
+  color: white;
+  font-family: montserrat;
+  margin-top: 16px;
+  margin-bottom: 24px;
+  font-size: 24px;
+}
+
+/* Singing Class Tab inside Class Tab */
+
+.singclass_tab{
+  display: flex;
+  width: 450px;
+  height: auto;
+  margin-left: 2.5%;
+  background-color:white;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.sc_cover{
+  display: flex;
+  width: 80px;
+  margin-left: 12px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.sc_head{
+  margin-top: 32px;
+  margin-left: 16px;
+  font-size: 22px;
+  font-family: montserrat;
+  font-weight: 1000;
+}
+
+.sc_arrow{
+  height: 42px;
+  margin-top: 26px;
+  margin-left: 31%;
+  float: right;
+}
+
+.sc_link{
+  text-decoration: none;
+  color: black;
+}
+
+/* Tabla Class Tab inside Classes Tab */
+
+.tablaclass_tab{
+  display: flex;
+  width: 450px;
+  height: auto;
+  margin-left: 2.5%;
+  background-color:white;
+  border-radius: 10px;
+  margin-bottom: 32px;
+}
+
+.tc_cover{
+  display: flex;
+  width: 80px;
+  margin-left: 12px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.tc_head{
+  margin-top: 32px;
+  margin-left: 16px;
+  font-size: 22px;
+  font-family: montserrat;
+  font-weight: 1000;
+}
+
+.tc_arrow{
+  height: 42px;
+  margin-top: 26px;
+  margin-left: 36%;
+  float: right;
+}
+
+.tc_link{
+  text-decoration: none;
+  color: black;
+}

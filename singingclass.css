@@ -117,6 +117,7 @@ nav{
 }
 
 .cbut {
+    width: 200px;
     background-color: rgb(194, 0, 0);
     padding: 10px 30px 10px 30px;
     border-radius: 100px;
@@ -130,6 +131,7 @@ nav{
 }
 
 .cbut:hover{
+    width: 212px;
     background-color: rgb(255, 255, 255);
     color: rgb(194, 0, 0);
     border: solid 2px rgb(194, 0, 0);
@@ -143,6 +145,7 @@ nav{
 }
 
 .mbut{
+    width: 180px;
     background-color: rgb(255, 255, 255);
     padding: 10px 30px 10px 30px;
     border-radius: 100px;
@@ -156,8 +159,68 @@ nav{
 }
 
 .mbut:hover{
+    width: 192px;
     background-color: rgb(194, 0, 0);
     color: white;
     border: solid 2px rgb(194, 0, 0);
     padding: 10px 36px 10px 36px;
+}
+
+@media screen and (max-width: 900px) {
+    
+/* Call Button */
+
+.callb{
+    text-decoration: none;
+}
+
+.cbut {
+    width: 200px;
+    background-color: rgb(194, 0, 0);
+    padding: 10px 30px 10px 30px;
+    border-radius: 100px;
+    font-family: montserrat;
+    font-size: 16px;
+    font-weight: 1000;
+    color: white;
+    border: solid 2px rgb(194, 0, 0);
+    margin-right: 24px;
+    transition: 0.2s;
+}
+
+.cbut:hover{
+    width: 212px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(194, 0, 0);
+    border: solid 2px rgb(194, 0, 0);
+    padding: 10px 36px 10px 36px;
+}
+
+/* Meet Button */
+
+.meetb{
+    text-decoration: none;
+}
+
+.mbut{
+    width: 180px;
+    background-color: rgb(255, 255, 255);
+    padding: 10px 30px 10px 30px;
+    border-radius: 100px;
+    font-family: montserrat;
+    font-size: 16px;
+    font-weight: 1000;
+    color: rgb(194, 0, 0);
+    border: solid 2px rgb(194, 0, 0);
+    margin-left: 24px;
+    transition: 0.2s;
+}
+
+.mbut:hover{
+    width: 192px;
+    background-color: rgb(194, 0, 0);
+    color: white;
+    border: solid 2px rgb(194, 0, 0);
+    padding: 10px 36px 10px 36px;
+}
 }

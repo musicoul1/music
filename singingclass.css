@@ -176,7 +176,7 @@ nav{
 
 .callbutton{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
@@ -184,7 +184,7 @@ nav{
 
 .cbut{
     width: 340px;
-    margin-left: 0px;
+    margin-right: 0px;
 }
 
 .cbut:hover{
@@ -195,8 +195,7 @@ nav{
 .mbut{
     margin-top: 16px;
     width: 340px;
-    margin-left: -12px;
-    margin-right: 0px
+    margin-left: 0px
 }
 
 .mbut:hover{

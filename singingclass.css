@@ -126,7 +126,7 @@ nav{
     font-weight: 1000;
     color: white;
     border: solid 2px rgb(194, 0, 0);
-    margin-right: 24px;
+    margin-right: 12px;
     transition: 0.2s;
 }
 
@@ -136,6 +136,7 @@ nav{
     color: rgb(194, 0, 0);
     border: solid 2px rgb(194, 0, 0);
     padding: 10px 36px 10px 36px;
+    box-shadow: 0 0 5px rgb(195, 100, 100);
 }
 
 /* Meet Button */
@@ -154,73 +155,19 @@ nav{
     font-weight: 1000;
     color: rgb(194, 0, 0);
     border: solid 2px rgb(194, 0, 0);
-    margin-left: 24px;
+    margin-left: 12px;
     transition: 0.2s;
 }
 
 .mbut:hover{
-    width: 192px;
+    width: 194px;
+    box-shadow: 0 0 5px rgb(194, 111, 111);
     background-color: rgb(194, 0, 0);
     color: white;
-    border: solid 2px rgb(194, 0, 0);
+    border: solid 2px rgb(174, 172, 172);
     padding: 10px 36px 10px 36px;
 }
 
-@media screen and (max-width: 900px) {
-    
-/* Call Button */
+@media screen and (min-width: 768px) {
 
-.callb{
-    text-decoration: none;
-}
-
-.cbut {
-    width: 200px;
-    background-color: rgb(194, 0, 0);
-    padding: 10px 30px 10px 30px;
-    border-radius: 100px;
-    font-family: montserrat;
-    font-size: 16px;
-    font-weight: 1000;
-    color: white;
-    border: solid 2px rgb(194, 0, 0);
-    margin-right: 24px;
-    transition: 0.2s;
-}
-
-.cbut:hover{
-    width: 212px;
-    background-color: rgb(255, 255, 255);
-    color: rgb(194, 0, 0);
-    border: solid 2px rgb(194, 0, 0);
-    padding: 10px 36px 10px 36px;
-}
-
-/* Meet Button */
-
-.meetb{
-    text-decoration: none;
-}
-
-.mbut{
-    width: 180px;
-    background-color: rgb(255, 255, 255);
-    padding: 10px 30px 10px 30px;
-    border-radius: 100px;
-    font-family: montserrat;
-    font-size: 16px;
-    font-weight: 1000;
-    color: rgb(194, 0, 0);
-    border: solid 2px rgb(194, 0, 0);
-    margin-left: 24px;
-    transition: 0.2s;
-}
-
-.mbut:hover{
-    width: 192px;
-    background-color: rgb(194, 0, 0);
-    color: white;
-    border: solid 2px rgb(194, 0, 0);
-    padding: 10px 36px 10px 36px;
-}
 }

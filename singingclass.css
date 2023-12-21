@@ -126,7 +126,7 @@ nav{
     font-weight: 1000;
     color: white;
     border: solid 2px rgb(194, 0, 0);
-    margin-right: 20px;
+    margin-right: 12px;
     transition: 0.2s;
 }
 
@@ -156,7 +156,7 @@ nav{
     font-weight: 1000;
     color: rgb(194, 0, 0);
     border: solid 2px rgb(194, 0, 0);
-    margin-left: 20px;
+    margin-left: 12px;
     transition: 0.2s;
 }
 

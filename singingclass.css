@@ -183,6 +183,7 @@ nav{
     height: 300px;
     border-radius: 60px 60px 0px 0px;
     background-color:black;
+    box-shadow: 0 0 10px rgb(100, 100, 100);
 }
 
 .cr_head{

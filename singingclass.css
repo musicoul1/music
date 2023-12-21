@@ -103,7 +103,7 @@ nav{
     font-weight: 1000;
 }
 
-/* Call Button */
+/* Join Button */
 
 .callbutton{
     display: flex;
@@ -169,5 +169,19 @@ nav{
 }
 
 @media screen and (min-width: 768px) {
+
+/* Join Buttons */
+
+.cbut{
+    display: block;
+    justify-content: center;
+    align-items: center;
+}
+
+.mbut{
+    display: block;
+    justify-content: center;
+    align-items: center;
+}
 
 }

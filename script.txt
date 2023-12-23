@@ -20,6 +20,9 @@
     </script>
 
 
+    Alternative image for chatbot avatar image :- 
+    https://img.freepik.com/premium-vector/cute-robot-waving-hand-cartoon-illustration_138676-2744.jpg
+
     Cutted Code from singingclass.html
 
     

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="Images/logo.png" type="image/x-icon">
+
+    <!-- Password -->
+    
+
+    <!-- Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+
+    <!-- Fonts -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+    </style>
+
+    <title>Musicoul</title>
+</head>
+<body>
+
+    <!-- Notifications Center -->
+    <script>
+
+    
+
+    </script>
+
+    <!-- Navigation Bar -->
+
+    <nav>
+        <img src="Images/musicoulname.png" alt="Musicoul" class="nav_musicoulname">
+        <img src="Images/more.png" alt="More" class="nav_more" onclick="openNav()">
+        
+
+        <script src="script.js"></script>
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <img src="Images/logo.png" alt="Logo" class="sidebar_logo">
+            <p class="sidebar_brandname">Musicoul</p>
+            <a href="index.html" class="sidebar_links"><p class="sidebar_names">Home</p></a>
+            <a href="resources.html" class="sidebar_links"><p class="sidebar_names">Resources</p></a>
+            <a href="#" class="sidebar_links"><p class="sidebar_names">Clients</p></a>
+            <a href="#" class="sidebar_links"><p class="sidebar_names">About Us</p></a>
+          </div>
+          
+          <!-- Use any element to open the sidenav -->
+
+    </nav>
+
+    <!-- Announcement Tab -->
+    <div class="an_tab">
+        <!-- Announcement Heading -->
+        <div class="an_heading"><p class="an_head">📌Announcements</p></div>
+
+        <!-- Announcement Content -->
+        <div class="an_content">
+            <p class="an_contenttext">Coming Soon...</p>
+            <!-- Just add class :- an_contenttext to any content you will add here -->
+        </div>
+    </div>
+
+    <!-- Classes Tab -->
+    <div class="class_tab">
+        <p class="ct_head">Classes</p>
+
+        <a href="singingclass.html" class="sc_link">
+            <div class="singclass_tab">
+                <img src="Images/Singing Class Cover.png" alt="Singing Class"   class="sc_cover">
+                <p class="sc_head">Singing Class</p>
+                <!-- <img src="Images/Arrow.webp" alt="More" class="sc_arrow"> -->
+            </div>
+        </a>
+        <a href="tablaclass.html" class="tc_link">
+            <div class="tablaclass_tab">
+                <img src="Images/Tabla Class Cover.png" alt="Tabla Class"   class="sc_cover">
+                <p class="sc_head">Tabla Class</p>
+                <!-- <img src="Images/Arrow.webp" alt="More" class="tc_arrow"> -->
+            </div>
+        </a>
+    </div>
+
+    <!-- Chatbot -->
+
+    <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
+    <script>
+    window.botpressWebChat.init({
+        "composerPlaceholder": "Type 'Hi' to start the conversation...",
+        "botConversationDescription": "Feel Free to ask me any doubt.",
+        "botId": "ff832e2e-70c3-4243-a55e-cdeb0cd95ad0",
+        "hostUrl": "https://cdn.botpress.cloud/webchat/v1",
+        "messagingUrl": "https://messaging.botpress.cloud",
+        "clientId": "ff832e2e-70c3-4243-a55e-cdeb0cd95ad0",
+        "webhookId": "f7408ac1-0651-4442-977e-7a30d5523853",
+        "lazySocket": true,
+        "themeName": "prism",
+        "botName": "Musi-Bot",
+        "avatarUrl": "https://img.freepik.com/premium-vector/cute-robot-waving-hand-cartoon-illustration_138676-2744.jpg",
+        "emailAddress": "musicoul1@gmail.com",
+        "frontendVersion": "v1",
+        "useSessionStorage": true,
+        "enableConversationDeletion": true,
+        "showPoweredBy": true,
+        "theme": "prism",
+        "themeColor": "#2563eb"
+    });
+    </script>
+
+</body>
+</html>

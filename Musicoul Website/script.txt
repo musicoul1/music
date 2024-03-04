@@ -1,0 +1,31 @@
+<script language="JavaScript">
+        <!--hide
+
+            var password;
+            var chakol = "CHAN2005"
+            var prikam = ""
+            var abhkha = ""
+            var tushoo = ""
+
+            password = prompt('Please enter your password to view this page!', '')
+
+            if (password==chakol || password==prikam || password==abhkha || password==tushoo) {
+                // alert('Password Correct! Click OK to enter')
+            } else {
+                alert('Incorrect Password. Try Again')
+                window.location.reload()
+            }
+
+            -->
+    </script>
+
+
+    Alternative image for chatbot avatar image :- 
+    https://img.freepik.com/premium-vector/cute-robot-waving-hand-cartoon-illustration_138676-2744.jpg
+
+    Cutted Code from singingclass.html
+
+    
+
+
+    

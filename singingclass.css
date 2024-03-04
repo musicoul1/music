@@ -22,6 +22,50 @@ nav{
     margin-right: 20px;
 }
 
+/* The Announcement Tab */
+
+.an_tab{
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    width: 95%;
+    height: auto;
+    background-color: rgb(230, 230, 230);
+    border-radius: 50px;
+    margin-top: 16px;
+    margin-left: 2.5%;
+    margin-bottom: 16px;
+  }
+  
+  .an_heading{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 16px;
+  }
+  
+  .an_head{
+    font-family: montserrat;
+    font-weight: 1000;
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+  
+  .an_content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .an_contenttext{
+    text-align: center;
+    font-family: montserrat;
+    font-weight: 500;
+    margin: 0px 16px 18px 16px;
+  }
+
 /* Side Navigation Menu */
 .sidenav {
     height: 100%; /* 100% Full-height */

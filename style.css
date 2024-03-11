@@ -1,233 +1,354 @@
 *{
-    margin: 0%;
-    padding: 0%;
+  margin: 0%;
+  padding: 0%;
 }
 
 nav{
-    background-color: black;
-    height: 60px;
-    width: 100%;
+  background-color: black;
+  height: 60px;
+  width: 100%;
 }
 
 .nav_musicoulname{
-    height: 20px;
-    margin-top: 20px;
-    margin-left: 20px;
+  height: 20px;
+  margin-top: 20px;
+  margin-left: 20px;
 }
 
 .nav_more{
-    float: right;
-    height: 25px;
-    margin-top: 16px;   
-    margin-right: 20px;
+  float: right;
+  height: 25px;
+  margin-top: 16px;   
+  margin-right: 20px;
 }
 
 /* Side Navigation Menu */
 .sidenav {
-    height: 100%; /* 100% Full-height */
-    width: 0; /* 0 width - change this with JavaScript */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Stay on top */
-    top: 0; /* Stay at the top */
-    left: 0;
-    background-color: #111; /* Black*/
-    overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 60px; /* Place content 60px from the top */
-    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
-  }
-  
+  height: 100%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: #111; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
 /* The navigation menu links */
 .sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-    transition: 0.3s;
-  }
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
 
 /* When you mouse over the navigation links, change their color */
 .sidenav a:hover {
-    color: #f1f1f1;
-  }
+  color: #f1f1f1;
+}
 
 /* Position and style the close button (top right corner) */
 .sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 20px;
-    font-size: 36px;
-    margin-left: 50px;
-  }
+  position: absolute;
+  top: 0;
+  right: 20px;
+  font-size: 36px;
+  margin-left: 50px;
+}
 
-  /* Sidebar Logo */
+/* Sidebar Logo */
 .sidebar_logo {
-    margin-top: 0px;
-    height: 60px;
-    margin-left: 30px;
-    
-  } 
+  margin-top: 0px;
+  height: 60px;
+  margin-left: 30px;
+  
+} 
 
 .sidebar_brandname{
-    color: white;
-    font-family: 'montserrat';
-    font-weight: 500;
-    font-size: 18px;
-    margin-top: 10px;
-    margin-left: 30px;
-    margin-bottom: 30px;
+  color: white;
+  font-family: 'montserrat';
+  font-weight: 500;
+  font-size: 18px;
+  margin-top: 10px;
+  margin-left: 30px;
+  margin-bottom: 30px;
 }
 
 .sidebar_links {
-    text-decoration: none;
-    font-family: montserrat, monospace;
-    font-family: 'poppins';
+  text-decoration: none;
+  font-family: montserrat, monospace;
+  font-family: 'poppins';
 }
 
 .sidebar_names{
-    font-size: 18px;
+  font-size: 18px;
 }
 
 /* Announcement Tab */
 
 .an_tab{
-  display: inline-block;
-  justify-content: center;
-  align-items: center;
-  width: 95%;
-  height: auto;
-  background-color: rgb(230, 230, 230);
-  border-radius: 50px;
-  margin-top: 16px;
-  margin-left: 2.5%;
+display: inline-block;
+justify-content: center;
+align-items: center;
+width: 95%;
+height: auto;
+background-color: rgb(230, 230, 230);
+border-radius: 50px;
+margin-top: 16px;
+margin-left: 2.5%;
 }
 
 .an_heading{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 16px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+margin-top: 16px;
 }
 
 .an_head{
-  font-family: montserrat;
-  font-weight: 1000;
-  font-size: 20px;
-  margin-bottom: 15px;
+font-family: montserrat;
+font-weight: 1000;
+font-size: 20px;
+margin-bottom: 15px;
 }
 
 .an_content{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
 }
 
 .an_contenttext{
-  text-align: center;
-  font-family: montserrat;
-  font-weight: 500;
-  margin: 0px 16px 18px 16px;
+text-align: center;
+font-family: montserrat;
+font-weight: 500;
+margin: 0px 16px 18px 16px;
 }
 
 /* Class Tab */
 .class_tab{
-  display: inline-block;
-  width: 95%;
-  height: auto;
-  margin-top: 24px;
-  margin-left: 2.5%;
-  background-color: black;
-  border-radius: 30px;
-  margin-bottom: 16px;
+display: inline-block;
+justify-content: center;
+align-items: center;
+width: 95%;
+height: auto;
+margin-top: 24px;
+margin-left: 2.5%;
+background-color: black;
+border-radius: 30px;
+margin-bottom: 16px;
 }
 
 .ct_head{
-  text-align: center;
-  color: white;
-  font-family: montserrat;
-  margin-top: 16px;
-  margin-bottom: 24px;
-  font-size: 24px;
+text-align: center;
+color: white;
+font-family: montserrat;
+margin-top: 16px;
+margin-bottom: 24px;
+font-size: 24px;
 }
 
 /* Singing Class Tab inside Class Tab */
 
 .singclass_tab{
-  display: flex;
-  width: 95%;
-  height: auto;
-  margin-left: 2.5%;
-  background-color:white;
-  border-radius: 10px;
-  margin-bottom: 20px;
-}
-
-.sc_cover{
-  display: flex;
-  width: 80px;
-  margin-left: 12px;
-  margin-top: 12px;
-  margin-bottom: 12px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+width: 400px;
+height: auto;
+margin-left: 6%;
+background-color:white;
+border-radius: 16px;
+margin-bottom: 20px;
 }
 
 .sc_head{
-  margin-top: 32px;
-  margin-left: 16px;
-  font-size: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 16px;
+  margin-bottom: 4px;
+  font-size: 20px;
   font-family: montserrat;
   font-weight: 1000;
 }
 
+.sc_cover{
+display: flex;
+justify-content: center;
+align-items: center;
+width: 90%;
+margin-top: 12px;
+margin-bottom: 12px;
+margin-left: 5%;
+border-radius: 16px;
+}
+
 .sc_arrow{
-  height: 42px;
-  margin-top: 26px;
-  margin-left: 31%;
-  float: right;
+height: 42px;
+margin-top: 26px;
+margin-left: 31%;
+float: right;
 }
 
 .sc_link{
-  text-decoration: none;
-  color: black;
+text-decoration: none;
+color: black;
+}
+
+.sc_btndiv{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.sc_vc1{
+  font-family: montserrat;
+  background-color: white;
+  margin: 4px 0px 16px 0px;
+  padding: 8px 32px 8px 32px;
+  border-radius: 24px;
+  color: rgb(186, 0, 0);
+  font-weight: 1000;
+  font-size: 14px;
+  border: 2px solid rgb(186, 0, 0);
+  margin-left: 16px;
+  margin-right: 16px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.sc_vc2{
+  font-family: montserrat;
+  background-color: white;
+  margin: 4px 0px 16px 0px;
+  padding: 8px 32px 8px 32px;
+  border-radius: 24px;
+  color: rgb(255, 255, 255);
+  background-color: rgb(186, 0, 0);
+  font-weight: 1000;
+  font-size: 14px;
+  border: 2px solid rgb(186, 0, 0);
+  margin-left: 16px;
+  margin-right: 16px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.sc_vc1:hover {
+  background-color: rgb(186, 0, 0);
+  color: white;
+}
+
+.sc_vc2:hover {
+  background-color: white;
+  color: rgb(186, 0, 0);
 }
 
 /* Tabla Class Tab inside Classes Tab */
 
 .tablaclass_tab{
   display: flex;
-  width: 95%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
   height: auto;
-  margin-left: 2.5%;
+  margin-top: 32px;
+  margin-left: 6%;
   background-color:white;
-  border-radius: 10px;
-  margin-bottom: 32px;
+  border-radius: 16px;
+  margin-bottom: 20px;
 }
 
 .tc_cover{
   display: flex;
-  width: 80px;
-  margin-left: 12px;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
   margin-top: 12px;
   margin-bottom: 12px;
+  margin: 5%;
+  border-radius: 16px;
 }
 
 .tc_head{
-  margin-top: 32px;
-  margin-left: 16px;
-  font-size: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 16px;
+  margin-bottom: 4px;
+  font-size: 20px;
   font-family: montserrat;
   font-weight: 1000;
 }
 
 .tc_arrow{
-  height: 42px;
-  margin-top: 26px;
-  margin-left: 36%;
-  float: right;
+height: 42px;
+margin-top: 26px;
+margin-left: 36%;
+float: right;
 }
 
 .tc_link{
-  text-decoration: none;
-  color: black;
+text-decoration: none;
+color: black;
+}
+
+.tc_btndiv{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.tc_vc1{
+  font-family: montserrat;
+  background-color: white;
+  margin: 4px 0px 16px 0px;
+  padding: 8px 32px 8px 32px;
+  border-radius: 24px;
+  color: rgb(186, 0, 0);
+  font-weight: 1000;
+  font-size: 14px;
+  border: 2px solid rgb(186, 0, 0);
+  margin-left: 16px;
+  margin-right: 16px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.tc_vc2{
+  font-family: montserrat;
+  background-color: white;
+  margin: 4px 0px 16px 0px;
+  padding: 8px 32px 8px 32px;
+  border-radius: 24px;
+  color: rgb(255, 255, 255);
+  background-color: rgb(186, 0, 0);
+  font-weight: 1000;
+  font-size: 14px;
+  border: 2px solid rgb(186, 0, 0);
+  margin-left: 16px;
+  margin-right: 16px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.tc_vc1:hover {
+  background-color: rgb(186, 0, 0);
+  color: white;
+}
+
+.tc_vc2:hover {
+  background-color: white;
+  color: rgb(186, 0, 0);
 }

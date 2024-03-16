@@ -1,0 +1,220 @@
+*{
+    margin: 0%;
+    padding: 0%;
+}
+
+nav{
+    background-color: black;
+    height: 60px;
+    width: 100%;
+}
+
+.nav_musicoulname{
+    height: 20px;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.nav_more{
+    float: right;
+    height: 25px;
+    margin-top: 16px;   
+    margin-right: 20px;
+}
+
+/* Side Navigation Menu */
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: #111; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  }
+  
+/* The navigation menu links */
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+    color: #f1f1f1;
+  }
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+
+  /* Sidebar Logo */
+.sidebar_logo {
+    margin-top: 0px;
+    height: 60px;
+    margin-left: 30px;
+    
+  } 
+
+.sidebar_brandname{
+    color: white;
+    font-family: 'montserrat';
+    font-weight: 500;
+    font-size: 18px;
+    margin-top: 10px;
+    margin-left: 30px;
+    margin-bottom: 30px;
+}
+
+.sidebar_links {
+    text-decoration: none;
+    font-family: montserrat, monospace;
+}
+
+.sidebar_names{
+    font-size: 18px;
+}
+
+/* Banner */
+
+.bannersection{
+    margin-top: 28px;
+    margin-bottom: 28px;
+}
+
+.bannerdiv {
+    display: flex;
+    flex-direction: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner{
+    width: 800px;
+    border-radius: 16px;
+    box-shadow: 0 0 15px rgb(202, 202, 202);
+}
+
+
+/* horizontal rule  */
+
+.hr{
+    margin-bottom: 25px;
+    box-shadow: 0 0 15px #3b3b3b;
+}
+
+/* Playlist Title */
+
+.playlisttitle-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: montserrat;
+}
+
+.playlisttitle{
+    /* margin-left: 50px; */
+    margin-bottom: 32px;
+}
+
+
+/* Playlist Section  */
+
+.playlist{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-left: -48px;
+    margin-bottom: 32px;
+}
+
+.boxcontainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; margin-bottom: 40px;
+}
+
+.playlistcard{
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 0 15px rgb(198, 198, 198);
+    margin-left: 48px;
+}
+
+.cardimage {
+    width: 300px;
+    border-radius: 16px;
+    margin: 8px;
+}
+
+.btn{
+    margin-left: 33%;
+    display: flex;
+    flex-direction: column;
+    padding: 8px 27px 8px 27px;
+    background-color: white;
+    text-align: center;
+    margin-bottom: 16px;
+    font-weight: 1000;
+    background-color: rgb(183, 0, 0);
+    font-size: 14.5px;
+    border: none;
+    color: white;
+    font-family: montserrat;
+    border-radius: 30px;
+    border: 2px solid rgb(183, 0, 0);
+    transition: 0.5s;
+}
+
+.btn:hover{
+    background-color: white;
+    border: 2px solid rgb(183, 0, 0);
+    color: rgb(183, 0, 0);
+}
+
+a:link{
+    text-decoration: none;
+}
+
+.buttonlink{
+
+}
+
+
+
+
+@media screen and (max-width: 700px) {
+    .bannerdiv {
+        display: flex;
+        flex-direction: center;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .banner{
+        width: 330px;
+        border-radius: 16px;
+        box-shadow: 0 0 15px rgb(202, 202, 202);
+    }
+
+    .boxcontainer{
+        margin-bottom: 48px;
+        margin-left: 0px;
+    }
+}

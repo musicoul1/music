@@ -131,103 +131,76 @@ nav{
   margin: 0px 16px 18px 16px;
 }
 
-/* Class Tab */
-.class_tab{
-  display: inline-block;
-  width: 95%;
-  height: auto;
-  margin-top: 24px;
-  margin-left: 2.5%;
+/* Playlist Section */
+
+.playlist-container {
   background-color: black;
-  border-radius: 30px;
-  margin-bottom: 16px;
+  margin-top: 40px;
+  border-radius: 50px;
 }
 
-.ct_head{
-  text-align: center;
+/* Playlist Title */
+
+.playlisttitle-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: montserrat;
   color: white;
-  font-family: montserrat;
-  margin-top: 16px;
-  margin-bottom: 24px;
-  font-size: 24px;
 }
 
-/* Singing Class Tab inside Class Tab */
-
-.singclass_tab{
-  display: flex;
-  width: 95%;
-  height: auto;
-  margin-left: 2.5%;
-  background-color:white;
-  border-radius: 10px;
+.playlisttitle{
+  /* margin-left: 50px; */
   margin-bottom: 20px;
+  font-size: 32px;
+  margin: 24px;
 }
 
-.sc_cover{
+
+/* Playlist Section  */
+
+.playlist{
   display: flex;
-  width: 80px;
-  margin-left: 12px;
-  margin-top: 12px;
-  margin-bottom: 12px;
-}
-
-.sc_head{
-  margin-top: 32px;
-  margin-left: 16px;
-  font-size: 22px;
-  font-family: montserrat;
-  font-weight: 1000;
-}
-
-.sc_arrow{
-  height: 42px;
-  margin-top: 26px;
-  margin-left: 31%;
-  float: right;
-}
-
-.sc_link{
-  text-decoration: none;
-  color: black;
-}
-
-/* Tabla Class Tab inside Classes Tab */
-
-.tablaclass_tab{
-  display: flex;
-  width: 95%;
-  height: auto;
-  margin-left: 2.5%;
-  background-color:white;
-  border-radius: 10px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-left: -48px;
   margin-bottom: 32px;
 }
 
-.tc_cover{
+.boxcontainer{
   display: flex;
-  width: 80px;
-  margin-left: 12px;
-  margin-top: 12px;
-  margin-bottom: 12px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 48px;
+  margin-bottom: 24px;
 }
 
-.tc_head{
-  margin-top: 32px;
-  margin-left: 16px;
-  font-size: 22px;
-  font-family: montserrat;
+.playlistcard{
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 0 15px rgb(151, 151, 151);
+  margin-bottom: 24px;
+}
+
+.cardimage {
+  width: 300px;
+  border-radius: 16px;
+  margin: 8px;
+}
+
+.cardtitle{
+  /* margin-left: 16px; */
+  text-align: center;
+  margin-bottom: 16px;
   font-weight: 1000;
+  color: rgb(208, 0, 0);
+  font-family: montserrat;
 }
 
-.tc_arrow{
-  height: 42px;
-  margin-top: 26px;
-  margin-left: 36%;
-  float: right;
-}
-
-.tc_link{
+a:link{
   text-decoration: none;
-  color: black;
 }

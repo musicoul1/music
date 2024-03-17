@@ -1,36 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="tablaclass.css">
-    <link rel="shortcut icon" href="Images/logo.jpg" type="image/x-icon">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="tablaclass.css" />
+    <link rel="shortcut icon" href="Images/Favicon/logo.jpg" type="image/x-icon" />
     <title>Tabla Class</title>
 
     <!-- Password Code -->
 
-    <!-- <script language="JavaScript"> -->
-        <!--hide
+    <script language="JavaScript">
+      <!--hide
 
-            var password;
-            var chakol = "CHAN2005"
-            var harkol = "HARI2005" 
-            var varstu = ""   // Varad Student [Ask for his full name and date of birth for password]
+          var password;
+          var chakol = "CHAN2005"  //Chandrashekhar Kolhe
+          var varstu = "VARA2007" //Tushar Hoodekar
 
-            password = prompt('Please enter your password to view this page!', '')
+          password = prompt('Please enter your password to view this page!', '')
 
-            if (password==pass0 || password==pass1 || password==pass2 || password==pass3) {
-                // alert('Password Correct! Click OK to enter')
-            } else {
-                alert('Incorrect Password. Try Again')
-                window.location.reload()
-            }
+          if (password==chakol || password==varstu) {
+              // alert('Password Correct! Click OK to enter')
+          } else {
+              alert('Incorrect Password. Try Again')
+              window.location.reload()
+          }
 
-            -->
-    <!-- </script> -->
+          -->
+  </script>
+      
 
-</head>
-<body>
+    <!-- Fonts -->
     <link
       href="https://fonts.googleapis.com/css?family=Poppins"
       rel="stylesheet"
@@ -42,6 +41,7 @@
     </style>
   </head>
   <body>
+
     <nav>
       <img
         src="Images/musicoulname.png"
@@ -60,12 +60,12 @@
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
           >&times;</a
         >
-        <img src="Images/logo.png" alt="Logo" class="sidebar_logo" />
+        <img src="Images/flogo.png" alt="Logo" class="sidebar_logo" />
         <p class="sidebar_brandname">Musicoul</p>
         <a href="index.html" class="sidebar_links"
           ><p class="sidebar_names">Home</p></a
         >
-        <a href="resources.html" class="sidebar_links"
+        <!-- <a href="resources.html" class="sidebar_links"
           ><p class="sidebar_names">Resources</p></a
         >
         <a href="#" class="sidebar_links"
@@ -73,7 +73,7 @@
         >
         <a href="#" class="sidebar_links"
           ><p class="sidebar_names">About Us</p></a
-        >
+        > -->
       </div>
 
       <!-- Use any element to open the sidenav -->
@@ -81,20 +81,20 @@
 
     <!-- Announcement Tab -->
     <div class="an_tab">
-        <!-- Announcement Heading -->
-        <div class="an_heading"><p class="an_head">📌Weekly Schedule</p></div>
-  
-        <!-- Announcement Content -->
-        <div class="an_content">
-            <p class="an_contenttext">
-              <strong>Monday</strong> :- 8:00 pm to 8:30 pm <br>
-              <strong>Wednesday</strong> :- 8:00 pm to 8:30 pm <br>
-              <strong>Friday</strong> :- 8:00 pm to 8:30 pm
-            </p>
-            <!-- Just add class :- an_contenttext to any content you will add here -->
-        </div>
-      </div>
+      <!-- Announcement Heading -->
+      <div class="an_heading"><p class="an_head">📌Weekly Schedule</p></div>
 
+      <!-- Announcement Content -->
+      <div class="an_content">
+        <p class="an_contenttext">
+          <strong>Monday</strong> :- 8:30 pm to 9:00 pm <br>
+          <strong>Wednesday</strong> :- 8:30 pm to 9:00 pm <br>
+          <strong>Friday</strong> :- 8:30 pm to 9:00 pm
+        </p>
+        <!-- Just add class :- an_contenttext to any content you will add here -->
+    </div>
+    </div>
+    
     <!-- Join Meeting Section -->
     <div class="jm">
       <p class="jm_head">Join Class</p>
@@ -109,34 +109,32 @@
       </a>
     </div>
 
-    <!-- Hand Written Notes Feature -->
+    <!-- Attendance Feature -->
     <div class="hw_feature">
-        <p class="hw_head">Get All Hand Written Notes <br /></p>
+        <p class="hw_head">Get your Attendance <br /></p>
         <p class="hw_head1"><strong>in one Click!</strong></p>
   
         <a
-          href="https://drive.google.com/drive/folders/1TZwy2nZ6oiGTHqwsBloOc6UfcaG2YvBj?usp=drive_link"
+          href="https://docs.google.com/spreadsheets/d/1YYBF85bLzeWjbfWXB8OCUDG2W7T3Fr1A_Um0oUCigrA/edit?usp=sharing"
           target="_blank"
           rel="noopener"
           class="hw_butlink"
-          ><button class="hw_but">Hand Written Notes</button></a
+          ><button class="hw_but">Attendance</button></a
         >
       </div>
 
-    <!-- Class Recordings Feature -->
+    <!-- Tabla Resources Feature -->
     <div class="cr_feature">
-      <p class="cr_head">Get All Class Recordings <br /></p>
+      <p class="cr_head">Get All Resources here <br /></p>
       <p class="cr_head1"><strong>in one Click!</strong></p>
 
       <a
-        href="https://drive.google.com/drive/folders/1oRvEysQdhlwn9O0NTxvZaS0iF2lj2xnu?usp=sharing"
+        href="tresources.html"
         target="_blank"
         rel="noopener"
         class="cr_butlink"
-        ><button class="cr_but">Class Recordings</button></a
+        ><button class="cr_but">Resources Tab</button></a
       >
     </div>
   </body>
-</html>
-</body>
 </html>

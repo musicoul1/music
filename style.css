@@ -134,9 +134,15 @@ nav{
 /* Playlist Section */
 
 .playlist-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background-color: black;
   margin-top: 40px;
   border-radius: 32px;
+  margin-right: 2%;
+  margin-left: 2%;
 }
 
 /* Playlist Title */
@@ -166,16 +172,16 @@ nav{
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  margin-left: -48px;
   margin-bottom: 32px;
 }
 
 .boxcontainer{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-left: 48px;
+  margin-right: 30px;
+  margin-left: 30px;
   margin-bottom: 24px;
 }
 
@@ -201,6 +207,89 @@ nav{
   font-family: montserrat;
 }
 
+.btn{
+  margin-left: 33%;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 27px 8px 27px;
+  background-color: white;
+  text-align: center;
+  margin-bottom: 16px;
+  font-weight: 1000;
+  background-color: rgb(183, 0, 0);
+  font-size: 14.5px;
+  border: none;
+  color: white;
+  font-family: montserrat;
+  border-radius: 30px;
+  border: 2px solid rgb(183, 0, 0);
+  transition: 0.5s;
+}
+
+.btn:hover{
+  background-color: white;
+  border: 2px solid rgb(183, 0, 0);
+  color: rgb(183, 0, 0);
+  cursor: pointer;
+  box-shadow: 0 0 10px rgb(255, 35, 35);
+}
+
 a:link{
   text-decoration: none;
+}
+
+@media screen and (max-width: 700px) {
+
+.playlist-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  margin-top: 40px;
+  border-radius: 32px;
+  margin-right: 2%;
+  margin-left: 2%;
+}
+
+/* Playlist Title */
+
+.playlisttitle-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: montserrat;
+  color: white;
+}
+
+.playlisttitle{
+  /* margin-left: 50px; */
+  margin-bottom: 20px;
+  font-size: 32px;
+  margin: 24px;
+}
+
+
+/* Playlist Section  */
+
+.playlist{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  /* margin-left: -48px; */
+  margin-bottom: 32px;
+}
+
+.boxcontainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* margin-left: 48px; */
+  margin-bottom: 24px;
+}
+
 }

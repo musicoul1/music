@@ -1,0 +1,289 @@
+/* style.css (Home Page) */
+
+body {
+    background: url('Resources/Homepage/music-background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+    font-family: 'Raleway', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+    transition: background-image 1s ease-in-out;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    height: 72px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    width: 100%;
+    box-sizing: border-box;
+    transition: transform 0.3s ease-in-out;
+}
+
+nav .nav-brand {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: 20px;
+}
+
+nav .logo {
+    width: 48px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+nav .musicoul-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6em;
+    font-weight: 700;
+}
+
+nav .nav-links {
+    display: flex;
+}
+
+nav .nav-links a {
+    color: white;
+    text-decoration: none;
+    margin: 0 20px;
+    transition: color 0.3s ease;
+    font-weight: 500;
+}
+
+nav .nav-links a:hover {
+    color: red;
+}
+
+main {
+    flex: 1;
+    padding: 20px;
+    perspective: 1px;
+    overflow-y: auto;
+    transform-style: preserve-3d;
+    padding-top: 72px;
+}
+
+.hero {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    transform: translateZ(-1px) scale(2);
+    position: relative;
+    z-index: 1;
+    margin-top: -20vh;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+}
+
+.hero-content {
+    max-width: 800px;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    padding: 40px;
+    border-radius: 10px;
+}
+
+.hero h1 {
+    font-size: 3.8em;
+    margin-bottom: 20px;
+    font-family: 'Playfair Display', serif;
+    line-height: 1.2;
+    font-weight: 700;
+}
+
+.hero p {
+    font-size: 1.3em;
+    margin-bottom: 30px;
+    line-height: 1.6;
+    font-weight: 400;
+}
+
+.cta-button {
+    background-color: red;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2em;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    font-weight: 600;
+}
+
+.cta-button:hover {
+    background-color: darkred;
+}
+
+.divider {
+    width: 80%;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 40px auto;
+}
+
+.explore-courses {
+    text-align: center;
+    margin-top: 32vh;
+    margin-bottom: 20vh;
+    position: relative;
+    z-index: 2;
+    padding: 60px 20px;
+}
+
+.explore-courses h2 {
+    font-size: 2.8em;
+    margin-bottom: 10px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+}
+
+.course-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.course-item {
+    width: 300px;
+    margin: 30px;
+    padding: 20px;
+    border: 1px solid #333;
+    border-radius: 10px;
+    text-align: left;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+}
+
+.course-item h3 {
+    font-size: 1.7em;
+    margin-bottom: 10px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+}
+
+.course-item p {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.course-link {
+    color: red;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.course-link:hover {
+    color: darkred;
+}
+
+.view-more-button {
+    background-color: red;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2em;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    font-weight: 600;
+    margin-top: 60px;
+}
+
+.view-more-button:hover {
+    background-color: darkred;
+}
+
+.hamburger {
+    display: none;
+    color: white;
+    font-size: 1.5em;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+}
+
+.side-nav {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(10px);
+    padding-top: 60px;
+    transition: right 0.3s ease;
+    z-index: 100;
+}
+
+.side-nav a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.course-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 5px;
+}
+
+@media (max-width: 768px) {
+    nav .nav-links {
+        display: none;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .hero h1 {
+        font-size: 2.8em;
+    }
+
+    .hero p {
+        font-size: 1.1em;
+    }
+
+    .course-grid {
+        flex-direction: column;
+    }
+
+    .course-item {
+        width: 95%;
+    }
+
+    .explore-courses {
+        margin-top: 10vh;
+        margin-bottom: 10vh;
+    }
+}

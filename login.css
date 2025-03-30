@@ -1,0 +1,102 @@
+/* login.css */
+
+body {
+    background: url('Resources/Homepage/music-background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+    font-family: 'Raleway', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.login-container {
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    width: 400px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.form-container {
+    width: 200%;
+    display: flex;
+    transition: transform 0.6s ease-in-out;
+}
+
+.login-form, .signup-form {
+    width: 50%;
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+.login-form h1, .signup-form h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-family: 'Playfair Display', serif;
+}
+
+.login-form input, .signup-form input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    box-sizing: border-box;
+}
+
+#submitLogin, #submitSignup {
+    width: 100%;
+    padding: 12px;
+    background-color: red; /* Red for both submit buttons */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease;
+}
+
+#submitLogin:hover, #submitSignup:hover {
+    background-color: darkred;
+}
+
+#toggleButton, #toggleButtonLogin {
+    width: 100%;
+    padding: 12px;
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    margin-top: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#toggleButton:hover, #toggleButtonLogin:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.form-message {
+    text-align: center;
+    margin-top: 10px;
+    color: red;
+}

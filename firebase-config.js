@@ -1,9 +1,4 @@
-/* firebase-config.js */
-
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider } from "firebase/auth";
-
+// Initialize Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyBaDBLoe2Wi2WgmJfPRXoEP-ZSgkVhMxVI",
     authDomain: "musicoul-15025.firebaseapp.com",
@@ -12,10 +7,9 @@ const firebaseConfig = {
     messagingSenderId: "863099041367",
     appId: "1:863099041367:web:c3d61399489a219611d512",
     measurementId: "G-WBPE697N9Q"
-  };
+};
 
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-const auth = getAuth(app);
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
 
-export { auth, analytics, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider };
+export { auth };

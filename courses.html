@@ -5,44 +5,205 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Musicoul - Courses</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="courses.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Raleway:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <nav>
-        <img src="Resources/Homepage/Logo.png" class="logo" alt="Musicoul Logo">
-        <span class="musicoul-name">Musicoul</span>
+        <div class="nav-brand">
+            <img src="Resources/Homepage/Logo.png" class="logo" alt="Musicoul Logo">
+            <span class="musicoul-name">Musicoul</span>
+        </div>
         <div class="nav-links">
             <a href="index.html">Home</a>
             <a href="courses.html">Courses</a>
-            <a href="instructors.html">Instructors</a>
-            <a href="about.html">About Us</a>
-            <a href="contact.html">Contact</a>
-            <a href="login.html">Login</a>
+            <a href="coming-soon.html">Events</a>
+            <a href="coming-soon.html">About Us</a>
+            <a href="coming-soon.html">Contact</a>
+            <a href="coming-soon.html">Login</a>
+        </div>
+        <div class="hamburger">
+            <i class="fas fa-bars"></i>
         </div>
     </nav>
+    <div class="side-nav">
+        <a href="index.html">Home</a>
+        <a href="courses.html">Courses</a>
+        <a href="coming-soon.html">Events</a>
+        <a href="coming-soon.html">About Us</a>
+        <a href="coming-soon.html">Contact</a>
+        <a href="coming-soon.html">Login</a>
+    </div>
+
     <main>
-        <section class="courses-list">
-            <h2>Our Courses</h2>
-            <div class="course-item">
-                <h3>Vocal Training</h3>
-                <p>Learn the fundamentals of vocal music and develop your singing skills.</p>
-                <a href="course-detail.html" class="cta-button">Learn More</a>
+        <section class="course-section">
+            <div class="course-head">
+                <h2>Our Courses</h2>
+                <p>Explore our Courses and Start your Musical Journey!</p>
             </div>
-            <div class="course-item">
-                <h3>Harmonium Classes</h3>
-                <p>Master the art of playing the harmonium with expert guidance.</p>
-                <a href="course-detail.html" class="cta-button">Learn More</a>
+            <div class="course-search">
+                <input type="text" id="courseSearch" placeholder="Search Courses...">
             </div>
-            <div class="course-item">
-                <h3>Tabla Lessons</h3>
-                <p>Explore the rhythmic world of tabla and become a skilled percussionist.</p>
-                <a href="course-detail.html" class="cta-button">Learn More</a>
-            </div>
-            <div class="course-item">
-                <h3>Piano Mastery</h3>
-                <p>Unlock your potential as a pianist with our comprehensive courses.</p>
-                <a href="course-detail.html" class="cta-button">Learn More</a>
+            <div class="course-grid">
+                <div class="course-card">
+                    <img src="Resources/Courses/e1.jpeg" alt="Prarambhik [Exam-1]">
+                    <h3>Prarambhik [Exam-1]</h3>
+                    <p>The foundational course for aspiring musicians.</p>
+                    <button class="read-more" data-course="1">All Features</button>
+                    <button class="view-button">Enter</button>
+                    <div class="course-details" id="course-details-1">
+                        <p class="course-features-title"><strong>Features:</strong></p>
+                        <ul>
+                            <li>Notes and Recordings</li>
+                            <li>Revision Sessions</li>
+                            <li>Doubt Sessions</li>
+                            <li>Workshops</li>
+                            <li>Competitions</li>
+                            <li>Performance Events</li>
+                            <li>Tests</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <img src="Resources/Courses/e3.jpeg" alt="Praveshika Pratham [Exam-2]">
+                    <h3>Praveshika Pratham [Exam-2]</h3>
+                    <p>Building upon the basics, this course delves deeper into musical concepts.</p>
+                    <button class="read-more" data-course="2">All Features</button>
+                    <button class="view-button">Enter</button>
+                    <div class="course-details" id="course-details-2">
+                        <p class="course-features-title"><strong>Features:</strong></p>
+                        <ul>
+                            <li>Notes and Recordings</li>
+                            <li>Revision Sessions</li>
+                            <li>Doubt Sessions</li>
+                            <li>Workshops</li>
+                            <li>Competitions</li>
+                            <li>Performance Events</li>
+                            <li>Tests</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <img src="Resources/Courses/e3.jpeg" alt="Praveshika Purna [Exam-3]">
+                    <h3>Praveshika Purna [Exam-3]</h3>
+                    <p>A comprehensive exploration of musical theory and practice.</p>
+                    <button class="read-more" data-course="3">All Features</button>
+                    <button class="view-button">Enter</button>
+                    <div class="course-details" id="course-details-3">
+                        <p class="course-features-title"><strong>Features:</strong></p>
+                        <ul>
+                            <li>Notes and Recordings</li>
+                            <li>Revision Sessions</li>
+                            <li>Doubt Sessions</li>
+                            <li>Workshops</li>
+                            <li>Competitions</li>
+                            <li>Performance Events</li>
+                            <li>Tests</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <img src="Resources/Courses/e4.jpeg" alt="Madhyama Pratham [Exam-4]">
+                    <h3>Madhyama Pratham [Exam-4]</h3>
+                    <p>Intermediate level course for those seeking advanced musical skills.</p>
+                    <button class="read-more" data-course="4">All Features</button>
+                    <button class="view-button">Enter</button>
+                    <div class="course-details" id="course-details-4">
+                        <p class="course-features-title"><strong>Features:</strong></p>
+                        <ul>
+                            <li>Notes and Recordings</li>
+                            <li>Revision Sessions</li>
+                            <li>Doubt Sessions</li>
+                            <li>Workshops</li>
+                            <li>Competitions</li>
+                            <li>Performance Events</li>
+                            <li>Tests</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <img src="Resources/Courses/e5.jpeg" alt="Madhyama Purna [Exam-5]">
+                    <h3>Madhyama Purna [Exam-5]</h3>
+                    <p>A comprehensive course for those seeking advanced musical skills.</p>
+                    <button class="read-more" data-course="5">All Features</button>
+                    <button class="view-button">Enter</button>
+                    <div class="course-details" id="course-details-5">
+                        <p class="course-features-title"><strong>Features:</strong></p>
+                        <ul>
+                            <li>Notes and Recordings</li>
+                            <li>Revision Sessions</li>
+                            <li>Doubt Sessions</li>
+                            <li>Workshops</li>
+                            <li>Competitions</li>
+                            <li>Performance Events</li>
+                            <li>Tests</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <img src="Resources/Courses/e6.jpeg" alt="Visharad Pratham [Exam-6]">
+                    <h3>Visharad Pratham [Exam-6]</h3>
+                    <p>The pinnacle of musical achievement, this course is for those seeking mastery.</p>
+                    <button class="read-more" data-course="6">All Features</button>
+                    <button class="view-button">Enter</button>
+                    <div class="course-details" id="course-details-6">
+                        <p class="course-features-title"><strong>Features:</strong></p>
+                        <ul>
+                            <li>Notes and Recordings</li>
+                            <li>Revision Sessions</li>
+                            <li>Doubt Sessions</li>
+                            <li>Workshops</li>
+                            <li>Competitions</li>
+                            <li>Performance Events</li>
+                            <li>Tests</li>
+                        </ul>
+                    </div>
+                </div>
+                 <div class="course-card">
+                    <img src="Resources/Courses/e6.jpeg" alt="Visharad Purna [Exam-7]">
+                    <h3>Visharad Purna [Exam-7]</h3>
+                    <p>The pinnacle of musical achievement, this course is for those seeking mastery.</p>
+                    <button class="read-more" data-course="7">All Features</button>
+                    <button class="view-button">Enter</button>
+                    <div class="course-details" id="course-details-7">
+                        <p class="course-features-title"><strong>Features:</strong></p>
+                        <ul>
+                            <li>Notes and Recordings</li>
+                            <li>Revision Sessions</li>
+                            <li>Doubt Sessions</li>
+                            <li>Workshops</li>
+                            <li>Competitions</li>
+                            <li>Performance Events</li>
+                            <li>Tests</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <img src="Resources/Courses/e1.jpeg" alt="Piano [Exam-1]">
+                    <h3>Piano [Exam-1]</h3>
+                    <p>The foundational course for aspiring pianists.</p>
+                    <button class="read-more" data-course="8">All Features</button>
+                    <button class="view-button">Enter</button>
+                    <div class="course-details" id="course-details-8">
+                        <p class="course-features-title"><strong>Features:</strong></p>
+                        <ul>
+                            <li>Notes and Recordings</li>
+                            <li>Revision Sessions</li>
+                            <li>Doubt Sessions</li>
+                            <li>Workshops</li>
+                            <li>Competitions</li>
+                            <li>Performance Events</li>
+                            <li>Tests</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
+    <script src="script.js"></script>
+    <script src="courses.js"></script>
 </body>
 </html>

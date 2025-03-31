@@ -1,0 +1,55 @@
+/* coming-soon.css */
+
+.coming-soon-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url('Resources/Homepage/music-background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+    text-align: center;
+    padding-top: 72px; /* to account for the navbar */
+}
+
+.coming-soon-section {
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    padding: 40px;
+    border-radius: 10px;
+}
+
+.coming-soon-section h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+}
+
+.coming-soon-section p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.countdown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.countdown-item {
+    margin: 0 20px;
+}
+
+.countdown-item span {
+    font-size: 2em;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .coming-soon-section h1 {
+        font-size: 2.5em;
+    }
+}

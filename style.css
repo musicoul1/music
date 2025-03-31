@@ -257,13 +257,24 @@ main {
     margin-bottom: 5px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     nav .nav-links {
         display: none;
     }
 
     .hamburger {
         display: block;
+    }
+
+    .hero {
+        margin-top: 72px;
+        transform: translateZ(0) scale(1);
+        min-height: auto;
+        padding: 50px 25px;
+    }
+
+    .hero-content {
+        padding: 35px;
     }
 
     .hero h1 {
@@ -274,16 +285,103 @@ main {
         font-size: 1.1em;
     }
 
+    .divider {
+        margin: 35px auto;
+    }
+
+    .explore-courses {
+        margin-top: 55px;
+        margin-bottom: 55px;
+        padding: 45px 15px;
+    }
+
+    .explore-courses h2 {
+        font-size: 2.5em;
+    }
+
+    .course-grid {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .course-item {
+        width: 45%;
+        margin: 15px 8px;
+        padding: 15px;
+    }
+
+    .course-item img {
+        height: 150px;
+    }
+
+    .course-item h3 {
+        font-size: 1.5em;
+    }
+
+    .course-item p {
+        font-size: 1em;
+    }
+
+    .view-more-button {
+        margin-top: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        padding: 35px 20px;
+    }
+
+    .hero-content {
+        padding: 25px;
+    }
+
+    .hero h1 {
+        font-size: 2.3em;
+    }
+
+    .hero p {
+        font-size: 0.9em;
+    }
+
+    .divider {
+        margin: 25px auto;
+    }
+
+    .explore-courses {
+        margin-top: 45px;
+        margin-bottom: 45px;
+        padding: 35px 10px;
+    }
+
+    .explore-courses h2 {
+        font-size: 2.2em;
+    }
+
     .course-grid {
         flex-direction: column;
     }
 
     .course-item {
         width: 95%;
+        margin: 15px auto;
+        padding: 15px;
     }
 
-    .explore-courses {
-        margin-top: 10vh;
-        margin-bottom: 10vh;
+    .course-item img {
+        height: 180px;
+    }
+
+    .course-item h3 {
+        font-size: 1.4em;
+    }
+
+    .course-item p {
+        font-size: 0.95em;
+    }
+
+    .view-more-button {
+        margin-top: 30px;
     }
 }

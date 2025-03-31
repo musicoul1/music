@@ -1,4 +1,4 @@
-/* script.js */
+// script.js
 
 let lastScrollTop = 0;
 const navbar = document.querySelector('nav');
@@ -37,6 +37,8 @@ hamburger.addEventListener('click', () => {
 
 window.addEventListener('click', (event) => {
     if (event.target === loginPopup) {
-        loginPopup.style.display = 'none';
+        if (loginPopup) {
+            loginPopup.style.display = 'none';
+        }
     }
 });

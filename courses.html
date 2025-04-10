@@ -44,16 +44,67 @@
                 <h2>Our Courses</h2>
                 <p>Explore our Courses and Start your Musical Journey!</p>
             </div>
-            <div class="course-search">
-                <input type="text" id="courseSearch" placeholder="Search Courses...">
+            <div class="course-filter-container">
+                <div class="course-search">
+                    <input type="text" id="courseSearch" placeholder="Search Courses...">
+                </div>
+                <div class="course-filters">
+                    <label for="subjectFilter">Subject:</label>
+                    <select id="subjectFilter">
+                        <option value="">All</option>
+                        <option value="Singing">Singing</option>
+                        <option value="Piano/Harmonium">Piano/Harmonium</option>
+                        <option value="Tabla">Tabla</option>
+                    </select>
+
+                    <label for="pricingFilter">Pricing:</label>
+                    <select id="pricingFilter">
+                        <option value="">All</option>
+                        <option value="Free">Free</option>
+                        <option value="Paid">Paid</option>
+                    </select>
+
+                    <label for="typeFilter">Course Type:</label>
+                    <select id="typeFilter">
+                        <option value="">All</option>
+                        <option value="Live">Live</option>
+                        <option value="Recorded">Recorded</option>
+                    </select>
+
+                    <label for="examFilter">Exam No:</label>
+                    <select id="examFilter">
+                        <option value="">All</option>
+                        <option value="1">Exam 1</option>
+                        <option value="2">Exam 2</option>
+                        <option value="3">Exam 3</option>
+                        <option value="4">Exam 4</option>
+                        <option value="5">Exam 5</option>
+                        <option value="6">Exam 6</option>
+                        <option value="7">Exam 7</option>
+                    </select>
+
+                    <button id="filterButton">Filter</button>
+                </div>
             </div>
             <div class="course-grid">
-                <div class="course-card">
+                <div class="course-card" data-pricing="Paid" data-type="Recorded" data-exam="1" data-subject="Singing">
                     <img src="Resources/Courses/e1.jpeg" alt="Prarambhik [Exam-1]">
-                    <h3>Prarambhik [Exam-1]</h3>
-                    <p>The foundational course for aspiring musicians.</p>
-                    <button class="read-more" data-course="1">All Features</button>
-                    <button class="view-button">Enter</button>
+                    <div class="course-tags">
+                        <span class="tag paid">Paid</span>
+                        <span class="tag recorded">Recorded</span>
+                        <span class="tag exam-1">Exam 1</span>
+                        <span class="tag singing">Singing</span>
+                    </div>
+                    <h3>Prarambhik <br>[Exam-1]</h3>
+                    <p>The foundational course for aspiring singers.</p>
+                    <div class="course-price">
+                        <span class="discounted-price">₹499</span>
+                        <span class="original-price">₹999</span>
+                    </div>
+                    <div class="button-container">
+                        <button class="read-more" data-course="1">All Features</button>
+                        <button class="view-button">Enter</button>
+                    </div>
                     <div class="course-details" id="course-details-1">
                         <p class="course-features-title"><strong>Features:</strong></p>
                         <ul>
@@ -67,136 +118,202 @@
                         </ul>
                     </div>
                 </div>
-                <div class="course-card">
+                <div class="course-card" data-pricing="Paid" data-type="Live" data-exam="2" data-subject="Piano/Harmonium">
                     <img src="Resources/Courses/e3.jpeg" alt="Praveshika Pratham [Exam-2]">
-                    <h3>Praveshika Pratham [Exam-2]</h3>
-                    <p>Building upon the basics, this course delves deeper into musical concepts.</p>
-                    <button class="read-more" data-course="2">All Features</button>
-                    <button class="view-button">Enter</button>
+                    <div class="course-tags">
+                        <span class="tag paid">Paid</span>
+                        <span class="tag live">Live</span>
+                        <span class="tag exam-2">Exam 2</span>
+                        <span class="tag piano-harmonium">Piano/Harmonium</span>
+                    </div>
+                    <h3>Praveshika Pratham <br>[Exam-2]</h3>
+                    <p>Building upon the basics, this live piano/harmonium course delves deeper.</p>
+                    <div class="course-price">
+                        <span class="discounted-price">₹799</span>
+                        <span class="original-price">₹1299</span>
+                    </div>
+                    <div class="button-container">
+                        <button class="read-more" data-course="2">All Features</button>
+                        <button class="view-button">Enter</button>
+                    </div>
                     <div class="course-details" id="course-details-2">
                         <p class="course-features-title"><strong>Features:</strong></p>
                         <ul>
-                            <li>Notes and Recordings</li>
-                            <li>Revision Sessions</li>
-                            <li>Doubt Sessions</li>
-                            <li>Workshops</li>
-                            <li>Competitions</li>
-                            <li>Performance Events</li>
-                            <li>Tests</li>
+                            <li>Live Sessions</li>
+                            <li>Interactive Practice</li>
+                            <li>Personalized Feedback</li>
+                            <li>Sheet Music</li>
+                            <li>Doubt Clearing</li>
+                            <li>Performance Opportunities</li>
+                            <li>Assessments</li>
                         </ul>
                     </div>
                 </div>
-                <div class="course-card">
+                <div class="course-card" data-pricing="Free" data-type="Recorded" data-exam="3" data-subject="Tabla">
                     <img src="Resources/Courses/e3.jpeg" alt="Praveshika Purna [Exam-3]">
-                    <h3>Praveshika Purna [Exam-3]</h3>
-                    <p>A comprehensive exploration of musical theory and practice.</p>
-                    <button class="read-more" data-course="3">All Features</button>
-                    <button class="view-button">Enter</button>
+                    <div class="course-tags">
+                        <span class="tag free">Free</span>
+                        <span class="tag recorded">Recorded</span>
+                        <span class="tag exam-3">Exam 3</span>
+                        <span class="tag tabla">Tabla</span>
+                    </div>
+                    <h3>Praveshika Purna <br>[Exam-3]</h3>
+                    <p>A comprehensive recorded tabla course exploring rhythm and beats.</p>
+                    <div class="course-price">
+                        <span class="discounted-price">Free</span>
+                        <span class="original-price"></span>
+                    </div>
+                    <div class="button-container">
+                        <button class="read-more" data-course="3">All Features</button>
+                        <button class="view-button">Enter</button>
+                    </div>
                     <div class="course-details" id="course-details-3">
                         <p class="course-features-title"><strong>Features:</strong></p>
                         <ul>
-                            <li>Notes and Recordings</li>
-                            <li>Revision Sessions</li>
-                            <li>Doubt Sessions</li>
-                            <li>Workshops</li>
-                            <li>Competitions</li>
-                            <li>Performance Events</li>
-                            <li>Tests</li>
+                            <li>Video Lessons</li>
+                            <li>Practice Tracks</li>
+                            <li>Notation Guides</li>
+                            <li>Rhythmic Exercises</li>
+                            <li>Self-Assessment Quizzes</li>
                         </ul>
                     </div>
                 </div>
-                <div class="course-card">
+                <div class="course-card" data-pricing="Paid" data-type="Live" data-exam="4" data-subject="Singing">
                     <img src="Resources/Courses/e4.jpeg" alt="Madhyama Pratham [Exam-4]">
-                    <h3>Madhyama Pratham [Exam-4]</h3>
-                    <p>Intermediate level course for those seeking advanced musical skills.</p>
-                    <button class="read-more" data-course="4">All Features</button>
-                    <button class="view-button">Enter</button>
+                    <div class="course-tags">
+                        <span class="tag paid">Paid</span>
+                        <span class="tag live">Live</span>
+                        <span class="tag exam-4">Exam 4</span>
+                        <span class="tag singing">Singing</span>
+                    </div>
+                    <h3>Madhyama Pratham <br>[Exam-4]</h3>
+                    <p>Intermediate level live singing course for advanced techniques.</p>
+                    <div class="course-price">
+                        <span class="discounted-price">₹999</span>
+                        <span class="original-price">₹1499</span>
+                    </div>
+                    <div class="button-container">
+                        <button class="read-more" data-course="4">All Features</button>
+                        <button class="view-button">Enter</button>
+                    </div>
                     <div class="course-details" id="course-details-4">
                         <p class="course-features-title"><strong>Features:</strong></p>
                         <ul>
-                            <li>Notes and Recordings</li>
-                            <li>Revision Sessions</li>
-                            <li>Doubt Sessions</li>
-                            <li>Workshops</li>
-                            <li>Competitions</li>
-                            <li>Performance Events</li>
-                            <li>Tests</li>
+                            <li>Advanced Vocal Exercises</li>
+                            <li>Raaga Exploration</li>
+                            <li>Improvisation Techniques</li>
+                            <li>Live Performance Practice</li>
+                            <li>Expert Feedback</li>
                         </ul>
                     </div>
                 </div>
-                <div class="course-card">
+                <div class="course-card" data-pricing="Paid" data-type="Recorded" data-exam="5" data-subject="Piano/Harmonium">
                     <img src="Resources/Courses/e5.jpeg" alt="Madhyama Purna [Exam-5]">
-                    <h3>Madhyama Purna [Exam-5]</h3>
-                    <p>A comprehensive course for those seeking advanced musical skills.</p>
-                    <button class="read-more" data-course="5">All Features</button>
-                    <button class="view-button">Enter</button>
+                    <div class="course-tags">
+                        <span class="tag paid">Paid</span>
+                        <span class="tag recorded">Recorded</span>
+                        <span class="tag exam-5">Exam 5</span>
+                        <span class="tag piano-harmonium">Piano/Harmonium</span>
+                    </div>
+                    <h3>Madhyama Purna <br>[Exam-5]</h3>
+                    <p>A comprehensive recorded piano/harmonium course for skilled players.</p>
+                    <div class="course-price">
+                        <span class="discounted-price">₹699</span>
+                        <span class="original-price">₹1199</span>
+                    </div>
+                    <div class="button-container">
+                        <button class="read-more" data-course="5">All Features</button>
+                        <button class="view-button">Enter</button>
+                    </div>
                     <div class="course-details" id="course-details-5">
                         <p class="course-features-title"><strong>Features:</strong></p>
                         <ul>
-                            <li>Notes and Recordings</li>
-                            <li>Revision Sessions</li>
-                            <li>Doubt Sessions</li>
-                            <li>Workshops</li>
-                            <li>Competitions</li>
-                            <li>Performance Events</li>
-                            <li>Tests</li>
+                            <li>Complex Musical Pieces</li>
+                            <li>Advanced Theory</li>
+                            <li>Composition Techniques</li>
+                            <li>Virtual Keyboard Practice</li>
                         </ul>
                     </div>
                 </div>
-                <div class="course-card">
+                <div class="course-card" data-pricing="Paid" data-type="Live" data-exam="6" data-subject="Tabla">
                     <img src="Resources/Courses/e6.jpeg" alt="Visharad Pratham [Exam-6]">
-                    <h3>Visharad Pratham [Exam-6]</h3>
-                    <p>The pinnacle of musical achievement, this course is for those seeking mastery.</p>
-                    <button class="read-more" data-course="6">All Features</button>
-                    <button class="view-button">Enter</button>
+                    <div class="course-tags">
+                        <span class="tag paid">Paid</span>
+                        <span class="tag live">Live</span>
+                        <span class="tag exam-6">Exam 6</span>
+                        <span class="tag tabla">Tabla</span>
+                    </div>
+                    <h3>Visharad Pratham <br>[Exam-6]</h3>
+                    <p>The advanced live tabla course for rhythmic mastery.</p>
+                    <div class="course-price">
+                        <span class="discounted-price">₹1299</span>
+                        <span class="original-price">₹1799</span>
+                    </div>
+                    <div class="button-container">
+                        <button class="read-more" data-course="6">All Features</button>
+                        <button class="view-button">Enter</button>
+                    </div>
                     <div class="course-details" id="course-details-6">
                         <p class="course-features-title"><strong>Features:</strong></p>
                         <ul>
-                            <li>Notes and Recordings</li>
-                            <li>Revision Sessions</li>
-                            <li>Doubt Sessions</li>
-                            <li>Workshops</li>
-                            <li>Competitions</li>
-                            <li>Performance Events</li>
-                            <li>Tests</li>
+                            <li>Intricate Rhythmic Patterns</li>
+                            <li>Advanced Taal Systems</li>
+                            <li>Improvisation and Soloing</li>
+                            <li>Live Accompaniment Practice</li>
                         </ul>
                     </div>
                 </div>
-                 <div class="course-card">
+                <div class="course-card" data-pricing="Paid" data-type="Recorded" data-exam="7" data-subject="Singing">
                     <img src="Resources/Courses/e6.jpeg" alt="Visharad Purna [Exam-7]">
-                    <h3>Visharad Purna [Exam-7]</h3>
-                    <p>The pinnacle of musical achievement, this course is for those seeking mastery.</p>
-                    <button class="read-more" data-course="7">All Features</button>
-                    <button class="view-button">Enter</button>
+                    <div class="course-tags">
+                        <span class="tag paid">Paid</span>
+                        <span class="tag recorded">Recorded</span>
+                        <span class="tag exam-7">Exam 7</span>
+                        <span class="tag singing">Singing</span>
+                    </div>
+                    <h3>Visharad Purna <br>[Exam-7]</h3>
+                    <p>The pinnacle recorded singing course for ultimate vocal proficiency.</p>
+                    <div class="course-price">
+                        <span class="discounted-price">₹899</span>
+                        <span class="original-price">₹1399</span>
+                    </div>
+                    <div class="button-container">
+                        <button class="read-more" data-course="7">All Features</button>
+                        <button class="view-button">Enter</button>
+                    </div>
                     <div class="course-details" id="course-details-7">
                         <p class="course-features-title"><strong>Features:</strong></p>
                         <ul>
-                            <li>Notes and Recordings</li>
-                            <li>Revision Sessions</li>
-                            <li>Doubt Sessions</li>
-                            <li>Workshops</li>
-                            <li>Competitions</li>
-                            <li>Performance Events</li>
-                            <li>Tests</li>
+                            <li>Masterclass Level Content</li>
+                            <li>Advanced Raaga Theory and Practice</li>
+                            <li>Performance Analysis</li>
                         </ul>
                     </div>
                 </div>
-                <div class="course-card">
+                <div class="course-card" data-pricing="Free" data-type="Recorded" data-exam="1" data-subject="Piano/Harmonium">
                     <img src="Resources/Courses/e1.jpeg" alt="Piano [Exam-1]">
-                    <h3>Piano [Exam-1]</h3>
-                    <p>The foundational course for aspiring pianists.</p>
-                    <button class="read-more" data-course="8">All Features</button>
-                    <button class="view-button">Enter</button>
+                    <div class="course-tags">
+                        <span class="tag free">Free</span>
+                        <span class="tag recorded">Recorded</span>
+                        <span class="tag exam-1">Exam 1</span>
+                        <span class="tag piano-harmonium">Piano/Harmonium</span>
+                    </div>
+                    <h3>Piano <br>[Exam-1]</h3>
+                    <p>The foundational recorded course for aspiring pianists/harmonists.</p>
+                    <div class="course-price">
+                        <span class="discounted-price">Free</span>
+                        <span class="original-price"></span>
+                    </div>
+                    <div class="button-container">
+                        <button class="read-more" data-course="8">All Features</button>
+                        <button class="view-button">Enter</button>
+                    </div>
                     <div class="course-details" id="course-details-8">
                         <p class="course-features-title"><strong>Features:</strong></p>
                         <ul>
-                            <li>Notes and Recordings</li>
-                            <li>Revision Sessions</li>
-                            <li>Doubt Sessions</li>
-                            <li>Workshops</li>
-                            <li>Competitions</li>
-                            <li>Performance Events</li>
-                            <li>Tests</li>
+                            <li>Basic Keyboard Techniques</li>
+                            <li>Simple Melodies</li>
+                            <li>Finger Exercises</li>
                         </ul>
                     </div>
                 </div>

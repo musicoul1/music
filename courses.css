@@ -15,11 +15,11 @@ body {
 }
 
 .course-section {
-    flex: center;
-    justify-content: center;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    text-align: center;
-    padding: 20px;
+    padding: 40px 20px;
     margin-top: 20px;
 }
 
@@ -28,15 +28,18 @@ body {
     background-color: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(10px);
     padding: 40px;
-    padding-top: 5px;
+    padding-top: 20px;
+    padding-bottom: 30px;
     border-radius: 10px;
-    margin: 0 auto; /* Add this line to center horizontally */
-    text-align: center; /* keep the text inside centered */
+    margin-bottom: 30px; /* Reduced margin */
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .course-section h2 {
-    font-size: 3.8em;
-    margin-bottom: -5px;
+    font-size: 3.2em;
+    margin-bottom: 5px;
     font-family: 'Playfair Display', serif;
     line-height: 1.2;
     font-weight: 700;
@@ -45,21 +48,23 @@ body {
 
 .course-section p {
     font-size: 1.1em;
-    margin-bottom: 30px;
+    margin-bottom: 10px; /* Reduced margin to make space for buttons */
     line-height: 1.6;
     font-weight: 400;
 }
 
-.course-search {
-    margin: 20px auto;
+.course-filter-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 40px;
     width: 80%;
-    max-width: 600px;
-    margin-bottom: 80px;
+    max-width: 900px;
 }
 
-.course-search label {
-    font-family: 'Raleway', sans-serif;
-    color: white;
+.course-search {
+    width: 100%;
 }
 
 .course-search input[type="text"] {
@@ -74,16 +79,53 @@ body {
     font-family: 'Raleway', sans-serif;
 }
 
-.course-details .course-features-title {
-    color: rgb(218, 175, 123);
-    margin-bottom: -6px;
+.course-filters {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap; /* Allow filters to wrap on smaller screens */
+    justify-content: center;
+    width: 100%;
+}
+
+.course-filters label {
+    color: white;
+    font-family: 'Raleway', sans-serif;
+}
+
+.course-filters select {
+    padding: 8px;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+    font-family: 'Raleway', sans-serif;
+}
+
+#filterButton {
+    background-color: rgb(212, 158, 91);
+    color: black;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+#filterButton:hover {
+    background-color: white;
+    color: black;
 }
 
 .course-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-gap: 20px;
-    margin-top: 20px;
+    grid-gap: 30px;
+    max-width: 1200px;
+    margin: 20px auto; /* Center the grid */
+    padding: 0 20px; /* Add some padding on the sides for smaller desktops */
 }
 
 .course-card {
@@ -94,6 +136,8 @@ body {
     background-color: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(10px);
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .course-card img {
@@ -112,50 +156,97 @@ body {
     color: white;
 }
 
-.course-card p {
-    font-size: 1em;
-    margin-bottom: 15px;
-    color: white;
+.course-card .course-tags {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 5px; /* Reduced margin to be above the title */
 }
 
-.read-more {
-    background-color: transparent;
+.course-card .tag {
+    background-color: #555; /* A darker, more muted gray */
     color: white;
-    border: 2px solid white;
+    padding: 5px 8px;
     border-radius: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
+    font-size: 0.8em;
+    font-weight: 500;
+    font-family: 'Raleway', sans-serif;
+    height: 20px; /* Set your desired fixed height here */
+    line-height: 20px; /* Vertically center the text */
+    display: inline-block; /* Important for height and padding to work correctly */
+}
+
+.course-card p {
+    font-size: 1em;
+    margin-bottom: 5px; /* Reduced margin to make space for price */
+    color: white;
+    flex-grow: 1; /* Allow description to take up available vertical space */
+}
+
+.course-card .course-price {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* Space above the buttons */
+}
+
+.course-card .course-price .discounted-price {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: rgb(212, 158, 91);
     margin-right: 10px;
+}
+
+.course-card .course-price .original-price {
+    font-size: 0.9em;
+    color: #ccc;
+    text-decoration: line-through;
+}
+
+.course-card .button-container {
+    display: flex; /* Keep it as flex to put buttons in a row */
+    width: 100%; /* Full width of the card */
+    max-width: 100%; /* Ensure it can take full width */
+    margin-top: 10px;
+}
+
+.course-card .button-container button {
+    flex: 1; /* Each button takes equal available space */
+    padding: 10px 0; /* Adjust vertical padding */
+    border-radius: 5px;
+    cursor: pointer;
     font-size: 0.9em;
     font-weight: 600;
     font-family: 'Raleway', sans-serif;
-    transition: background-color 0.2s ease, color 0.3s ease;
+    transition: background-color 0.2s ease, color 0.3s ease, border-color 0.2s ease;
+    border: 2px solid;
+    text-align: center; /* Center the text */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.read-more:hover {
+.course-card .button-container .read-more {
+    background-color: transparent;
+    color: white;
+    border-color: white;
+    margin-right: 5px; /* Add spacing between buttons */
+}
+
+.course-card .button-container .read-more:hover {
     background-color: white;
     color: black;
 }
 
-
-.view-button {
+.course-card .button-container .view-button {
     background-color: red;
     color: white;
-    border: 2px solid red;
-    border-radius: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
-    margin-right: 10px;
-    font-size: 0.9em;
-    font-weight: 600;
-    font-family: 'Raleway', sans-serif; /* Changed font */
-    transition: background-color 0.2s ease, color 0.3s ease, border-color 0.2s ease;
+    border-color: red;
+    margin-left: 5px; /* Add spacing between buttons */
 }
 
-.view-button:hover {
+.course-card .button-container .view-button:hover {
     background-color: white;
     color: black;
-    border: 2px solid white;
+    border-color: white;
 }
 
 .course-details {
@@ -164,41 +255,126 @@ body {
     color: white;
 }
 
+.course-details .course-features-title {
+    color: rgb(218, 175, 123);
+    margin-bottom: -6px;
+}
+
 .course-details ul {
     list-style-type: disc;
     margin-left: 20px;
 }
 
-@media (max-width: 768px) {
+/* Desktop Styles */
+@media (min-width: 992px) {
+    /* Buttons will already be in the same line due to the main styles */
+    /* Adjust max-width if you want to limit their combined width */
+    .course-card .button-container {
+        max-width: 100%; /* Can be adjusted if needed */
+    }
+}
+
+/* Tablet Styles */
+@media (max-width: 991px) and (min-width: 768px) {
     .course-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
     }
 
+    .course-filter-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .course-filters {
+        justify-content: center;
+    }
+    .course-card .button-container {
+        max-width: 100%; /* Ensure full width on tablet */
+    }
+}
+
+/* Mobile Styles */
+@media (max-width: 767px) {
     .course-head {
-        max-width: 800px;
-        background-color: rgba(0, 0, 0, 0.6);
-        backdrop-filter: blur(10px);
-        padding: 40px;
-        padding-top: 5px;
+        padding: 30px;
+        padding-top: 15px;
         padding-bottom: 20px;
-        border-radius: 10px;
-        margin: 0 auto; /* Add this line to center horizontally */
-        text-align: center; /* keep the text inside centered */
+        margin-bottom: 20px; /* Further reduced margin */
     }
-    
+
     .course-section h2 {
-        font-size: 3.2em;
-        margin-bottom: -5px;
-        font-family: 'Playfair Display', serif;
-        line-height: 1.2;
-        font-weight: 700;
+        font-size: 2.8em;
     }
-    
+
     .course-section p {
         font-size: 1em;
-        margin-bottom: 30px;
-        line-height: 1.6;
-        font-weight: 400;
+        margin-bottom: 5px; /* Reduced margin for mobile */
     }
 
+    .course-filter-container {
+        flex-direction: column;
+        align-items: stretch; /* Make filter elements take full width */
+        gap: 10px;
+        margin-bottom: 30px;
+    }
+
+    .course-filters {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .course-filters label,
+    .course-filters select,
+    #filterButton {
+        width: 100%;
+    }
+
+    .course-grid {
+        grid-template-columns: 1fr;
+        padding: 0 15px;
+    }
+
+    .course-card {
+        padding: 15px;
+    }
+
+    .course-card h3 {
+        font-size: 1.4em;
+    }
+
+    .course-card p {
+        font-size: 0.9em;
+        margin-bottom: 5px; /* Reduced margin for mobile */
+    }
+
+    .course-card .course-price {
+        margin-bottom: 5px; /* Reduced margin for mobile */
+    }
+
+    .course-card .course-price .discounted-price {
+        font-size: 1.1em;
+        margin-right: 5px;
+    }
+
+    .course-card .course-price .original-price {
+        font-size: 0.8em;
+    }
+
+    .course-card .button-container {
+        max-width: 100%; /* Full width on mobile */
+    }
+
+    .course-card .button-container button {
+        font-size: 0.8em;
+        padding: 8px 0;
+    }
+
+    .course-card .button-container .read-more {
+        margin-right: 2px; /* Adjust spacing for mobile */
+    }
+
+    .course-card .button-container .view-button {
+        margin-left: 2px; /* Adjust spacing for mobile */
+    }
 }

@@ -1,4 +1,4 @@
-/* courses.js */
+// courses.js
 
 document.addEventListener('DOMContentLoaded', function() {
     const readMoreButtons = document.querySelectorAll('.read-more');
@@ -9,6 +9,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const typeFilter = document.getElementById('typeFilter');
     const examFilter = document.getElementById('examFilter');
     const subjectFilter = document.getElementById('subjectFilter'); // Get the new filter
+    const hamburger = document.querySelector('.hamburger');
+    const sideNav = document.querySelector('.side-nav');
+    const closeBtn = document.querySelector('.side-nav .close-btn'); // Get the close button correctly within side-nav
 
     // Function to filter courses based on selected criteria
     function filterCourses() {
@@ -50,10 +53,30 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    searchInput.addEventListener('input', filterCourses);
-    filterButton.addEventListener('click', filterCourses);
-    pricingFilter.addEventListener('change', filterCourses);
-    typeFilter.addEventListener('change', filterCourses);
-    examFilter.addEventListener('change', filterCourses);
-    subjectFilter.addEventListener('change', filterCourses); // Add listener for subject filter
+    if (searchInput) searchInput.addEventListener('input', filterCourses);
+    if (filterButton) filterButton.addEventListener('click', filterCourses);
+    if (pricingFilter) pricingFilter.addEventListener('change', filterCourses);
+    if (typeFilter) typeFilter.addEventListener('change', filterCourses);
+    if (examFilter) examFilter.addEventListener('change', filterCourses);
+    if (subjectFilter) subjectFilter.addEventListener('change', filterCourses); // Add listener for subject filter
+
+    // Hamburger menu functionality
+    if (hamburger && sideNav) {
+        hamburger.addEventListener('click', () => {
+            sideNav.classList.add('active'); // Use classList for adding/removing classes
+        });
+    }
+
+    if (closeBtn && sideNav) {
+        closeBtn.addEventListener('click', () => {
+            sideNav.classList.remove('active'); // Use classList for adding/removing classes
+        });
+    }
+
+    // Close side navigation when clicking outside (optional, but good for UX)
+    window.addEventListener('click', (event) => {
+        if (sideNav && sideNav.classList.contains('active') && !event.target.closest('.side-nav') && event.target !== hamburger) {
+            sideNav.classList.remove('active');
+        }
+    });
 });

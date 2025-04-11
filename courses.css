@@ -1,4 +1,4 @@
-/* courses.css */
+/* courses.css - Course Specific Styles */
 
 body {
     background: url('Resources/Homepage/music-background8.jpg') no-repeat center center fixed;
@@ -14,6 +14,21 @@ body {
     transition: background-image 1s ease-in-out;
 }
 
+.nav-links a.active{
+    color: gold;
+    font-weight: 600;
+}
+
+.side-nav a.active{
+    color: red;
+    font-weight: 600;
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.side-nav a:hover{
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
 .course-section {
     flex: 1;
     display: flex;
@@ -24,7 +39,7 @@ body {
 }
 
 .course-head {
-    max-width: 800px;
+    max-width: 1600px;
     background-color: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(10px);
     padding: 40px;
@@ -175,6 +190,20 @@ body {
     display: inline-block; /* Important for height and padding to work correctly */
 }
 
+.course-card .tag.paid {
+    background: linear-gradient(to bottom, #fff09e, #ffbf00); /* Golden gradient */
+    color: black; /* Ensure good contrast */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+    border: 1px solid #e6ac00; /* Slightly darker border */
+}
+
+.course-card .tag.live {
+    background: linear-gradient(to bottom, #fff09e, #ffbf00); /* Golden gradient */
+    color: black; /* Ensure good contrast */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+    border: 1px solid #e6ac00; /* Slightly darker border */
+}
+
 .course-card p {
     font-size: 1em;
     margin-bottom: 5px; /* Reduced margin to make space for price */
@@ -189,16 +218,16 @@ body {
 }
 
 .course-card .course-price .discounted-price {
-    font-size: 1.2em;
+    font-size: 1.5em;
     font-weight: bold;
-    color: rgb(212, 158, 91);
-    margin-right: 10px;
+    color: rgb(255, 238, 0); /* Base golden color */
 }
 
 .course-card .course-price .original-price {
-    font-size: 0.9em;
+    font-size: 1.1em;
     color: #ccc;
     text-decoration: line-through;
+    margin-left: 8px;
 }
 
 .course-card .button-container {
@@ -256,21 +285,39 @@ body {
 }
 
 .course-details .course-features-title {
-    color: rgb(218, 175, 123);
+    color: rgb(255, 203, 47);
+    font-size: 1.1em;
     margin-bottom: -6px;
 }
 
 .course-details ul {
     list-style-type: disc;
-    margin-left: 20px;
+    margin-left: 60px;
+    margin-top: 16px;
 }
 
 /* Desktop Styles */
 @media (min-width: 992px) {
-    /* Buttons will already be in the same line due to the main styles */
-    /* Adjust max-width if you want to limit their combined width */
-    .course-card .button-container {
-        max-width: 100%; /* Can be adjusted if needed */
+    .nav-links {
+        display: flex;
+        justify-content: center; /* Center the navigation links */
+        flex-grow: 1; /* Allow links to take up available space */
+    }
+
+    .nav-links a {
+        margin: 0 15px; /* Adjust spacing between links */
+    }
+
+    .hamburger {
+        display: none !important; /* Hide hamburger on desktop */
+    }
+
+    .side-nav {
+        display: none !important; /* Hide side nav on desktop */
+    }
+
+    .nav-brand {
+        flex-grow: 0; /* Prevent brand from taking extra space */
     }
 }
 
@@ -289,12 +336,39 @@ body {
         justify-content: center;
     }
     .course-card .button-container {
-        max-width: 100%; /* Ensure full width on tablet */
+        display: flex; /* Make buttons inline */
+        flex-direction: row; /* Ensure they are side-by-side */
+        justify-content: center; /* Center the buttons horizontally */
+        width: 100%; /* Take full width of the card */
+        max-width: 100%; /* Ensure it doesn't exceed */
+        margin-top: 10px; /* Add some space below the price */
+    }
+
+    .course-card .button-container button {
+        flex: 0 1 auto; /* Don't let them grow too much, auto width */
+        margin: 0 5px; /* Add spacing between the buttons */
+        width: 100%; /* Adjust width based on content */
+        padding: 8px 12px; /* Adjust padding for smaller buttons */
+        font-size: 0.85em; /* Slightly smaller font */
+    }
+
+    /* You might need to adjust the image height or other elements
+        if the buttons are overlapping. For example: */
+    .course-card img {
+        /* Add some margin below the image if needed */
+        margin-bottom: 15px;
     }
 }
 
 /* Mobile Styles */
 @media (max-width: 767px) {
+    .nav-links {
+        display: none; /* Hide desktop navigation on mobile */
+    }
+    .hamburger {
+        display: block !important; /* Show hamburger on mobile */
+    }
+
     .course-head {
         padding: 30px;
         padding-top: 15px;
@@ -345,36 +419,29 @@ body {
 
     .course-card p {
         font-size: 0.9em;
-        margin-bottom: 5px; /* Reduced margin for mobile */
-    }
-
-    .course-card .course-price {
-        margin-bottom: 5px; /* Reduced margin for mobile */
-    }
-
-    .course-card .course-price .discounted-price {
-        font-size: 1.1em;
-        margin-right: 5px;
-    }
-
-    .course-card .course-price .original-price {
-        font-size: 0.8em;
     }
 
     .course-card .button-container {
-        max-width: 100%; /* Full width on mobile */
+        display: flex; /* Make buttons inline */
+        flex-direction: row; /* Ensure they are side-by-side */
+        justify-content: center; /* Center the buttons horizontally */
+        width: 100%; /* Take full width of the card */
+        max-width: 100%; /* Ensure it doesn't exceed */
+        margin-top: 10px; /* Add some space below the price */
     }
 
     .course-card .button-container button {
-        font-size: 0.8em;
-        padding: 8px 0;
+        flex: 0 1 auto; /* Don't let them grow too much, auto width */
+        margin: 0 5px; /* Add spacing between the buttons */
+        width: 100%; /* Adjust width based on content */
+        padding: 8px 12px; /* Adjust padding for smaller buttons */
+        font-size: 0.85em; /* Slightly smaller font */
     }
 
-    .course-card .button-container .read-more {
-        margin-right: 2px; /* Adjust spacing for mobile */
-    }
-
-    .course-card .button-container .view-button {
-        margin-left: 2px; /* Adjust spacing for mobile */
+    /* You might need to adjust the image height or other elements
+        if the buttons are overlapping. For example: */
+    .course-card img {
+        /* Add some margin below the image if needed */
+        margin-bottom: 15px;
     }
 }

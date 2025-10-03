@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Musicoul - Learn Music Online</title>
+    <link rel="icon" href="https://yt3.googleusercontent.com/FRE-Mlxh3eYM2VObB1ZHR4zygMMjAAZfuoLbeBMtVHfzjlqs2RkozmqNDQ8_iEhESwA5J_zxAA=s160-c-k-c0x00ffffff-no-rj" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
     <style>
         body {
-            background-color: #000;
+            background: #000;
+            background-image: radial-gradient(ellipse at top, rgba(107, 33, 168, 0.15), transparent 60%);
+            background-attachment: fixed;
             color: #f3f4f6;
         }
         .heading { font-family: 'Playfair Display', serif; }
@@ -23,7 +26,17 @@
         .cta:hover { transform: scale(1.05); box-shadow: 0 10px 25px rgba(255, 0, 128, 0.3); }
         .contact-btn { border: 2px solid #6b21a8; background: transparent; color: #fff; transition: all 0.3s ease-in-out; padding: .75rem 1.5rem; border-radius: .5rem;}
         .contact-btn:hover { background: #6b21a8; color: #fff; transform: scale(1.05); }
-        .card { background: linear-gradient(135deg, #1f1f1f, #0f0f1f); border: 1px solid #2a2a2a; border-radius: 1rem; overflow: hidden; transition: all .3s ease-in-out; display: flex; flex-direction: column; }
+        .card { 
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem; 
+            overflow: hidden; 
+            transition: all .3s ease-in-out; 
+            display: flex; 
+            flex-direction: column; 
+        }
         .card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(244, 114, 182, 0.2); border-color: #f472b6; }
         .card-button { background: linear-gradient(90deg, #6b21a8, #ef4444, #f472b6); color: #fff; padding: .75rem 1.25rem; border-radius: .5rem; transition: transform .3s ease-in-out; }
         .card-button:hover { transform: scale(1.05); }
@@ -35,26 +48,107 @@
         .auth-input:focus, .filter-input:focus { outline: none; border-color: #ec4899; box-shadow: 0 0 0 2px rgba(236, 72, 153, 0.3); }
         .filter-input { background-color: #111827; border-color: #374151; }
         .filter-input::placeholder { color: #6b7280 }
-        .about-card { transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; }
-        .about-card:hover { transform: translateY(-10px); border-color: rgba(236, 72, 153, 0.5); box-shadow: 0 25px 50px -12px rgba(236, 72, 153, 0.25); }
-        .about-icon { transition: transform 0.3s ease, color 0.3s ease; }
-        .about-card:hover .about-icon { transform: scale(1.1); color: #f472b6; }
         .admin-card { background: #1a1a1a; padding: 1.5rem; border-radius: 1rem; border: 1px solid #333; }
         .admin-header { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem; color: #ec4899; }
         .admin-tab { width: 100%; text-align: left; padding: 0.75rem 1rem; border-radius: 0.5rem; font-weight: 600; transition: background-color 0.2s, color 0.2s; }
         .admin-tab-active { background-color: #ec4899; color: white; }
         .admin-tab:not(.admin-tab-active):hover { background-color: #374151; }
+        
+        /* --- Teacher Card Styles --- */
         .teacher-card {
-            background: #1a1a1a;
-            border: 1px solid #333;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            background-color: #1a1a1a;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease-in-out;
+            border-radius: 1.5rem; 
+            text-align: center;
         }
-        .teacher-card:hover {
+        .teacher-card.is-center {
             border-color: #ec4899;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.25);
         }
-        .slider-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; background-color: rgba(26,26,26,0.5); backdrop-filter: blur(4px); color: white; border-radius: 50%; width: 3rem; height: 3rem; display: flex; align-items: center; justify-content: center; transition: background-color 0.2s; border: 1px solid #4a4a4a}
-        .slider-arrow:hover { background-color: rgba(236, 72, 153, 0.8); }
+        .teacher-card.is-center:hover {
+            box-shadow: 0 10px 30px rgba(236, 72, 153, 0.3);
+        }
+        .teacher-image-container {
+            padding: 4px;
+            border-radius: 50%;
+            margin: 0 auto;
+            width: fit-content;
+            background: transparent;
+            transition: background 0.4s ease-in-out;
+        }
+        .teacher-card.is-center .teacher-image-container {
+            background: linear-gradient(45deg, #6b21a8, #ef4444, #f472b6);
+        }
+        .teacher-image {
+            border-radius: 50%;
+            width: 128px;
+            height: 128px;
+            object-fit: cover;
+            border: 3px solid #1a1a1a;
+        }
+        .teacher-buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-top: auto;
+            padding-top: 0.5rem;
+        }
+        .know-more-btn {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 9999px;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+        .know-more-btn:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        .instagram-btn {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+        .instagram-btn:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        .instagram-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .slider-arrow { 
+            background-color: rgba(26,26,26,0.5); 
+            backdrop-filter: blur(4px); 
+            color: white; 
+            border-radius: 50%; 
+            width: 3rem; 
+            height: 3rem; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            transition: all 0.2s; 
+            border: 1px solid #4a4a4a;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 20;
+        }
+        .slider-arrow:hover { 
+            background-color: rgba(236, 72, 153, 0.8);
+            transform: translateY(-50%) scale(1.1);
+        }
         .typewriter-container::after {
             content: '|';
             color: white;
@@ -66,596 +160,266 @@
             50% { color: white; }
         }
 
-        /* Mobile layout for teachers */
+        /* --- Slider Base Styles --- */
+        #teacher-slider-track {
+            position: relative;
+        }
+
+        /* Mobile Slider: Single Card Sliding Track */
         @media (max-width: 768px) {
-            #teacher-slider-wrapper {
+            #teacher-slider-viewport {
+                overflow: hidden;
+            }
+            #teacher-slider-track {
                 display: flex;
-                height: auto;
-                justify-content: flex-start;
-                align-items: stretch; /* Make cards same height */
-                overflow-x: auto;
-                padding: 0 1rem 1rem 1rem; /* Add padding for start/end and bottom */
-                margin: 0 -1.5rem; /* Extend to screen edges */
-                scroll-snap-type: x mandatory; /* Snap scrolling */
-                -ms-overflow-style: none;
-                scrollbar-width: none;
+                transition: transform 0.5s ease-in-out;
             }
-            #teacher-slider-wrapper::-webkit-scrollbar {
-                display: none;
-            }
-            /* This targets the div with the inline style from JS */
-            #teacher-slider-wrapper > div {
-                position: static !important; /* Override absolute positioning */
-                transform: none !important;
-                opacity: 1 !important;
-                z-index: 1 !important;
-                width: 75%; /* Each card takes up 75% of screen */
-                height: auto;
+            .teacher-card-wrapper {
+                width: 100%;
                 flex-shrink: 0;
-                margin-right: 1rem;
-                scroll-snap-align: start; /* Snap to the start of the card */
-            }
-             /* Target the last card to remove margin */
-            #teacher-slider-wrapper > div:last-child {
-                margin-right: 0;
-            }
-            .slider-arrow {
-                display: none;
             }
         }
+
+        /* Desktop Slider: Cover Flow Effect */
+        @media (min-width: 769px) {
+             #teacher-slider-viewport {
+                overflow: visible;
+             }
+            .teacher-card-wrapper {
+                position: absolute;
+                top: 0;
+                left: 50%;
+                transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out, z-index 0.5s;
+            }
+        }
+
     </style>
 </head>
 <body class="min-h-screen text-gray-100 bg-black bodyfont">
 
     <div id="app-container">
-        <!-- Header will be rendered here -->
         <header id="header-container"></header>
-        
-        <!-- Page content will be rendered here -->
         <main id="page-container"></main>
-
-        <!-- Modals will be rendered here -->
         <div id="modal-container"></div>
     </div>
     
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script type="module">
-        // --- Firebase Imports ---
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { 
-            getAuth, 
-            createUserWithEmailAndPassword, 
-            signInWithEmailAndPassword,
-            onAuthStateChanged,
-            signOut,
-            updateProfile
-        } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-        import { 
-            getFirestore, collection, addDoc, onSnapshot, 
-            doc, deleteDoc, setDoc, getDoc, getDocs 
-        } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-        import { 
-            getStorage, ref, uploadBytes, getDownloadURL 
-        } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { getFirestore, collection, addDoc, onSnapshot, doc, deleteDoc, setDoc, getDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+        import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
-        // --- Firebase Configuration ---
-        const firebaseConfig = {
-            apiKey: "AIzaSyBaDBLoe2Wi2WgmJfPRXoEP-ZSgkVhMxVI",
-            authDomain: "musicoul-15025.firebaseapp.com",
-            databaseURL: "https://musicoul-15025-default-rtdb.firebaseio.com",
-            projectId: "musicoul-15025",
-            storageBucket: "musicoul-15025.appspot.com",
-            messagingSenderId: "863099041367",
-            appId: "1:863099041367:web:c3d61399489a219611d512",
-            measurementId: "G-WBPE697N9Q"
-        };
-
-        // --- Initialize Firebase ---
+        const firebaseConfig = { apiKey: "AIzaSyBaDBLoe2Wi2WgmJfPRXoEP-ZSgkVhMxVI", authDomain: "musicoul-15025.firebaseapp.com", databaseURL: "https://musicoul-15025-default-rtdb.firebaseio.com", projectId: "musicoul-15025", storageBucket: "musicoul-15025.appspot.com", messagingSenderId: "863099041367", appId: "1:863099041367:web:c3d61399489a219611d512", measurementId: "G-WBPE697N9Q" };
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
         const storage = getStorage(app);
         
-        // --- Static Data & Constants ---
         const ADMIN_EMAIL = "chandrashekharkolhe7@gmail.com";
         const NAV_ITEMS = [ { name: "Home", id: "home" }, { name: "Courses", id: "courses" }, { name: "Teachers", id: "teachers" }, { name: "About", id: "about" }, { name: "Contact", id: "contact" }, ];
         const STATIC_COURSES_DATA = [ { id: 'static_singing', subject: "Singing", level: "All Levels", description: "Master vocal techniques from seasoned professionals.", imageUrl: "https://img.freepik.com/premium-photo/young-man-singer-stag_5850-338.jpg" }, { id: 'static_piano', subject: "Piano", level: "All Levels", description: "Learn piano theory, technique, and performance.", imageUrl: "https://media.istockphoto.com/id/1129332575/photo/favorite-classical-music-close-up-view-of-gentle-female-hands-playing-a-melody-on-piano-while.jpg?s=612x612&w=0&k=20&c=GJEJTdGtmgHpKjDL7BE9KO2diJNQ4lPinInWiJAOSCQ=" }, { id: 'static_tabla', subject: "Tabla", level: "All Levels", description: "Explore Indian classical rhythms with our tabla masters.", imageUrl: "https://jagatsinghhotels.com/media/jsHotel/Experiences/2.jpg" } ];
-        const TEACHERS_DATA = [ { id: 'teacher1', name: "Chandrashekhar Kolhe", subjects: "Singing, Tabla", experience: "7+ Years", img: "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRaCNhiok5D6DbyD9yMS5tuOb5jSJnm-sHmGvsZhAMia2_QcUhz" }, { id: 'teacher2', name: "Ganesh Wagh", subjects: "Tabla, Percussions", experience: "7+ Years", img: "https://c.superprof.com/i/a/28810301/12782620/600/20250501060151/unlock-the-rhythms-indian-classical-music-tabla-classes-online-offline-start-your-musical-journey-now.jpg" }, { id: 'teacher3', name: "Hariom Kolhe", subjects: "Singing, Tabla", experience: "4+ Years", img: "https://i.ibb.co/F8R7x7V/hariom-kolhe-profile.png" } ];
-        const FEATURES_DATA = [ { icon: "🎵", title: "Live Interactive Classes", desc: "Engage in real-time with expert instructors and fellow students for a dynamic learning experience." }, { icon: "📜", title: "Structured Syllabus", desc: "Follow a clear, progressive path from beginner to advanced levels with our well-defined curriculum." }, { icon: "👩‍🏫", title: "Expert Teachers", desc: "Learn from professional musicians and passionate educators with years of teaching experience." }, ];
+        const TEACHERS_DATA = [ 
+            { id: 'teacher1', name: "Chandrashekhar Kolhe", subjects: "Singing, Tabla", img: "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRaCNhiok5D6DbyD9yMS5tuOb5jSJnm-sHmGvsZhAMia2_QcUhz", instagram: "https://www.instagram.com/chandrashekharkolhe9/", bio: "A virtuoso in both vocal and tabla, Chandrashekhar brings over 7 years of performance and teaching experience. His methodology focuses on building a strong foundation in classical techniques while encouraging students to find their unique voice.", description: ["7+ years of performance & teaching.", "Specializes in classical vocal & tabla."] }, 
+            { id: 'teacher2', name: "Ganesh Wagh", subjects: "Tabla, Percussions", img: "https://c.superprof.com/i/a/28810301/12782620/600/20250501060151/unlock-the-rhythms-indian-classical-music-tabla-classes-online-offline-start-your-musical-journey-now.jpg", instagram: "https://www.instagram.com/_ganeshwagh/", bio: "Ganesh is a master of rhythm, specializing in Tabla and various percussion instruments. With a passion for intricate 'taals' and 'layas', he guides students through the complexities of Indian classical rhythms, making learning both challenging and rewarding.", description: ["Master of Tabla and percussion.", "Expert in intricate Indian rhythms ('taals')."] }, 
+            { id: 'teacher3', name: "Hariom Kolhe", subjects: "Singing, Tabla", img: "https://yt3.googleusercontent.com/BYHZUYJY5R8VwMEodeV2ehjzoBTRt3y--Ot_e8Xpz_19ZNB6LOWuxbxl7lRgoqcJB9uJRd6hwg=s160-c-k-c0x00ffffff-no-rj", instagram: "https://www.instagram.com/hariomkolhe1/", bio: "Hariom is a versatile artist with a deep understanding of vocal music and tabla. His teaching style is energetic and adaptive, perfect for students of all ages. He excels at making complex musical concepts accessible and fun to learn.", description: ["Versatile in vocal music and tabla.", "Energetic and adaptive teaching style."] } 
+        ];
+        const FEATURES_DATA = [ { icon: "🎵", title: "Live Interactive Classes", desc: "Engage in real-time with expert instructors." }, { icon: "📜", title: "Structured Syllabus", desc: "Follow a clear path from beginner to advanced." }, { icon: "👩‍🏫", title: "Expert Teachers", desc: "Learn from professional and passionate musicians." }, ];
 
-        // --- Application State ---
-        let appState = {
-            currentUser: null,
-            assignedCourses: [],
-            currentPage: 'home',
-            users: [],
-            subjects: [],
-            levels: [],
-            courses: [],
-            teachers: [],
-            previewCourse: null,
-            authModal: { isOpen: false, type: 'login' },
-            teacherSliderIndex: 0,
-            adminActiveTab: 'dashboard',
-            assignModal: {isOpen: false, user: null, courseId: '', schedule: []},
-            mobileMenuOpen: false
-        };
+        let appState = { currentUser: null, assignedCourses: [], currentPage: 'home', users: [], subjects: [], levels: [], courses: [], teachers: [], previewCourse: null, authModal: { isOpen: false, type: 'login' }, teacherSliderIndex: 0, adminActiveTab: 'dashboard', assignModal: {isOpen: false, user: null, courseId: '', schedule: []}, mobileMenuOpen: false, teacherDetailModal: { isOpen: false, teacher: null } };
 
-        // --- Typewriter Effect Logic ---
         function startTypewriter(element, words, typingSpeed = 100, deletingSpeed = 50, pause = 1400) {
-            // Add the necessary class for the CSS cursor
             element.classList.add('typewriter-container');
-
-            let wordIndex = 0;
-            let subIndex = 0;
-            let isDeleting = false;
-            
-            // Create the inner span for the gradient text
+            let wordIndex = 0, subIndex = 0, isDeleting = false;
             const textSpan = document.createElement('span');
             textSpan.className = 'bg-gradient-to-r from-purple-600 via-red-500 to-pink-500 bg-clip-text text-transparent';
-            element.innerHTML = ''; // Clear any previous content
-            element.appendChild(textSpan);
-
+            element.innerHTML = ''; element.appendChild(textSpan);
             function type() {
                 const currentWord = words[wordIndex];
                 textSpan.textContent = currentWord.substring(0, subIndex);
-
-                if (isDeleting) {
-                    if (subIndex > 0) {
-                        subIndex--;
-                        setTimeout(type, deletingSpeed);
-                    } else { // Finished deleting
-                        isDeleting = false;
-                        wordIndex = (wordIndex + 1) % words.length;
-                        setTimeout(type, typingSpeed);
-                    }
-                } else { // isTyping
-                    if (subIndex < currentWord.length) {
-                        subIndex++;
-                        setTimeout(type, typingSpeed);
-                    } else { // Finished typing
-                        isDeleting = true;
-                        setTimeout(type, pause);
-                    }
-                }
+                if (isDeleting) { subIndex > 0 ? (subIndex--, setTimeout(type, deletingSpeed)) : (isDeleting = false, wordIndex = (wordIndex + 1) % words.length, setTimeout(type, typingSpeed)); } 
+                else { subIndex < currentWord.length ? (subIndex++, setTimeout(type, typingSpeed)) : (isDeleting = true, setTimeout(type, pause)); }
             }
-            
             type();
         }
 
-
-        // --- Render Functions ---
-        
         function renderHeader() {
             const headerContainer = document.getElementById('header-container');
             if (!headerContainer) return;
-            
             const { currentUser, assignedCourses, mobileMenuOpen } = appState;
-            const isUserAnonymous = currentUser?.isAnonymous;
             const hasAssignedCourses = assignedCourses.length > 0;
-
-            const navItemsHtml = NAV_ITEMS.map(item => `
-                <button data-navid="${item.id}" class="hover:text-pink-400 bodyfont transition-colors duration-300">${item.name}</button>
-            `).join('');
-
-            const mobileNavItemsHtml = NAV_ITEMS.map(item => `
-                <button data-navid-mobile="${item.id}" class="py-3 text-gray-200 hover:text-pink-400 heading">${item.name}</button>
-            `).join('');
-
-            let authButtonsHtml = '';
-            if (currentUser && !isUserAnonymous) {
-                authButtonsHtml = `
-                    <span class="text-sm text-gray-300 bodyfont">Hi, ${currentUser.displayName ? currentUser.displayName.split(' ')[0] : currentUser.email.split('@')[0]}</span>
-                    <button id="logout-btn" class="heading font-semibold text-white border-2 border-purple-700 rounded-md px-4 py-2 transition-all duration-300 hover:bg-purple-700 hover:scale-105">Logout</button>
-                `;
-            } else {
-                authButtonsHtml = `
-                    <button id="login-btn" class="cta text-white px-4 py-2 rounded-md heading font-semibold">Login</button>
-                    <button id="signup-btn" class="heading font-semibold text-white border-2 border-purple-700 rounded-md px-4 py-2 transition-all duration-300 hover:bg-purple-700 hover:scale-105">Signup</button>
-                `;
-            }
-             let mobileAuthButtonsHtml = '';
-            if (currentUser && !isUserAnonymous) {
-                 mobileAuthButtonsHtml = `<button id="mobile-logout-btn" class="heading font-semibold text-white text-sm border-2 border-purple-700 rounded-md px-4 py-2 transition-all duration-300 hover:bg-purple-700 hover:scale-105">Logout</button>`;
-            } else {
-                 mobileAuthButtonsHtml = `<button id="mobile-login-btn" class="cta text-white text-sm px-4 py-2 rounded-md heading font-semibold">Login</button> <button id="mobile-signup-btn" class="heading font-semibold text-white text-sm border-2 border-purple-700 rounded-md px-4 py-2 transition-all duration-300 hover:bg-purple-700 hover:scale-105">Signup</button>`;
-            }
-
-            headerContainer.innerHTML = `
-                <div class="bg-black/90 sticky top-0 z-50 border-b border-gray-800">
-                    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center">
-                        <div class="flex items-center gap-4 z-10">
-                            <img src="https://yt3.googleusercontent.com/FRE-Mlxh3eYM2VObB1ZHR4zygMMjAAZfuoLbeBMtVHfzjlqs2RkozmqNDQ8_iEhESwA5J_zxAA=s160-c-k-c0x00ffffff-no-rj" alt="Musicoul Logo" class="w-12 h-12 rounded-full" />
-                            <div class="heading text-white text-2xl font-bold">Musicoul</div>
-                        </div>
-                        <nav class="hidden md:flex gap-8 text-sm font-medium text-gray-300 items-center ml-auto">
-                            ${navItemsHtml}
-                            ${hasAssignedCourses ? `<button data-navid="myClass" class="hover:text-pink-400 bodyfont transition-colors duration-300 font-bold">My Class</button>` : ''}
-                            ${currentUser?.email === ADMIN_EMAIL ? `<button id="admin-panel-btn" class="hover:text-pink-400 bodyfont transition-colors duration-300 font-bold">Admin Panel</button>` : ''}
-                            <div class="flex gap-3 ml-4 items-center">${authButtonsHtml}</div>
-                        </nav>
-                        <button id="mobile-menu-toggle" class="md:hidden p-2 border rounded-lg border-gray-600 text-gray-300 z-50 ml-auto" aria-label="Toggle navigation menu">
-                           ${mobileMenuOpen ? '✕' : '☰'}
-                        </button>
-                    </div>
-                     <div id="mobile-menu" class="md:hidden bg-black border-t border-gray-800 flex flex-col items-center overflow-hidden transition-all duration-500 ease-in-out ${mobileMenuOpen ? 'max-h-96 opacity-100 py-4' : 'max-h-0 opacity-0'}">
-                        ${mobileNavItemsHtml}
-                        ${hasAssignedCourses ? `<button data-navid-mobile="myClass" class="py-3 text-gray-200 hover:text-pink-400 heading font-bold">My Class</button>`: ''}
-                        ${currentUser?.email === ADMIN_EMAIL ? `<button id="mobile-admin-panel-btn" class="py-3 text-gray-200 hover:text-pink-400 heading font-bold">Admin Panel</button>` : ''}
-                        <div class="flex gap-4 mt-3">${mobileAuthButtonsHtml}</div>
-                    </div>
-                </div>
-            `;
+            const navItemsHtml = NAV_ITEMS.map(item => `<button data-navid="${item.id}" class="hover:text-pink-400 bodyfont transition-colors duration-300">${item.name}</button>`).join('');
+            const mobileNavItemsHtml = NAV_ITEMS.map(item => `<button data-navid-mobile="${item.id}" class="py-3 text-gray-200 hover:text-pink-400 heading">${item.name}</button>`).join('');
+            let authButtonsHtml = currentUser && !currentUser.isAnonymous ? `<span class="text-sm text-gray-300 bodyfont">Hi, ${currentUser.displayName ? currentUser.displayName.split(' ')[0] : currentUser.email.split('@')[0]}</span><button id="logout-btn" class="heading font-semibold text-white border-2 border-purple-700 rounded-md px-4 py-2 transition-all duration-300 hover:bg-purple-700 hover:scale-105">Logout</button>` : `<button id="login-btn" class="cta text-white px-4 py-2 rounded-md heading font-semibold">Login</button><button id="signup-btn" class="heading font-semibold text-white border-2 border-purple-700 rounded-md px-4 py-2 transition-all duration-300 hover:bg-purple-700 hover:scale-105">Signup</button>`;
+            let mobileAuthButtonsHtml = currentUser && !currentUser.isAnonymous ? `<button id="mobile-logout-btn" class="heading font-semibold text-white text-sm border-2 border-purple-700 rounded-md px-4 py-2 transition-all duration-300 hover:bg-purple-700 hover:scale-105">Logout</button>` : `<button id="mobile-login-btn" class="cta text-white text-sm px-4 py-2 rounded-md heading font-semibold">Login</button> <button id="mobile-signup-btn" class="heading font-semibold text-white text-sm border-2 border-purple-700 rounded-md px-4 py-2 transition-all duration-300 hover:bg-purple-700 hover:scale-105">Signup</button>`;
+            headerContainer.innerHTML = `<div class="bg-black/90 sticky top-0 z-50 border-b border-gray-800"><div class="max-w-7xl mx-auto px-6 py-4 flex items-center"><div class="flex items-center gap-4 z-10"><img src="https://yt3.googleusercontent.com/FRE-Mlxh3eYM2VObB1ZHR4zygMMjAAZfuoLbeBMtVHfzjlqs2RkozmqNDQ8_iEhESwA5J_zxAA=s160-c-k-c0x00ffffff-no-rj" alt="Musicoul Logo" class="w-12 h-12 rounded-full" /><div class="heading text-white text-2xl font-bold">Musicoul</div></div><nav class="hidden md:flex gap-8 text-sm font-medium text-gray-300 items-center ml-auto">${navItemsHtml}${hasAssignedCourses ? `<button data-navid="myClass" class="hover:text-pink-400 bodyfont transition-colors duration-300 font-bold">My Class</button>` : ''}${currentUser?.email === ADMIN_EMAIL ? `<button id="admin-panel-btn" class="hover:text-pink-400 bodyfont transition-colors duration-300 font-bold">Admin Panel</button>` : ''}<div class="flex gap-3 ml-4 items-center">${authButtonsHtml}</div></nav><button id="mobile-menu-toggle" class="md:hidden p-2 border rounded-lg border-gray-600 text-gray-300 z-50 ml-auto" aria-label="Toggle navigation menu">${mobileMenuOpen ? '✕' : '☰'}</button></div><div id="mobile-menu" class="md:hidden bg-black border-t border-gray-800 flex flex-col items-center overflow-hidden transition-all duration-500 ease-in-out ${mobileMenuOpen ? 'max-h-96 opacity-100 py-4' : 'max-h-0 opacity-0'}">${mobileNavItemsHtml}${hasAssignedCourses ? `<button data-navid-mobile="myClass" class="py-3 text-gray-200 hover:text-pink-400 heading font-bold">My Class</button>`: ''}${currentUser?.email === ADMIN_EMAIL ? `<button id="mobile-admin-panel-btn" class="py-3 text-gray-200 hover:text-pink-400 heading font-bold">Admin Panel</button>` : ''}<div class="flex gap-4 mt-3">${mobileAuthButtonsHtml}</div></div></div>`;
         }
 
         function renderHomePage() {
-            const { assignedCourses } = appState;
-
-            // Hero Section
-            const heroHtml = `
-                <main class="flex flex-col items-center justify-center text-center px-6 min-h-[85vh]" data-aos="fade-up">
-                    <h1 class="heading text-white text-4xl sm:text-5xl md:text-7xl font-extrabold mb-4 tracking-tight">
-                        Unleash your Inner<br />
-                        <span id="typewriter"></span>
-                    </h1>
-                    <p class="bodyfont text-gray-300 max-w-2xl mt-8 text-lg leading-relaxed">
-                        Join live sessions, access recordings, and follow a structured syllabus — all in one place.
-                    </p>
-                    <div class="mt-10 flex flex-col sm:flex-row gap-6">
-                        <button id="explore-courses-btn" class="cta text-white px-8 py-3 rounded-lg heading text-lg font-semibold">Explore Courses</button>
-                        <button id="get-started-btn" class="contact-btn text-lg heading font-semibold px-8 py-3 rounded-lg">${assignedCourses.length > 0 ? 'My Class' : 'Get Started'}</button>
-                    </div>
-                </main>
-            `;
-
-            // About Section
-            const aboutHtml = `
-                <section id="about" class="max-w-6xl mx-auto px-6 py-20" data-aos="fade-up">
-                    <h2 class="heading text-4xl text-white text-center mb-12 font-bold" data-aos="fade-up">Why Choose Musicoul?</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        ${FEATURES_DATA.map((item, index) => `
-                            <div class="about-card p-8 bg-gradient-to-b from-gray-900 to-black rounded-2xl border border-gray-800 text-center" data-aos="fade-up" data-aos-delay="${index * 150 + 100}">
-                                <div class="about-icon text-5xl mb-6">${item.icon}</div>
-                                <h3 class="heading text-xl text-white mb-3 font-semibold">${item.title}</h3>
-                                <p class="bodyfont text-gray-400 leading-relaxed">${item.desc}</p>
-                            </div>
-                        `).join('')}
-                    </div>
-                </section>
-            `;
-            
-            // Courses Section
+            const heroHtml = `<main class="flex flex-col items-center justify-center text-center px-6 min-h-[85vh]" data-aos="fade-up"><h1 class="heading text-white text-4xl sm:text-5xl md:text-7xl font-extrabold mb-4 tracking-tight">Unleash your Inner<br /><span id="typewriter"></span></h1><p class="bodyfont text-gray-300 max-w-2xl mt-8 text-lg leading-relaxed">Join live sessions, access recordings, and follow a structured syllabus — all in one place.</p><div class="mt-10 flex flex-col sm:flex-row gap-6"><button id="explore-courses-btn" class="cta text-white px-8 py-3 rounded-lg heading text-lg font-semibold">Explore Courses</button><button id="get-started-btn" class="contact-btn text-lg heading font-semibold px-8 py-3 rounded-lg">${appState.assignedCourses.length > 0 ? 'My Class' : 'Get Started'}</button></div></main>`;
+            const aboutHtml = `<section id="about" class="max-w-6xl mx-auto px-6 py-20" data-aos="fade-up"><div class="text-center"><h2 class="heading text-4xl text-white font-bold" data-aos="fade-up">Why Choose Musicoul?</h2><p class="bodyfont text-gray-400 mt-4 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">We provide a premium, streamlined learning experience for aspiring musicians.</p></div><div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">${FEATURES_DATA.map((item, index) => `<div data-aos="fade-up" data-aos-delay="${index * 150 + 200}"><div class="text-5xl text-pink-400 mb-4">${item.icon}</div><h3 class="heading text-xl text-white mb-2 font-semibold">${item.title}</h3><p class="bodyfont text-gray-400 leading-relaxed">${item.desc}</p></div>`).join('')}</div></section>`;
             const coursesToDisplay = (appState.courses.length > 0 ? appState.courses : STATIC_COURSES_DATA).slice(0, 3);
-            const coursesHtml = `
-                 <section id="courses" class="max-w-6xl mx-auto px-6 py-20" data-aos="fade-up">
-                    <h2 class="heading text-4xl text-white text-center mb-12 font-bold">Explore Our Courses</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        ${coursesToDisplay.map((course, index) => `
-                            <div class="card p-4" data-aos="fade-up" data-aos-delay="${(index + 1) * 100}">
-                                <img src="${course.imageUrl}" alt="${course.subject}" class="w-full h-48 object-cover rounded-xl mb-4" />
-                                <h3 class="heading text-xl text-white mb-2 font-semibold">${course.subject} - ${course.level}</h3>
-                                <p class="bodyfont text-gray-400 mb-4 flex-grow">${course.description}</p>
-                                <div class="mt-4">
-                                    <button data-course-id='${course.id}' class="view-course-btn card-button font-semibold w-full text-center">View Course</button>
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-                    <div class="text-center mt-12">
-                        <button id="view-more-courses-btn" class="view-more-btn heading font-semibold">
-                            View More
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="http://www.w3.org/2000/svg" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                            </svg>
-                        </button>
-                    </div>
-                </section>
-            `;
-
-            // Teachers Section
-            const { teacherSliderIndex } = appState;
-            const teachersHtml = `
-                 <section id="teachers" class="py-20 overflow-hidden">
-                    <div class="max-w-6xl mx-auto px-6">
-                        <h2 class="heading text-4xl text-white text-center mb-16 font-bold" data-aos="fade-up">Our Esteemed Teachers</h2>
-                        <div id="teacher-slider-wrapper" class="relative h-96 flex items-center justify-center" data-aos="fade-up">
-                            <button id="teacher-slider-prev" class="slider-arrow left-0 xl:-left-16">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
-                            </button>
-                            ${TEACHERS_DATA.map((teacher, index) => {
-                                const offset = (index - teacherSliderIndex + TEACHERS_DATA.length) % TEACHERS_DATA.length;
-                                let transformStyle, zIndex, opacity;
-                                if (offset === 0) { transformStyle = 'translateX(0) scale(1)'; zIndex = 3; opacity = 1; } 
-                                else if (offset === 1) { transformStyle = 'translateX(80%) scale(0.8)'; zIndex = 2; opacity = 0.6; } 
-                                else if (offset === TEACHERS_DATA.length - 1) { transformStyle = 'translateX(-80%) scale(0.8)'; zIndex = 2; opacity = 0.6; } 
-                                else { transformStyle = `translateX(${offset > TEACHERS_DATA.length / 2 ? '-160%' : '160%'}) scale(0.6)`; zIndex = 1; opacity = 0; }
-                                return `
-                                    <div class="absolute w-80 h-96 transition-all duration-500 ease-in-out" style="transform: ${transformStyle}; z-index: ${zIndex}; opacity: ${opacity};">
-                                        <div class="teacher-card rounded-lg p-6 text-center h-full flex flex-col items-center justify-center">
-                                            <img src="${teacher.img}" alt="${teacher.name}" class="w-28 h-28 rounded-full object-cover mx-auto mb-6 border-4 border-gray-700"/>
-                                            <h3 class="heading text-2xl font-bold text-white leading-tight">${teacher.name}</h3>
-                                            <p class="bodyfont text-pink-400 mt-2 text-sm">${teacher.subjects}</p>
-                                            <p class="bodyfont text-gray-400 mt-2 text-xs">${teacher.experience} of experience</p>
-                                        </div>
-                                    </div>`;
-                            }).join('')}
-                            <button id="teacher-slider-next" class="slider-arrow right-0 xl:-right-16">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
-                            </button>
-                        </div>
-                    </div>
-                </section>
-            `;
-            
-            // Contact Section
-            const contactHtml = `
-                <section id="contact" class="max-w-4xl mx-auto px-6 py-20 text-center" data-aos="fade-up">
-                    <h2 class="heading text-4xl text-white mb-4 font-bold">Get In Touch</h2>
-                    <p class="text-gray-400 bodyfont max-w-xl mx-auto mb-10">Have questions or ready to start your musical journey? Contact us!</p>
-                    <div class="flex flex-col sm:flex-row justify-center items-center gap-6">
-                        <a href="mailto:music2soul11@gmail.com" class="cta text-white px-8 py-3 rounded-lg heading text-lg font-semibold flex items-center gap-3 w-full sm:w-auto justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
-                            Send an Email
-                        </a>
-                        <a href="tel:+919309152986" class="contact-btn text-lg heading font-semibold px-8 py-3 rounded-lg flex items-center gap-3 w-full sm:w-auto justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
-                            Call Us
-                        </a>
-                    </div>
-                </section>
-            `;
-
-            // Footer
-            const footerHtml = `
-                <footer class="bg-black text-gray-400 py-12 mt-20 border-t border-gray-800" data-aos="fade-up">
-                    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-8">
-                        <div>
-                            <div class="heading text-white text-2xl font-bold mb-1">Musicoul</div>
-                            <div class="bodyfont text-sm text-gray-500">© ${new Date().getFullYear()} Musicoul. All rights reserved.</div>
-                        </div>
-                        <div class="flex flex-wrap justify-center gap-6 text-sm">
-                            ${NAV_ITEMS.filter(item => item.name !== "Home").map(item => `
-                                <button data-navid="${item.id}" class="bodyfont hover:text-pink-400 transition-colors duration-300">${item.name}</button>
-                            `).join('')}
-                        </div>
-                    </div>
-                </footer>
-            `;
-            
+            const coursesHtml = `<section id="courses" class="max-w-6xl mx-auto px-6 py-20" data-aos="fade-up"><h2 class="heading text-4xl text-white text-center mb-12 font-bold">Explore Our Courses</h2><div class="grid grid-cols-1 md:grid-cols-3 gap-8">${coursesToDisplay.map((course, index) => `<div class="card p-4" data-aos="fade-up" data-aos-delay="${(index + 1) * 100}"><img src="${course.imageUrl}" alt="${course.subject}" class="w-full aspect-square object-cover rounded-xl mb-4" /><h3 class="heading text-xl text-white mb-2 font-semibold">${course.subject} - ${course.level}</h3><p class="bodyfont text-gray-400 mb-4 flex-grow">${course.description}</p><div class="mt-4"><button data-course-id='${course.id}' class="view-course-btn card-button font-semibold w-full text-center">View Course</button></div></div>`).join('')}</div><div class="text-center mt-12"><button id="view-more-courses-btn" class="view-more-btn heading font-semibold">View More<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="http://www.w3.org/2000/svg" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg></button></div></section>`;
+            const teachersHtml = `<section id="teachers" class="py-20 overflow-hidden"><div class="max-w-6xl mx-auto px-6"><h2 class="heading text-4xl text-white text-center mb-16 font-bold" data-aos="fade-up">Our Esteemed Teachers</h2><div id="teacher-slider-container" class="relative" data-aos="fade-up"><button id="teacher-slider-prev-btn" class="slider-arrow left-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button><div id="teacher-slider-viewport" class="w-full h-[30rem]"><div id="teacher-slider-track" class="w-full h-full">${TEACHERS_DATA.map((teacher, index) => `<div class="teacher-card-wrapper w-72 h-full p-2" data-teacher-index="${index}"><div class="teacher-card flex flex-col h-full w-full overflow-hidden p-4"><div class="teacher-image-container mb-3"><img src="${teacher.img}" alt="${teacher.name}" class="teacher-image"/></div><div class="text-center flex-grow flex flex-col"><h3 class="heading text-xl font-bold text-white leading-tight">${teacher.name}</h3><p class="bodyfont text-pink-400 mt-1 text-sm">${teacher.subjects}</p><ul class="text-left text-sm text-gray-400 my-3 space-y-2 px-2 bodyfont list-inside h-16">${teacher.description.map(point => `<li class="flex items-start"><span class="text-pink-400 mr-2 mt-1 leading-none">&bull;</span><span>${point}</span></li>`).join('')}</ul><div class="teacher-buttons"><button data-teacher-id="${teacher.id}" class="know-more-btn">Know More</button><a href="${teacher.instagram}" target="_blank" rel="noopener noreferrer" class="instagram-btn"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.012 3.584-.07 4.85c-.148 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.07-1.645-.07-4.85s.012-3.584.07-4.85c.148-3.225 1.664-4.771 4.919 4.919 1.266.058 1.644.07 4.85.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.44-1.441-1.44z"></path></svg></a></div></div></div></div>`).join('')}</div></div><button id="teacher-slider-next-btn" class="slider-arrow right-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg></button></div></div></section>`;
+            const contactHtml = `<section id="contact" class="max-w-4xl mx-auto px-6 py-20 text-center" data-aos="fade-up"><h2 class="heading text-4xl text-white mb-4 font-bold">Get In Touch</h2><p class="text-gray-400 bodyfont max-w-xl mx-auto mb-10">Have questions or ready to start your musical journey? Contact us!</p><div class="flex flex-col sm:flex-row justify-center items-center gap-6"><a href="mailto:music2soul11@gmail.com" class="cta text-white px-8 py-3 rounded-lg heading text-lg font-semibold flex items-center gap-3 w-full sm:w-auto justify-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>Send an Email</a><a href="tel:+919309152986" class="contact-btn text-lg heading font-semibold px-8 py-3 rounded-lg flex items-center gap-3 w-full sm:w-auto justify-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>Call Us</a></div></section>`;
+            const footerHtml = `<footer class="bg-black text-gray-400 py-12 mt-20 border-t border-gray-800" data-aos="fade-up"><div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-8"><div><div class="heading text-white text-2xl font-bold mb-1">Musicoul</div><div class="bodyfont text-sm text-gray-500">© ${new Date().getFullYear()} Musicoul. All rights reserved.</div></div><div class="flex flex-wrap justify-center gap-6 text-sm">${NAV_ITEMS.filter(item => item.name !== "Home").map(item => `<button data-navid="${item.id}" class="bodyfont hover:text-pink-400 transition-colors duration-300">${item.name}</button>`).join('')}</div></div></footer>`;
             document.getElementById('page-container').innerHTML = heroHtml + aboutHtml + coursesHtml + teachersHtml + contactHtml + footerHtml;
-
             const typewriterElement = document.getElementById('typewriter');
-            if(typewriterElement) {
-                startTypewriter(typewriterElement, ["Musician", "Singer", "Tabla Player", "Pianist", "Harmonist", "Guitarist", "Flutist"]);
-            }
+            if(typewriterElement) { startTypewriter(typewriterElement, ["Musician", "Singer", "Tabla Player", "Pianist", "Harmonist", "Guitarist", "Flutist"]); }
+            updateTeacherSlider();
         }
-
-        // --- Other Page Renderers (Admin, MyClass, etc.) would go here ---
         
         function renderAuthModal() {
             const { isOpen, type } = appState.authModal;
             const modalContainer = document.getElementById('modal-container');
-            if (!isOpen) {
-                modalContainer.innerHTML = '';
-                return;
-            }
-
-            modalContainer.innerHTML = `
-                <div id="auth-modal-backdrop" class="fixed inset-0 z-50 flex items-center justify-center p-4 transition-opacity duration-300 opacity-100">
-                    <div class="fixed inset-0 bg-black bg-opacity-70"></div>
-                    <div class="bg-gray-900 border border-gray-700 rounded-xl shadow-lg w-full max-w-md m-4 transform transition-all duration-300 scale-100 opacity-100">
-                        <div class="p-8 space-y-6">
-                            <div class="text-center">
-                                <h2 class="heading text-3xl font-bold text-white">${type === 'login' ? 'Welcome Back' : 'Create Account'}</h2>
-                                <p class="bodyfont text-gray-400 mt-2">${type === 'login' ? 'Login to continue your musical journey.' : 'Start your musical journey with us.'}</p>
-                            </div>
-                            <form id="auth-form" class="space-y-4">
-                                ${type === 'signup' ? `
-                                    <div>
-                                        <label class="bodyfont text-sm font-medium text-gray-300 block mb-2" for="name">Full Name</label>
-                                        <input type="text" id="name" name="name" required class="auth-input" placeholder="Your Name" />
-                                    </div>
-                                    <div>
-                                        <label class="bodyfont text-sm font-medium text-gray-300 block mb-2" for="phone">Phone Number</label>
-                                        <input type="tel" id="phone" name="phone" required class="auth-input" placeholder="Your Phone Number" />
-                                    </div>` : ''}
-                                <div>
-                                    <label class="bodyfont text-sm font-medium text-gray-300 block mb-2" for="email">Email Address</label>
-                                    <input type="email" id="email" name="email" required class="auth-input" placeholder="you@example.com" />
-                                </div>
-                                <div>
-                                    <div class="flex justify-between items-center mb-2">
-                                        <label class="bodyfont text-sm font-medium text-gray-300" for="password">Password</label>
-                                        ${type === 'login' ? `<a href="#" class="text-sm bodyfont text-pink-500 hover:underline">Forgot?</a>` : ''}
-                                    </div>
-                                    <input type="password" id="password" name="password" required class="auth-input" placeholder="••••••••" />
-                                </div>
-                                <p id="auth-error" class="text-red-500 text-sm text-center bodyfont hidden"></p>
-                                <button type="submit" class="w-full cta text-white py-3 rounded-lg heading font-semibold">${type === 'login' ? 'Login' : 'Sign Up'}</button>
-                            </form>
-                            <p class="bodyfont text-sm text-center text-gray-400">
-                                ${type === 'login' ? "Don't have an account?" : "Already have an account?"}
-                                <button id="toggle-auth-type" class="font-semibold text-pink-500 hover:underline ml-2">${type === 'login' ? 'Sign Up' : 'Login'}</button>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            `;
+            if (!isOpen) { modalContainer.innerHTML = ''; return; }
+            modalContainer.innerHTML = `<div id="auth-modal-backdrop" class="fixed inset-0 z-50 flex items-center justify-center p-4 transition-opacity duration-300 opacity-100"><div class="fixed inset-0 bg-black bg-opacity-70"></div><div class="bg-gray-900 border border-gray-700 rounded-xl shadow-lg w-full max-w-md m-4 transform transition-all duration-300 scale-100 opacity-100"><div class="p-8 space-y-6"><div class="text-center"><h2 class="heading text-3xl font-bold text-white">${type === 'login' ? 'Welcome Back' : 'Create Account'}</h2><p class="bodyfont text-gray-400 mt-2">${type === 'login' ? 'Login to continue your musical journey.' : 'Start your musical journey with us.'}</p></div><form id="auth-form" class="space-y-4">${type === 'signup' ? `<div><label class="bodyfont text-sm font-medium text-gray-300 block mb-2" for="name">Full Name</label><input type="text" id="name" name="name" required class="auth-input" placeholder="Your Name" /></div><div><label class="bodyfont text-sm font-medium text-gray-300 block mb-2" for="phone">Phone Number</label><input type="tel" id="phone" name="phone" required class="auth-input" placeholder="Your Phone Number" /></div>` : ''}<div><label class="bodyfont text-sm font-medium text-gray-300 block mb-2" for="email">Email Address</label><input type="email" id="email" name="email" required class="auth-input" placeholder="you@example.com" /></div><div><div class="flex justify-between items-center mb-2"><label class="bodyfont text-sm font-medium text-gray-300" for="password">Password</label>${type === 'login' ? `<a href="#" class="text-sm bodyfont text-pink-500 hover:underline">Forgot?</a>` : ''}</div><input type="password" id="password" name="password" required class="auth-input" placeholder="••••••••" /></div><p id="auth-error" class="text-red-500 text-sm text-center bodyfont hidden"></p><button type="submit" class="w-full cta text-white py-3 rounded-lg heading font-semibold">${type === 'login' ? 'Login' : 'Sign Up'}</button></form><p class="bodyfont text-sm text-center text-gray-400">${type === 'login' ? "Don't have an account?" : "Already have an account?"}<button id="toggle-auth-type" class="font-semibold text-pink-500 hover:underline ml-2">${type === 'login' ? 'Sign Up' : 'Login'}</button></p></div></div></div>`;
+        }
+        
+        function renderTeacherDetailModal() {
+            const { isOpen, teacher } = appState.teacherDetailModal;
+            const modalContainer = document.getElementById('modal-container');
+            if (!isOpen || !teacher) { if (!appState.authModal.isOpen) modalContainer.innerHTML = ''; return; }
+            modalContainer.innerHTML = `<div id="teacher-modal-backdrop" class="fixed inset-0 z-50 flex items-center justify-center p-4 transition-opacity duration-300 opacity-100"><div class="fixed inset-0 bg-black bg-opacity-80"></div><div class="bg-gray-900 border border-gray-700 rounded-xl shadow-lg w-full max-w-lg m-4 transform transition-all duration-300 scale-100 opacity-100 relative"><button id="close-teacher-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors z-10 text-3xl leading-none">&times;</button><div class="p-8"><img src="${teacher.img}" alt="${teacher.name}" class="w-32 h-32 object-cover rounded-full mx-auto mb-4 border-4 border-gray-700"/><h2 class="heading text-3xl font-bold text-white text-center">${teacher.name}</h2><p class="bodyfont text-pink-400 text-center mt-1">${teacher.subjects}</p><p class="bodyfont text-gray-300 mt-6 leading-relaxed text-center">${teacher.bio}</p></div></div></div>`;
         }
 
-        // --- Main Render Function ---
         function renderApp() {
             renderHeader();
-            
-            // Only render the page content. Modals are handled separately.
-            const { currentPage } = appState;
-            // Add other cases for 'coursesPage', 'myClass', 'admin'
-            if (currentPage === 'home') {
-                 renderHomePage();
-            } // else if (currentPage === 'coursesPage') { renderCoursesPage(); } ... etc
-
+            if (appState.currentPage === 'home') { renderHomePage(); } 
             renderAuthModal();
-            // renderCoursePreviewModal();
-            
-            // Re-initialize AOS after rendering new content
+            renderTeacherDetailModal();
             AOS.refresh();
             addEventListeners();
         }
 
-        // --- Event Handlers & Logic ---
-        function handleNavItemClick(id) {
-            // Simplified for this example. A full implementation would handle all page types.
-            if (id === 'courses') {
-                // appState.currentPage = 'coursesPage';
-                alert('Navigating to All Courses page is not fully implemented in this HTML version.');
-            } else {
-                appState.currentPage = 'home';
-                renderApp(); // Re-render to ensure we are on the home page
-                setTimeout(() => {
-                    const section = document.getElementById(id);
-                    if (section) {
-                        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                }, 100);
+        function updateTeacherSlider(direction) {
+            const totalTeachers = TEACHERS_DATA.length;
+            if (direction) {
+                if (direction === 'next') { appState.teacherSliderIndex = (appState.teacherSliderIndex + 1) % totalTeachers; } 
+                else if (direction === 'prev') { appState.teacherSliderIndex = (appState.teacherSliderIndex - 1 + totalTeachers) % totalTeachers; }
             }
-             appState.mobileMenuOpen = false;
-             renderHeader(); // to close menu
+            
+            // Mobile Logic: Slide the track
+            if (window.innerWidth <= 768) {
+                const track = document.getElementById('teacher-slider-track');
+                if (track) {
+                    track.style.transform = `translateX(-${appState.teacherSliderIndex * 100}%)`;
+                }
+                document.querySelectorAll('.teacher-card').forEach((card, index) => {
+                     card.classList.toggle('is-center', index === appState.teacherSliderIndex);
+                });
+                return;
+            }
+
+            // Desktop Logic: Cover flow
+            const wrappers = document.querySelectorAll('.teacher-card-wrapper');
+            wrappers.forEach((wrapper, index) => {
+                const card = wrapper.querySelector('.teacher-card');
+                const offset = (index - appState.teacherSliderIndex + totalTeachers) % totalTeachers;
+                
+                let transform, opacity, zIndex;
+
+                if (offset === 0) { // Center card
+                    transform = 'translateX(-50%) scale(1)';
+                    opacity = 1;
+                    zIndex = 10;
+                    card.classList.add('is-center');
+                } else if (offset === 1) { // Right card
+                    transform = 'translateX(0%) scale(0.8)';
+                    opacity = 0.6;
+                    zIndex = 5;
+                    card.classList.remove('is-center');
+                } else if (offset === totalTeachers - 1) { // Left card
+                    transform = 'translateX(-100%) scale(0.8)';
+                    opacity = 0.6;
+                    zIndex = 5;
+                    card.classList.remove('is-center');
+                } else { // Hidden cards
+                    transform = `translateX(-50%) scale(0.6)`;
+                    opacity = 0;
+                    zIndex = 1;
+                    card.classList.remove('is-center');
+                }
+
+                wrapper.style.transform = transform;
+                wrapper.style.opacity = opacity;
+                wrapper.style.zIndex = zIndex;
+            });
+        }
+
+        function handleNavItemClick(id) {
+            if (id === 'courses') { alert('Navigating to All Courses page is not fully implemented.'); } 
+            else { appState.currentPage = 'home'; renderApp(); setTimeout(() => { document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100); }
+            appState.mobileMenuOpen = false;
+            renderHeader();
         }
 
         async function handleAuthFormSubmit(e) {
             e.preventDefault();
             const errorP = document.getElementById('auth-error');
-            errorP.textContent = '';
-            errorP.classList.add('hidden');
-
-            const email = e.target.email.value;
-            const password = e.target.password.value;
-            const type = appState.authModal.type;
-
+            errorP.textContent = ''; errorP.classList.add('hidden');
+            const { email, password } = e.target.elements;
             try {
-                if (type === 'signup') {
-                    const name = e.target.name.value;
-                    const phone = e.target.phone.value;
-                    if (!name) { 
-                        errorP.textContent = "Please enter your full name.";
-                        errorP.classList.remove('hidden');
-                        return; 
-                    }
-                    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-                    await updateProfile(userCredential.user, { displayName: name });
-                    await setDoc(doc(db, "users", userCredential.user.uid), { displayName: name, email: email, role: 'student', phone: phone });
-                } else {
-                    await signInWithEmailAndPassword(auth, email, password);
-                }
-                appState.authModal.isOpen = false;
-                renderApp();
+                if (appState.authModal.type === 'signup') {
+                    const { name, phone } = e.target.elements;
+                    if (!name.value) throw new Error("Please enter your full name.");
+                    const userCredential = await createUserWithEmailAndPassword(auth, email.value, password.value);
+                    await updateProfile(userCredential.user, { displayName: name.value });
+                    await setDoc(doc(db, "users", userCredential.user.uid), { displayName: name.value, email: email.value, role: 'student', phone: phone.value });
+                } else { await signInWithEmailAndPassword(auth, email.value, password.value); }
+                appState.authModal.isOpen = false; renderApp();
             } catch (err) {
-                 let message = 'An unexpected error occurred. Please try again.';
+                 let message = 'An unexpected error occurred.';
                  switch (err.code) {
-                     case 'auth/invalid-credential': message = 'Invalid email or password. Please try again.'; break;
-                     case 'auth/email-already-in-use': message = 'An account with this email already exists. Please login.'; break;
-                     case 'auth/weak-password': message = 'Password should be at least 6 characters long.'; break;
+                     case 'auth/invalid-credential': message = 'Invalid email or password.'; break;
+                     case 'auth/email-already-in-use': message = 'An account with this email already exists.'; break;
+                     case 'auth/weak-password': message = 'Password must be at least 6 characters.'; break;
                  }
-                 errorP.textContent = message;
-                 errorP.classList.remove('hidden');
+                 errorP.textContent = message; errorP.classList.remove('hidden');
             }
         }
 
-        async function handleLogout() {
-             try {
-                await signOut(auth);
-                appState.currentPage = 'home';
-                renderApp();
-            } catch (error) {
-                console.error("Error signing out: ", error);
-            }
-        }
-
-        // --- Event Listener Setup ---
         function addEventListeners() {
-            // Use event delegation on the app container
-            const appContainer = document.getElementById('app-container');
-            
-            appContainer.onclick = function(e) {
-                // Header Nav Buttons
-                const navTarget = e.target.closest('[data-navid]');
-                if (navTarget) {
-                    handleNavItemClick(navTarget.dataset.navid);
+            document.getElementById('app-container').onclick = function(e) {
+                if (e.target.closest('[data-navid]')) { handleNavItemClick(e.target.closest('[data-navid]').dataset.navid); return; }
+                if (e.target.closest('[data-navid-mobile]')) { handleNavItemClick(e.target.closest('[data-navid-mobile]').dataset.navidMobile); return; }
+                if (['login-btn', 'mobile-login-btn'].includes(e.target.id)) { appState.authModal = { isOpen: true, type: 'login' }; renderApp(); return; }
+                if (['signup-btn', 'mobile-signup-btn'].includes(e.target.id)) { appState.authModal = { isOpen: true, type: 'signup' }; renderApp(); return; }
+                if (['logout-btn', 'mobile-logout-btn'].includes(e.target.id)) { signOut(auth); return; }
+                if (e.target.closest('#mobile-menu-toggle')) { appState.mobileMenuOpen = !appState.mobileMenuOpen; renderHeader(); addEventListeners(); return; }
+                if (['explore-courses-btn', 'view-more-courses-btn'].includes(e.target.id)) { alert('Course catalog page coming soon!'); return; }
+                const knowMoreBtn = e.target.closest('.know-more-btn');
+                if (knowMoreBtn) {
+                    const teacher = TEACHERS_DATA.find(t => t.id === knowMoreBtn.dataset.teacherId);
+                    if (teacher) { appState.teacherDetailModal = { isOpen: true, teacher }; renderApp(); }
                     return;
                 }
-                 const mobileNavTarget = e.target.closest('[data-navid-mobile]');
-                if (mobileNavTarget) {
-                    handleNavItemClick(mobileNavTarget.dataset.navidmobile);
-                    return;
-                }
-
-                // Auth buttons in header
-                if (e.target.id === 'login-btn' || e.target.id === 'mobile-login-btn') { appState.authModal = { isOpen: true, type: 'login' }; renderApp(); return; }
-                if (e.target.id === 'signup-btn' || e.target.id === 'mobile-signup-btn') { appState.authModal = { isOpen: true, type: 'signup' }; renderApp(); return; }
-                if (e.target.id === 'logout-btn' || e.target.id === 'mobile-logout-btn') { handleLogout(); return; }
-
-                 // Mobile menu toggle
-                if (e.target.closest('#mobile-menu-toggle')) {
-                    appState.mobileMenuOpen = !appState.mobileMenuOpen;
-                    renderHeader(); // Only re-render the header
-                    addEventListeners(); // Re-add listeners as header is replaced
-                    return;
-                }
-                
-                // Hero Buttons
-                if(e.target.id === 'explore-courses-btn' || e.target.id === 'view-more-courses-btn') {
-                     alert('Navigating to All Courses page is not fully implemented in this HTML version.');
-                     return;
-                }
-
-                // Teacher Slider
-                if (e.target.closest('#teacher-slider-next')) {
-                    appState.teacherSliderIndex = (appState.teacherSliderIndex + 1) % TEACHERS_DATA.length;
-                    renderApp(); // This is inefficient, a better way would be renderTeachersSection()
-                    return;
-                }
-                if (e.target.closest('#teacher-slider-prev')) {
-                    appState.teacherSliderIndex = (appState.teacherSliderIndex - 1 + TEACHERS_DATA.length) % TEACHERS_DATA.length;
-                    renderApp(); // Inefficient, but works for this conversion
-                    return;
-                }
-
-                // Auth Modal interactions
-                const authModalBackdrop = e.target.closest('#auth-modal-backdrop');
-                if (authModalBackdrop && e.target === authModalBackdrop.firstElementChild) { // Click on backdrop only
-                    appState.authModal.isOpen = false;
-                    renderApp();
-                    return;
-                }
-                if (e.target.id === 'toggle-auth-type') {
-                    appState.authModal.type = appState.authModal.type === 'login' ? 'signup' : 'login';
-                    renderAuthModal(); // Just re-render the modal
-                    addEventListeners();
-                    return;
-                }
+                if (e.target.closest('#teacher-slider-next-btn')) { updateTeacherSlider('next'); return; }
+                if (e.target.closest('#teacher-slider-prev-btn')) { updateTeacherSlider('prev'); return; }
             };
             
-            // Form submission needs a direct listener
-            const authForm = document.getElementById('auth-form');
-            if (authForm) {
-                authForm.onsubmit = handleAuthFormSubmit;
+            document.getElementById('modal-container').onclick = function(e) {
+                if (e.target.id === 'toggle-auth-type') { appState.authModal.type = appState.authModal.type === 'login' ? 'signup' : 'login'; renderApp(); }
+                else if (e.target.id === 'auth-modal-backdrop' && e.target === e.currentTarget.firstElementChild) { appState.authModal.isOpen = false; renderApp(); }
+                else if (e.target.closest('#close-teacher-modal') || (e.target.id === 'teacher-modal-backdrop' && e.target === e.currentTarget.firstElementChild)) { appState.teacherDetailModal = { isOpen: false, teacher: null }; renderApp(); }
             }
+            
+            const authForm = document.getElementById('auth-form');
+            if (authForm) { authForm.onsubmit = handleAuthFormSubmit; }
         }
 
-
-        // --- App Initialization ---
         document.addEventListener('DOMContentLoaded', () => {
             AOS.init({ duration: 1000, once: true });
-            
-            // Listen for auth state changes
-            onAuthStateChanged(auth, user => {
-                appState.currentUser = user;
-                // In a full app, here you would also fetch user-specific data like assignedCourses
-                // For now, we just re-render
-                renderApp();
+            onAuthStateChanged(auth, user => { appState.currentUser = user; renderApp(); });
+            // Initial render can be tricky with screen size, so we add a resize listener
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    // Re-render the whole page might be too much, but for this it's simple
+                    renderHomePage();
+                }, 250);
             });
-            
-            // Initial Render
             renderApp();
         });
     </script>

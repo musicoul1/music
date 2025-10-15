@@ -238,6 +238,29 @@
         body.mobile-nav-open {
             overflow: hidden;
         }
+        
+        /* Hero Background Animation */
+        #hero-bg-container::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(10, 10, 10, 1) 0%, rgba(10, 10, 10, 0.7) 50%, rgba(10, 10, 10, 0.4) 100%);
+            z-index: 1;
+        }
+        .hero-bg-image {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            z-index: 0;
+        }
+        .hero-bg-image.active {
+            opacity: 1;
+        }
 
     </style>
 </head>
@@ -293,6 +316,15 @@
             { id: 'teacher3', name: "Hariom Kolhe", subjects: "Singing, Tabla", img: "https://yt3.googleusercontent.com/BYHZUYJY5R8VwMEodeV2ehjzoBTRt3y--Ot_e8Xpz_19ZNB6LOWuxbxl7lRgoqcJB9uJRd6hwg=s160-c-k-c0x00ffffff-no-rj", instagram: "https://www.instagram.com/hariomkolhe1/", bio: "Hariom is a versatile artist with a deep understanding of vocal music and tabla. His teaching style is energetic and adaptive, perfect for students of all ages. He excels at making complex musical concepts accessible and fun to learn.", description: ["Versatile in vocal music and tabla.", "Energetic and adaptive teaching style."] } 
         ];
         const FEATURES_DATA = [ { icon: "🎵", title: "Live Interactive Classes", desc: "Engage in real-time with expert instructors." }, { icon: "📜", title: "Structured Syllabus", desc: "Follow a clear path from beginner to advanced." }, { icon: "👩‍🏫", title: "Expert Teachers", desc: "Learn from professional and passionate musicians." }, ];
+        const TYPEWRITER_DATA = [
+            { word: "Musician", imageUrl: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=2070&auto=format&fit=crop" },
+            { word: "Singer", imageUrl: "https://images.unsplash.com/photo-1499415474424-6c108163452f?q=80&w=1932&auto=format&fit=crop" },
+            { word: "Tabla Player", imageUrl: "https://images.unsplash.com/photo-1613946069412-38f3f2b74534?q=80&w=1974&auto=format&fit=crop" },
+            { word: "Pianist", imageUrl: "https://images.unsplash.com/photo-1520442053-246A7f93f15a?q=80&w=2070&auto=format&fit=crop" },
+            { word: "Harmonist", imageUrl: "https://images.unsplash.com/photo-1628192138125-a681a0e05141?q=80&w=2070&auto=format&fit=crop" },
+            { word: "Guitarist", imageUrl: "https://images.unsplash.com/photo-1464375117522-1311d6a5b81f?q=80&w=2070&auto=format&fit=crop" },
+            { word: "Flutist", imageUrl: "https://images.unsplash.com/photo-1612211519459-3a13a55855e2?q=80&w=1935&auto=format&fit=crop" }
+        ];
 
         // --- Application State ---
         let appState = { 
@@ -441,7 +473,15 @@
         // --- Page Renderers ---
         function renderHomePage() {
             const pageContainer = document.getElementById('page-container');
-            const heroHtml = `<main class="flex flex-col items-center justify-center text-center px-6 min-h-[90vh]" data-aos="fade-up"><h1 class="heading text-white text-4xl sm:text-5xl md:text-7xl font-extrabold mb-4 tracking-tight">Unleash your Inner<br /><span id="typewriter"></span></h1><p class="bodyfont text-gray-300 max-w-2xl mt-8 text-lg sm:text-xl leading-relaxed">Join live sessions, access recordings, and follow a structured syllabus — all in one place.</p><div class="mt-10 flex flex-col sm:flex-row gap-6"><button data-navid="courses" class="cta text-white px-8 py-3 rounded-lg heading text-lg font-semibold">Explore Courses</button><button data-navid="contact" class="contact-btn text-lg heading font-semibold px-8 py-3 rounded-lg">Get Started</button></div></main>`;
+            const heroHtml = `<main class="relative flex flex-col items-center justify-center text-center px-6 min-h-[90vh]" data-aos="fade-up">
+                <div id="hero-bg-container" class="absolute inset-0 z-[-1] overflow-hidden"></div>
+                <h1 class="heading text-white text-4xl sm:text-5xl md:text-7xl font-extrabold mb-4 tracking-tight">Unleash your Inner<br /><span id="typewriter"></span></h1>
+                <p class="bodyfont text-gray-300 max-w-2xl mt-8 text-lg sm:text-xl leading-relaxed">Join live sessions, access recordings, and follow a structured syllabus — all in one place.</p>
+                <div class="mt-10 flex flex-col sm:flex-row gap-6">
+                    <button data-navid="courses" class="cta text-white px-8 py-3 rounded-lg heading text-lg font-semibold">Explore Courses</button>
+                    <button data-navid="contact" class="contact-btn text-lg heading font-semibold px-8 py-3 rounded-lg">Get Started</button>
+                </div>
+            </main>`;
             const aboutHtml = `<section id="about" class="max-w-6xl mx-auto px-6 py-20 sm:py-24" data-aos="fade-up"><div class="text-center"><h2 class="heading text-4xl sm:text-5xl text-white font-bold" data-aos="fade-up">Why Choose Musicoul?</h2><p class="bodyfont text-gray-400 mt-4 max-w-2xl mx-auto text-lg" data-aos="fade-up" data-aos-delay="100">We provide a premium, streamlined learning experience for aspiring musicians.</p></div><div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 text-center">${FEATURES_DATA.map((item, index) => `<div data-aos="fade-up" data-aos-delay="${index * 150 + 200}"><div class="text-6xl text-pink-400 mb-4">${item.icon}</div><h3 class="heading text-2xl text-white mb-2 font-semibold">${item.title}</h3><p class="bodyfont text-gray-400 leading-relaxed">${item.desc}</p></div>`).join('')}</div></section>`;
             const coursesToDisplay = (appState.courses.length > 0 ? appState.courses : STATIC_COURSES_DATA).slice(0, 3);
             const coursesHtml = `<section id="courses" class="max-w-6xl mx-auto px-6 py-20 sm:py-24" data-aos="fade-up"><h2 class="heading text-4xl sm:text-5xl text-white text-center mb-12 font-bold">Explore Our Courses</h2><div class="grid grid-cols-1 md:grid-cols-3 gap-8">${coursesToDisplay.map((course, index) => `<div class="card p-4" data-aos="fade-up" data-aos-delay="${(index + 1) * 100}"><img src="${course.imageUrl}" alt="${course.subject}" class="w-full aspect-square object-cover rounded-xl mb-4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1a1a1a/f472b6?text=Music';"/><h3 class="heading text-xl text-white mb-2 font-semibold">${course.subject} - ${course.level}</h3><p class="bodyfont text-gray-400 mb-4 flex-grow">${course.description}</p><div class="mt-4"><button data-navid="courses" class="card-button font-semibold w-full text-center">View Details</button></div></div>`).join('')}</div><div class="text-center mt-12"><button data-navid="courses" class="view-more-btn heading font-semibold">View All Courses<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="http://www.w3.org/2000/svg" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg></button></div></section>`;
@@ -451,7 +491,10 @@
             
             pageContainer.innerHTML = heroHtml + aboutHtml + coursesHtml + teachersHtml + contactHtml + footerHtml;
             const typewriterElement = document.getElementById('typewriter');
-            if(typewriterElement) { startTypewriter(typewriterElement, ["Musician", "Singer", "Tabla Player", "Pianist", "Harmonist", "Guitarist", "Flutist"]); }
+            const bgContainer = document.getElementById('hero-bg-container');
+            if(typewriterElement && bgContainer) {
+                startTypewriter(typewriterElement, bgContainer, TYPEWRITER_DATA);
+            }
             updateTeacherSlider();
         }
 
@@ -646,17 +689,35 @@
 
 
         // --- Helper & Utility Functions ---
-        function startTypewriter(element, words, typingSpeed = 100, deletingSpeed = 50, pause = 1400) {
-            element.classList.add('typewriter-container');
+        function startTypewriter(textElement, bgContainer, data, typingSpeed = 100, deletingSpeed = 50, pause = 1400) {
+            textElement.classList.add('typewriter-container');
+            
+            bgContainer.innerHTML = data.map((item, index) =>
+                `<div class="hero-bg-image ${index === 0 ? 'active' : ''}" style="background-image: url('${item.imageUrl}')"></div>`
+            ).join('');
+            const bgImages = bgContainer.querySelectorAll('.hero-bg-image');
+
             let wordIndex = 0, subIndex = 0, isDeleting = false;
             const textSpan = document.createElement('span');
             textSpan.className = 'bg-gradient-to-r from-purple-600 via-red-500 to-pink-500 bg-clip-text text-transparent';
-            element.innerHTML = ''; element.appendChild(textSpan);
+            textElement.innerHTML = ''; 
+            textElement.appendChild(textSpan);
+
             function type() {
-                const currentWord = words[wordIndex];
+                if (!isDeleting && subIndex === 0) { // New word starts
+                    const currentActive = bgContainer.querySelector('.hero-bg-image.active');
+                    if (currentActive) currentActive.classList.remove('active');
+                    bgImages[wordIndex].classList.add('active');
+                }
+
+                const currentWord = data[wordIndex].word;
                 textSpan.textContent = currentWord.substring(0, subIndex);
-                if (isDeleting) { subIndex > 0 ? (subIndex--, setTimeout(type, deletingSpeed)) : (isDeleting = false, wordIndex = (wordIndex + 1) % words.length, setTimeout(type, typingSpeed)); } 
-                else { subIndex < currentWord.length ? (subIndex++, setTimeout(type, typingSpeed)) : (isDeleting = true, setTimeout(type, pause)); }
+                
+                if (isDeleting) {
+                    subIndex > 0 ? (subIndex--, setTimeout(type, deletingSpeed)) : (isDeleting = false, wordIndex = (wordIndex + 1) % data.length, setTimeout(type, typingSpeed));
+                } else {
+                    subIndex < currentWord.length ? (subIndex++, setTimeout(type, typingSpeed)) : (isDeleting = true, setTimeout(type, pause));
+                }
             }
             type();
         }
@@ -1007,10 +1068,10 @@
 
             if (appState.mobileMenuOpen) {
                 document.body.classList.add('mobile-nav-open');
-                mobileMenu.classList.remove('opacity-0', 'pointer-events-none', 'translate-x-full');
+                mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
             } else {
                 document.body.classList.remove('mobile-nav-open');
-                mobileMenu.classList.add('opacity-0', 'pointer-events-none', 'translate-x-full');
+                mobileMenu.classList.add('opacity-0', 'pointer-events-none');
             }
         }
 

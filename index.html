@@ -50,8 +50,8 @@
         .view-more-btn svg { transition: transform 0.3s ease-in-out; }
         .view-more-btn:hover { background: #ffffff; color: #000000; transform: scale(1.05); box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2); }
         .view-more-btn:hover svg { transform: translateX(5px); }
-        .auth-input, .filter-input { background-color: #1f2937; border: 1px solid #4b5563; color: #d1d5db; width: 100%; padding: 0.75rem; border-radius: 0.5rem; transition: border-color 0.3s, box-shadow 0.3s; }
-        .auth-input:focus, .filter-input:focus { outline: none; border-color: #ec4899; box-shadow: 0 0 0 2px rgba(236, 72, 153, 0.3); }
+        .auth-input, .filter-input, .admin-input { background-color: #1f2937; border: 1px solid #4b5563; color: #d1d5db; width: 100%; padding: 0.75rem; border-radius: 0.5rem; transition: border-color 0.3s, box-shadow 0.3s; }
+        .auth-input:focus, .filter-input:focus, .admin-input:focus { outline: none; border-color: #ec4899; box-shadow: 0 0 0 2px rgba(236, 72, 153, 0.3); }
         .filter-input { background-color: #111827; border-color: #374151; }
         .filter-input::placeholder { color: #6b7280 }
         .admin-card { background: #1a1a1a; padding: 1.5rem; border-radius: 1rem; border: 1px solid #333; }
@@ -189,7 +189,6 @@
                 position: static;
                 width: 100%;
                 flex-shrink: 0;
-                /* Reset desktop styles */
                 transform: none !important;
                 opacity: 1 !important;
                 z-index: auto !important;
@@ -204,7 +203,7 @@
              .slider-arrow:hover {
                 background: rgba(255, 255, 255, 0.1);
                 color: white;
-                transform: translateY(-50%); /* Prevent scale jump */
+                transform: translateY(-50%);
             }
             #teacher-slider-prev-btn { left: -1rem; }
             #teacher-slider-next-btn { right: -1rem; }
@@ -222,6 +221,23 @@
                 transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out, z-index 0.5s;
             }
         }
+        .loader {
+            width: 48px;
+            height: 48px;
+            border: 5px solid #FFF;
+            border-bottom-color: #FF3D00;
+            border-radius: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+        }
+        @keyframes rotation {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        body.mobile-nav-open {
+            overflow: hidden;
+        }
 
     </style>
 </head>
@@ -231,21 +247,43 @@
         <header id="header-container"></header>
         <main id="page-container"></main>
         <div id="modal-container"></div>
+        <div id="mobile-menu-overlay"></div>
     </div>
     
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script type="module">
+        // --- Firebase SDK Imports ---
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-        import { getFirestore, collection, addDoc, onSnapshot, doc, deleteDoc, setDoc, getDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-        import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { getFirestore, collection, addDoc, onSnapshot, doc, deleteDoc, setDoc, getDocs, query, where, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+        import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
-        const firebaseConfig = { apiKey: "AIzaSyBaDBLoe2Wi2WgmJfPRXoEP-ZSgkVhMxVI", authDomain: "musicoul-15025.firebaseapp.com", databaseURL: "https://musicoul-15025-default-rtdb.firebaseio.com", projectId: "musicoul-15025", storageBucket: "musicoul-15025.appspot.com", messagingSenderId: "863099041367", appId: "1:863099041367:web:c3d61399489a219611d512", measurementId: "G-WBPE697N9Q" };
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-        const storage = getStorage(app);
+        // --- Firebase Initialization ---
+        let app, auth, db, storage;
+        try {
+            const firebaseConfig = {
+                apiKey: "AIzaSyBaDBLoe2Wi2WgmJfPRXoEP-ZSgkVhMxVI",
+                authDomain: "musicoul-15025.firebaseapp.com",
+                databaseURL: "https://musicoul-15025-default-rtdb.firebaseio.com",
+                projectId: "musicoul-15025",
+                storageBucket: "musicoul-15025.appspot.com",
+                messagingSenderId: "863099041367",
+                appId: "1:863099041367:web:c3d61399489a219611d512",
+                measurementId: "G-WBPE697N9Q"
+            };
+            app = initializeApp(firebaseConfig);
+            auth = getAuth(app);
+            db = getFirestore(app);
+            storage = getStorage(app);
+        } catch (e) {
+            console.error("Firebase initialization failed:", e);
+            document.body.innerHTML = `<div class="text-red-500 text-center p-8">Error: Could not initialize Firebase. Please check your configuration.</div>`;
+        }
         
+        // --- App ID for Firestore Paths ---
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+
+        // --- Constants & Static Data ---
         const ADMIN_EMAIL = "chandrashekharkolhe7@gmail.com";
         const NAV_ITEMS = [ { name: "Home", id: "home" }, { name: "Courses", id: "courses" }, { name: "Teachers", id: "teachers" }, { name: "About", id: "about" }, { name: "Contact", id: "contact" }, ];
         const STATIC_COURSES_DATA = [ { id: 'static_singing', subject: "Singing", level: "All Levels", description: "Master vocal techniques from seasoned professionals.", imageUrl: "https://img.freepik.com/premium-photo/young-man-singer-stag_5850-338.jpg" }, { id: 'static_piano', subject: "Piano", level: "All Levels", description: "Learn piano theory, technique, and performance.", imageUrl: "https://media.istockphoto.com/id/1129332575/photo/favorite-classical-music-close-up-view-of-gentle-female-hands-playing-a-melody-on-piano-while.jpg?s=612x612&w=0&k=20&c=GJEJTdGtmgHpKjDL7BE9KO2diJNQ4lPinInWiJAOSCQ=" }, { id: 'static_tabla', subject: "Tabla", level: "All Levels", description: "Explore Indian classical rhythms with our tabla masters.", imageUrl: "https://jagatsinghhotels.com/media/jsHotel/Experiences/2.jpg" } ];
@@ -256,8 +294,358 @@
         ];
         const FEATURES_DATA = [ { icon: "🎵", title: "Live Interactive Classes", desc: "Engage in real-time with expert instructors." }, { icon: "📜", title: "Structured Syllabus", desc: "Follow a clear path from beginner to advanced." }, { icon: "👩‍🏫", title: "Expert Teachers", desc: "Learn from professional and passionate musicians." }, ];
 
-        let appState = { currentUser: null, assignedCourses: [], currentPage: 'home', users: [], subjects: [], levels: [], courses: [], teachers: [], previewCourse: null, authModal: { isOpen: false, type: 'login' }, teacherSliderIndex: 0, adminActiveTab: 'dashboard', assignModal: {isOpen: false, user: null, courseId: '', schedule: []}, mobileMenuOpen: false, teacherDetailModal: { isOpen: false, teacher: null } };
+        // --- Application State ---
+        let appState = { 
+            currentUser: null,
+            isAdmin: false,
+            isLoading: true,
+            currentPage: 'home',
+            courses: [],
+            users: [],
+            assignments: [],
+            mobileMenuOpen: false, 
+            teacherSliderIndex: 0, // Start with Chandrashekhar Kolhe
+            authModal: { isOpen: false, type: 'login' }, 
+            teacherDetailModal: { isOpen: false, teacher: null },
+            admin: {
+                activeTab: 'dashboard',
+                isLoading: false,
+                assignModal: {
+                    isOpen: false,
+                    user: null,
+                }
+            }
+        };
 
+        // --- Unsubscribe listeners ---
+        let unsubscribeCourses = () => {};
+        let unsubscribeUsers = () => {};
+        let unsubscribeAssignments = () => {};
+
+        // --- Core Rendering Logic ---
+        function renderApp() {
+            renderHeader();
+            renderPage();
+            renderModals();
+            renderMobileMenuOverlay();
+            AOS.refresh();
+            addEventListeners();
+        }
+
+        function renderPage() {
+            const pageContainer = document.getElementById('page-container');
+            if(!pageContainer) return;
+            
+            if (appState.isLoading) {
+                 pageContainer.innerHTML = `<div class="flex justify-center items-center h-screen"><span class="loader"></span></div>`;
+                 return;
+            }
+            
+            // This acts as a simple router
+            switch(appState.currentPage) {
+                case 'home':
+                    renderHomePage();
+                    break;
+                case 'courses':
+                    renderCoursesPage();
+                    break;
+                case 'admin':
+                    renderAdminPanelPage();
+                    break;
+                case 'myClass':
+                    renderMyClassPage();
+                    break;
+                default:
+                    renderHomePage();
+            }
+        }
+        
+        function renderHeader() {
+            const headerContainer = document.getElementById('header-container');
+            if (!headerContainer) return;
+            const { currentUser, assignments, isAdmin } = appState;
+            const hasAssignedCourses = assignments.length > 0;
+            const navItemsHtml = NAV_ITEMS.map(item => `<button data-navid="${item.id}" class="hover:text-pink-400 bodyfont transition-colors duration-300 ${appState.currentPage === item.id ? 'text-pink-400' : ''}">${item.name}</button>`).join('');
+            
+            let authButtonsHtml;
+            if (currentUser && !currentUser.isAnonymous) {
+                const displayName = currentUser.displayName ? currentUser.displayName.split(' ')[0] : (currentUser.email ? currentUser.email.split('@')[0] : 'User');
+                authButtonsHtml = `<span class="text-sm text-gray-300 bodyfont">Hi, ${displayName}</span><button id="logout-btn" class="heading font-semibold text-white border-2 border-purple-700 rounded-md px-4 py-2 transition-all duration-300 hover:bg-purple-700 hover:scale-105">Logout</button>`;
+            } else {
+                authButtonsHtml = `<button id="login-btn" class="cta text-white px-4 py-2 rounded-md heading font-semibold">Login</button><button id="signup-btn" class="heading font-semibold text-white border-2 border-purple-700 rounded-md px-4 py-2 transition-all duration-300 hover:bg-purple-700 hover:scale-105">Signup</button>`;
+            }
+            
+            headerContainer.innerHTML = `
+                <div class="bg-black/80 backdrop-blur-sm sticky top-0 z-30 border-b border-gray-800">
+                    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <img src="https://yt3.googleusercontent.com/FRE-Mlxh3eYM2VObB1ZHR4zygMMjAAZfuoLbeBMtVHfzjlqs2RkozmqNDQ8_iEhESwA5J_zxAA=s160-c-k-c0x00ffffff-no-rj" alt="Musicoul Logo" class="w-12 h-12 rounded-full" />
+                            <div class="heading text-white text-2xl font-bold">Musicoul</div>
+                        </div>
+                        <nav class="hidden lg:flex flex-wrap gap-x-8 gap-y-2 text-sm font-medium text-gray-300 items-center justify-end">
+                            ${navItemsHtml}
+                            ${hasAssignedCourses ? `<button data-navid="myClass" class="hover:text-pink-400 bodyfont transition-colors duration-300 font-bold ${appState.currentPage === 'myClass' ? 'text-pink-400' : ''}">My Class</button>` : ''}
+                            ${isAdmin ? `<button data-navid="admin" class="hover:text-pink-400 bodyfont transition-colors duration-300 font-bold ${appState.currentPage === 'admin' ? 'text-pink-400' : ''}">Admin Panel</button>` : ''}
+                            <div class="flex gap-3 ml-4 items-center">${authButtonsHtml}</div>
+                        </nav>
+                        <button id="mobile-menu-toggle" class="lg:hidden p-2 border rounded-lg border-gray-600 text-gray-300" aria-label="Toggle navigation menu">
+                           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                        </button>
+                    </div>
+                </div>`;
+        }
+
+        function renderMobileMenuOverlay() {
+            const overlay = document.getElementById('mobile-menu-overlay');
+            if (!overlay) return;
+            
+            overlay.className = "fixed inset-0 bg-black/95 backdrop-blur-sm z-40 flex flex-col items-center justify-center gap-6 text-center transition-opacity duration-300 ease-in-out opacity-0 pointer-events-none";
+
+            const { currentUser, assignments, isAdmin } = appState;
+            const mobileNavItemsHtml = NAV_ITEMS.map(item => `<button data-navid-mobile="${item.id}" class="text-4xl heading text-gray-300 hover:text-pink-400 transition-colors">${item.name}</button>`).join('');
+
+            let mobileAuthButtonsHtml;
+            if (currentUser && !currentUser.isAnonymous) {
+                 mobileAuthButtonsHtml = `<div class="w-full max-w-xs mx-auto">
+                    <button id="mobile-logout-btn" class="heading font-semibold text-white text-lg border-2 border-purple-700 rounded-md w-full py-3 transition-all duration-300 hover:bg-purple-700">Logout</button>
+                </div>`;
+            } else {
+                mobileAuthButtonsHtml = `<div class="flex gap-4 w-full max-w-xs mx-auto">
+                    <button id="mobile-login-btn" class="cta text-white w-full py-3 rounded-md heading font-semibold text-lg">Login</button>
+                    <button id="mobile-signup-btn" class="heading font-semibold w-full text-white border-2 border-purple-700 rounded-md py-3 transition-all duration-300 hover:bg-purple-700 text-lg">Signup</button>
+                </div>`;
+            }
+
+            overlay.innerHTML = `
+                <button id="mobile-menu-close" class="absolute top-6 right-6 p-2 text-gray-400 hover:text-white" aria-label="Close navigation menu">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+                <div class="flex flex-col gap-8">
+                    ${mobileNavItemsHtml}
+                    ${assignments.length > 0 ? `<button data-navid-mobile="myClass" class="text-4xl heading font-bold text-gray-300 hover:text-pink-400 transition-colors">My Class</button>`: ''}
+                    ${isAdmin ? `<button data-navid-mobile="admin" class="text-4xl heading font-bold text-gray-300 hover:text-pink-400 transition-colors">Admin Panel</button>` : ''}
+                </div>
+                <div class="absolute bottom-10 w-full px-6">
+                     ${mobileAuthButtonsHtml}
+                </div>
+            `;
+            updateBodyForMobileMenu();
+        }
+
+        function renderModals() {
+            renderAuthModal();
+            renderTeacherDetailModal();
+            if(appState.isAdmin) renderAdminModals();
+        }
+
+        // --- Page Renderers ---
+        function renderHomePage() {
+            const pageContainer = document.getElementById('page-container');
+            const heroHtml = `<main class="flex flex-col items-center justify-center text-center px-6 min-h-[90vh]" data-aos="fade-up"><h1 class="heading text-white text-4xl sm:text-5xl md:text-7xl font-extrabold mb-4 tracking-tight">Unleash your Inner<br /><span id="typewriter"></span></h1><p class="bodyfont text-gray-300 max-w-2xl mt-8 text-lg sm:text-xl leading-relaxed">Join live sessions, access recordings, and follow a structured syllabus — all in one place.</p><div class="mt-10 flex flex-col sm:flex-row gap-6"><button data-navid="courses" class="cta text-white px-8 py-3 rounded-lg heading text-lg font-semibold">Explore Courses</button><button data-navid="contact" class="contact-btn text-lg heading font-semibold px-8 py-3 rounded-lg">Get Started</button></div></main>`;
+            const aboutHtml = `<section id="about" class="max-w-6xl mx-auto px-6 py-20 sm:py-24" data-aos="fade-up"><div class="text-center"><h2 class="heading text-4xl sm:text-5xl text-white font-bold" data-aos="fade-up">Why Choose Musicoul?</h2><p class="bodyfont text-gray-400 mt-4 max-w-2xl mx-auto text-lg" data-aos="fade-up" data-aos-delay="100">We provide a premium, streamlined learning experience for aspiring musicians.</p></div><div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 text-center">${FEATURES_DATA.map((item, index) => `<div data-aos="fade-up" data-aos-delay="${index * 150 + 200}"><div class="text-6xl text-pink-400 mb-4">${item.icon}</div><h3 class="heading text-2xl text-white mb-2 font-semibold">${item.title}</h3><p class="bodyfont text-gray-400 leading-relaxed">${item.desc}</p></div>`).join('')}</div></section>`;
+            const coursesToDisplay = (appState.courses.length > 0 ? appState.courses : STATIC_COURSES_DATA).slice(0, 3);
+            const coursesHtml = `<section id="courses" class="max-w-6xl mx-auto px-6 py-20 sm:py-24" data-aos="fade-up"><h2 class="heading text-4xl sm:text-5xl text-white text-center mb-12 font-bold">Explore Our Courses</h2><div class="grid grid-cols-1 md:grid-cols-3 gap-8">${coursesToDisplay.map((course, index) => `<div class="card p-4" data-aos="fade-up" data-aos-delay="${(index + 1) * 100}"><img src="${course.imageUrl}" alt="${course.subject}" class="w-full aspect-square object-cover rounded-xl mb-4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1a1a1a/f472b6?text=Music';"/><h3 class="heading text-xl text-white mb-2 font-semibold">${course.subject} - ${course.level}</h3><p class="bodyfont text-gray-400 mb-4 flex-grow">${course.description}</p><div class="mt-4"><button data-navid="courses" class="card-button font-semibold w-full text-center">View Details</button></div></div>`).join('')}</div><div class="text-center mt-12"><button data-navid="courses" class="view-more-btn heading font-semibold">View All Courses<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="http://www.w3.org/2000/svg" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg></button></div></section>`;
+            const teachersHtml = `<section id="teachers" class="py-20 sm:py-24 overflow-hidden"><div class="max-w-7xl mx-auto px-6"><h2 class="heading text-4xl sm:text-5xl text-white text-center mb-16 font-bold" data-aos="fade-up">Our Esteemed Teachers</h2><div id="teacher-slider-container" class="relative" data-aos="fade-up"><button id="teacher-slider-prev-btn" class="slider-arrow left-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button><div id="teacher-slider-viewport" class="w-full h-[30rem]"><div id="teacher-slider-track" class="w-full h-full">${TEACHERS_DATA.map((teacher, index) => `<div class="teacher-card-wrapper w-72 h-full p-2" data-teacher-index="${index}"><div class="teacher-card flex flex-col h-full w-full overflow-hidden p-4"><div class="teacher-image-container mb-3"><img src="${teacher.img}" alt="${teacher.name}" class="teacher-image"/></div><div class="text-center flex-grow flex flex-col"><h3 class="heading text-xl font-bold text-white leading-tight">${teacher.name}</h3><p class="bodyfont text-pink-400 mt-1 text-sm">${teacher.subjects}</p><ul class="text-left text-sm text-gray-400 my-3 space-y-2 px-2 bodyfont list-inside h-16">${teacher.description.map(point => `<li class="flex items-start"><span class="text-pink-400 mr-2 mt-1 leading-none">&bull;</span><span>${point}</span></li>`).join('')}</ul><div class="teacher-buttons"><button data-teacher-id="${teacher.id}" class="know-more-btn">Know More</button><a href="${teacher.instagram}" target="_blank" rel="noopener noreferrer" class="instagram-btn"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.012 3.584-.07 4.85c-.148 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.07-1.645-.07-4.85s.012-3.584.07-4.85c.148-3.225 1.664-4.771 4.919 4.919 1.266.058 1.644.07 4.85.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.44-1.441-1.44z"></path></svg></a></div></div></div></div>`).join('')}</div></div><button id="teacher-slider-next-btn" class="slider-arrow right-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg></button></div></div></section>`;
+            const contactHtml = `<section id="contact" class="max-w-4xl mx-auto px-6 py-20 sm:py-24 text-center" data-aos="fade-up"><h2 class="heading text-4xl sm:text-5xl text-white mb-4 font-bold">Get In Touch</h2><p class="text-gray-400 bodyfont max-w-xl mx-auto mb-10 text-lg">Have questions or ready to start your musical journey? Contact us!</p><div class="flex flex-col sm:flex-row justify-center items-center gap-6"><a href="mailto:music2soul11@gmail.com" class="cta text-white px-8 py-3 rounded-lg heading text-lg font-semibold flex items-center gap-3 w-full sm:w-auto justify-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>Send an Email</a><a href="tel:+919309152986" class="contact-btn text-lg heading font-semibold px-8 py-3 rounded-lg flex items-center gap-3 w-full sm:w-auto justify-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>Call Us</a></div></section>`;
+            const footerHtml = `<footer class="bg-black text-gray-400 py-12 mt-20 border-t border-gray-800" data-aos="fade-up"><div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-8"><div><div class="heading text-white text-2xl font-bold mb-1">Musicoul</div><div class="bodyfont text-sm text-gray-500">© ${new Date().getFullYear()} Musicoul. All rights reserved.</div></div><div class="flex flex-wrap justify-center gap-6 text-sm">${NAV_ITEMS.filter(item => item.name !== "Home").map(item => `<button data-navid="${item.id}" class="bodyfont hover:text-pink-400 transition-colors duration-300">${item.name}</button>`).join('')}</div></div></footer>`;
+            
+            pageContainer.innerHTML = heroHtml + aboutHtml + coursesHtml + teachersHtml + contactHtml + footerHtml;
+            const typewriterElement = document.getElementById('typewriter');
+            if(typewriterElement) { startTypewriter(typewriterElement, ["Musician", "Singer", "Tabla Player", "Pianist", "Harmonist", "Guitarist", "Flutist"]); }
+            updateTeacherSlider();
+        }
+
+        // --- All Courses Page ---
+        function renderCoursesPage() {
+            const pageContainer = document.getElementById('page-container');
+            const uniqueSubjects = [...new Set(appState.courses.map(c => c.subject))];
+            const uniqueLevels = [...new Set(appState.courses.map(c => c.level))];
+
+            let html = `
+                <div class="max-w-7xl mx-auto px-6 py-16 sm:py-24" data-aos="fade-up">
+                    <div class="text-center mb-12">
+                        <h1 class="heading text-4xl sm:text-5xl text-white font-bold">Our Courses</h1>
+                        <p class="bodyfont text-gray-400 mt-4 max-w-2xl mx-auto text-lg">Find the perfect course to start or continue your musical journey.</p>
+                    </div>
+
+                    <!-- Filters -->
+                    <div class="flex flex-col md:flex-row gap-4 mb-8">
+                        <input id="filter-search" type="text" placeholder="Search by name..." class="filter-input flex-grow">
+                        <select id="filter-subject" class="filter-input">
+                            <option value="">All Subjects</option>
+                            ${uniqueSubjects.map(s => `<option value="${s}">${s}</option>`).join('')}
+                        </select>
+                        <select id="filter-level" class="filter-input">
+                            <option value="">All Levels</option>
+                            ${uniqueLevels.map(l => `<option value="${l}">${l}</option>`).join('')}
+                        </select>
+                    </div>
+                    
+                    <!-- Course Grid -->
+                    <div id="courses-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Courses will be rendered here by JS -->
+                    </div>
+                </div>
+            `;
+            pageContainer.innerHTML = html;
+            renderFilteredCourses();
+        }
+
+        // --- My Class Page ---
+        function renderMyClassPage() {
+            const pageContainer = document.getElementById('page-container');
+            let content;
+
+            if (appState.assignments.length === 0) {
+                content = `
+                    <div class="text-center py-20">
+                        <h2 class="heading text-3xl font-bold text-white">You are not enrolled in any classes yet.</h2>
+                        <p class="bodyfont text-gray-400 mt-4">Explore our courses to get started!</p>
+                        <button data-navid="courses" class="cta text-white px-6 py-3 rounded-lg heading text-lg font-semibold mt-8">Explore Courses</button>
+                    </div>`;
+            } else {
+                content = `
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        ${appState.assignments.map(assignment => {
+                            const course = appState.courses.find(c => c.id === assignment.courseId);
+                            if (!course) return '<p>Error loading course.</p>';
+                            return `
+                                <div class="card p-6 flex flex-col" data-aos="fade-up">
+                                    <img src="${course.imageUrl}" alt="${course.subject}" class="w-full h-48 object-cover rounded-xl mb-4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1a1a1a/f472b6?text=Music';">
+                                    <h3 class="heading text-2xl text-white font-semibold">${course.subject}</h3>
+                                    <p class="bodyfont text-pink-400 mb-3">${course.level}</p>
+                                    <p class="bodyfont text-gray-400 mb-4 flex-grow">${course.description}</p>
+                                    <div class="mt-4 border-t border-gray-700 pt-4">
+                                        <p class="bodyfont text-gray-300 font-semibold">Your Schedule:</p>
+                                        <p class="bodyfont text-white">${assignment.schedule || 'Not set'}</p>
+                                    </div>
+                                    <button class="mt-6 card-button font-semibold w-full text-center" onclick="alert('Joining class...')">Join Class</button>
+                                </div>`;
+                        }).join('')}
+                    </div>`;
+            }
+            
+            pageContainer.innerHTML = `
+                <div class="max-w-7xl mx-auto px-6 py-16 sm:py-24">
+                    <div class="text-center mb-12" data-aos="fade-up">
+                        <h1 class="heading text-4xl sm:text-5xl text-white font-bold">My Classroom</h1>
+                        <p class="bodyfont text-gray-400 mt-4 max-w-2xl mx-auto text-lg">Here are your enrolled courses and schedules.</p>
+                    </div>
+                    ${content}
+                </div>
+            `;
+        }
+
+        // --- Admin Panel Page ---
+        function renderAdminPanelPage() {
+             const pageContainer = document.getElementById('page-container');
+             if(!appState.isAdmin) {
+                pageContainer.innerHTML = `<p class="text-center text-red-500 py-20">Access Denied.</p>`;
+                return;
+             }
+             
+            let activeTabContent = '';
+            switch(appState.admin.activeTab) {
+                case 'dashboard': activeTabContent = renderAdminDashboard(); break;
+                case 'courses': activeTabContent = renderAdminCourses(); break;
+                case 'users': activeTabContent = renderAdminUsers(); break;
+            }
+
+            const tabs = ['dashboard', 'courses', 'users'];
+             
+             pageContainer.innerHTML = `
+                <div class="max-w-7xl mx-auto px-6 py-16" data-aos="fade-up">
+                     <h1 class="heading text-4xl text-white font-bold text-center mb-10">Admin Panel</h1>
+                     <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                        <!-- Sidebar -->
+                        <div class="md:col-span-1">
+                            <div class="admin-card space-y-2">
+                                ${tabs.map(tab => `
+                                    <button data-admin-tab="${tab}" class="admin-tab ${appState.admin.activeTab === tab ? 'admin-tab-active' : ''}">${tab.charAt(0).toUpperCase() + tab.slice(1)}</button>
+                                `).join('')}
+                            </div>
+                        </div>
+                        <!-- Content -->
+                        <div class="md:col-span-3" id="admin-content">
+                            ${activeTabContent}
+                        </div>
+                     </div>
+                </div>
+             `;
+        }
+
+        // --- Modal Renderers ---
+        function renderAuthModal() {
+            const modalContainer = document.getElementById('modal-container');
+            const { isOpen, type } = appState.authModal;
+            if (!isOpen) { modalContainer.innerHTML = ''; return; }
+            modalContainer.innerHTML = `<div id="auth-modal-backdrop" class="fixed inset-0 z-50 flex items-center justify-center p-4 transition-opacity duration-300 opacity-100"><div class="fixed inset-0 bg-black bg-opacity-70"></div><div class="bg-gray-900 border border-gray-700 rounded-xl shadow-lg w-full max-w-md m-4 transform transition-all duration-300 scale-100 opacity-100"><div class="p-8 space-y-6"><div class="text-center"><h2 class="heading text-3xl font-bold text-white">${type === 'login' ? 'Welcome Back' : 'Create Account'}</h2><p class="bodyfont text-gray-400 mt-2">${type === 'login' ? 'Login to continue your musical journey.' : 'Start your musical journey with us.'}</p></div><form id="auth-form" class="space-y-4">${type === 'signup' ? `<div><label class="bodyfont text-sm font-medium text-gray-300 block mb-2" for="name">Full Name</label><input type="text" id="name" name="name" required class="auth-input" placeholder="Your Name" /></div><div><label class="bodyfont text-sm font-medium text-gray-300 block mb-2" for="phone">Phone Number</label><input type="tel" id="phone" name="phone" required class="auth-input" placeholder="Your Phone Number" /></div>` : ''}<div><label class="bodyfont text-sm font-medium text-gray-300 block mb-2" for="email">Email Address</label><input type="email" id="email" name="email" required class="auth-input" placeholder="you@example.com" /></div><div><div class="flex justify-between items-center mb-2"><label class="bodyfont text-sm font-medium text-gray-300" for="password">Password</label>${type === 'login' ? `<a href="#" class="text-sm bodyfont text-pink-500 hover:underline" onclick="alert('Password reset functionality not implemented.')">Forgot?</a>` : ''}</div><input type="password" id="password" name="password" required class="auth-input" placeholder="••••••••" /></div><p id="auth-error" class="text-red-500 text-sm text-center bodyfont hidden"></p><button type="submit" class="w-full cta text-white py-3 rounded-lg heading font-semibold">${type === 'login' ? 'Login' : 'Sign Up'}</button></form><p class="bodyfont text-sm text-center text-gray-400">${type === 'login' ? "Don't have an account?" : "Already have an account?"}<button id="toggle-auth-type" class="font-semibold text-pink-500 hover:underline ml-2">${type === 'login' ? 'Sign Up' : 'Login'}</button></p></div></div></div>`;
+        }
+        
+        function renderTeacherDetailModal() {
+            let modalContainer = document.getElementById('modal-container');
+            const { isOpen, teacher } = appState.teacherDetailModal;
+            if (appState.authModal.isOpen || (appState.isAdmin && appState.admin.assignModal.isOpen)) {
+                if(!document.getElementById('teacher-modal-specific-container')) {
+                    const tempContainer = document.createElement('div');
+                    tempContainer.id = 'teacher-modal-specific-container';
+                    document.body.appendChild(tempContainer);
+                }
+                modalContainer = document.getElementById('teacher-modal-specific-container');
+            } else if (document.getElementById('teacher-modal-specific-container')) {
+                document.getElementById('teacher-modal-specific-container').remove();
+            }
+
+            if (!isOpen || !teacher) { 
+                if (modalContainer && modalContainer.id === 'teacher-modal-specific-container') {
+                    modalContainer.innerHTML = '';
+                } else if (!appState.authModal.isOpen && !(appState.isAdmin && appState.admin.assignModal.isOpen)) {
+                    if (document.getElementById('modal-container')) document.getElementById('modal-container').innerHTML = '';
+                }
+                return; 
+            }
+
+            modalContainer.innerHTML = `<div id="teacher-modal-backdrop" class="fixed inset-0 z-[60] flex items-center justify-center p-4 transition-opacity duration-300 opacity-100"><div class="fixed inset-0 bg-black bg-opacity-80"></div><div class="bg-gray-900 border border-gray-700 rounded-xl shadow-lg w-full max-w-lg m-4 transform transition-all duration-300 scale-100 opacity-100 relative"><button id="close-teacher-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors z-10 text-3xl leading-none">&times;</button><div class="p-8"><img src="${teacher.img}" alt="${teacher.name}" class="w-32 h-32 object-cover rounded-full mx-auto mb-4 border-4 border-gray-700"/><h2 class="heading text-3xl font-bold text-white text-center">${teacher.name}</h2><p class="bodyfont text-pink-400 text-center mt-1">${teacher.subjects}</p><p class="bodyfont text-gray-300 mt-6 leading-relaxed text-center">${teacher.bio}</p></div></div></div>`;
+        }
+        
+        function renderAdminModals() {
+            const modalContainer = document.getElementById('modal-container');
+            const { isOpen, user } = appState.admin.assignModal;
+            if (!isOpen || !user) { 
+                if (!appState.authModal.isOpen) modalContainer.innerHTML = '';
+                return;
+            }
+
+            modalContainer.innerHTML = `
+                <div id="assign-modal-backdrop" class="fixed inset-0 z-50 flex items-center justify-center p-4 transition-opacity duration-300 opacity-100">
+                    <div class="fixed inset-0 bg-black bg-opacity-70"></div>
+                    <div class="bg-gray-900 border border-gray-700 rounded-xl shadow-lg w-full max-w-md m-4 transform transition-all duration-300 scale-100 opacity-100">
+                        <form id="assign-course-form" class="p-8 space-y-6">
+                            <h2 class="heading text-2xl font-bold text-white">Assign Course to ${user.displayName}</h2>
+                            <div>
+                                <label for="course-select" class="bodyfont text-sm font-medium text-gray-300 block mb-2">Select Course</label>
+                                <select id="course-select" name="courseId" required class="admin-input">
+                                    <option value="">--Please choose a course--</option>
+                                    ${appState.courses.map(c => `<option value="${c.id}">${c.subject} - ${c.level}</option>`).join('')}
+                                </select>
+                            </div>
+                            <div>
+                                <label for="schedule-input" class="bodyfont text-sm font-medium text-gray-300 block mb-2">Schedule (e.g., Mon & Wed at 5 PM)</label>
+                                <input type="text" id="schedule-input" name="schedule" required class="admin-input" placeholder="Enter class schedule">
+                            </div>
+                            <p id="assign-error" class="text-red-500 text-sm text-center bodyfont hidden"></p>
+                            <div class="flex gap-4">
+                                <button type="button" id="cancel-assign-btn" class="w-full bg-gray-600 hover:bg-gray-500 text-white py-2 rounded-lg heading font-semibold">Cancel</button>
+                                <button type="submit" class="w-full cta text-white py-2 rounded-lg heading font-semibold">Assign</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            `;
+        }
+
+
+        // --- Helper & Utility Functions ---
         function startTypewriter(element, words, typingSpeed = 100, deletingSpeed = 50, pause = 1400) {
             element.classList.add('typewriter-container');
             let wordIndex = 0, subIndex = 0, isDeleting = false;
@@ -273,55 +661,6 @@
             type();
         }
 
-        function renderHeader() {
-            const headerContainer = document.getElementById('header-container');
-            if (!headerContainer) return;
-            const { currentUser, assignedCourses, mobileMenuOpen } = appState;
-            const hasAssignedCourses = assignedCourses.length > 0;
-            const navItemsHtml = NAV_ITEMS.map(item => `<button data-navid="${item.id}" class="hover:text-pink-400 bodyfont transition-colors duration-300">${item.name}</button>`).join('');
-            const mobileNavItemsHtml = NAV_ITEMS.map(item => `<button data-navid-mobile="${item.id}" class="py-3 text-gray-200 hover:text-pink-400 heading">${item.name}</button>`).join('');
-            let authButtonsHtml = currentUser && !currentUser.isAnonymous ? `<span class="text-sm text-gray-300 bodyfont">Hi, ${currentUser.displayName ? currentUser.displayName.split(' ')[0] : currentUser.email.split('@')[0]}</span><button id="logout-btn" class="heading font-semibold text-white border-2 border-purple-700 rounded-md px-4 py-2 transition-all duration-300 hover:bg-purple-700 hover:scale-105">Logout</button>` : `<button id="login-btn" class="cta text-white px-4 py-2 rounded-md heading font-semibold">Login</button><button id="signup-btn" class="heading font-semibold text-white border-2 border-purple-700 rounded-md px-4 py-2 transition-all duration-300 hover:bg-purple-700 hover:scale-105">Signup</button>`;
-            let mobileAuthButtonsHtml = currentUser && !currentUser.isAnonymous ? `<button id="mobile-logout-btn" class="heading font-semibold text-white text-sm border-2 border-purple-700 rounded-md px-4 py-2 transition-all duration-300 hover:bg-purple-700 hover:scale-105">Logout</button>` : `<button id="mobile-login-btn" class="cta text-white text-sm px-4 py-2 rounded-md heading font-semibold">Login</button> <button id="mobile-signup-btn" class="heading font-semibold text-white text-sm border-2 border-purple-700 rounded-md px-4 py-2 transition-all duration-300 hover:bg-purple-700 hover:scale-105">Signup</button>`;
-            headerContainer.innerHTML = `<div class="bg-black/90 sticky top-0 z-50 border-b border-gray-800"><div class="max-w-7xl mx-auto px-6 py-4 flex items-center"><div class="flex items-center gap-4 z-10"><img src="https://yt3.googleusercontent.com/FRE-Mlxh3eYM2VObB1ZHR4zygMMjAAZfuoLbeBMtVHfzjlqs2RkozmqNDQ8_iEhESwA5J_zxAA=s160-c-k-c0x00ffffff-no-rj" alt="Musicoul Logo" class="w-12 h-12 rounded-full" /><div class="heading text-white text-2xl font-bold">Musicoul</div></div><nav class="hidden md:flex gap-8 text-sm font-medium text-gray-300 items-center ml-auto">${navItemsHtml}${hasAssignedCourses ? `<button data-navid="myClass" class="hover:text-pink-400 bodyfont transition-colors duration-300 font-bold">My Class</button>` : ''}${currentUser?.email === ADMIN_EMAIL ? `<button id="admin-panel-btn" class="hover:text-pink-400 bodyfont transition-colors duration-300 font-bold">Admin Panel</button>` : ''}<div class="flex gap-3 ml-4 items-center">${authButtonsHtml}</div></nav><button id="mobile-menu-toggle" class="md:hidden p-2 border rounded-lg border-gray-600 text-gray-300 z-50 ml-auto" aria-label="Toggle navigation menu">${mobileMenuOpen ? '✕' : '☰'}</button></div><div id="mobile-menu" class="md:hidden bg-black border-t border-gray-800 flex flex-col items-center overflow-hidden transition-all duration-500 ease-in-out ${mobileMenuOpen ? 'max-h-96 opacity-100 py-4' : 'max-h-0 opacity-0'}">${mobileNavItemsHtml}${hasAssignedCourses ? `<button data-navid-mobile="myClass" class="py-3 text-gray-200 hover:text-pink-400 heading font-bold">My Class</button>`: ''}${currentUser?.email === ADMIN_EMAIL ? `<button id="mobile-admin-panel-btn" class="py-3 text-gray-200 hover:text-pink-400 heading font-bold">Admin Panel</button>` : ''}<div class="flex gap-4 mt-3">${mobileAuthButtonsHtml}</div></div></div>`;
-        }
-
-        function renderHomePage() {
-            const heroHtml = `<main class="flex flex-col items-center justify-center text-center px-6 min-h-[90vh]" data-aos="fade-up"><h1 class="heading text-white text-4xl sm:text-5xl md:text-7xl font-extrabold mb-4 tracking-tight">Unleash your Inner<br /><span id="typewriter"></span></h1><p class="bodyfont text-gray-300 max-w-2xl mt-8 text-lg sm:text-xl leading-relaxed">Join live sessions, access recordings, and follow a structured syllabus — all in one place.</p><div class="mt-10 flex flex-col sm:flex-row gap-6"><button id="explore-courses-btn" class="cta text-white px-8 py-3 rounded-lg heading text-lg font-semibold">Explore Courses</button><button id="get-started-btn" class="contact-btn text-lg heading font-semibold px-8 py-3 rounded-lg">${appState.assignedCourses.length > 0 ? 'My Class' : 'Get Started'}</button></div></main>`;
-            const aboutHtml = `<section id="about" class="max-w-6xl mx-auto px-6 py-20 sm:py-24" data-aos="fade-up"><div class="text-center"><h2 class="heading text-4xl sm:text-5xl text-white font-bold" data-aos="fade-up">Why Choose Musicoul?</h2><p class="bodyfont text-gray-400 mt-4 max-w-2xl mx-auto text-lg" data-aos="fade-up" data-aos-delay="100">We provide a premium, streamlined learning experience for aspiring musicians.</p></div><div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 text-center">${FEATURES_DATA.map((item, index) => `<div data-aos="fade-up" data-aos-delay="${index * 150 + 200}"><div class="text-6xl text-pink-400 mb-4">${item.icon}</div><h3 class="heading text-2xl text-white mb-2 font-semibold">${item.title}</h3><p class="bodyfont text-gray-400 leading-relaxed">${item.desc}</p></div>`).join('')}</div></section>`;
-            const coursesToDisplay = (appState.courses.length > 0 ? appState.courses : STATIC_COURSES_DATA).slice(0, 3);
-            const coursesHtml = `<section id="courses" class="max-w-6xl mx-auto px-6 py-20 sm:py-24" data-aos="fade-up"><h2 class="heading text-4xl sm:text-5xl text-white text-center mb-12 font-bold">Explore Our Courses</h2><div class="grid grid-cols-1 md:grid-cols-3 gap-8">${coursesToDisplay.map((course, index) => `<div class="card p-4" data-aos="fade-up" data-aos-delay="${(index + 1) * 100}"><img src="${course.imageUrl}" alt="${course.subject}" class="w-full aspect-square object-cover rounded-xl mb-4" /><h3 class="heading text-xl text-white mb-2 font-semibold">${course.subject} - ${course.level}</h3><p class="bodyfont text-gray-400 mb-4 flex-grow">${course.description}</p><div class="mt-4"><button data-course-id='${course.id}' class="view-course-btn card-button font-semibold w-full text-center">View Course</button></div></div>`).join('')}</div><div class="text-center mt-12"><button id="view-more-courses-btn" class="view-more-btn heading font-semibold">View More<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="http://www.w3.org/2000/svg" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg></button></div></section>`;
-            const teachersHtml = `<section id="teachers" class="py-20 sm:py-24 overflow-hidden"><div class="max-w-7xl mx-auto px-6"><h2 class="heading text-4xl sm:text-5xl text-white text-center mb-16 font-bold" data-aos="fade-up">Our Esteemed Teachers</h2><div id="teacher-slider-container" class="relative" data-aos="fade-up"><button id="teacher-slider-prev-btn" class="slider-arrow left-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button><div id="teacher-slider-viewport" class="w-full h-[30rem]"><div id="teacher-slider-track" class="w-full h-full">${TEACHERS_DATA.map((teacher, index) => `<div class="teacher-card-wrapper w-72 h-full p-2" data-teacher-index="${index}"><div class="teacher-card flex flex-col h-full w-full overflow-hidden p-4"><div class="teacher-image-container mb-3"><img src="${teacher.img}" alt="${teacher.name}" class="teacher-image"/></div><div class="text-center flex-grow flex flex-col"><h3 class="heading text-xl font-bold text-white leading-tight">${teacher.name}</h3><p class="bodyfont text-pink-400 mt-1 text-sm">${teacher.subjects}</p><ul class="text-left text-sm text-gray-400 my-3 space-y-2 px-2 bodyfont list-inside h-16">${teacher.description.map(point => `<li class="flex items-start"><span class="text-pink-400 mr-2 mt-1 leading-none">&bull;</span><span>${point}</span></li>`).join('')}</ul><div class="teacher-buttons"><button data-teacher-id="${teacher.id}" class="know-more-btn">Know More</button><a href="${teacher.instagram}" target="_blank" rel="noopener noreferrer" class="instagram-btn"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.012 3.584-.07 4.85c-.148 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.07-1.645-.07-4.85s.012-3.584.07-4.85c.148-3.225 1.664-4.771 4.919 4.919 1.266.058 1.644.07 4.85.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.44-1.441-1.44z"></path></svg></a></div></div></div></div>`).join('')}</div></div><button id="teacher-slider-next-btn" class="slider-arrow right-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg></button></div></div></section>`;
-            const contactHtml = `<section id="contact" class="max-w-4xl mx-auto px-6 py-20 sm:py-24 text-center" data-aos="fade-up"><h2 class="heading text-4xl sm:text-5xl text-white mb-4 font-bold">Get In Touch</h2><p class="text-gray-400 bodyfont max-w-xl mx-auto mb-10 text-lg">Have questions or ready to start your musical journey? Contact us!</p><div class="flex flex-col sm:flex-row justify-center items-center gap-6"><a href="mailto:music2soul11@gmail.com" class="cta text-white px-8 py-3 rounded-lg heading text-lg font-semibold flex items-center gap-3 w-full sm:w-auto justify-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>Send an Email</a><a href="tel:+919309152986" class="contact-btn text-lg heading font-semibold px-8 py-3 rounded-lg flex items-center gap-3 w-full sm:w-auto justify-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>Call Us</a></div></section>`;
-            const footerHtml = `<footer class="bg-black text-gray-400 py-12 mt-20 border-t border-gray-800" data-aos="fade-up"><div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-8"><div><div class="heading text-white text-2xl font-bold mb-1">Musicoul</div><div class="bodyfont text-sm text-gray-500">© ${new Date().getFullYear()} Musicoul. All rights reserved.</div></div><div class="flex flex-wrap justify-center gap-6 text-sm">${NAV_ITEMS.filter(item => item.name !== "Home").map(item => `<button data-navid="${item.id}" class="bodyfont hover:text-pink-400 transition-colors duration-300">${item.name}</button>`).join('')}</div></div></footer>`;
-            document.getElementById('page-container').innerHTML = heroHtml + aboutHtml + coursesHtml + teachersHtml + contactHtml + footerHtml;
-            const typewriterElement = document.getElementById('typewriter');
-            if(typewriterElement) { startTypewriter(typewriterElement, ["Musician", "Singer", "Tabla Player", "Pianist", "Harmonist", "Guitarist", "Flutist"]); }
-            updateTeacherSlider();
-        }
-        
-        function renderAuthModal() {
-            const { isOpen, type } = appState.authModal;
-            const modalContainer = document.getElementById('modal-container');
-            if (!isOpen) { modalContainer.innerHTML = ''; return; }
-            modalContainer.innerHTML = `<div id="auth-modal-backdrop" class="fixed inset-0 z-50 flex items-center justify-center p-4 transition-opacity duration-300 opacity-100"><div class="fixed inset-0 bg-black bg-opacity-70"></div><div class="bg-gray-900 border border-gray-700 rounded-xl shadow-lg w-full max-w-md m-4 transform transition-all duration-300 scale-100 opacity-100"><div class="p-8 space-y-6"><div class="text-center"><h2 class="heading text-3xl font-bold text-white">${type === 'login' ? 'Welcome Back' : 'Create Account'}</h2><p class="bodyfont text-gray-400 mt-2">${type === 'login' ? 'Login to continue your musical journey.' : 'Start your musical journey with us.'}</p></div><form id="auth-form" class="space-y-4">${type === 'signup' ? `<div><label class="bodyfont text-sm font-medium text-gray-300 block mb-2" for="name">Full Name</label><input type="text" id="name" name="name" required class="auth-input" placeholder="Your Name" /></div><div><label class="bodyfont text-sm font-medium text-gray-300 block mb-2" for="phone">Phone Number</label><input type="tel" id="phone" name="phone" required class="auth-input" placeholder="Your Phone Number" /></div>` : ''}<div><label class="bodyfont text-sm font-medium text-gray-300 block mb-2" for="email">Email Address</label><input type="email" id="email" name="email" required class="auth-input" placeholder="you@example.com" /></div><div><div class="flex justify-between items-center mb-2"><label class="bodyfont text-sm font-medium text-gray-300" for="password">Password</label>${type === 'login' ? `<a href="#" class="text-sm bodyfont text-pink-500 hover:underline">Forgot?</a>` : ''}</div><input type="password" id="password" name="password" required class="auth-input" placeholder="••••••••" /></div><p id="auth-error" class="text-red-500 text-sm text-center bodyfont hidden"></p><button type="submit" class="w-full cta text-white py-3 rounded-lg heading font-semibold">${type === 'login' ? 'Login' : 'Sign Up'}</button></form><p class="bodyfont text-sm text-center text-gray-400">${type === 'login' ? "Don't have an account?" : "Already have an account?"}<button id="toggle-auth-type" class="font-semibold text-pink-500 hover:underline ml-2">${type === 'login' ? 'Sign Up' : 'Login'}</button></p></div></div></div>`;
-        }
-        
-        function renderTeacherDetailModal() {
-            const { isOpen, teacher } = appState.teacherDetailModal;
-            const modalContainer = document.getElementById('modal-container');
-            if (!isOpen || !teacher) { if (!appState.authModal.isOpen) modalContainer.innerHTML = ''; return; }
-            modalContainer.innerHTML = `<div id="teacher-modal-backdrop" class="fixed inset-0 z-50 flex items-center justify-center p-4 transition-opacity duration-300 opacity-100"><div class="fixed inset-0 bg-black bg-opacity-80"></div><div class="bg-gray-900 border border-gray-700 rounded-xl shadow-lg w-full max-w-lg m-4 transform transition-all duration-300 scale-100 opacity-100 relative"><button id="close-teacher-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors z-10 text-3xl leading-none">&times;</button><div class="p-8"><img src="${teacher.img}" alt="${teacher.name}" class="w-32 h-32 object-cover rounded-full mx-auto mb-4 border-4 border-gray-700"/><h2 class="heading text-3xl font-bold text-white text-center">${teacher.name}</h2><p class="bodyfont text-pink-400 text-center mt-1">${teacher.subjects}</p><p class="bodyfont text-gray-300 mt-6 leading-relaxed text-center">${teacher.bio}</p></div></div></div>`;
-        }
-
-        function renderApp() {
-            renderHeader();
-            if (appState.currentPage === 'home') { renderHomePage(); } 
-            renderAuthModal();
-            renderTeacherDetailModal();
-            AOS.refresh();
-            addEventListeners();
-        }
-
         function updateTeacherSlider(direction) {
             const totalTeachers = TEACHERS_DATA.length;
             if (direction) {
@@ -329,45 +668,40 @@
                 else if (direction === 'prev') { appState.teacherSliderIndex = (appState.teacherSliderIndex - 1 + totalTeachers) % totalTeachers; }
             }
             
-            // Mobile Logic: Slide the track
             if (window.innerWidth <= 768) {
                 const track = document.getElementById('teacher-slider-track');
-                if (track) {
-                    track.style.transform = `translateX(-${appState.teacherSliderIndex * 100}%)`;
-                }
+                if (track) track.style.transform = `translateX(-${appState.teacherSliderIndex * 100}%)`;
                 document.querySelectorAll('.teacher-card').forEach((card, index) => {
-                     card.classList.toggle('is-center', index === appState.teacherSliderIndex);
+                    card.classList.toggle('is-center', index === appState.teacherSliderIndex);
                 });
                 return;
             }
 
-            // Desktop Logic: Cover flow
             const wrappers = document.querySelectorAll('.teacher-card-wrapper');
+            const centerIndex = appState.teacherSliderIndex;
+            const prevIndex = (centerIndex - 1 + totalTeachers) % totalTeachers;
+            const nextIndex = (centerIndex + 1) % totalTeachers;
+
             wrappers.forEach((wrapper, index) => {
                 const card = wrapper.querySelector('.teacher-card');
-                const offset = (index - appState.teacherSliderIndex + totalTeachers) % totalTeachers;
-                
                 let transform, opacity, zIndex;
 
-                if (offset === 0) { // Center card
+                if (index === centerIndex) {
                     transform = 'translateX(-50%) scale(1)';
-                    opacity = 1;
-                    zIndex = 10;
+                    opacity = 1; zIndex = 10;
                     card.classList.add('is-center');
-                } else if (offset === 1) { // Right card
+                } else if (index === nextIndex) {
                     transform = 'translateX(0%) scale(0.8)';
-                    opacity = 0.6;
-                    zIndex = 5;
+                    opacity = 0.6; zIndex = 5;
                     card.classList.remove('is-center');
-                } else if (offset === totalTeachers - 1) { // Left card
+                } else if (index === prevIndex) {
                     transform = 'translateX(-100%) scale(0.8)';
-                    opacity = 0.6;
-                    zIndex = 5;
+                    opacity = 0.6; zIndex = 5;
                     card.classList.remove('is-center');
-                } else { // Hidden cards
-                    transform = `translateX(-50%) scale(0.6)`;
-                    opacity = 0;
-                    zIndex = 1;
+                } else {
+                    const offset = index - centerIndex;
+                    transform = `translateX(calc(-50% + ${offset * 50}%)) scale(0.6)`;
+                    opacity = 0; zIndex = 1;
                     card.classList.remove('is-center');
                 }
 
@@ -376,48 +710,327 @@
                 wrapper.style.zIndex = zIndex;
             });
         }
+        
+        function renderFilteredCourses() {
+            const grid = document.getElementById('courses-grid');
+            if (!grid) return;
 
+            const search = document.getElementById('filter-search').value.toLowerCase();
+            const subject = document.getElementById('filter-subject').value;
+            const level = document.getElementById('filter-level').value;
+
+            const filtered = appState.courses.filter(c => 
+                (c.subject.toLowerCase().includes(search) || c.description.toLowerCase().includes(search)) &&
+                (subject === '' || c.subject === subject) &&
+                (level === '' || c.level === level)
+            );
+            
+            if (filtered.length === 0) {
+                grid.innerHTML = `<p class="text-gray-400 md:col-span-2 lg:col-span-3 text-center">No courses match your criteria.</p>`;
+                return;
+            }
+
+            grid.innerHTML = filtered.map((course, index) => `
+                <div class="card p-4" data-aos="fade-up" data-aos-delay="${index * 50}">
+                    <img src="${course.imageUrl}" alt="${course.subject}" class="w-full aspect-video object-cover rounded-xl mb-4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1a1a1a/f472b6?text=Music';"/>
+                    <h3 class="heading text-xl text-white mb-2 font-semibold">${course.subject} - ${course.level}</h3>
+                    <p class="bodyfont text-gray-400 mb-4 flex-grow">${course.description}</p>
+                    <div class="mt-4">
+                        <button class="card-button font-semibold w-full text-center" onclick="alert('Viewing course details for ${course.subject}')">View Course</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // --- Admin Panel Content Renderers ---
+        function renderAdminDashboard() {
+            return `
+                <div class="admin-card">
+                    <h2 class="admin-header">Dashboard</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="p-4 bg-gray-800 rounded-lg text-center">
+                            <p class="text-4xl font-bold text-pink-400">${appState.users.length}</p>
+                            <p class="text-gray-400">Total Users</p>
+                        </div>
+                        <div class="p-4 bg-gray-800 rounded-lg text-center">
+                            <p class="text-4xl font-bold text-pink-400">${appState.courses.length}</p>
+                            <p class="text-gray-400">Total Courses</p>
+                        </div>
+                        <div class="p-4 bg-gray-800 rounded-lg text-center">
+                             <p class="text-4xl font-bold text-pink-400">${appState.assignments.length}</p>
+                            <p class="text-gray-400">Assigned Courses</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderAdminCourses() {
+            return `
+                <div class="admin-card space-y-6">
+                    <h2 class="admin-header">Manage Courses</h2>
+                    <!-- Add Course Form -->
+                    <form id="add-course-form" class="p-4 bg-gray-800 rounded-lg space-y-4">
+                        <h3 class="font-bold text-lg text-white">Add New Course</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                           <input type="text" name="subject" placeholder="Subject (e.g., Piano)" required class="admin-input">
+                           <input type="text" name="level" placeholder="Level (e.g., Beginner)" required class="admin-input">
+                        </div>
+                        <textarea name="description" placeholder="Course Description" required class="admin-input h-24"></textarea>
+                        <div>
+                           <label class="text-sm text-gray-400 block mb-1">Course Image</label>
+                           <input type="file" name="image" accept="image/*" required class="admin-input file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-pink-100 file:text-pink-700 hover:file:bg-pink-200">
+                        </div>
+                        <button type="submit" class="cta text-white py-2 px-6 rounded-lg heading font-semibold">Add Course</button>
+                    </form>
+                    
+                    <!-- Course List -->
+                    <div>
+                        <h3 class="font-bold text-lg text-white mb-4">Existing Courses</h3>
+                        <div id="admin-course-list" class="space-y-3">
+                           ${appState.courses.length === 0 ? '<p class="text-gray-500">No courses found.</p>' : appState.courses.map(course => `
+                            <div class="flex items-center justify-between bg-gray-800 p-3 rounded-lg">
+                                <div class="flex items-center gap-4">
+                                    <img src="${course.imageUrl}" class="w-12 h-12 object-cover rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/48x48/1a1a1a/f472b6?text=C';">
+                                    <div>
+                                        <p class="font-semibold text-white">${course.subject}</p>
+                                        <p class="text-sm text-gray-400">${course.level}</p>
+                                    </div>
+                                </div>
+                                <button data-course-id="${course.id}" data-image-path="${course.imagePath || ''}" class="delete-course-btn bg-red-600 hover:bg-red-500 text-white p-2 rounded-full">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm4 0a1 1 0 012 0v6a1 1 0 11-2 0V8z" clip-rule="evenodd" /></svg>
+                                </button>
+                            </div>
+                           `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderAdminUsers() {
+            return `
+                <div class="admin-card">
+                    <h2 class="admin-header">Manage Users</h2>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-400">
+                            <thead class="text-xs text-gray-300 uppercase bg-gray-800">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3">Name</th>
+                                    <th scope="col" class="px-6 py-3">Email</th>
+                                    <th scope="col" class="px-6 py-3">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${appState.users.map(user => `
+                                    <tr class="bg-gray-800 border-b border-gray-700 hover:bg-gray-700">
+                                        <td class="px-6 py-4 font-medium text-white whitespace-nowrap">${user.displayName}</td>
+                                        <td class="px-6 py-4">${user.email}</td>
+                                        <td class="px-6 py-4">
+                                            <button data-user-id='${JSON.stringify(user)}' class="assign-course-btn text-pink-400 hover:underline font-semibold">Assign Course</button>
+                                        </td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+        }
+
+
+        // --- Event Handlers ---
         function handleNavItemClick(id) {
-            if (id === 'courses') { alert('Navigating to All Courses page is not fully implemented.'); } 
-            else { appState.currentPage = 'home'; renderApp(); setTimeout(() => { document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100); }
+            if (['home', 'courses', 'admin', 'myClass'].includes(id)) {
+                 appState.currentPage = id;
+                 renderApp();
+            }
+            if (appState.currentPage === 'home' && ['about', 'teachers', 'contact'].includes(id)) {
+                setTimeout(() => { document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
+            }
             appState.mobileMenuOpen = false;
-            renderHeader();
+            updateBodyForMobileMenu();
         }
 
         async function handleAuthFormSubmit(e) {
             e.preventDefault();
+            const form = e.target;
+            const submitButton = form.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
+            submitButton.innerHTML = `<span class="loader !w-6 !h-6 !border-4"></span>`;
+
             const errorP = document.getElementById('auth-error');
             errorP.textContent = ''; errorP.classList.add('hidden');
             const { email, password } = e.target.elements;
             try {
+                let userCredential;
                 if (appState.authModal.type === 'signup') {
                     const { name, phone } = e.target.elements;
                     if (!name.value) throw new Error("Please enter your full name.");
-                    const userCredential = await createUserWithEmailAndPassword(auth, email.value, password.value);
+                    userCredential = await createUserWithEmailAndPassword(auth, email.value, password.value);
                     await updateProfile(userCredential.user, { displayName: name.value });
-                    await setDoc(doc(db, "users", userCredential.user.uid), { displayName: name.value, email: email.value, role: 'student', phone: phone.value });
-                } else { await signInWithEmailAndPassword(auth, email.value, password.value); }
+                    // Create private user profile
+                    const userProfileRef = doc(db, "artifacts", appId, "users", userCredential.user.uid, "profile", "details");
+                    await setDoc(userProfileRef, { displayName: name.value, email: email.value, role: 'student', phone: phone.value, createdAt: serverTimestamp() });
+                } else { 
+                    userCredential = await signInWithEmailAndPassword(auth, email.value, password.value); 
+                }
+                
+                // For admin, store public user data for assignment purposes
+                if(appState.authModal.type === 'signup') {
+                    const publicUserRef = doc(db, "artifacts", appId, "public", "data", "users", userCredential.user.uid);
+                    await setDoc(publicUserRef, { displayName: name.value, email: email.value });
+                }
+
                 appState.authModal.isOpen = false; renderApp();
             } catch (err) {
-                 let message = 'An unexpected error occurred.';
-                 switch (err.code) {
-                     case 'auth/invalid-credential': message = 'Invalid email or password.'; break;
-                     case 'auth/email-already-in-use': message = 'An account with this email already exists.'; break;
-                     case 'auth/weak-password': message = 'Password must be at least 6 characters.'; break;
-                 }
-                 errorP.textContent = message; errorP.classList.remove('hidden');
+                let message = 'An unexpected error occurred.';
+                switch (err.code) {
+                    case 'auth/invalid-credential': message = 'Invalid email or password.'; break;
+                    case 'auth/email-already-in-use': message = 'An account with this email already exists.'; break;
+                    case 'auth/weak-password': message = 'Password must be at least 6 characters.'; break;
+                    default: message = err.message; break;
+                }
+                errorP.textContent = message; errorP.classList.remove('hidden');
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = appState.authModal.type === 'login' ? 'Login' : 'Sign Up';
             }
         }
 
+        async function handleAddCourse(e) {
+            e.preventDefault();
+            const form = e.target;
+            const submitButton = form.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
+            submitButton.innerHTML = 'Adding...';
+
+            try {
+                const { subject, level, description, image } = form.elements;
+                const file = image.files[0];
+                if (!file) throw new Error("Image file is required.");
+
+                const imagePath = `course_images/${Date.now()}_${file.name}`;
+                const storageRef = ref(storage, imagePath);
+                await uploadBytes(storageRef, file);
+                const imageUrl = await getDownloadURL(storageRef);
+
+                await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'courses'), {
+                    subject: subject.value,
+                    level: level.value,
+                    description: description.value,
+                    imageUrl,
+                    imagePath,
+                    createdAt: serverTimestamp()
+                });
+                
+                form.reset();
+            } catch (error) {
+                console.error("Error adding course: ", error);
+                alert("Failed to add course. Check console for details.");
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = 'Add Course';
+            }
+        }
+
+        async function handleDeleteCourse(e) {
+            const button = e.target.closest('.delete-course-btn');
+            if(!button) return;
+            
+            const courseId = button.dataset.courseId;
+            const imagePath = button.dataset.imagePath;
+
+            if (confirm("Are you sure you want to delete this course? This action cannot be undone.")) {
+                try {
+                    // Delete firestore document
+                    await deleteDoc(doc(db, "artifacts", appId, "public", "data", "courses", courseId));
+
+                    // Delete image from storage
+                    if (imagePath && imagePath !== "undefined") {
+                        const imageRef = ref(storage, imagePath);
+                        await deleteObject(imageRef);
+                    }
+                } catch(error) {
+                    console.error("Error deleting course: ", error);
+                    alert("Failed to delete course. Check console for details.");
+                }
+            }
+        }
+
+        async function handleAssignCourse(e) {
+            e.preventDefault();
+            const form = e.target;
+            const submitButton = form.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
+            submitButton.textContent = "Assigning...";
+            const errorP = document.getElementById('assign-error');
+            errorP.classList.add('hidden');
+
+            try {
+                const { courseId, schedule } = form.elements;
+                const user = appState.admin.assignModal.user;
+                if (!user || !courseId.value) throw new Error("User or course not selected.");
+                
+                // Simple check for existing assignment (can be improved)
+                const assignmentsCol = collection(db, "artifacts", appId, "public", "data", "assignments");
+                const q = query(assignmentsCol, where("userId", "==", user.uid), where("courseId", "==", courseId.value));
+                const existing = await getDocs(q);
+
+                if(!existing.empty) {
+                    throw new Error("This course is already assigned to the user.");
+                }
+                
+                await addDoc(assignmentsCol, {
+                    userId: user.uid,
+                    courseId: courseId.value,
+                    schedule: schedule.value,
+                    assignedAt: serverTimestamp()
+                });
+                
+                appState.admin.assignModal = { isOpen: false, user: null };
+                renderApp();
+
+            } catch(error) {
+                console.error("Error assigning course: ", error);
+                errorP.textContent = error.message;
+                errorP.classList.remove('hidden');
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = "Assign";
+            }
+        }
+        
+        function updateBodyForMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu-overlay');
+            if (!mobileMenu) return;
+
+            if (appState.mobileMenuOpen) {
+                document.body.classList.add('mobile-nav-open');
+                mobileMenu.classList.remove('opacity-0', 'pointer-events-none', 'translate-x-full');
+            } else {
+                document.body.classList.remove('mobile-nav-open');
+                mobileMenu.classList.add('opacity-0', 'pointer-events-none', 'translate-x-full');
+            }
+        }
+
+        // --- Event Listener Setup ---
         function addEventListeners() {
-            document.getElementById('app-container').onclick = function(e) {
+            const appContainer = document.getElementById('app-container');
+            const modalContainer = document.getElementById('modal-container');
+            const teacherModalContainer = document.getElementById('teacher-modal-specific-container');
+            const mobileOverlay = document.getElementById('mobile-menu-overlay');
+
+            const handleClick = (e) => {
                 if (e.target.closest('[data-navid]')) { handleNavItemClick(e.target.closest('[data-navid]').dataset.navid); return; }
-                if (e.target.closest('[data-navid-mobile]')) { handleNavItemClick(e.target.closest('[data-navid-mobile]').dataset.navidMobile); return; }
-                if (['login-btn', 'mobile-login-btn'].includes(e.target.id)) { appState.authModal = { isOpen: true, type: 'login' }; renderApp(); return; }
-                if (['signup-btn', 'mobile-signup-btn'].includes(e.target.id)) { appState.authModal = { isOpen: true, type: 'signup' }; renderApp(); return; }
-                if (['logout-btn', 'mobile-logout-btn'].includes(e.target.id)) { signOut(auth); return; }
-                if (e.target.closest('#mobile-menu-toggle')) { appState.mobileMenuOpen = !appState.mobileMenuOpen; renderHeader(); addEventListeners(); return; }
-                if (['explore-courses-btn', 'view-more-courses-btn'].includes(e.target.id)) { alert('Course catalog page coming soon!'); return; }
+                if (['login-btn', 'signup-btn'].includes(e.target.id)) {
+                    appState.authModal = { isOpen: true, type: e.target.id.includes('login') ? 'login' : 'signup' };
+                    renderApp();
+                    return;
+                }
+                if (e.target.id === 'logout-btn') { signOut(auth); appState.currentPage = 'home'; return; }
+                if (e.target.closest('#mobile-menu-toggle')) { appState.mobileMenuOpen = true; updateBodyForMobileMenu(); return; }
+                
                 const knowMoreBtn = e.target.closest('.know-more-btn');
                 if (knowMoreBtn) {
                     const teacher = TEACHERS_DATA.find(t => t.id === knowMoreBtn.dataset.teacherId);
@@ -426,32 +1039,179 @@
                 }
                 if (e.target.closest('#teacher-slider-next-btn')) { updateTeacherSlider('next'); return; }
                 if (e.target.closest('#teacher-slider-prev-btn')) { updateTeacherSlider('prev'); return; }
+
+                const adminTab = e.target.closest('[data-admin-tab]');
+                if(adminTab) {
+                    appState.admin.activeTab = adminTab.dataset.adminTab;
+                    renderAdminPanelPage();
+                    addEventListeners();
+                }
+                if(e.target.closest('.delete-course-btn')) { handleDeleteCourse(e); }
+                const assignBtn = e.target.closest('.assign-course-btn');
+                if (assignBtn) {
+                    appState.admin.assignModal = { isOpen: true, user: JSON.parse(assignBtn.dataset.userId) };
+                    renderApp();
+                }
             };
             
-            document.getElementById('modal-container').onclick = function(e) {
+            const handleModalClick = (e) => {
                 if (e.target.id === 'toggle-auth-type') { appState.authModal.type = appState.authModal.type === 'login' ? 'signup' : 'login'; renderApp(); }
-                else if (e.target.id === 'auth-modal-backdrop' && e.target === e.currentTarget.firstElementChild) { appState.authModal.isOpen = false; renderApp(); }
-                else if (e.target.closest('#close-teacher-modal') || (e.target.id === 'teacher-modal-backdrop' && e.target === e.currentTarget.firstElementChild)) { appState.teacherDetailModal = { isOpen: false, teacher: null }; renderApp(); }
+                else if (e.target.id === 'auth-modal-backdrop') { appState.authModal.isOpen = false; renderApp(); }
+                else if (e.target.id === 'cancel-assign-btn' || e.target.id === 'assign-modal-backdrop') { appState.admin.assignModal = { isOpen: false, user: null }; renderApp(); }
             }
             
+            const handleTeacherModalClick = (e) => {
+                if (e.target.closest('#close-teacher-modal') || e.target.id === 'teacher-modal-backdrop') { 
+                    appState.teacherDetailModal = { isOpen: false, teacher: null }; 
+                    renderApp();
+                }
+            }
+            
+            const handleMobileMenuClick = (e) => {
+                 if (e.target.closest('[data-navid-mobile]')) {
+                     handleNavItemClick(e.target.closest('[data-navid-mobile]').dataset.navidMobile);
+                     return;
+                 }
+                 if (['mobile-login-btn', 'mobile-signup-btn'].includes(e.target.id)) {
+                    appState.authModal = { isOpen: true, type: e.target.id.includes('login') ? 'login' : 'signup' };
+                    appState.mobileMenuOpen = false;
+                    renderApp();
+                    return;
+                }
+                if(e.target.id === 'mobile-logout-btn') {
+                    signOut(auth);
+                    appState.mobileMenuOpen = false;
+                    updateBodyForMobileMenu();
+                }
+                 if (e.target.closest('#mobile-menu-close')) {
+                     appState.mobileMenuOpen = false;
+                     updateBodyForMobileMenu();
+                     return;
+                 }
+            }
+
+            // --- Attach Listeners ---
+            if(appContainer) appContainer.onclick = handleClick;
+            if(modalContainer) modalContainer.onclick = handleModalClick;
+            if(teacherModalContainer) teacherModalContainer.onclick = handleTeacherModalClick;
+            if(mobileOverlay) mobileOverlay.onclick = handleMobileMenuClick;
+
             const authForm = document.getElementById('auth-form');
-            if (authForm) { authForm.onsubmit = handleAuthFormSubmit; }
+            if (authForm) authForm.onsubmit = handleAuthFormSubmit;
+            
+            const addCourseForm = document.getElementById('add-course-form');
+            if (addCourseForm) addCourseForm.onsubmit = handleAddCourse;
+
+            const assignCourseForm = document.getElementById('assign-course-form');
+            if (assignCourseForm) assignCourseForm.onsubmit = handleAssignCourse;
+            
+            document.getElementById('filter-search')?.addEventListener('input', renderFilteredCourses);
+            document.getElementById('filter-subject')?.addEventListener('change', renderFilteredCourses);
+            document.getElementById('filter-level')?.addEventListener('change', renderFilteredCourses);
         }
 
+        // --- Firebase Data Subscriptions ---
+        function setupFirestoreListeners(user) {
+            unsubscribeCourses();
+            unsubscribeUsers();
+            unsubscribeAssignments();
+            
+            if (!user) {
+                appState.courses = [];
+                appState.users = [];
+                appState.assignments = [];
+                appState.isAdmin = false;
+                return; 
+            }
+
+            const coursesCol = collection(db, 'artifacts', appId, 'public', 'data', 'courses');
+            unsubscribeCourses = onSnapshot(coursesCol, (snapshot) => {
+                appState.courses = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                if (!appState.isLoading) renderPage();
+            }, (error) => {
+                console.error("Courses listener error:", error);
+                appState.courses = []; 
+                if (!appState.isLoading) renderPage();
+            });
+
+            if (user && !user.isAnonymous) {
+                 const assignmentsCol = collection(db, "artifacts", appId, "public", "data", "assignments");
+                 const q = query(assignmentsCol, where("userId", "==", user.uid));
+                 unsubscribeAssignments = onSnapshot(q, (snapshot) => {
+                     appState.assignments = snapshot.docs.map(doc => ({id: doc.id, ...doc.data() }));
+                     if (!appState.isLoading) renderApp();
+                 }, (error) => {
+                    console.error("Assignments listener error:", error);
+                 });
+
+                if(user.email === ADMIN_EMAIL) {
+                    appState.isAdmin = true;
+                    const usersCol = collection(db, 'artifacts', appId, 'public', 'data', 'users');
+                    unsubscribeUsers = onSnapshot(usersCol, (snapshot) => {
+                        appState.users = snapshot.docs.map(doc => ({ uid: doc.id, ...doc.data() }));
+                        if(appState.currentPage === 'admin' && !appState.isLoading) renderAdminPanelPage();
+                    }, (error) => {
+                        console.error("Users listener error:", error);
+                    });
+                } else {
+                    appState.isAdmin = false;
+                }
+            } else { 
+                appState.isAdmin = false;
+                appState.assignments = [];
+                appState.users = [];
+            }
+        }
+        
+        // --- App Initialization ---
         document.addEventListener('DOMContentLoaded', () => {
-            AOS.init({ duration: 1000, once: true });
-            onAuthStateChanged(auth, user => { appState.currentUser = user; renderApp(); });
-            // Initial render can be tricky with screen size, so we add a resize listener
+            AOS.init({ duration: 800, once: true });
+            
+            const initializeAndStartApp = () => {
+                
+                onAuthStateChanged(auth, (user) => {
+                    
+                    if (appState.isLoading) {
+                        appState.currentUser = user;
+                        setupFirestoreListeners(user);
+                        appState.isLoading = false;
+                        renderApp(); 
+                    } else {
+                        const wasAnonymous = appState.currentUser ? appState.currentUser.isAnonymous : true;
+                        const isNowAnonymous = user ? user.isAnonymous : true;
+                        
+                        if(wasAnonymous && isNowAnonymous) return;
+
+                        appState.currentUser = user;
+                        setupFirestoreListeners(user);
+                        renderApp();
+                    }
+                });
+
+                if (!auth.currentUser) {
+                    signInAnonymously(auth).catch((error) => {
+                        console.error("Startup anonymous sign-in failed:", error);
+                        const pageContainer = document.getElementById('page-container');
+                        if(pageContainer) pageContainer.innerHTML = `<div class="text-center text-red-400 p-8">Could not connect to services. Please refresh.</div>`;
+                        appState.isLoading = false;
+                        renderApp();
+                    });
+                }
+            };
+
+            if (auth) {
+                initializeAndStartApp();
+            }
+
             let resizeTimer;
             window.addEventListener('resize', () => {
                 clearTimeout(resizeTimer);
                 resizeTimer = setTimeout(() => {
-                    // Re-render the whole page might be too much, but for this it's simple
-                    renderHomePage();
+                    renderPage();
                 }, 250);
             });
-            renderApp();
         });
+
     </script>
 </body>
 </html>

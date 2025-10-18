@@ -455,7 +455,9 @@
             };
             
             if(mainJoinClassBtn) {
-                mainJoinClassBtn.addEventListener('click', () => openModal('meet', 'https://meet.google.com/ocv-ptdw-qos'));
+                mainJoinClassBtn.addEventListener('click', () => {
+                    window.open('https://meet.google.com/ocv-ptdw-qos', '_blank');
+                });
             }
 
             closeModalBtn.addEventListener('click', closeModal);
@@ -534,4 +536,6 @@
     </script>
 </body>
 </html>
+
+
 

@@ -50,15 +50,10 @@
         .view-more-btn svg { transition: transform 0.3s ease-in-out; }
         .view-more-btn:hover { background: #ffffff; color: #000000; transform: scale(1.05); box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2); }
         .view-more-btn:hover svg { transform: translateX(5px); }
-        .auth-input, .filter-input, .admin-input { background-color: #1f2937; border: 1px solid #4b5563; color: #d1d5db; width: 100%; padding: 0.75rem; border-radius: 0.5rem; transition: border-color 0.3s, box-shadow 0.3s; }
-        .auth-input:focus, .filter-input:focus, .admin-input:focus { outline: none; border-color: #ec4899; box-shadow: 0 0 0 2px rgba(236, 72, 153, 0.3); }
+        .auth-input, .filter-input { background-color: #1f2937; border: 1px solid #4b5563; color: #d1d5db; width: 100%; padding: 0.75rem; border-radius: 0.5rem; transition: border-color 0.3s, box-shadow 0.3s; }
+        .auth-input:focus, .filter-input:focus { outline: none; border-color: #ec4899; box-shadow: 0 0 0 2px rgba(236, 72, 153, 0.3); }
         .filter-input { background-color: #111827; border-color: #374151; }
         .filter-input::placeholder { color: #6b7280 }
-        .admin-card { background: #1a1a1a; padding: 1.5rem; border-radius: 1rem; border: 1px solid #333; }
-        .admin-header { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem; color: #ec4899; }
-        .admin-tab { width: 100%; text-align: left; padding: 0.75rem 1rem; border-radius: 0.5rem; font-weight: 600; transition: background-color 0.2s, color 0.2s; }
-        .admin-tab-active { background-color: #ec4899; color: white; }
-        .admin-tab:not(.admin-tab-active):hover { background-color: #374151; }
         
         /* --- Teacher Card Styles --- */
         .teacher-card {
@@ -221,20 +216,6 @@
                 transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out, z-index 0.5s;
             }
         }
-        .loader {
-            width: 48px;
-            height: 48px;
-            border: 5px solid #FFF;
-            border-bottom-color: #FF3D00;
-            border-radius: 50%;
-            display: inline-block;
-            box-sizing: border-box;
-            animation: rotation 1s linear infinite;
-        }
-        @keyframes rotation {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
         body.mobile-nav-open {
             overflow: hidden;
         }
@@ -301,9 +282,9 @@
             z-index: 0;
         }
         @keyframes subtle-glow {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         .about-section > div { 
             position: relative;
@@ -468,39 +449,7 @@
     
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script type="module">
-        // --- Firebase SDK Imports ---
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-        import { getFirestore, collection, addDoc, onSnapshot, doc, deleteDoc, setDoc, getDocs, query, where, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-        import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
-
-        // --- Firebase Initialization ---
-        let app, auth, db, storage;
-        try {
-            const firebaseConfig = {
-                apiKey: "AIzaSyBaDBLoe2Wi2WgmJfPRXoEP-ZSgkVhMxVI",
-                authDomain: "musicoul-15025.firebaseapp.com",
-                databaseURL: "https://musicoul-15025-default-rtdb.firebaseio.com",
-                projectId: "musicoul-15025",
-                storageBucket: "musicoul-15025.appspot.com",
-                messagingSenderId: "863099041367",
-                appId: "1:863099041367:web:c3d61399489a219611d512",
-                measurementId: "G-WBPE697N9Q"
-            };
-            app = initializeApp(firebaseConfig);
-            auth = getAuth(app);
-            db = getFirestore(app);
-            storage = getStorage(app);
-        } catch (e) {
-            console.error("Firebase initialization failed:", e);
-            document.body.innerHTML = `<div class="text-red-500 text-center p-8">Error: Could not initialize Firebase. Please check your configuration.</div>`;
-        }
-        
-        // --- App ID for Firestore Paths ---
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-
         // --- Constants & Static Data ---
-        const ADMIN_EMAIL = "chandrashekharkolhe7@gmail.com";
         const NAV_ITEMS = [ { name: "Home", id: "home" }, { name: "Courses", id: "courses" }, { name: "Teachers", id: "teachers" }, { name: "About", id: "about" }, { name: "Contact", id: "contact" }, ];
         const STATIC_COURSES_DATA = [ { id: 'static_singing', subject: "Singing", level: "All Levels", description: "Master vocal techniques from seasoned professionals.", imageUrl: "https://img.freepik.com/premium-photo/young-man-singer-stag_5850-338.jpg" }, { id: 'static_piano', subject: "Piano", level: "All Levels", description: "Learn piano theory, technique, and performance.", imageUrl: "https://media.istockphoto.com/id/1129332575/photo/favorite-classical-music-close-up-view-of-gentle-female-hands-playing-a-melody-on-piano-while.jpg?s=612x612&w=0&k=20&c=GJEJTdGtmgHpKjDL7BE9KO2diJNQ4lPinInWiJAOSCQ=" }, { id: 'static_tabla', subject: "Tabla", level: "All Levels", description: "Explore Indian classical rhythms with our tabla masters.", imageUrl: "https://jagatsinghhotels.com/media/jsHotel/Experiences/2.jpg" } ];
         const TEACHERS_DATA = [ 
@@ -537,31 +486,12 @@
 
         // --- Application State ---
         let appState = { 
-            currentUser: null,
-            isAdmin: false,
-            isLoading: true,
             currentPage: 'home',
-            courses: [],
-            users: [],
-            assignments: [],
             mobileMenuOpen: false, 
-            teacherSliderIndex: 0, // Start with Chandrashekhar Kolhe
-            authModal: { isOpen: false, type: 'login' }, 
+            teacherSliderIndex: 0, 
+            passwordModal: { isOpen: false },
             teacherDetailModal: { isOpen: false, teacher: null },
-            admin: {
-                activeTab: 'dashboard',
-                isLoading: false,
-                assignModal: {
-                    isOpen: false,
-                    user: null,
-                }
-            }
         };
-
-        // --- Unsubscribe listeners ---
-        let unsubscribeCourses = () => {};
-        let unsubscribeUsers = () => {};
-        let unsubscribeAssignments = () => {};
 
         // --- Core Rendering Logic ---
         function renderApp() {
@@ -577,11 +507,6 @@
             const pageContainer = document.getElementById('page-container');
             if(!pageContainer) return;
             
-            if (appState.isLoading) {
-                 pageContainer.innerHTML = `<div class="flex justify-center items-center h-screen"><span class="loader"></span></div>`;
-                 return;
-            }
-            
             // This acts as a simple router
             switch(appState.currentPage) {
                 case 'home':
@@ -589,12 +514,6 @@
                     break;
                 case 'courses':
                     renderCoursesPage();
-                    break;
-                case 'admin':
-                    renderAdminPanelPage();
-                    break;
-                case 'myClass':
-                    renderMyClassPage();
                     break;
                 default:
                     renderHomePage();
@@ -604,17 +523,8 @@
         function renderHeader() {
             const headerContainer = document.getElementById('header-container');
             if (!headerContainer) return;
-            const { currentUser, assignments, isAdmin } = appState;
-            const hasAssignedCourses = assignments.length > 0;
+
             const navItemsHtml = NAV_ITEMS.map(item => `<button data-navid="${item.id}" class="hover:text-pink-400 bodyfont transition-colors duration-300 ${appState.currentPage === item.id ? 'text-pink-400' : ''}">${item.name}</button>`).join('');
-            
-            let authButtonsHtml;
-            if (currentUser && !currentUser.isAnonymous) {
-                const displayName = currentUser.displayName ? currentUser.displayName.split(' ')[0] : (currentUser.email ? currentUser.email.split('@')[0] : 'User');
-                authButtonsHtml = `<span class="text-sm text-gray-300 bodyfont">Hi, ${displayName}</span><button id="logout-btn" class="heading font-semibold text-white border-2 border-purple-700 rounded-md px-4 py-2 transition-all duration-300 hover:bg-purple-700 hover:scale-105">Logout</button>`;
-            } else {
-                authButtonsHtml = `<button id="login-btn" class="cta text-white px-4 py-2 rounded-md heading font-semibold">Login</button><button id="signup-btn" class="heading font-semibold text-white border-2 border-purple-700 rounded-md px-4 py-2 transition-all duration-300 hover:bg-purple-700 hover:scale-105">Signup</button>`;
-            }
             
             headerContainer.innerHTML = `
                 <div class="bg-black/80 backdrop-blur-sm border-b border-gray-800">
@@ -625,9 +535,6 @@
                         </div>
                         <nav class="hidden lg:flex flex-wrap gap-x-8 gap-y-2 text-sm font-medium text-gray-300 items-center justify-end">
                             ${navItemsHtml}
-                            ${hasAssignedCourses ? `<button data-navid="myClass" class="hover:text-pink-400 bodyfont transition-colors duration-300 font-bold ${appState.currentPage === 'myClass' ? 'text-pink-400' : ''}">My Class</button>` : ''}
-                            ${isAdmin ? `<button data-navid="admin" class="hover:text-pink-400 bodyfont transition-colors duration-300 font-bold ${appState.currentPage === 'admin' ? 'text-pink-400' : ''}">Admin Panel</button>` : ''}
-                            <div class="flex gap-3 ml-4 items-center">${authButtonsHtml}</div>
                         </nav>
                         <button id="mobile-menu-toggle" class="lg:hidden p-2 border rounded-lg border-gray-600 text-gray-300" aria-label="Toggle navigation menu">
                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
@@ -642,20 +549,7 @@
             
             overlay.className = "fixed inset-0 bg-black/95 backdrop-blur-sm z-40 flex flex-col items-center justify-center gap-6 text-center transition-opacity duration-300 ease-in-out opacity-0 pointer-events-none";
 
-            const { currentUser, assignments, isAdmin } = appState;
             const mobileNavItemsHtml = NAV_ITEMS.map(item => `<button data-navid-mobile="${item.id}" class="text-4xl heading text-gray-300 hover:text-pink-400 transition-colors">${item.name}</button>`).join('');
-
-            let mobileAuthButtonsHtml;
-            if (currentUser && !currentUser.isAnonymous) {
-                 mobileAuthButtonsHtml = `<div class="w-full max-w-xs mx-auto">
-                    <button id="mobile-logout-btn" class="heading font-semibold text-white text-lg border-2 border-purple-700 rounded-md w-full py-3 transition-all duration-300 hover:bg-purple-700">Logout</button>
-                </div>`;
-            } else {
-                mobileAuthButtonsHtml = `<div class="flex gap-4 w-full max-w-xs mx-auto">
-                    <button id="mobile-login-btn" class="cta text-white w-full py-3 rounded-md heading font-semibold text-lg">Login</button>
-                    <button id="mobile-signup-btn" class="heading font-semibold w-full text-white border-2 border-purple-700 rounded-md py-3 transition-all duration-300 hover:bg-purple-700 text-lg">Signup</button>
-                </div>`;
-            }
 
             overlay.innerHTML = `
                 <button id="mobile-menu-close" class="absolute top-6 right-6 p-2 text-gray-400 hover:text-white" aria-label="Close navigation menu">
@@ -663,20 +557,14 @@
                 </button>
                 <div class="flex flex-col gap-8">
                     ${mobileNavItemsHtml}
-                    ${assignments.length > 0 ? `<button data-navid-mobile="myClass" class="text-4xl heading font-bold text-gray-300 hover:text-pink-400 transition-colors">My Class</button>`: ''}
-                    ${isAdmin ? `<button data-navid-mobile="admin" class="text-4xl heading font-bold text-gray-300 hover:text-pink-400 transition-colors">Admin Panel</button>` : ''}
-                </div>
-                <div class="absolute bottom-10 w-full px-6">
-                     ${mobileAuthButtonsHtml}
                 </div>
             `;
             updateBodyForMobileMenu();
         }
 
         function renderModals() {
-            renderAuthModal();
             renderTeacherDetailModal();
-            if(appState.isAdmin) renderAdminModals();
+            renderPasswordModal();
         }
 
         // --- Page Renderers ---
@@ -688,7 +576,7 @@
                 <p class="bodyfont text-gray-300 max-w-2xl mt-8 text-lg sm:text-xl leading-relaxed">Explore, Enjoy and Learn Music!</p>
                 <div class="hero-buttons mt-10 flex flex-col sm:flex-row gap-6">
                     <button data-navid="courses" class="cta text-white px-8 py-3 rounded-lg heading text-lg font-semibold">Explore Courses</button>
-                    <button data-navid="contact" class="contact-btn text-lg heading font-semibold px-8 py-3 rounded-lg">Get Started</button>
+                    <button id="get-started-btn" class="contact-btn text-lg heading font-semibold px-8 py-3 rounded-lg">Get Started</button>
                 </div>
             </main>`;
             const aboutHtml = `<section id="about" class="about-section py-20 sm:py-24" data-aos="fade-up">
@@ -711,7 +599,7 @@
                     </div>
                 </div>
             </section>`;
-            const coursesToDisplay = (appState.courses.length > 0 ? appState.courses : STATIC_COURSES_DATA).slice(0, 3);
+            const coursesToDisplay = STATIC_COURSES_DATA.slice(0, 3);
             const coursesHtml = `<section id="courses" class="courses-section py-20 sm:py-24" data-aos="fade-up">
                 <div class="musical-notes">
                     <span>♪</span><span>♫</span><span>♩</span><span>♬</span><span>♪</span><span>♫</span><span>♩</span><span>♬</span><span>♪</span>
@@ -719,7 +607,7 @@
                 <div class="relative z-10 max-w-6xl mx-auto px-6">
                     <h2 class="section-heading heading text-4xl sm:text-5xl text-white text-center mb-12 font-bold">Explore Our Courses</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">${coursesToDisplay.map((course, index) => `<div class="card p-4" data-aos="fade-up" data-aos-delay="${(index + 1) * 100}"><img src="${course.imageUrl}" alt="${course.subject}" class="w-full aspect-square object-cover rounded-xl mb-4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1a1a1a/f472b6?text=Music';"/><h3 class="heading text-xl text-white mb-2 font-semibold">${course.subject} - ${course.level}</h3><p class="bodyfont text-gray-400 mb-4 flex-grow">${course.description}</p><div class="mt-4"><button data-navid="courses" class="card-button font-semibold w-full text-center">View Details</button></div></div>`).join('')}</div>
-                    <div class="text-center mt-12"><button data-navid="courses" class="view-more-btn heading font-semibold">View All Courses<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="http://www.w3.org/2000/svg" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg></button></div>
+                    <div class="text-center mt-12"><button data-navid="courses" class="view-more-btn heading font-semibold">View All Courses<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg></button></div>
                 </div>
             </section>`;
             const teachersHtml = `<section id="teachers" class="py-20 sm:py-24"><div class="golden-particles"><span class="particle"></span><span class="particle"></span><span class="particle"></span><span class="particle"></span><span class="particle"></span><span class="particle"></span><span class="particle"></span><span class="particle"></span><span class="particle"></span><span class="particle"></span></div><div class="max-w-7xl mx-auto px-6 relative z-10"><h2 class="section-heading heading text-4xl sm:text-5xl text-white text-center mb-16 font-bold" data-aos="fade-up">Our Esteemed Teachers</h2><div id="teacher-slider-container" class="relative" data-aos="fade-up"><button id="teacher-slider-prev-btn" class="slider-arrow left-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button><div id="teacher-slider-viewport" class="w-full h-[30rem]"><div id="teacher-slider-track" class="w-full h-full">${TEACHERS_DATA.map((teacher, index) => `<div class="teacher-card-wrapper w-72 h-full p-2" data-teacher-index="${index}"><div class="teacher-card flex flex-col h-full w-full overflow-hidden p-4"><div class="teacher-image-container mb-3"><img src="${teacher.img}" alt="${teacher.name}" class="teacher-image"/></div><div class="text-center flex-grow flex flex-col"><h3 class="heading text-xl font-bold text-white leading-tight">${teacher.name}</h3><p class="bodyfont text-pink-400 mt-1 text-sm">${teacher.subjects}</p><ul class="text-left text-sm text-gray-400 my-3 space-y-2 px-2 bodyfont list-inside h-16">${teacher.description.map(point => `<li class="flex items-start"><span class="text-pink-400 mr-2 mt-1 leading-none">&bull;</span><span>${point}</span></li>`).join('')}</ul><div class="teacher-buttons"><button data-teacher-id="${teacher.id}" class="know-more-btn">Know More</button><a href="${teacher.instagram}" target="_blank" rel="noopener noreferrer" class="instagram-btn"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.012 3.584-.07 4.85c-.148 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.07-1.645-.07-4.85s.012-3.584.07-4.85c.148-3.225 1.664 4.771 4.919 4.919 1.266.058 1.644.07 4.85.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.44-1.441-1.44z"></path></svg></a></div></div></div></div>`).join('')}</div></div><button id="teacher-slider-next-btn" class="slider-arrow right-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg></button></div></div></section>`;
@@ -738,8 +626,8 @@
         // --- All Courses Page ---
         function renderCoursesPage() {
             const pageContainer = document.getElementById('page-container');
-            const uniqueSubjects = [...new Set(appState.courses.map(c => c.subject))];
-            const uniqueLevels = [...new Set(appState.courses.map(c => c.level))];
+            const uniqueSubjects = [...new Set(STATIC_COURSES_DATA.map(c => c.subject))];
+            const uniqueLevels = [...new Set(STATIC_COURSES_DATA.map(c => c.level))];
 
             let html = `
                 <div class="max-w-7xl mx-auto px-6 py-16 sm:py-24" data-aos="fade-up">
@@ -771,102 +659,23 @@
             renderFilteredCourses();
         }
 
-        // --- My Class Page ---
-        function renderMyClassPage() {
-            const pageContainer = document.getElementById('page-container');
-            let content;
-
-            if (appState.assignments.length === 0) {
-                content = `
-                    <div class="text-center py-20">
-                        <h2 class="heading text-3xl font-bold text-white">You are not enrolled in any classes yet.</h2>
-                        <p class="bodyfont text-gray-400 mt-4">Explore our courses to get started!</p>
-                        <button data-navid="courses" class="cta text-white px-6 py-3 rounded-lg heading text-lg font-semibold mt-8">Explore Courses</button>
-                    </div>`;
-            } else {
-                content = `
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        ${appState.assignments.map(assignment => {
-                            const course = appState.courses.find(c => c.id === assignment.courseId);
-                            if (!course) return '<p>Error loading course.</p>';
-                            return `
-                                <div class="card p-6 flex flex-col" data-aos="fade-up">
-                                    <img src="${course.imageUrl}" alt="${course.subject}" class="w-full h-48 object-cover rounded-xl mb-4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1a1a1a/f472b6?text=Music';">
-                                    <h3 class="heading text-2xl text-white font-semibold">${course.subject}</h3>
-                                    <p class="bodyfont text-pink-400 mb-3">${course.level}</p>
-                                    <p class="bodyfont text-gray-400 mb-4 flex-grow">${course.description}</p>
-                                    <div class="mt-4 border-t border-gray-700 pt-4">
-                                        <p class="bodyfont text-gray-300 font-semibold">Your Schedule:</p>
-                                        <p class="bodyfont text-white">${assignment.schedule || 'Not set'}</p>
-                                    </div>
-                                    <button class="mt-6 card-button font-semibold w-full text-center" onclick="alert('Joining class...')">Join Class</button>
-                                </div>`;
-                        }).join('')}
-                    </div>`;
-            }
-            
-            pageContainer.innerHTML = `
-                <div class="max-w-7xl mx-auto px-6 py-16 sm:py-24">
-                    <div class="text-center mb-12" data-aos="fade-up">
-                        <h1 class="heading text-4xl sm:text-5xl text-white font-bold">My Classroom</h1>
-                        <p class="bodyfont text-gray-400 mt-4 max-w-2xl mx-auto text-lg">Here are your enrolled courses and schedules.</p>
-                    </div>
-                    ${content}
-                </div>
-            `;
-        }
-
-        // --- Admin Panel Page ---
-        function renderAdminPanelPage() {
-             const pageContainer = document.getElementById('page-container');
-             if(!appState.isAdmin) {
-                 pageContainer.innerHTML = `<p class="text-center text-red-500 py-20">Access Denied.</p>`;
-                 return;
-             }
-             
-             let activeTabContent = '';
-             switch(appState.admin.activeTab) {
-                 case 'dashboard': activeTabContent = renderAdminDashboard(); break;
-                 case 'courses': activeTabContent = renderAdminCourses(); break;
-                 case 'users': activeTabContent = renderAdminUsers(); break;
-             }
-
-             const tabs = ['dashboard', 'courses', 'users'];
-             
-             pageContainer.innerHTML = `
-                 <div class="max-w-7xl mx-auto px-6 py-16" data-aos="fade-up">
-                      <h1 class="heading text-4xl text-white font-bold text-center mb-10">Admin Panel</h1>
-                      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                          <!-- Sidebar -->
-                          <div class="md:col-span-1">
-                              <div class="admin-card space-y-2">
-                                  ${tabs.map(tab => `
-                                      <button data-admin-tab="${tab}" class="admin-tab ${appState.admin.activeTab === tab ? 'admin-tab-active' : ''}">${tab.charAt(0).toUpperCase() + tab.slice(1)}</button>
-                                  `).join('')}
-                              </div>
-                          </div>
-                          <!-- Content -->
-                          <div class="md:col-span-3" id="admin-content">
-                              ${activeTabContent}
-                          </div>
-                      </div>
-                 </div>
-             `;
-        }
-
         // --- Modal Renderers ---
-        function renderAuthModal() {
+        function renderPasswordModal() {
             const modalContainer = document.getElementById('modal-container');
-            const { isOpen, type } = appState.authModal;
-            if (!isOpen) { modalContainer.innerHTML = ''; return; }
-            modalContainer.innerHTML = `<div id="auth-modal-backdrop" class="fixed inset-0 z-50 flex items-center justify-center p-4 transition-opacity duration-300 opacity-100"><div class="fixed inset-0 bg-black bg-opacity-70"></div><div class="bg-gray-900 border border-gray-700 rounded-xl shadow-lg w-full max-w-md m-4 transform transition-all duration-300 scale-100 opacity-100"><div class="p-8 space-y-6"><div class="text-center"><h2 class="heading text-3xl font-bold text-white">${type === 'login' ? 'Welcome Back' : 'Create Account'}</h2><p class="bodyfont text-gray-400 mt-2">${type === 'login' ? 'Login to continue your musical journey.' : 'Start your musical journey with us.'}</p></div><form id="auth-form" class="space-y-4">${type === 'signup' ? `<div><label class="bodyfont text-sm font-medium text-gray-300 block mb-2" for="name">Full Name</label><input type="text" id="name" name="name" required class="auth-input" placeholder="Your Name" /></div><div><label class="bodyfont text-sm font-medium text-gray-300 block mb-2" for="phone">Phone Number</label><input type="tel" id="phone" name="phone" required class="auth-input" placeholder="Your Phone Number" /></div>` : ''}<div><label class="bodyfont text-sm font-medium text-gray-300 block mb-2" for="email">Email Address</label><input type="email" id="email" name="email" required class="auth-input" placeholder="you@example.com" /></div><div><div class="flex justify-between items-center mb-2"><label class="bodyfont text-sm font-medium text-gray-300" for="password">Password</label>${type === 'login' ? `<a href="#" class="text-sm bodyfont text-pink-500 hover:underline" onclick="alert('Password reset functionality not implemented.')">Forgot?</a>` : ''}</div><input type="password" id="password" name="password" required class="auth-input" placeholder="••••••••" /></div><p id="auth-error" class="text-red-500 text-sm text-center bodyfont hidden"></p><button type="submit" class="w-full cta text-white py-3 rounded-lg heading font-semibold">${type === 'login' ? 'Login' : 'Sign Up'}</button></form><p class="bodyfont text-sm text-center text-gray-400">${type === 'login' ? "Don't have an account?" : "Already have an account?"}<button id="toggle-auth-type" class="font-semibold text-pink-500 hover:underline ml-2">${type === 'login' ? 'Sign Up' : 'Login'}</button></p></div></div></div>`;
+            const { isOpen } = appState.passwordModal;
+            if (!isOpen) { 
+                if(!appState.teacherDetailModal.isOpen) modalContainer.innerHTML = ''; 
+                return; 
+            }
+            modalContainer.innerHTML = `<div id="password-modal-backdrop" class="fixed inset-0 z-50 flex items-center justify-center p-4 transition-opacity duration-300 opacity-100"><div class="fixed inset-0 bg-black bg-opacity-70"></div><div class="bg-gray-900 border border-gray-700 rounded-xl shadow-lg w-full max-w-sm m-4 transform transition-all duration-300 scale-100 opacity-100 relative"><button id="close-password-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors z-10 text-3xl leading-none">&times;</button><div class="p-8 space-y-6"><div class="text-center"><h2 class="heading text-3xl font-bold text-white">Enter Access Code</h2><p class="bodyfont text-gray-400 mt-2">Please enter the code provided to you to access your page.</p></div><form id="password-form" class="space-y-4"><div><label class="bodyfont text-sm font-medium text-gray-300 block mb-2" for="access-code">Access Code</label><input type="password" id="access-code" name="password" required class="auth-input text-center tracking-widest" placeholder="••••" /></div><p id="password-error" class="text-red-500 text-sm text-center bodyfont hidden"></p><button type="submit" class="w-full cta text-white py-3 rounded-lg heading font-semibold">Proceed</button></form></div></div></div>`;
         }
         
         function renderTeacherDetailModal() {
             let modalContainer = document.getElementById('modal-container');
             const { isOpen, teacher } = appState.teacherDetailModal;
-            if (appState.authModal.isOpen || (appState.isAdmin && appState.admin.assignModal.isOpen)) {
-                if(!document.getElementById('teacher-modal-specific-container')) {
+
+            if (appState.passwordModal.isOpen) {
+                 if(!document.getElementById('teacher-modal-specific-container')) {
                     const tempContainer = document.createElement('div');
                     tempContainer.id = 'teacher-modal-specific-container';
                     document.body.appendChild(tempContainer);
@@ -879,7 +688,7 @@
             if (!isOpen || !teacher) { 
                 if (modalContainer && modalContainer.id === 'teacher-modal-specific-container') {
                     modalContainer.innerHTML = '';
-                } else if (!appState.authModal.isOpen && !(appState.isAdmin && appState.admin.assignModal.isOpen)) {
+                } else if (!appState.passwordModal.isOpen) {
                     if (document.getElementById('modal-container')) document.getElementById('modal-container').innerHTML = '';
                 }
                 return; 
@@ -887,43 +696,6 @@
 
             modalContainer.innerHTML = `<div id="teacher-modal-backdrop" class="fixed inset-0 z-[60] flex items-center justify-center p-4 transition-opacity duration-300 opacity-100"><div class="fixed inset-0 bg-black bg-opacity-80"></div><div class="bg-gray-900 border border-gray-700 rounded-xl shadow-lg w-full max-w-lg m-4 transform transition-all duration-300 scale-100 opacity-100 relative"><button id="close-teacher-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors z-10 text-3xl leading-none">&times;</button><div class="p-8"><img src="${teacher.img}" alt="${teacher.name}" class="w-32 h-32 object-cover rounded-full mx-auto mb-4 border-4 border-gray-700"/><h2 class="heading text-3xl font-bold text-white text-center">${teacher.name}</h2><p class="bodyfont text-pink-400 text-center mt-1">${teacher.subjects}</p><p class="bodyfont text-gray-300 mt-6 leading-relaxed text-center">${teacher.bio}</p></div></div></div>`;
         }
-        
-        function renderAdminModals() {
-            const modalContainer = document.getElementById('modal-container');
-            const { isOpen, user } = appState.admin.assignModal;
-            if (!isOpen || !user) { 
-                if (!appState.authModal.isOpen) modalContainer.innerHTML = '';
-                return;
-            }
-
-            modalContainer.innerHTML = `
-                <div id="assign-modal-backdrop" class="fixed inset-0 z-50 flex items-center justify-center p-4 transition-opacity duration-300 opacity-100">
-                    <div class="fixed inset-0 bg-black bg-opacity-70"></div>
-                    <div class="bg-gray-900 border border-gray-700 rounded-xl shadow-lg w-full max-w-md m-4 transform transition-all duration-300 scale-100 opacity-100">
-                        <form id="assign-course-form" class="p-8 space-y-6">
-                            <h2 class="heading text-2xl font-bold text-white">Assign Course to ${user.displayName}</h2>
-                            <div>
-                                <label for="course-select" class="bodyfont text-sm font-medium text-gray-300 block mb-2">Select Course</label>
-                                <select id="course-select" name="courseId" required class="admin-input">
-                                    <option value="">--Please choose a course--</option>
-                                    ${appState.courses.map(c => `<option value="${c.id}">${c.subject} - ${c.level}</option>`).join('')}
-                                </select>
-                            </div>
-                            <div>
-                                <label for="schedule-input" class="bodyfont text-sm font-medium text-gray-300 block mb-2">Schedule (e.g., Mon & Wed at 5 PM)</label>
-                                <input type="text" id="schedule-input" name="schedule" required class="admin-input" placeholder="Enter class schedule">
-                            </div>
-                            <p id="assign-error" class="text-red-500 text-sm text-center bodyfont hidden"></p>
-                            <div class="flex gap-4">
-                                <button type="button" id="cancel-assign-btn" class="w-full bg-gray-600 hover:bg-gray-500 text-white py-2 rounded-lg heading font-semibold">Cancel</button>
-                                <button type="submit" class="w-full cta text-white py-2 rounded-lg heading font-semibold">Assign</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            `;
-        }
-
 
         // --- Helper & Utility Functions ---
         function startTypewriter(textElement, bgContainer, data, typingSpeed = 80, deletingSpeed = 40, pause = 2000) {
@@ -1017,7 +789,7 @@
             const subject = document.getElementById('filter-subject').value;
             const level = document.getElementById('filter-level').value;
 
-            const filtered = appState.courses.filter(c => 
+            const filtered = STATIC_COURSES_DATA.filter(c => 
                 (c.subject.toLowerCase().includes(search) || c.description.toLowerCase().includes(search)) &&
                 (subject === '' || c.subject === subject) &&
                 (level === '' || c.level === level)
@@ -1040,262 +812,38 @@
             `).join('');
         }
 
-        // --- Admin Panel Content Renderers ---
-        function renderAdminDashboard() {
-            return `
-                <div class="admin-card">
-                    <h2 class="admin-header">Dashboard</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div class="p-4 bg-gray-800 rounded-lg text-center">
-                            <p class="text-4xl font-bold text-pink-400">${appState.users.length}</p>
-                            <p class="text-gray-400">Total Users</p>
-                        </div>
-                        <div class="p-4 bg-gray-800 rounded-lg text-center">
-                            <p class="text-4xl font-bold text-pink-400">${appState.courses.length}</p>
-                            <p class="text-gray-400">Total Courses</p>
-                        </div>
-                        <div class="p-4 bg-gray-800 rounded-lg text-center">
-                             <p class="text-4xl font-bold text-pink-400">${appState.assignments.length}</p>
-                            <p class="text-gray-400">Assigned Courses</p>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-
-        function renderAdminCourses() {
-            return `
-                <div class="admin-card space-y-6">
-                    <h2 class="admin-header">Manage Courses</h2>
-                    <!-- Add Course Form -->
-                    <form id="add-course-form" class="p-4 bg-gray-800 rounded-lg space-y-4">
-                        <h3 class="font-bold text-lg text-white">Add New Course</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                           <input type="text" name="subject" placeholder="Subject (e.g., Piano)" required class="admin-input">
-                           <input type="text" name="level" placeholder="Level (e.g., Beginner)" required class="admin-input">
-                        </div>
-                        <textarea name="description" placeholder="Course Description" required class="admin-input h-24"></textarea>
-                        <div>
-                           <label class="text-sm text-gray-400 block mb-1">Course Image</label>
-                           <input type="file" name="image" accept="image/*" required class="admin-input file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-pink-100 file:text-pink-700 hover:file:bg-pink-200">
-                        </div>
-                        <button type="submit" class="cta text-white py-2 px-6 rounded-lg heading font-semibold">Add Course</button>
-                    </form>
-                    
-                    <!-- Course List -->
-                    <div>
-                        <h3 class="font-bold text-lg text-white mb-4">Existing Courses</h3>
-                        <div id="admin-course-list" class="space-y-3">
-                            ${appState.courses.length === 0 ? '<p class="text-gray-500">No courses found.</p>' : appState.courses.map(course => `
-                            <div class="flex items-center justify-between bg-gray-800 p-3 rounded-lg">
-                                <div class="flex items-center gap-4">
-                                    <img src="${course.imageUrl}" class="w-12 h-12 object-cover rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/48x48/1a1a1a/f472b6?text=C';">
-                                    <div>
-                                        <p class="font-semibold text-white">${course.subject}</p>
-                                        <p class="text-sm text-gray-400">${course.level}</p>
-                                    </div>
-                                </div>
-                                <button data-course-id="${course.id}" data-image-path="${course.imagePath || ''}" class="delete-course-btn bg-red-600 hover:bg-red-500 text-white p-2 rounded-full">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm4 0a1 1 0 012 0v6a1 1 0 11-2 0V8z" clip-rule="evenodd" /></svg>
-                                </button>
-                            </div>
-                           `).join('')}
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-
-        function renderAdminUsers() {
-            return `
-                <div class="admin-card">
-                    <h2 class="admin-header">Manage Users</h2>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-sm text-left text-gray-400">
-                            <thead class="text-xs text-gray-300 uppercase bg-gray-800">
-                                <tr>
-                                    <th scope="col" class="px-6 py-3">Name</th>
-                                    <th scope="col" class="px-6 py-3">Email</th>
-                                    <th scope="col" class="px-6 py-3">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                ${appState.users.map(user => `
-                                    <tr class="bg-gray-800 border-b border-gray-700 hover:bg-gray-700">
-                                        <td class="px-6 py-4 font-medium text-white whitespace-nowrap">${user.displayName}</td>
-                                        <td class="px-6 py-4">${user.email}</td>
-                                        <td class="px-6 py-4">
-                                            <button data-user-id='${JSON.stringify(user)}' class="assign-course-btn text-pink-400 hover:underline font-semibold">Assign Course</button>
-                                        </td>
-                                    </tr>
-                                `).join('')}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            `;
-        }
-
-
         // --- Event Handlers ---
         function handleNavItemClick(id) {
-            if (['home', 'courses', 'admin', 'myClass'].includes(id)) {
+            if (['home', 'courses'].includes(id)) {
                  appState.currentPage = id;
                  renderApp();
-            }
-            if (appState.currentPage === 'home' && ['about', 'teachers', 'contact'].includes(id)) {
-                setTimeout(() => { document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
+            } else {
+                 appState.currentPage = 'home';
+                 renderApp();
+                 setTimeout(() => { document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
             }
             appState.mobileMenuOpen = false;
             updateBodyForMobileMenu();
         }
-
-        async function handleAuthFormSubmit(e) {
+        
+        function handlePasswordSubmit(e) {
             e.preventDefault();
-            const form = e.target;
-            const submitButton = form.querySelector('button[type="submit"]');
-            submitButton.disabled = true;
-            submitButton.innerHTML = `<span class="loader !w-6 !h-6 !border-4"></span>`;
-
-            const errorP = document.getElementById('auth-error');
-            errorP.textContent = ''; errorP.classList.add('hidden');
-            const { email, password } = e.target.elements;
-            try {
-                let userCredential;
-                if (appState.authModal.type === 'signup') {
-                    const { name, phone } = e.target.elements;
-                    if (!name.value) throw new Error("Please enter your full name.");
-                    userCredential = await createUserWithEmailAndPassword(auth, email.value, password.value);
-                    await updateProfile(userCredential.user, { displayName: name.value });
-                    // Create private user profile
-                    const userProfileRef = doc(db, "artifacts", appId, "users", userCredential.user.uid, "profile", "details");
-                    await setDoc(userProfileRef, { displayName: name.value, email: email.value, role: 'student', phone: phone.value, createdAt: serverTimestamp() });
-                } else { 
-                    userCredential = await signInWithEmailAndPassword(auth, email.value, password.value); 
-                }
-                
-                // For admin, store public user data for assignment purposes
-                if(appState.authModal.type === 'signup') {
-                    const publicUserRef = doc(db, "artifacts", appId, "public", "data", "users", userCredential.user.uid);
-                    await setDoc(publicUserRef, { displayName: name.value, email: email.value });
-                }
-
-                appState.authModal.isOpen = false; renderApp();
-            } catch (err) {
-                let message = 'An unexpected error occurred.';
-                switch (err.code) {
-                    case 'auth/invalid-credential': message = 'Invalid email or password.'; break;
-                    case 'auth/email-already-in-use': message = 'An account with this email already exists.'; break;
-                    case 'auth/weak-password': message = 'Password must be at least 6 characters.'; break;
-                    default: message = err.message; break;
-                }
-                errorP.textContent = message; errorP.classList.remove('hidden');
-            } finally {
-                submitButton.disabled = false;
-                submitButton.textContent = appState.authModal.type === 'login' ? 'Login' : 'Sign Up';
-            }
-        }
-
-        async function handleAddCourse(e) {
-            e.preventDefault();
-            const form = e.target;
-            const submitButton = form.querySelector('button[type="submit"]');
-            submitButton.disabled = true;
-            submitButton.innerHTML = 'Adding...';
-
-            try {
-                const { subject, level, description, image } = form.elements;
-                const file = image.files[0];
-                if (!file) throw new Error("Image file is required.");
-
-                const imagePath = `course_images/${Date.now()}_${file.name}`;
-                const storageRef = ref(storage, imagePath);
-                await uploadBytes(storageRef, file);
-                const imageUrl = await getDownloadURL(storageRef);
-
-                await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'courses'), {
-                    subject: subject.value,
-                    level: level.value,
-                    description: description.value,
-                    imageUrl,
-                    imagePath,
-                    createdAt: serverTimestamp()
-                });
-                
-                form.reset();
-            } catch (error) {
-                console.error("Error adding course: ", error);
-                alert("Failed to add course. Check console for details.");
-            } finally {
-                submitButton.disabled = false;
-                submitButton.textContent = 'Add Course';
-            }
-        }
-
-        async function handleDeleteCourse(e) {
-            const button = e.target.closest('.delete-course-btn');
-            if(!button) return;
+            const passwordInput = document.getElementById('access-code');
+            const password = passwordInput.value;
+            const errorEl = document.getElementById('password-error');
             
-            const courseId = button.dataset.courseId;
-            const imagePath = button.dataset.imagePath;
+            const passwordMap = {
+                '1101': 's1.html', '1202': 's2.html', '1303': 's3.html', '1404': 's4.html', '1505': 's5.html', '1606': 's6.html', '1707': 's7.html',
+                '2101': 't1.html', '2202': 't2.html', '2303': 't3.html', '2404': 't4.html', '2505': 't5.html', '2606': 't6.html', '2707': 't7.html',
+                '3101': 'p1.html', '3202': 'p2.html', '3303': 'p3.html', '3404': 'p4.html', '3505': 'p5.html', '3606': 'p6.html', '3707': 'p7.html'
+            };
 
-            if (confirm("Are you sure you want to delete this course? This action cannot be undone.")) {
-                try {
-                    // Delete firestore document
-                    await deleteDoc(doc(db, "artifacts", appId, "public", "data", "courses", courseId));
-
-                    // Delete image from storage
-                    if (imagePath && imagePath !== "undefined") {
-                        const imageRef = ref(storage, imagePath);
-                        await deleteObject(imageRef);
-                    }
-                } catch(error) {
-                    console.error("Error deleting course: ", error);
-                    alert("Failed to delete course. Check console for details.");
-                }
-            }
-        }
-
-        async function handleAssignCourse(e) {
-            e.preventDefault();
-            const form = e.target;
-            const submitButton = form.querySelector('button[type="submit"]');
-            submitButton.disabled = true;
-            submitButton.textContent = "Assigning...";
-            const errorP = document.getElementById('assign-error');
-            errorP.classList.add('hidden');
-
-            try {
-                const { courseId, schedule } = form.elements;
-                const user = appState.admin.assignModal.user;
-                if (!user || !courseId.value) throw new Error("User or course not selected.");
-                
-                // Simple check for existing assignment (can be improved)
-                const assignmentsCol = collection(db, "artifacts", appId, "public", "data", "assignments");
-                const q = query(assignmentsCol, where("userId", "==", user.uid), where("courseId", "==", courseId.value));
-                const existing = await getDocs(q);
-
-                if(!existing.empty) {
-                    throw new Error("This course is already assigned to the user.");
-                }
-                
-                await addDoc(assignmentsCol, {
-                    userId: user.uid,
-                    courseId: courseId.value,
-                    schedule: schedule.value,
-                    assignedAt: serverTimestamp()
-                });
-                
-                appState.admin.assignModal = { isOpen: false, user: null };
-                renderApp();
-
-            } catch(error) {
-                console.error("Error assigning course: ", error);
-                errorP.textContent = error.message;
-                errorP.classList.remove('hidden');
-            } finally {
-                submitButton.disabled = false;
-                submitButton.textContent = "Assign";
+            if (passwordMap[password]) {
+                window.location.href = passwordMap[password];
+            } else {
+                errorEl.textContent = 'Invalid code. Please try again.';
+                errorEl.classList.remove('hidden');
+                passwordInput.focus();
             }
         }
         
@@ -1320,13 +868,18 @@
             const mobileOverlay = document.getElementById('mobile-menu-overlay');
 
             const handleClick = (e) => {
-                if (e.target.closest('[data-navid]')) { handleNavItemClick(e.target.closest('[data-navid]').dataset.navid); return; }
-                if (['login-btn', 'signup-btn'].includes(e.target.id)) {
-                    appState.authModal = { isOpen: true, type: e.target.id.includes('login') ? 'login' : 'signup' };
-                    renderApp();
-                    return;
+                if (e.target.closest('[data-navid]')) {
+                    handleNavItemClick(e.target.closest('[data-navid]').dataset.navid); 
+                    return; 
                 }
-                if (e.target.id === 'logout-btn') { signOut(auth); appState.currentPage = 'home'; return; }
+
+                if(e.target.closest('#get-started-btn')){
+                     e.preventDefault();
+                     appState.passwordModal.isOpen = true;
+                     renderApp();
+                     return;
+                }
+
                 if (e.target.closest('#mobile-menu-toggle')) { appState.mobileMenuOpen = true; updateBodyForMobileMenu(); return; }
                 
                 const knowMoreBtn = e.target.closest('.know-more-btn');
@@ -1337,25 +890,13 @@
                 }
                 if (e.target.closest('#teacher-slider-next-btn')) { updateTeacherSlider('next'); return; }
                 if (e.target.closest('#teacher-slider-prev-btn')) { updateTeacherSlider('prev'); return; }
-
-                const adminTab = e.target.closest('[data-admin-tab]');
-                if(adminTab) {
-                    appState.admin.activeTab = adminTab.dataset.adminTab;
-                    renderAdminPanelPage();
-                    addEventListeners();
-                }
-                if(e.target.closest('.delete-course-btn')) { handleDeleteCourse(e); }
-                const assignBtn = e.target.closest('.assign-course-btn');
-                if (assignBtn) {
-                    appState.admin.assignModal = { isOpen: true, user: JSON.parse(assignBtn.dataset.userId) };
-                    renderApp();
-                }
             };
             
             const handleModalClick = (e) => {
-                if (e.target.id === 'toggle-auth-type') { appState.authModal.type = appState.authModal.type === 'login' ? 'signup' : 'login'; renderApp(); }
-                else if (e.target.id === 'auth-modal-backdrop') { appState.authModal.isOpen = false; renderApp(); }
-                else if (e.target.id === 'cancel-assign-btn' || e.target.id === 'assign-modal-backdrop') { appState.admin.assignModal = { isOpen: false, user: null }; renderApp(); }
+                if (e.target.id === 'password-modal-backdrop' || e.target.closest('#close-password-modal')) { 
+                    appState.passwordModal.isOpen = false; 
+                    renderApp(); 
+                }
             }
             
             const handleTeacherModalClick = (e) => {
@@ -1366,21 +907,18 @@
             }
             
             const handleMobileMenuClick = (e) => {
-                 if (e.target.closest('[data-navid-mobile]')) {
-                     handleNavItemClick(e.target.closest('[data-navid-mobile]').dataset.navidMobile);
+                 const navidMobile = e.target.closest('[data-navid-mobile]');
+                 if (navidMobile) {
+                    if(navidMobile.dataset.navidMobile === 'contact') {
+                        e.preventDefault();
+                        appState.mobileMenuOpen = false;
+                        appState.passwordModal.isOpen = true;
+                        renderApp();
+                        return;
+                    }
+                     handleNavItemClick(navidMobile.dataset.navidMobile);
                      return;
                  }
-                 if (['mobile-login-btn', 'mobile-signup-btn'].includes(e.target.id)) {
-                    appState.authModal = { isOpen: true, type: e.target.id.includes('login') ? 'login' : 'signup' };
-                    appState.mobileMenuOpen = false;
-                    renderApp();
-                    return;
-                }
-                if(e.target.id === 'mobile-logout-btn') {
-                    signOut(auth);
-                    appState.mobileMenuOpen = false;
-                    updateBodyForMobileMenu();
-                }
                  if (e.target.closest('#mobile-menu-close')) {
                      appState.mobileMenuOpen = false;
                      updateBodyForMobileMenu();
@@ -1394,112 +932,18 @@
             if(teacherModalContainer) teacherModalContainer.onclick = handleTeacherModalClick;
             if(mobileOverlay) mobileOverlay.onclick = handleMobileMenuClick;
 
-            const authForm = document.getElementById('auth-form');
-            if (authForm) authForm.onsubmit = handleAuthFormSubmit;
-            
-            const addCourseForm = document.getElementById('add-course-form');
-            if (addCourseForm) addCourseForm.onsubmit = handleAddCourse;
+            const passwordForm = document.getElementById('password-form');
+            if(passwordForm) passwordForm.onsubmit = handlePasswordSubmit;
 
-            const assignCourseForm = document.getElementById('assign-course-form');
-            if (assignCourseForm) assignCourseForm.onsubmit = handleAssignCourse;
-            
             document.getElementById('filter-search')?.addEventListener('input', renderFilteredCourses);
             document.getElementById('filter-subject')?.addEventListener('change', renderFilteredCourses);
             document.getElementById('filter-level')?.addEventListener('change', renderFilteredCourses);
         }
 
-        // --- Firebase Data Subscriptions ---
-        function setupFirestoreListeners(user) {
-            unsubscribeCourses();
-            unsubscribeUsers();
-            unsubscribeAssignments();
-            
-            if (!user) {
-                appState.courses = [];
-                appState.users = [];
-                appState.assignments = [];
-                appState.isAdmin = false;
-                return; 
-            }
-
-            const coursesCol = collection(db, 'artifacts', appId, 'public', 'data', 'courses');
-            unsubscribeCourses = onSnapshot(coursesCol, (snapshot) => {
-                appState.courses = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                if (!appState.isLoading) renderPage();
-            }, (error) => {
-                console.error("Courses listener error:", error);
-                appState.courses = []; 
-                if (!appState.isLoading) renderPage();
-            });
-
-            if (user && !user.isAnonymous) {
-                 const assignmentsCol = collection(db, "artifacts", appId, "public", "data", "assignments");
-                 const q = query(assignmentsCol, where("userId", "==", user.uid));
-                 unsubscribeAssignments = onSnapshot(q, (snapshot) => {
-                     appState.assignments = snapshot.docs.map(doc => ({id: doc.id, ...doc.data() }));
-                     if (!appState.isLoading) renderApp();
-                 }, (error) => {
-                    console.error("Assignments listener error:", error);
-                 });
-
-                if(user.email === ADMIN_EMAIL) {
-                    appState.isAdmin = true;
-                    const usersCol = collection(db, 'artifacts', appId, 'public', 'data', 'users');
-                    unsubscribeUsers = onSnapshot(usersCol, (snapshot) => {
-                        appState.users = snapshot.docs.map(doc => ({ uid: doc.id, ...doc.data() }));
-                        if(appState.currentPage === 'admin' && !appState.isLoading) renderAdminPanelPage();
-                    }, (error) => {
-                        console.error("Users listener error:", error);
-                    });
-                } else {
-                    appState.isAdmin = false;
-                }
-            } else { 
-                appState.isAdmin = false;
-                appState.assignments = [];
-                appState.users = [];
-            }
-        }
-        
         // --- App Initialization ---
         document.addEventListener('DOMContentLoaded', () => {
             AOS.init({ duration: 800, once: true });
-            
-            const initializeAndStartApp = () => {
-                
-                onAuthStateChanged(auth, (user) => {
-                    
-                    if (appState.isLoading) {
-                        appState.currentUser = user;
-                        setupFirestoreListeners(user);
-                        appState.isLoading = false;
-                        renderApp(); 
-                    } else {
-                        const wasAnonymous = appState.currentUser ? appState.currentUser.isAnonymous : true;
-                        const isNowAnonymous = user ? user.isAnonymous : true;
-                        
-                        if(wasAnonymous && isNowAnonymous) return;
-
-                        appState.currentUser = user;
-                        setupFirestoreListeners(user);
-                        renderApp();
-                    }
-                });
-
-                if (!auth.currentUser) {
-                    signInAnonymously(auth).catch((error) => {
-                        console.error("Startup anonymous sign-in failed:", error);
-                        const pageContainer = document.getElementById('page-container');
-                        if(pageContainer) pageContainer.innerHTML = `<div class="text-center text-red-400 p-8">Could not connect to services. Please refresh.</div>`;
-                        appState.isLoading = false;
-                        renderApp();
-                    });
-                }
-            };
-
-            if (auth) {
-                initializeAndStartApp();
-            }
+            renderApp(); 
 
             let lastScrollTop = 0;
             const headerContainer = document.getElementById('header-container');

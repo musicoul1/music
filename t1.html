@@ -10,6 +10,132 @@
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
     <script src="https://www.youtube.com/iframe_api"></script>
     <style>
+        .font-poppins { font-family: 'Poppins', sans-serif; }
+        .font-playfair { font-family: 'Playfair Display', serif; }
+
+        #musicoul-chat-widget {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+
+        #musicoul-chat-button {
+            background: linear-gradient(135deg, #8B5CF6, #EC4899);
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 10px 25px -5px rgba(236, 72, 153, 0.4), 0 8px 10px -6px rgba(139, 92, 246, 0.4);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: pulse-glow 3s infinite ease-in-out;
+            overflow: hidden;
+        }
+        #musicoul-chat-button:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 20px 30px -10px rgba(236, 72, 153, 0.5), 0 15px 20px -10px rgba(139, 92, 246, 0.5);
+            animation-play-state: paused;
+        }
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 10px 25px -5px rgba(236, 72, 153, 0.4), 0 8px 10px -6px rgba(139, 92, 246, 0.4); }
+            50% { box-shadow: 0 20px 30px -10px rgba(236, 72, 153, 0.6), 0 15px 20px -10px rgba(139, 92, 246, 0.6); }
+        }
+
+        #musicoul-chat-modal {
+            position: fixed;
+            bottom: 7rem;
+            right: 2rem;
+            width: 90vw;
+            max-width: 400px;
+            height: 70vh;
+            max-height: 600px;
+            background: rgba(30, 30, 42, 0.8);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transform: translateY(20px) scale(0.95);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        #musicoul-chat-modal.active {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #musicoul-chat-messages::-webkit-scrollbar { width: 6px; }
+        #musicoul-chat-messages::-webkit-scrollbar-track { background: transparent; }
+        #musicoul-chat-messages::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 3px; }
+
+        .message-bubble {
+            animation: message-in 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        @keyframes message-in {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .typing-indicator span {
+            height: 8px;
+            width: 8px;
+            background-color: #9ca3af;
+            border-radius: 50%;
+            display: inline-block;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+        .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1.0); }
+        }
+
+        .suggestion-chip {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 9999px;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            color: #e5e7eb;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            backdrop-filter: blur(5px);
+        }
+        .suggestion-chip:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .ai-message-content span {
+            opacity: 0;
+            animation: fadeInWord 0.3s ease forwards;
+            display: inline-block;
+        }
+        @keyframes fadeInWord {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 640px) {
+            #musicoul-chat-widget { bottom: 1rem; right: 1rem; }
+            #musicoul-chat-modal {
+                bottom: 6rem;
+                right: 1rem;
+                width: calc(100vw - 2rem);
+                max-width: none;
+            }
+        }
+    </style>
+    <style>
         @keyframes gradient-animation {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -224,6 +350,200 @@
     </style>
 </head>
 <body class="min-h-screen text-gray-100 bg-black bodyfont">
+
+    <div id="musicoul-chat-widget">
+        <div id="musicoul-chat-button">
+             <img src="https://yt3.googleusercontent.com/FRE-Mlxh3eYM2VObB1ZHR4zygMMjAAZfuoLbeBMtVHfzjlqs2RkozmqNDQ8_iEhESwA5J_zxAA=s160-c-k-c0x00ffffff-no-rj" alt="Musicoul Avatar" class="w-full h-full rounded-full object-cover">
+        </div>
+        <div id="musicoul-chat-modal">
+            <div class="p-4 border-b border-white/10 flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-full overflow-hidden">
+                    <img src="https://yt3.googleusercontent.com/FRE-Mlxh3eYM2VObB1ZHR4zygMMjAAZfuoLbeBMtVHfzjlqs2RkozmqNDQ8_iEhESwA5J_zxAA=s160-c-k-c0x00ffffff-no-rj" alt="Musicoul Avatar" class="w-full h-full object-cover">
+                </div>
+                <div>
+                    <h3 class="font-semibold text-white font-playfair">Musicoul Assistant</h3>
+                    <p class="text-xs text-green-400">Online</p>
+                </div>
+            </div>
+            <div id="musicoul-chat-messages" class="flex-1 p-4 space-y-4 overflow-y-auto">
+                <div class="flex message-bubble">
+                    <div class="bg-violet-600 rounded-lg rounded-bl-none p-3 max-w-xs text-sm">
+                        Hello! I'm Musicoul, your personal music theory and practice guide. How can I help you today?
+                    </div>
+                </div>
+            </div>
+             <div id="musicoul-suggestions" class="p-4 pt-0 flex flex-wrap gap-2">
+                <button class="suggestion-chip">Explain Raag Bhupali</button>
+                <button class="suggestion-chip">What is a 'Taal'?</button>
+                <button class="suggestion-chip">How to practice scales?</button>
+            </div>
+            <div class="p-4 border-t border-white/10">
+                <form id="musicoul-chat-form" class="flex items-center space-x-2">
+                    <input id="musicoul-chat-input" type="text" placeholder="Ask about any music topic..." class="flex-1 bg-white/10 text-white placeholder-white/50 px-4 py-2 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-pink-500 transition">
+                    <button type="submit" class="bg-pink-600 hover:bg-pink-700 rounded-full w-10 h-10 flex items-center justify-center transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const chatButton = document.getElementById('musicoul-chat-button');
+            const chatModal = document.getElementById('musicoul-chat-modal');
+            const chatForm = document.getElementById('musicoul-chat-form');
+            const chatInput = document.getElementById('musicoul-chat-input');
+            const messagesContainer = document.getElementById('musicoul-chat-messages');
+            const suggestionsContainer = document.getElementById('musicoul-suggestions');
+
+            chatButton.addEventListener('click', () => {
+                chatModal.classList.toggle('active');
+            });
+            
+            suggestionsContainer.addEventListener('click', (e) => {
+                if (e.target.classList.contains('suggestion-chip')) {
+                    const query = e.target.textContent;
+                    appendMessage(query, 'user');
+                    showTypingIndicator();
+                    getGeminiResponse(query);
+                    suggestionsContainer.style.display = 'none';
+                }
+            });
+
+            chatForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const userInput = chatInput.value.trim();
+                if (!userInput) return;
+
+                appendMessage(userInput, 'user');
+                chatInput.value = '';
+                showTypingIndicator();
+                suggestionsContainer.style.display = 'none';
+                getGeminiResponse(userInput);
+            });
+            
+            function parseMarkdown(text) {
+                text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                text = text.replace(/^### (.*$)/gim, '<h3 class="text-lg font-semibold mb-2 mt-4">$1</h3>');
+                text = text.replace(/(\r\n|\n\r|\r|\n){2,}/g, '<br><br>');
+                text = text.replace(/(\r\n|\n\r|\r|\n)/g, '<br>');
+                text = text.replace(/`([^`]+)`/g, '<code class="bg-gray-700 rounded px-1 text-pink-300">$1</code>');
+                text = text.replace(/^\* (.*$)/gim, '<li class="ml-4 list-disc">$1</li>');
+                text = text.replace(/^- (.*$)/gim, '<li class="ml-4 list-disc">$1</li>');
+                return text;
+            }
+
+            function animateText(bubbleElement) {
+                const walker = document.createTreeWalker(bubbleElement, NodeFilter.SHOW_TEXT, null, false);
+                let node;
+                const textNodes = [];
+                while(node = walker.nextNode()) {
+                    textNodes.push(node);
+                }
+
+                let delay = 0;
+                textNodes.forEach(textNode => {
+                    const text = textNode.textContent;
+                    const fragment = document.createDocumentFragment();
+                    
+                    for (let i = 0; i < text.length; i++) {
+                        const char = text[i];
+                        const span = document.createElement('span');
+                        span.textContent = char;
+                        span.className = 'fade-in-word';
+                        span.style.animationDelay = `${delay}s`;
+                        fragment.appendChild(span);
+                        delay += 0.015; 
+                    }
+                    textNode.parentNode.replaceChild(fragment, textNode);
+                });
+            }
+
+            function appendMessage(text, sender) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `flex message-bubble ${sender === 'user' ? 'justify-end' : 'justify-start'}`;
+                
+                const bubble = document.createElement('div');
+                bubble.className = `p-3 rounded-lg text-sm max-w-xs ${sender === 'user' ? 'bg-pink-600 rounded-br-none' : 'bg-violet-600 rounded-bl-none'}`;
+                
+                if (sender === 'ai') {
+                    bubble.innerHTML = parseMarkdown(text);
+                    animateText(bubble);
+                } else {
+                    bubble.textContent = text;
+                }
+                
+                messageDiv.appendChild(bubble);
+                messagesContainer.appendChild(messageDiv);
+                
+                // Scroll the new message into view, aligning its top with the container's top
+                setTimeout(() => {
+                    messageDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            }
+
+            function showTypingIndicator() {
+                const indicator = document.createElement('div');
+                indicator.id = 'typing-indicator';
+                indicator.className = 'flex message-bubble';
+                indicator.innerHTML = `
+                    <div class="bg-violet-600/80 rounded-lg rounded-bl-none p-3 max-w-xs text-sm">
+                        <div class="typing-indicator">
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>
+                `;
+                messagesContainer.appendChild(indicator);
+                indicator.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+            
+            function removeTypingIndicator() {
+                const indicator = document.getElementById('typing-indicator');
+                if (indicator) {
+                    indicator.remove();
+                }
+            }
+
+            async function getGeminiResponse(prompt) {
+                const systemPrompt = "You are Musicoul, a friendly and expert music tutor. Your goal is to guide students of all levels. Keep your answers minimal and crisp by default. Use key points via Markdown lists (`*` or `-`). However, if a topic requires detailed explanation, feel free to elaborate with multiple sections using Markdown headings (`###`). Always use `**` for bolding key terms. Maintain a positive and supportive tone.";
+                const apiKey = "";
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+
+                const payload = {
+                    contents: [{ parts: [{ text: prompt }] }],
+                    systemInstruction: {
+                        parts: [{ text: systemPrompt }]
+                    },
+                };
+                
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    const result = await response.json();
+                    
+                    removeTypingIndicator();
+
+                    const candidate = result.candidates?.[0];
+                    if (candidate && candidate.content?.parts?.[0]?.text) {
+                        appendMessage(candidate.content.parts[0].text, 'ai');
+                    } else {
+                        appendMessage("Sorry, I couldn't process that. Could you try asking in a different way?", 'ai');
+                        console.error('Unexpected API response structure:', result);
+                    }
+                } catch (error) {
+                    removeTypingIndicator();
+                    appendMessage("Oops! I'm having a little trouble connecting. Please check your connection and try again.", 'ai');
+                    console.error('Error fetching Gemini response:', error);
+                }
+            }
+        });
+    </script>
 
     <div id="app-container">
         <a href="https://musicoul.in" class="back-btn fixed top-24 left-4 md:left-6 z-40 rounded-full p-2 md:p-3 text-white" data-aos="fade-right">

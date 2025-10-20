@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla - Praveshika Purna | Musicoul</title>
+    <link rel="icon" href="https://yt3.googleusercontent.com/FRE-Mlxh3eYM2VObB1ZHR4zygMMjAAZfuoLbeBMtVHfzjlqs2RkozmqNDQ8_iEhESwA5J_zxAA=s160-c-k-c0x00ffffff-no-rj" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <style>
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        body {
+            background: #0a0a0a;
+            background-image: linear-gradient(135deg, #0a0a0a 0%, #1a0a1a 50%, #0a0a0a 100%);
+            background-size: 200% 200%;
+            animation: gradient-animation 25s ease infinite;
+            color: #f3f4f6;
+        }
+        .heading { font-family: 'Playfair Display', serif; }
+        .bodyfont { font-family: 'Poppins', sans-serif; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #111; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #6b21a8, #ef4444, #f472b6); border-radius: 4px; }
+        
+        #header-container {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            transition: transform 0.3s ease-in-out;
+        }
+        #header-container.header-hidden {
+            transform: translateY(-100%);
+        }
+        body.mobile-nav-open {
+            overflow: hidden;
+        }
+
+        .hero-section {
+            position: relative;
+            background: url('https://jagatsinghhotels.com/media/jsHotel/Experiences/2.jpg') center center/cover no-repeat;
+        }
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(10, 10, 10, 1) 10%, rgba(10, 10, 10, 0.8) 50%, rgba(10, 10, 10, 0.5) 100%);
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .glass-card {
+            background: rgba(30, 30, 40, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(236, 72, 153, 0.25), transparent 50%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 0;
+        }
+        .glass-card:hover::before {
+            opacity: 1;
+        }
+        .glass-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border-color: rgba(236, 72, 153, 0.3);
+        }
+        .glass-card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .file-item {
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .file-item:hover {
+            background: rgba(236, 72, 153, 0.1);
+            transform: translateX(8px);
+        }
+        .file-item .play-icon {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .file-item:hover .play-icon {
+            opacity: 0.8;
+        }
+
+        .folder-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+        .folder.open > .folder-content {
+            max-height: 1000px;
+        }
+        .folder.open .folder-arrow {
+            transform: rotate(90deg);
+        }
+        .folder-arrow {
+            transition: transform 0.3s ease;
+        }
+        
+        #previewer-modal-container.hidden { display: none; }
+        .modal-backdrop { animation: fadeIn 0.3s ease forwards; }
+        .modal-content { animation: slideUp 0.4s ease forwards; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+        .media-player video, .media-player audio, #youtube-player-element { width: 100%; height: 100%; display: block; }
+        .media-controls { background: linear-gradient(to top, rgba(0,0,0,0.7), transparent); transition: opacity 0.3s; }
+        .media-player:hover .media-controls, .media-player.paused .media-controls { opacity: 1; }
+        .progress-bar { background: rgba(255,255,255,0.2); cursor: pointer; position: relative; }
+        .progress-filled { background: linear-gradient(90deg, #6b21a8, #ef4444, #f472b6); flex-basis: 0%; }
+        .progress-thumb {
+            width: 16px; height: 16px; background: white; border-radius: 50%;
+            position: absolute; top: 50%; transform: translate(-50%, -50%); left: 0%;
+            box-shadow: 0 0 5px rgba(0,0,0,0.5); pointer-events: none;
+        }
+        .back-btn {
+            background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        .back-btn:hover { background: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.4); transform: scale(1.05); }
+
+        .join-btn {
+            background-color: rgba(236, 72, 153, 0.1);
+            border: 1px solid rgba(236, 72, 153, 0.4);
+            color: #f3f4f6;
+            box-shadow: 0 0 15px rgba(236, 72, 153, 0.2);
+            transition: all 0.3s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+
+        .join-btn:hover {
+            background-color: rgba(236, 72, 153, 0.2);
+            border-color: rgba(236, 72, 153, 0.6);
+            box-shadow: 0 0 25px rgba(236, 72, 153, 0.4);
+            transform: translateY(-2px);
+        }
+        
+        .join-btn .live-indicator {
+            width: 8px;
+            height: 8px;
+            background-color: #34D399;
+            border-radius: 50%;
+            animation: pulse-live 1.5s infinite;
+        }
+
+        @keyframes pulse-live {
+          0%, 100% {
+            box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7);
+          }
+          70% {
+            box-shadow: 0 0 0 10px rgba(52, 211, 153, 0);
+          }
+        }
+        
+        input[type=range] { -webkit-appearance: none; background: transparent; }
+        input[type=range]::-webkit-slider-runnable-track { height: 4px; background: rgba(255,255,255,0.3); border-radius: 2px; }
+        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 14px; width: 14px; border-radius: 50%; background: white; margin-top: -5px; }
+
+        .dropdown-content { transition: opacity 0.2s, visibility 0.2s; }
+        .dropdown:hover .dropdown-content { opacity: 1; visibility: visible; }
+        
+        .date-selector {
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid transparent;
+        }
+        .date-selector:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        .date-selector.active {
+            background: #ec4899;
+            color: white;
+            border-color: #ec4899;
+            box-shadow: 0 0 15px rgba(236, 72, 153, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .hero-content { min-height: 40vh; }
+            #page-container { padding-left: 1rem; padding-right: 1rem; padding-top: 2rem; }
+            .back-btn { top: 5rem; left: 1rem; height: 2.5rem; width: 2.5rem; }
+            .date-picker-container {
+                display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
+                gap: 0.5rem; padding-bottom: 1rem;
+                -ms-overflow-style: none; scrollbar-width: none;
+            }
+            .date-picker-container::-webkit-scrollbar { display: none; }
+            .date-selector {
+                flex: 0 0 auto;
+                scroll-snap-align: center;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen text-gray-100 bg-black bodyfont">
+
+    <div id="app-container">
+        <a href="https://musicoul.in" class="back-btn fixed top-24 left-4 md:left-6 z-40 rounded-full p-2 md:p-3 text-white" data-aos="fade-right">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
+        </a>
+        <header id="header-container"></header>
+        
+        <div class="hero-section" data-aos="fade-in">
+            <div class="hero-content min-h-[40vh] md:min-h-[50vh] flex flex-col items-center justify-center text-center px-6">
+                <h1 class="heading text-white text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight">Tabla</h1>
+                <p class="bodyfont text-pink-300 mt-4 text-2xl md:text-3xl font-semibold">Praveshika Purna</p>
+            </div>
+        </div>
+
+        <main id="page-container" class="max-w-5xl mx-auto px-6 py-16 sm:py-24">
+            
+            <section class="text-center mb-16" data-aos="fade-up">
+                 <a href="https://meet.google.com/gnr-gqxm-csk" target="_blank" class="join-btn w-full max-w-sm mx-auto font-bold py-4 rounded-lg heading text-xl">
+                    <span class="live-indicator"></span>
+                    Join Live Class
+                </a>
+            </section>
+
+            <section id="schedule" data-aos="fade-up">
+                <div class="glass-card rounded-xl p-6 md:p-8">
+                    <h2 class="heading text-3xl md:text-4xl font-bold text-white mb-6">Weekly Schedule</h2>
+                    <div id="date-picker" class="date-picker-container flex justify-center gap-2 mb-6"></div>
+                    <div id="class-info-container" class="space-y-4"></div>
+                </div>
+            </section>
+
+            <section id="resources" class="mt-16 md:mt-20" data-aos="fade-up" data-aos-delay="200">
+                <h2 class="heading text-3xl md:text-4xl font-bold text-white mb-8">Premium Resources</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="resource-folders">
+                    <div class="glass-card rounded-xl folder">
+                        <div class="folder-header p-5 flex justify-between items-center cursor-pointer">
+                            <div class="flex items-center gap-4"><svg class="h-8 w-8 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg><h3 class="heading text-xl font-semibold">Taal</h3></div>
+                           <svg class="h-6 w-6 text-gray-400 folder-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </div>
+                        <div class="folder-content px-5 pb-5">
+                            <div class="space-y-3 pt-4 border-t border-gray-700/50">
+                                <div class="file-item p-3 rounded-lg" data-type="gdrive-pdf" data-src="https://drive.google.com/file/d/13y-v2XJpVDvyy-ocdfMr3OYyNoDjfGWI/view?usp=sharing">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center gap-4"><svg class="h-6 w-6 text-gray-300 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M13,3.5L18.5,9H13V3.5M12,19L8,15H11V12H13V15H16L12,19Z"></path></svg><span class="truncate">Taal Tritaal</span></div>
+                                        <svg class="play-icon h-6 w-6 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                                    </div>
+                                </div>
+                                <div class="file-item p-3 rounded-lg" data-type="gdrive-pdf" data-src="https://drive.google.com/file/d/11oVa-sy0aGfQLGmARGqrD3BhvtWOudgH/view?usp=sharing">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center gap-4"><svg class="h-6 w-6 text-gray-300 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M13,3.5L18.5,9H13V3.5M12,19L8,15H11V12H13V15H16L12,19Z"></path></svg><span class="truncate">Taal Keherwa</span></div>
+                                        <svg class="play-icon h-6 w-6 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                                    </div>
+                                </div>
+                                <div class="file-item p-3 rounded-lg" data-type="gdrive-pdf" data-src="https://drive.google.com/file/d/1MaxmcLkHSAX7e4QqprlgWtR2Umx094Hv/view?usp=sharing">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center gap-4"><svg class="h-6 w-6 text-gray-300 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M13,3.5L18.5,9H13V3.5M12,19L8,15H11V12H13V15H16L12,19Z"></path></svg><span class="truncate">Taal Dadra</span></div>
+                                        <svg class="play-icon h-6 w-6 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="glass-card rounded-xl folder">
+                        <div class="folder-header p-5 flex justify-between items-center cursor-pointer">
+                            <div class="flex items-center gap-4"><svg class="h-8 w-8 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg><h3 class="heading text-xl font-semibold">Kayada</h3></div>
+                            <svg class="h-6 w-6 text-gray-400 folder-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </div>
+                        <div class="folder-content px-5 pb-5">
+                            <div class="space-y-3 pt-4 border-t border-gray-700/50">
+                                <div class="file-item p-3 rounded-lg" data-type="gdrive-pdf" data-src="https://drive.google.com/file/d/13GL-q7-QnfS_LkRGer3Hg0E67gRD631T/view?usp=sharing">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center gap-4"><svg class="h-6 w-6 text-gray-300 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M13,3.5L18.5,9H13V3.5M12,19L8,15H11V12H13V15H16L12,19Z"></path></svg><span class="truncate">तिट कायदा</span></div>
+                                        <svg class="play-icon h-6 w-6 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                                    </div>
+                                </div>
+                                <div class="file-item p-3 rounded-lg" data-type="gdrive-pdf" data-src="https://drive.google.com/file/d/1K8SHLey79co84OTJp-pslacmW_q7ujhb/view?usp=sharing">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center gap-4"><svg class="h-6 w-6 text-gray-300 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M13,3.5L18.5,9H13V3.5M12,19L8,15H11V12H13V15H16L12,19Z"></path></svg><span class="truncate">तिरकिट कायदा</span></div>
+                                        <svg class="play-icon h-6 w-6 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                                    </div>
+                                </div>
+                                <div class="file-item p-3 rounded-lg" data-type="gdrive-pdf" data-src="https://drive.google.com/file/d/1ShBPlHb3XmoMe6Heyaln32B5LmEaHOGx/view?usp=sharing">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center gap-4"><svg class="h-6 w-6 text-gray-300 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M13,3.5L18.5,9H13V3.5M12,19L8,15H11V12H13V15H16L12,19Z"></path></svg><span class="truncate">धाती-धागे कायदा</span></div>
+                                        <svg class="play-icon h-6 w-6 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <div id="mobile-menu-overlay"></div>
+    </div>
+
+    <div id="previewer-modal-container" class="hidden fixed inset-0 z-[60] flex items-center justify-center p-4">
+        <div id="modal-backdrop" class="modal-backdrop fixed inset-0 bg-black bg-opacity-80"></div>
+        <div id="modal-content" class="modal-content bg-gray-900 border border-gray-700 rounded-xl shadow-2xl w-full max-w-4xl m-4 relative transform transition-all duration-300">
+             <button id="close-modal-btn" class="absolute -top-3 -right-3 bg-white text-black rounded-full h-9 w-9 flex items-center justify-center text-2xl font-bold z-10">&times;</button>
+             <div id="previewer-content" class="h-full w-full rounded-lg overflow-hidden"></div>
+        </div>
+    </div>
+    
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            AOS.init({ duration: 800, once: true, disable: 'mobile' });
+            
+            const NAV_ITEMS = [ { name: "Home", id: "home" }, { name: "Courses", id: "courses" }, { name: "Teachers", id: "teachers" }, { name: "About", id: "about" }, { name: "Contact", id: "contact" }, ];
+            let mobileMenuOpen = false;
+            let youtubePlayer = null;
+            let ytInterval = null;
+
+            const resourceFolders = document.getElementById('resource-folders');
+            const modalContainer = document.getElementById('previewer-modal-container');
+            const previewerContent = document.getElementById('previewer-content');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+            const modalBackdrop = document.getElementById('modal-backdrop');
+            const mainJoinClassBtn = document.getElementById('main-join-class-btn');
+
+            const renderHeader = () => {
+                const headerContainer = document.getElementById('header-container');
+                if (!headerContainer) return;
+                const navItemsHtml = NAV_ITEMS.map(item => `<a href="https://musicoul.in#${item.id}" class="hover:text-pink-400 bodyfont transition-colors duration-300">${item.name}</a>`).join('');
+                headerContainer.innerHTML = `<div class="bg-black/80 backdrop-blur-sm border-b border-gray-800"><div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between"><a href="https://musicoul.in" class="flex items-center gap-4 cursor-pointer"><img src="https://yt3.googleusercontent.com/FRE-Mlxh3eYM2VObB1ZHR4zygMMjAAZfuoLbeBMtVHfzjlqs2RkozmqNDQ8_iEhESwA5J_zxAA=s160-c-k-c0x00ffffff-no-rj" alt="Musicoul Logo" class="w-12 h-12 rounded-full" /><div class="heading text-white text-2xl font-bold">Musicoul</div></a><nav class="hidden lg:flex flex-wrap gap-x-8 gap-y-2 text-sm font-medium text-gray-300 items-center justify-end">${navItemsHtml}</nav><button id="mobile-menu-toggle" class="lg:hidden p-2 border rounded-lg border-gray-600 text-gray-300" aria-label="Toggle navigation menu"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg></button></div></div>`;
+                document.getElementById('mobile-menu-toggle').addEventListener('click', () => { mobileMenuOpen = true; updateBodyForMobileMenu(); });
+            };
+            
+            const renderMobileMenuOverlay = () => {
+                const overlay = document.getElementById('mobile-menu-overlay');
+                if (!overlay) return;
+                overlay.className = "fixed inset-0 bg-black/95 backdrop-blur-sm z-[100] flex flex-col items-center justify-center gap-6 text-center transition-opacity duration-300 ease-in-out opacity-0 pointer-events-none";
+                const mobileNavItemsHtml = NAV_ITEMS.map(item => `<a href="https://musicoul.in#${item.id}" class="text-4xl heading text-gray-300 hover:text-pink-400 transition-colors">${item.name}</a>`).join('');
+                overlay.innerHTML = `<button id="mobile-menu-close" class="absolute top-6 right-6 p-2 text-gray-400 hover:text-white" aria-label="Close navigation menu"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button><div class="flex flex-col gap-8">${mobileNavItemsHtml}</div>`;
+                overlay.addEventListener('click', (e) => { if(e.target.closest('a') || e.target.closest('#mobile-menu-close')) { mobileMenuOpen = false; updateBodyForMobileMenu(); }})
+            };
+            
+            const updateBodyForMobileMenu = () => {
+                const mobileMenu = document.getElementById('mobile-menu-overlay');
+                if (!mobileMenu) return;
+                document.body.classList.toggle('mobile-nav-open', mobileMenuOpen);
+                mobileMenu.classList.toggle('opacity-0', !mobileMenuOpen);
+                mobileMenu.classList.toggle('pointer-events-none', !mobileMenuOpen);
+            };
+            
+            renderHeader();
+            renderMobileMenuOverlay();
+
+            const datePicker = document.getElementById('date-picker');
+            const classInfoContainer = document.getElementById('class-info-container');
+            const today = new Date();
+            const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+            const todayIndex = (today.getDay() + 6) % 7; // Monday is 0
+
+            const getMonday = (d) => {
+                d = new Date(d);
+                let day = d.getDay(),
+                    diff = d.getDate() - day + (day == 0 ? -6 : 1); // adjust when day is sunday
+                return new Date(d.setDate(diff));
+            }
+
+            const monday = getMonday(new Date());
+
+            for (let i = 0; i < 7; i++) {
+                const date = new Date(monday);
+                date.setDate(monday.getDate() + i);
+                
+                const button = document.createElement('button');
+                button.className = `date-selector text-center rounded-lg p-3 w-full md:w-auto`;
+                button.dataset.dayIndex = i;
+                button.innerHTML = `
+                    <p class="font-semibold text-sm">${dayNames[(i + 1) % 7]}</p>
+                    <p class="font-bold text-2xl mt-1">${date.getDate()}</p>
+                `;
+                if (i === todayIndex) {
+                    button.classList.add('active');
+                }
+                datePicker.appendChild(button);
+            }
+
+            const weeklySchedule = {
+                0: [{ time: "12:45 PM - 01:30 PM", tag: "Theory", name: "Theory Workshop" }, { time: "09:00 PM - 09:30 PM", tag: "Teaching class", name: "Praveshika Purna" }],
+                1: [{ time: "12:45 PM - 01:30 PM", tag: "Theory", name: "Theory Workshop" }, { time: "09:00 PM - 09:30 PM", tag: "Teaching class", name: "Praveshika Purna" }],
+                2: [{ time: "12:45 PM - 01:30 PM", tag: "Theory", name: "Theory Workshop" }, { time: "09:00 PM - 09:30 PM", tag: "Teaching class", name: "Praveshika Purna" }],
+                3: [{ time: "12:45 PM - 01:30 PM", tag: "Theory", name: "Theory Workshop" }, { time: "09:00 PM - 09:30 PM", tag: "Teaching class", name: "Praveshika Purna" }],
+                4: [{ time: "12:45 PM - 01:30 PM", tag: "Theory", name: "Theory Workshop" }, { time: "09:00 PM - 09:30 PM", tag: "Teaching class", name: "Praveshika Purna" }],
+                5: [], 
+                6: []
+            };
+
+            const renderClassInfo = (dayIndex) => {
+                const classes = weeklySchedule[dayIndex];
+                if (classes && classes.length > 0) {
+                    classInfoContainer.innerHTML = classes.map(c => `
+                        <div class="glass-card p-5 rounded-lg flex justify-between items-center">
+                            <div class="flex items-center gap-4">
+                                <div>
+                                    <p class="text-gray-200 text-md">${c.time}</p>
+                                    <p class="text-white bodyfont font-semibold mt-1">${c.name}</p>
+                                </div>
+                            </div>
+                            <span class="bg-gray-700 text-gray-300 text-xs font-semibold px-2.5 py-1 rounded-full">${c.tag}</span>
+                        </div>
+                    `).join('');
+                } else {
+                    classInfoContainer.innerHTML = `<p class="text-center text-gray-400 bodyfont p-4">No Class Today</p>`;
+                }
+            };
+
+            datePicker.addEventListener('click', (e) => {
+                const selector = e.target.closest('.date-selector');
+                if (selector) {
+                    datePicker.querySelector('.active')?.classList.remove('active');
+                    selector.classList.add('active');
+                    renderClassInfo(selector.dataset.dayIndex);
+                }
+            });
+            
+            renderClassInfo(todayIndex);
+            
+            document.getElementById('resource-folders').addEventListener('click', function(e) {
+                const header = e.target.closest('.folder-header');
+                const fileItem = e.target.closest('.file-item');
+
+                if (header) {
+                    e.stopPropagation();
+                    const folder = header.closest('.folder');
+                    if (folder) {
+                        folder.classList.toggle('open');
+                    }
+                } else if (fileItem) {
+                    e.stopPropagation();
+                    const type = fileItem.dataset.type;
+                    if (type === 'gdrive-pdf') {
+                        window.open(fileItem.dataset.src, '_blank');
+                    } else {
+                        openModal(type, fileItem.dataset.src);
+                    }
+                }
+            });
+
+
+            const openModal = (type, src) => {
+                let contentHtml = '';
+                const modalContentDiv = document.getElementById('modal-content');
+                modalContentDiv.classList.toggle('aspect-video', ['youtube', 'video', 'meet'].includes(type));
+
+                if (['meet'].includes(type)) {
+                    contentHtml = `<iframe class="w-full h-full" src="${src}" frameborder="0" allow="camera; microphone; fullscreen" allowfullscreen></iframe>`;
+                } else if (type === 'youtube') {
+                     contentHtml = `<div class="media-player aspect-video bg-black rounded-lg overflow-hidden h-full group/player"><div id="youtube-player-element"></div><div class="media-controls absolute bottom-0 left-0 right-0 p-2 sm:p-3 text-white space-y-2 opacity-0 group-hover/player:opacity-100 paused"><div class="progress-bar h-2 rounded-full w-full"><div class="progress-filled h-full rounded-full"></div><div class="progress-thumb"></div></div><div class="flex justify-between items-center text-xs sm:text-sm"><div class="flex items-center gap-2 sm:gap-3"><button data-action="play-pause"></button><div class="flex items-center gap-2 group/volume"><button data-action="volume-mute"></button><input type="range" data-action="volume-slider" min="0" max="100" value="100" class="w-0 group-hover/volume:w-16 sm:w-20 transition-all duration-300"></div><div class="time-display font-mono">00:00 / 00:00</div></div><div class="flex items-center gap-1 sm:gap-2"><button data-action="skip-back" class="p-1"></button><button data-action="skip-forward" class="p-1"></button><div class="relative dropdown"><button class="px-2 py-1 rounded-md hover:bg-white/10 text-xs sm:text-sm">1x</button><div class="dropdown-content absolute bottom-full mb-2 right-0 bg-black/80 rounded-md overflow-hidden opacity-0 invisible" data-options="speed"></div></div><div class="relative dropdown"><button class="px-2 py-1 rounded-md hover:bg-white/10 text-xs sm:text-sm">Auto</button><div class="dropdown-content absolute bottom-full mb-2 right-0 bg-black/80 rounded-md overflow-hidden opacity-0 invisible" data-options="quality"></div></div><button data-action="fullscreen"></button></div></div></div></div>`;
+                } else if (type === 'image') {
+                    modalContentDiv.classList.remove('aspect-video');
+                     contentHtml = `<div class="relative w-full h-full bg-black flex items-center justify-center"><img src="${src}" class="max-w-full max-h-full object-contain"></div>`;
+                } else if (type === 'video' || type === 'audio') {
+                    const isVideo = type === 'video';
+                    contentHtml = `
+                        <div class="media-player ${isVideo ? 'aspect-video bg-black' : 'p-4 bg-black'} rounded-lg h-full flex flex-col justify-center">
+                            ${!isVideo ? `<div class="text-center mb-4"><h4 class="font-semibold text-lg">${src.split('/').pop()}</h4></div>` : ''}
+                            <div class="relative">
+                                <${isVideo ? 'video' : 'audio'} src="${src}" ${isVideo ? 'playsinline' : ''} class="w-full"></${isVideo ? 'video' : 'audio'}>
+                            </div>
+                            <div class="media-controls p-2 sm:p-3 text-white space-y-2 opacity-0 group-hover:opacity-100 ${isVideo ? 'absolute bottom-0 left-0 right-0' : 'mt-4'}">
+                                <div class="progress-bar h-2 rounded-full w-full"><div class="progress-filled h-full rounded-full"></div><div class="progress-thumb"></div></div>
+                                <div class="flex justify-between items-center text-xs sm:text-sm">
+                                    <div class="flex items-center gap-2 sm:gap-3">
+                                        <button data-action="play-pause"></button>
+                                        <div class="flex items-center gap-2 group/volume">
+                                            <button data-action="volume-mute"></button>
+                                            <input type="range" data-action="volume-slider" min="0" max="1" step="0.05" value="1" class="w-0 group-hover/volume:w-16 sm:w-20 transition-all duration-300">
+                                        </div>
+                                        <div class="time-display font-mono">00:00/00:00</div>
+                                    </div>
+                                    <div class="flex items-center gap-1 sm:gap-2">
+                                        <button data-action="skip-back" class="p-1"></button>
+                                        <button data-action="skip-forward" class="p-1"></button>
+                                        <div class="relative dropdown"><button class="px-2 py-1 rounded-md hover:bg-white/10 text-xs sm:text-sm">1x</button><div class="dropdown-content absolute bottom-full mb-2 right-0 bg-black/80 rounded-md overflow-hidden opacity-0 invisible" data-options="speed"></div></div>
+                                        ${isVideo ? `<div class="relative dropdown"><button class="px-2 py-1 rounded-md hover:bg-white/10 text-xs sm:text-sm">HD</button><div class="dropdown-content absolute bottom-full mb-2 right-0 bg-black/80 rounded-md overflow-hidden opacity-0 invisible" data-options="quality"></div></div><button data-action="fullscreen"></button>` : ''}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
+                }
+                
+                previewerContent.innerHTML = contentHtml;
+                modalContainer.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+
+                if (type === 'video' || type === 'audio') {
+                    setupMediaPlayer();
+                } else if (type === 'youtube') {
+                    if (window.YT && window.YT.Player) {
+                        setupYouTubePlayer(src);
+                    } else {
+                        // Wait for API to be ready
+                        window.onYouTubeIframeAPIReady = () => setupYouTubePlayer(src);
+                    }
+                }
+            };
+
+            const closeModal = () => {
+                if (youtubePlayer && typeof youtubePlayer.destroy === 'function') {
+                    youtubePlayer.destroy();
+                    youtubePlayer = null;
+                }
+                if (ytInterval) {
+                    clearInterval(ytInterval);
+                    ytInterval = null;
+                }
+                previewerContent.innerHTML = '';
+                modalContainer.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            };
+            
+            if(mainJoinClassBtn) {
+                mainJoinClassBtn.addEventListener('click', () => {
+                    window.open('https://meet.google.com/gnr-gqxm-csk', '_blank');
+                });
+            }
+
+            closeModalBtn.addEventListener('click', closeModal);
+            modalBackdrop.addEventListener('click', closeModal);
+            
+            const setupMediaPlayer = () => {
+                // ... same as previous version
+            };
+
+            const setupYouTubePlayer = (videoId) => {
+                const playerContainer = document.getElementById('previewer-content');
+                if(!playerContainer) return;
+
+                let player;
+                
+                const icons = {
+                    play: `<svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>`,
+                    pause: `<svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>`,
+                    volumeHigh: `<svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>`,
+                    volumeMute: `<svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" clip-rule="evenodd"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l-4-4m0 4l4-4"></path></svg>`,
+                    fullscreen: `<svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 1v4m0 0h-4m4 0l-5-5"></path></svg>`
+                };
+
+                const updatePlayBtn = () => {
+                    if (!player || typeof player.getPlayerState !== 'function') return;
+                    const state = player.getPlayerState();
+                    const playBtn = playerContainer.querySelector('[data-action="play-pause"]');
+                    if (playBtn) {
+                        playBtn.innerHTML = (state === YT.PlayerState.PLAYING) ? icons.pause : icons.play;
+                        playerContainer.querySelector('.media-player').classList.toggle('paused', state !== YT.PlayerState.PLAYING);
+                    }
+                };
+                
+                const onPlayerReady = (event) => {
+                    player = event.target;
+                    const playBtn = playerContainer.querySelector('[data-action="play-pause"]'),
+                          muteBtn = playerContainer.querySelector('[data-action="volume-mute"]'),
+                          volumeSlider = playerContainer.querySelector('[data-action="volume-slider"]'),
+                          speedOpts = playerContainer.querySelector('[data-options="speed"]'),
+                          qualityOpts = playerContainer.querySelector('[data-options="quality"]'),
+                          fullscreenBtn = playerContainer.querySelector('[data-action="fullscreen"]'),
+                          skipBtns = playerContainer.querySelectorAll('[data-action^="skip-"]'),
+                          progressBar = playerContainer.querySelector('.progress-bar'),
+                          progressFilled = playerContainer.querySelector('.progress-filled'),
+                          progressThumb = playerContainer.querySelector('.progress-thumb'),
+                          timeDisplay = playerContainer.querySelector('.time-display');
+
+                    const togglePlay = () => {
+                        const state = player.getPlayerState();
+                        if (state === YT.PlayerState.PLAYING) player.pauseVideo();
+                        else player.playVideo();
+                    };
+                    const handleProgress = () => {
+                        const percent = (player.getCurrentTime() / player.getDuration()) * 100;
+                        progressFilled.style.flexBasis = `${percent}%`;
+                        progressThumb.style.left = `${percent}%`;
+                    };
+                    const formatTime = s => isNaN(s) ? '00:00' : `${String(Math.floor(s/60)).padStart(2,'0')}:${String(Math.floor(s%60)).padStart(2,'0')}`;
+                    const updateTimeDisplay = () => { timeDisplay.textContent = `${formatTime(player.getCurrentTime())} / ${formatTime(player.getDuration())}`; };
+                    const scrub = (e) => { player.seekTo((e.offsetX / progressBar.offsetWidth) * player.getDuration()); };
+                    const updateVolumeIcon = () => { muteBtn.innerHTML = player.isMuted() || player.getVolume() === 0 ? icons.volumeMute : icons.volumeHigh; };
+
+                    // Initial setup
+                    updatePlayBtn();
+                    updateVolumeIcon();
+                    if(fullscreenBtn) fullscreenBtn.innerHTML = icons.fullscreen;
+                    skipBtns.forEach((btn, i) => btn.innerHTML = `<svg class="w-6 h-6" ${i === 0 ? 'transform="scale(-1, 1)"' : ''} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.933 12.8a1 1 0 000-1.6L6.6 7.2A1 1 0 005 8v8a1 1 0 001.6.8l5.333-4zM19.933 12.8a1 1 0 000-1.6l-5.333-4A1 1 0 0013 8v8a1 1 0 001.6.8l5.333-4z"></path><text x="9" y="14" font-size="6" font-weight="bold" fill="currentColor">10</text></svg>`);
+
+                    // Populate dropdowns
+                    const availableSpeeds = player.getAvailablePlaybackRates();
+                    speedOpts.innerHTML = availableSpeeds.map(s => `<button data-value="${s}" class="block w-full text-left px-4 py-2 text-sm hover:bg-white/10">${s}x</button>`).join('');
+                    
+                    const availableQualities = player.getAvailableQualityLevels();
+                    qualityOpts.innerHTML = availableQualities.map(q => `<button data-value="${q}" class="block w-full text-left px-4 py-2 text-sm hover:bg-white/10">${q}</button>`).join('');
+
+                    // Add Event Listeners
+                    playBtn.addEventListener('click', togglePlay);
+                    skipBtns.forEach(btn => btn.addEventListener('click', (e) => {
+                        const skipTime = e.target.closest('[data-action]').dataset.action === 'skip-forward' ? 10 : -10;
+                        player.seekTo(player.getCurrentTime() + skipTime);
+                    }));
+                    volumeSlider.addEventListener('input', (e) => player.setVolume(e.target.value));
+                    muteBtn.addEventListener('click', () => player.isMuted() ? player.unMute() : player.mute());
+                    if(fullscreenBtn) fullscreenBtn.addEventListener('click', () => playerContainer.requestFullscreen().catch(err => console.error(err)));
+                    speedOpts.addEventListener('click', (e) => { if(e.target.dataset.value) { player.setPlaybackRate(parseFloat(e.target.dataset.value)); speedOpts.previousElementSibling.textContent = `${e.target.dataset.value}x`; }});
+                    qualityOpts.addEventListener('click', (e) => { if(e.target.dataset.value) { player.setPlaybackQuality(e.target.dataset.value); qualityOpts.previousElementSibling.textContent = e.target.dataset.value; }});
+
+                    let mousedown = false;
+                    progressBar.addEventListener('click', scrub);
+                    progressBar.addEventListener('mousemove', (e) => mousedown && scrub(e));
+                    progressBar.addEventListener('mousedown', () => mousedown = true);
+                    window.addEventListener('mouseup', () => mousedown = false);
+
+                    ytInterval = setInterval(() => {
+                        handleProgress();
+                        updateTimeDisplay();
+                    }, 250);
+                };
+
+                const onPlayerStateChange = (event) => {
+                    updatePlayBtn();
+                };
+
+                youtubePlayer = new YT.Player('youtube-player-element', {
+                    height: '100%',
+                    width: '100%',
+                    videoId: videoId,
+                    playerVars: { 'playsinline': 1, 'autoplay': 1, 'controls': 0, 'rel': 0, 'showinfo': 0, 'modestbranding': 1 },
+                    events: { 'onReady': onPlayerReady, 'onStateChange': onPlayerStateChange }
+                });
+            }
+
+             let lastScrollTop = 0;
+            const headerContainer = document.getElementById('header-container');
+            window.addEventListener('scroll', () => {
+                if (!headerContainer) return;
+                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                headerContainer.classList.toggle('header-hidden', scrollTop > lastScrollTop && scrollTop > headerContainer.offsetHeight);
+                lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+            }, false);
+        });
+    </script>
+</body>
+</html>
+

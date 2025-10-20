@@ -31,7 +31,6 @@
             box-shadow: 0 10px 25px -5px rgba(236, 72, 153, 0.4), 0 8px 10px -6px rgba(139, 92, 246, 0.4);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             animation: pulse-glow 3s infinite ease-in-out;
-            overflow: hidden;
         }
         #musicoul-chat-button:hover {
             transform: scale(1.1) rotate(10deg);
@@ -69,6 +68,26 @@
             transform: translateY(0) scale(1);
             opacity: 1;
             visibility: visible;
+        }
+        
+        #musicoul-close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            z-index: 20;
+        }
+        #musicoul-close-button:hover {
+             background: rgba(255, 255, 255, 0.2);
+             transform: rotate(90deg);
         }
 
         #musicoul-chat-messages::-webkit-scrollbar { width: 6px; }
@@ -113,11 +132,19 @@
             background: rgba(255, 255, 255, 0.2);
             border-color: rgba(255, 255, 255, 0.3);
         }
+
+        #stop-generation-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.2s ease;
+        }
+        #stop-generation-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
         
         .ai-message-content span {
             opacity: 0;
             animation: fadeInWord 0.3s ease forwards;
-            display: inline-block;
         }
         @keyframes fadeInWord {
             from { opacity: 0; transform: translateY(5px); }
@@ -566,19 +593,33 @@
 </head>
 <body class="min-h-screen text-gray-100 bg-black bodyfont">
 
+    <div id="app-container">
+        <header id="header-container"></header>
+        <main id="page-container"></main>
+        <div id="modal-container"></div>
+        <div id="mobile-menu-overlay"></div>
+    </div>
+
     <div id="musicoul-chat-widget">
         <div id="musicoul-chat-button">
-             <img src="https://yt3.googleusercontent.com/FRE-Mlxh3eYM2VObB1ZHR4zygMMjAAZfuoLbeBMtVHfzjlqs2RkozmqNDQ8_iEhESwA5J_zxAA=s160-c-k-c0x00ffffff-no-rj" alt="Musicoul Avatar" class="w-full h-full rounded-full object-cover">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+            </svg>
         </div>
         <div id="musicoul-chat-modal">
-            <div class="p-4 border-b border-white/10 flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-full overflow-hidden">
-                    <img src="https://yt3.googleusercontent.com/FRE-Mlxh3eYM2VObB1ZHR4zygMMjAAZfuoLbeBMtVHfzjlqs2RkozmqNDQ8_iEhESwA5J_zxAA=s160-c-k-c0x00ffffff-no-rj" alt="Musicoul Avatar" class="w-full h-full object-cover">
+            <div class="relative p-4 border-b border-white/10 flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                     <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                    </svg>
                 </div>
                 <div>
                     <h3 class="font-semibold text-white font-playfair">Musicoul Assistant</h3>
                     <p class="text-xs text-green-400">Online</p>
                 </div>
+                 <button id="musicoul-close-button" aria-label="Close chat">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
             </div>
             <div id="musicoul-chat-messages" class="flex-1 p-4 space-y-4 overflow-y-auto">
                 <div class="flex message-bubble">
@@ -593,6 +634,11 @@
                 <button class="suggestion-chip">How to practice scales?</button>
             </div>
             <div class="p-4 border-t border-white/10">
+                <div id="stop-generation-container" class="text-center mb-2 hidden">
+                    <button id="stop-generation-btn" class="text-xs text-white px-3 py-1 rounded-md">
+                        Stop generating
+                    </button>
+                </div>
                 <form id="musicoul-chat-form" class="flex items-center space-x-2">
                     <input id="musicoul-chat-input" type="text" placeholder="Ask about any music topic..." class="flex-1 bg-white/10 text-white placeholder-white/50 px-4 py-2 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-pink-500 transition">
                     <button type="submit" class="bg-pink-600 hover:bg-pink-700 rounded-full w-10 h-10 flex items-center justify-center transition">
@@ -603,168 +649,6 @@
                 </form>
             </div>
         </div>
-    </div>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const chatButton = document.getElementById('musicoul-chat-button');
-            const chatModal = document.getElementById('musicoul-chat-modal');
-            const chatForm = document.getElementById('musicoul-chat-form');
-            const chatInput = document.getElementById('musicoul-chat-input');
-            const messagesContainer = document.getElementById('musicoul-chat-messages');
-            const suggestionsContainer = document.getElementById('musicoul-suggestions');
-
-            chatButton.addEventListener('click', () => {
-                chatModal.classList.toggle('active');
-            });
-            
-            suggestionsContainer.addEventListener('click', (e) => {
-                if (e.target.classList.contains('suggestion-chip')) {
-                    const query = e.target.textContent;
-                    appendMessage(query, 'user');
-                    showTypingIndicator();
-                    getGeminiResponse(query);
-                    suggestionsContainer.style.display = 'none';
-                }
-            });
-
-            chatForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const userInput = chatInput.value.trim();
-                if (!userInput) return;
-
-                appendMessage(userInput, 'user');
-                chatInput.value = '';
-                showTypingIndicator();
-                suggestionsContainer.style.display = 'none';
-                getGeminiResponse(userInput);
-            });
-            
-            function parseMarkdown(text) {
-                text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-                text = text.replace(/^### (.*$)/gim, '<h3 class="text-lg font-semibold mb-2 mt-4">$1</h3>');
-                text = text.replace(/(\r\n|\n\r|\r|\n){2,}/g, '<br><br>');
-                text = text.replace(/(\r\n|\n\r|\r|\n)/g, '<br>');
-                text = text.replace(/`([^`]+)`/g, '<code class="bg-gray-700 rounded px-1 text-pink-300">$1</code>');
-                text = text.replace(/^\* (.*$)/gim, '<li class="ml-4 list-disc">$1</li>');
-                text = text.replace(/^- (.*$)/gim, '<li class="ml-4 list-disc">$1</li>');
-                return text;
-            }
-
-            function animateText(bubbleElement) {
-                const walker = document.createTreeWalker(bubbleElement, NodeFilter.SHOW_TEXT, null, false);
-                let node;
-                const textNodes = [];
-                while(node = walker.nextNode()) {
-                    textNodes.push(node);
-                }
-
-                let delay = 0;
-                textNodes.forEach(textNode => {
-                    const text = textNode.textContent;
-                    const fragment = document.createDocumentFragment();
-                    
-                    for (let i = 0; i < text.length; i++) {
-                        const char = text[i];
-                        const span = document.createElement('span');
-                        span.textContent = char;
-                        span.className = 'fade-in-word';
-                        span.style.animationDelay = `${delay}s`;
-                        fragment.appendChild(span);
-                        delay += 0.015; 
-                    }
-                    textNode.parentNode.replaceChild(fragment, textNode);
-                });
-            }
-
-            function appendMessage(text, sender) {
-                const messageDiv = document.createElement('div');
-                messageDiv.className = `flex message-bubble ${sender === 'user' ? 'justify-end' : 'justify-start'}`;
-                
-                const bubble = document.createElement('div');
-                bubble.className = `p-3 rounded-lg text-sm max-w-xs ${sender === 'user' ? 'bg-pink-600 rounded-br-none' : 'bg-violet-600 rounded-bl-none'}`;
-                
-                if (sender === 'ai') {
-                    bubble.innerHTML = parseMarkdown(text);
-                    animateText(bubble);
-                } else {
-                    bubble.textContent = text;
-                }
-                
-                messageDiv.appendChild(bubble);
-                messagesContainer.appendChild(messageDiv);
-                
-                // Scroll the new message into view, aligning its top with the container's top
-                setTimeout(() => {
-                    messageDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 100);
-            }
-
-            function showTypingIndicator() {
-                const indicator = document.createElement('div');
-                indicator.id = 'typing-indicator';
-                indicator.className = 'flex message-bubble';
-                indicator.innerHTML = `
-                    <div class="bg-violet-600/80 rounded-lg rounded-bl-none p-3 max-w-xs text-sm">
-                        <div class="typing-indicator">
-                            <span></span><span></span><span></span>
-                        </div>
-                    </div>
-                `;
-                messagesContainer.appendChild(indicator);
-                indicator.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-            
-            function removeTypingIndicator() {
-                const indicator = document.getElementById('typing-indicator');
-                if (indicator) {
-                    indicator.remove();
-                }
-            }
-
-            async function getGeminiResponse(prompt) {
-                const systemPrompt = "You are Musicoul, a friendly and expert music tutor. Your goal is to guide students of all levels. Keep your answers minimal and crisp by default. Use key points via Markdown lists (`*` or `-`). However, if a topic requires detailed explanation, feel free to elaborate with multiple sections using Markdown headings (`###`). Always use `**` for bolding key terms. Maintain a positive and supportive tone.";
-                const apiKey = "";
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
-
-                const payload = {
-                    contents: [{ parts: [{ text: prompt }] }],
-                    systemInstruction: {
-                        parts: [{ text: systemPrompt }]
-                    },
-                };
-                
-                try {
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-                    const result = await response.json();
-                    
-                    removeTypingIndicator();
-
-                    const candidate = result.candidates?.[0];
-                    if (candidate && candidate.content?.parts?.[0]?.text) {
-                        appendMessage(candidate.content.parts[0].text, 'ai');
-                    } else {
-                        appendMessage("Sorry, I couldn't process that. Could you try asking in a different way?", 'ai');
-                        console.error('Unexpected API response structure:', result);
-                    }
-                } catch (error) {
-                    removeTypingIndicator();
-                    appendMessage("Oops! I'm having a little trouble connecting. Please check your connection and try again.", 'ai');
-                    console.error('Error fetching Gemini response:', error);
-                }
-            }
-        });
-    </script>
-
-    <div id="app-container">
-        <header id="header-container"></header>
-        <main id="page-container"></main>
-        <div id="modal-container"></div>
-        <div id="mobile-menu-overlay"></div>
     </div>
     
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -1285,6 +1169,180 @@
                     renderPage();
                 }, 250);
             });
+
+            const chatButton = document.getElementById('musicoul-chat-button');
+            const chatModal = document.getElementById('musicoul-chat-modal');
+            const closeButton = document.getElementById('musicoul-close-button');
+            const chatForm = document.getElementById('musicoul-chat-form');
+            const chatInput = document.getElementById('musicoul-chat-input');
+            const messagesContainer = document.getElementById('musicoul-chat-messages');
+            const suggestionsContainer = document.getElementById('musicoul-suggestions');
+            const stopGenerationContainer = document.getElementById('stop-generation-container');
+            const stopGenerationBtn = document.getElementById('stop-generation-btn');
+
+            let abortController = null;
+            let animationInterval = null;
+
+            const toggleChat = () => chatModal.classList.toggle('active');
+
+            chatButton.addEventListener('click', toggleChat);
+            closeButton.addEventListener('click', toggleChat);
+            
+            suggestionsContainer.addEventListener('click', (e) => {
+                if (e.target.classList.contains('suggestion-chip')) {
+                    const query = e.target.textContent;
+                    handleUserQuery(query);
+                }
+            });
+
+            chatForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const userInput = chatInput.value.trim();
+                if (userInput) {
+                    handleUserQuery(userInput);
+                }
+            });
+
+            function handleUserQuery(query) {
+                if (animationInterval) clearInterval(animationInterval);
+                appendMessage(query, 'user');
+                chatInput.value = '';
+                showTypingIndicator();
+                suggestionsContainer.style.display = 'none';
+                getGeminiResponse(query);
+            }
+            
+            stopGenerationBtn.addEventListener('click', () => {
+                if (abortController) {
+                    abortController.abort();
+                }
+            });
+
+            function parseMarkdown(text) {
+                let html = text
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                    .replace(/^### (.*$)/gim, '<h3 class="text-lg font-semibold mb-2 mt-4">$1</h3>')
+                    .replace(/`([^`]+)`/g, '<code class="bg-gray-700 rounded px-1 text-pink-300">$1</code>');
+                
+                html = html.replace(/^\s*([*\-]) (.*)/gm, (match, bullet, content) => {
+                    return `<li>${content}</li>`;
+                });
+                html = html.replace(/(<li>.*<\/li>)/gs, '<ul class="list-disc list-inside space-y-1 my-2">$1</ul>').replace(/<\/ul>\s*<ul>/g, '');
+
+                return html.replace(/(\r\n|\n|\r)/g, '<br>');
+            }
+
+            function animateText(bubbleElement, text) {
+                let i = 0;
+                bubbleElement.innerHTML = '';
+                stopGenerationContainer.classList.remove('hidden');
+                
+                if (animationInterval) clearInterval(animationInterval);
+
+                animationInterval = setInterval(() => {
+                    if (i < text.length) {
+                        bubbleElement.innerHTML += text.charAt(i);
+                        i++;
+                        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                    } else {
+                        clearInterval(animationInterval);
+                        animationInterval = null;
+                        stopGenerationContainer.classList.add('hidden');
+                    }
+                }, 15);
+            }
+
+            function appendMessage(text, sender) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `flex message-bubble ${sender === 'user' ? 'justify-end' : 'justify-start'}`;
+                
+                const bubble = document.createElement('div');
+                bubble.className = `p-3 rounded-lg text-sm max-w-xs ${sender === 'user' ? 'bg-pink-600 rounded-br-none' : 'bg-violet-600 rounded-bl-none'}`;
+                
+                if (sender === 'ai') {
+                    const parsedText = parseMarkdown(text);
+                    bubble.innerHTML = parsedText;
+                    messageDiv.appendChild(bubble);
+                    messagesContainer.appendChild(messageDiv);
+                } else {
+                    bubble.textContent = text;
+                    messageDiv.appendChild(bubble);
+                    messagesContainer.appendChild(messageDiv);
+                }
+                
+                setTimeout(() => {
+                    messageDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            }
+
+            function showTypingIndicator() {
+                const indicator = document.createElement('div');
+                indicator.id = 'typing-indicator';
+                indicator.className = 'flex message-bubble';
+                indicator.innerHTML = `
+                    <div class="bg-violet-600/80 rounded-lg rounded-bl-none p-3 max-w-xs text-sm">
+                        <div class="typing-indicator">
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>
+                `;
+                messagesContainer.appendChild(indicator);
+                indicator.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+            
+            function removeTypingIndicator() {
+                const indicator = document.getElementById('typing-indicator');
+                if (indicator) {
+                    indicator.remove();
+                }
+            }
+
+            async function getGeminiResponse(prompt) {
+                abortController = new AbortController();
+
+                const systemPrompt = "You are Musicoul, a friendly and expert music tutor. Your goal is to guide students of all levels. Keep your answers minimal and crisp by default. Use key points via Markdown lists (`*` or `-`). However, if a topic requires detailed explanation, feel free to elaborate with multiple sections using Markdown headings (`###`). Always use `**` for bolding key terms. Maintain a positive and supportive tone. Do not output raw HTML tags in your response.";
+                const apiKey = "AIzaSyDSouhjuv4h6aAA1DuEQJIgWVqyqacz_u4";
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+
+                const payload = {
+                    contents: [{ parts: [{ text: prompt }] }],
+                    systemInstruction: { parts: [{ text: systemPrompt }] },
+                };
+                
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload),
+                        signal: abortController.signal
+                    });
+                    const result = await response.json();
+                    
+                    removeTypingIndicator();
+                    
+                    const candidate = result.candidates?.[0];
+                    if (candidate && candidate.content?.parts?.[0]?.text) {
+                        appendMessage(candidate.content.parts[0].text, 'ai');
+                    } else {
+                        stopGenerationContainer.classList.add('hidden');
+                        if(result.error) {
+                             console.error('API Error:', result.error);
+                             appendMessage("Sorry, I'm having trouble connecting to my knowledge base right now. Please try again later.", 'ai');
+                        } else {
+                             appendMessage("Sorry, I couldn't process that. Could you try asking in a different way?", 'ai');
+                             console.error('Unexpected API response structure:', result);
+                        }
+                    }
+                } catch (error) {
+                    if (error.name !== 'AbortError') {
+                        removeTypingIndicator();
+                        appendMessage("Oops! I'm having a little trouble connecting. Please check your connection and try again.", 'ai');
+                        console.error('Error fetching Gemini response:', error);
+                    }
+                    stopGenerationContainer.classList.add('hidden');
+                }
+            }
+
         });
 
     </script>

@@ -123,7 +123,7 @@
             transition: transform 0.3s ease;
         }
         
-        #previewer-modal-container.hidden, #ai-modal-container.hidden { display: none; }
+        #previewer-modal-container.hidden { display: none; }
         .modal-backdrop { animation: fadeIn 0.3s ease forwards; }
         .modal-content { animation: slideUp 0.4s ease forwards; }
 
@@ -206,31 +206,6 @@
             box-shadow: 0 0 15px rgba(236, 72, 153, 0.4);
         }
 
-        .ai-chat-button {
-            background: linear-gradient(45deg, #6b21a8, #ef4444, #f472b6);
-            transition: all 0.3s ease-in-out;
-        }
-        .ai-chat-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 10px 25px rgba(239, 68, 68, 0.4);
-        }
-        .ai-suggestion-btn {
-            background: rgba(255, 255, 255, 0.1);
-            transition: all 0.2s ease;
-        }
-        .ai-suggestion-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-        
-        .loader {
-            width: 24px; height: 24px; border: 3px solid #FFF;
-            border-bottom-color: transparent; border-radius: 50%;
-            display: inline-block; box-sizing: border-box;
-            animation: rotation 1s linear infinite;
-        }
-        @keyframes rotation { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-
         @media (max-width: 768px) {
             .hero-content { min-height: 40vh; }
             #page-container { padding-left: 1rem; padding-right: 1rem; padding-top: 2rem; }
@@ -266,7 +241,7 @@
         <main id="page-container" class="max-w-5xl mx-auto px-6 py-16 sm:py-24">
             
             <section class="text-center mb-16" data-aos="fade-up">
-                 <a href="https://meet.google.com/ocv-ptdw-qos" target="_blank" class="join-btn w-full max-w-sm mx-auto font-bold py-4 rounded-lg heading text-xl">
+                 <a href="https://meet.google.com/zno-mrwc-bhj" target="_blank" class="join-btn w-full max-w-sm mx-auto font-bold py-4 rounded-lg heading text-xl">
                     <span class="live-indicator"></span>
                     Join Live Class
                 </a>
@@ -322,7 +297,7 @@
                         </div>
                         <div class="folder-content px-5 pb-5">
                             <div class="space-y-3 pt-4 border-t border-gray-700/50">
-                                <div class="file-item p-3 rounded-lg" data-type="gdrive-pdf" data-src="https://drive.google.com/file/d/1oVxrvwFCcWsU7XroslILM33t9pnu8c1W/view?usp=sharing">
+                                <div class="file-item p-3 rounded-lg" data-type="gdrive-pdf" data-src="https://drive.google.com/file/d/1qQMJlrZx0XIHHOOHwfbM4EDKYx0WLANc/view?usp=sharing">
                                     <div class="flex items-center justify-between">
                                         <div class="flex items-center gap-4"><svg class="h-6 w-6 text-gray-300 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M13,3.5L18.5,9H13V3.5M12,19L8,15H11V12H13V15H16L12,19Z"></path></svg><span class="truncate">Complete Notes</span></div>
                                         <svg class="play-icon h-6 w-6 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
@@ -331,6 +306,7 @@
                             </div>
                         </div>
                     </div>
+                    
                     <div class="glass-card rounded-xl folder">
                         <div class="folder-header p-5 flex justify-between items-center cursor-pointer">
                             <div class="flex items-center gap-4"><svg class="h-8 w-8 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg><h3 class="heading text-xl font-semibold">Taal</h3></div>
@@ -389,10 +365,16 @@
                                                     <svg class="play-icon h-5 w-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
                                                 </div>
                                             </div>
-                                            <div class="file-item p-2 rounded-lg" data-type="youtube" data-src="et-HKqIqNOM">
-                                                <div class="flex items-center justify-between">
-                                                    <div class="flex items-center gap-3"><svg class="h-5 w-5 text-gray-300 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M21.582,6.186c-0.23-0.86-0.908-1.538-1.768-1.768C18.267,4,12,4,12,4S5.733,4,4.186,4.418 c-0.86,0.23-1.538,0.908-1.768,1.768C2,7.733,2,12,2,12s0,4.267,0.418,5.814c0.23,0.86,0.908,1.538,1.768,1.768 C5.733,20,12,20,12,20s6.267,0,7.814-0.418c0.861-0.23,1.538-0.908,1.768-1.768C22,16.267,22,12,22,12S22,7.733,21.582,6.186z M10,15.464V8.536L16,12L10,15.464z"></path></svg><span class="truncate">Swarmandal</span></div>
-                                                    <svg class="play-icon h-5 w-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                                            <div class="glass-card rounded-lg folder">
+                                                <div class="folder-header p-3 flex justify-between items-center cursor-pointer">
+                                                    <div class="flex items-center gap-3"><svg class="h-7 w-7 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg><h4 class="heading text-lg font-medium">Swarmandal</h4></div>
+                                                    <svg class="h-5 w-5 text-gray-400 folder-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                                </div>
+                                                <div class="folder-content px-3 pb-3">
+                                                    <div class="space-y-2 pt-3 border-t border-gray-700/50">
+                                                        <div class="file-item p-2 rounded-lg" data-type="youtube" data-src="et-HKqIqNOM"><div class="flex items-center justify-between"><div class="flex items-center gap-3"><svg class="h-5 w-5 text-gray-300 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M21.582,6.186c-0.23-0.86-0.908-1.538-1.768-1.768C18.267,4,12,4,12,4S5.733,4,4.186,4.418 c-0.86,0.23-1.538,0.908-1.768,1.768C2,7.733,2,12,2,12s0,4.267,0.418,5.814c0.23,0.86,0.908,1.538,1.768,1.768 C5.733,20,12,20,12,20s6.267,0,7.814-0.418c0.861-0.23,1.538-0.908,1.768-1.768C22,16.267,22,12,22,12S22,7.733,21.582,6.186z M10,15.464V8.536L16,12L10,15.464z"></path></svg><span class="truncate">Bhupali Swarmandal</span></div><svg class="play-icon h-5 w-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg></div></div>
+                                                        
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -421,10 +403,16 @@
                                                     <svg class="play-icon h-5 w-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
                                                 </div>
                                             </div>
-                                            <div class="file-item p-2 rounded-lg" data-type="youtube" data-src="qFqEMK6dWAA">
-                                                <div class="flex items-center justify-between">
-                                                    <div class="flex items-center gap-3"><svg class="h-5 w-5 text-gray-300 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M21.582,6.186c-0.23-0.86-0.908-1.538-1.768-1.768C18.267,4,12,4,12,4S5.733,4,4.186,4.418 c-0.86,0.23-1.538,0.908-1.768,1.768C2,7.733,2,12,2,12s0,4.267,0.418,5.814c0.23,0.86,0.908,1.538,1.768,1.768 C5.733,20,12,20,12,20s6.267,0,7.814-0.418c0.861-0.23,1.538-0.908,1.768-1.768C22,16.267,22,12,22,12S22,7.733,21.582,6.186z M10,15.464V8.536L16,12L10,15.464z"></path></svg><span class="truncate">Swarmandal</span></div>
-                                                    <svg class="play-icon h-5 w-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                                            <div class="glass-card rounded-lg folder">
+                                                <div class="folder-header p-3 flex justify-between items-center cursor-pointer">
+                                                    <div class="flex items-center gap-3"><svg class="h-7 w-7 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg><h4 class="heading text-lg font-medium">Swarmandal</h4></div>
+                                                    <svg class="h-5 w-5 text-gray-400 folder-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                                </div>
+                                                <div class="folder-content px-3 pb-3">
+                                                    <div class="space-y-2 pt-3 border-t border-gray-700/50">
+                                                        <div class="file-item p-2 rounded-lg" data-type="youtube" data-src="qFqEMK6dWAA"><div class="flex items-center justify-between"><div class="flex items-center gap-3"><svg class="h-5 w-5 text-gray-300 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M21.582,6.186c-0.23-0.86-0.908-1.538-1.768-1.768C18.267,4,12,4,12,4S5.733,4,4.186,4.418 c-0.86,0.23-1.538,0.908-1.768,1.768C2,7.733,2,12,2,12s0,4.267,0.418,5.814c0.23,0.86,0.908,1.538,1.768,1.768 C5.733,20,12,20,12,20s6.267,0,7.814-0.418c0.861-0.23,1.538-0.908,1.768-1.768C22,16.267,22,12,22,12S22,7.733,21.582,6.186z M10,15.464V8.536L16,12L10,15.464z"></path></svg><span class="truncate">Bhupali Swarmandal</span></div><svg class="play-icon h-5 w-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg></div></div>
+
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -493,7 +481,6 @@
             renderHeader();
             renderMobileMenuOverlay();
 
-            // --- Dynamic Schedule Logic ---
             const datePicker = document.getElementById('date-picker');
             const classInfoContainer = document.getElementById('class-info-container');
             const today = new Date();
@@ -527,11 +514,11 @@
             }
 
             const weeklySchedule = {
-                0: [{ time: "10:00 AM - 10:30 AM", tag: "TEACHING", name: "Alankaars" }, { time: "12:00 PM - 01:00 PM", tag: "THEORY", name: "Theory Workshop" }],
-                1: [{ time: "10:00 AM - 10:30 AM", tag: "TEACHING", name: "Alankaars" }, { time: "12:00 PM - 01:00 PM", tag: "THEORY", name: "Theory Workshop" }],
-                2: [{ time: "10:00 AM - 10:30 AM", tag: "TEACHING", name: "Alankaars" }, { time: "12:00 PM - 01:00 PM", tag: "THEORY", name: "Theory Workshop" }],
-                3: [{ time: "10:00 AM - 10:30 AM", tag: "TEACHING", name: "Alankaars" }, { time: "12:00 PM - 01:00 PM", tag: "THEORY", name: "Theory Workshop" }],
-                4: [{ time: "10:00 AM - 10:30 AM", tag: "TEACHING", name: "Alankaars" }, { time: "12:00 PM - 01:00 PM", tag: "THEORY", name: "Theory Workshop" }],
+                0: [{ time: "12:00 PM - 01:00 PM", tag: "THEORY", name: "Theory Workshop" }, { time: "07:00 PM - 07:45 PM", tag: "SHARVARI", name: "Raag - Tilang" }, { time: "07:45 PM - 08:30 PM", tag: "HARIOM, NANDA, KIRAN", name: "Raag - Hamir" }],
+                1: [{ time: "12:00 PM - 01:00 PM", tag: "THEORY", name: "Theory Workshop" }, { time: "07:00 PM - 07:45 PM", tag: "SHARVARI", name: "Raag - Tilang" }, { time: "07:45 PM - 08:30 PM", tag: "HARIOM, NANDA, KIRAN", name: "Raag - Hamir" }],
+                2: [{ time: "12:00 PM - 01:00 PM", tag: "THEORY", name: "Theory Workshop" }, { time: "07:00 PM - 07:45 PM", tag: "SHARVARI", name: "Raag - Tilang" }, { time: "07:45 PM - 08:30 PM", tag: "HARIOM, NANDA, KIRAN", name: "Raag - Hamir" }],
+                3: [{ time: "12:00 PM - 01:00 PM", tag: "THEORY", name: "Theory Workshop" }, { time: "07:00 PM - 07:45 PM", tag: "SHARVARI", name: "Raag - Tilang" }, { time: "07:45 PM - 08:30 PM", tag: "HARIOM, NANDA, KIRAN", name: "Raag - Hamir" }],
+                4: [{ time: "12:00 PM - 01:00 PM", tag: "THEORY", name: "Theory Workshop" }, { time: "07:00 PM - 07:45 PM", tag: "SHARVARI", name: "Raag - Tilang" }, { time: "07:45 PM - 08:30 PM", tag: "HARIOM, NANDA, KIRAN", name: "Raag - Hamir" }],
                 5: [], 
                 6: []
             };
@@ -565,7 +552,7 @@
             });
             
             renderClassInfo(todayIndex);
-            
+
             resourceFolders.addEventListener('click', (e) => {
                 const header = e.target.closest('.folder-header');
                 if (header) {
@@ -662,7 +649,7 @@
             
             if(mainJoinClassBtn) {
                 mainJoinClassBtn.addEventListener('click', () => {
-                    window.open('https://meet.google.com/ocv-ptdw-qos', '_blank');
+                    window.open('https://meet.google.com/zno-mrwc-bhj', '_blank');
                 });
             }
 

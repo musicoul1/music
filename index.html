@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musicoul | Elite Music Institute</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --dark: #0A0A0A;
+            --glass: rgba(255, 255, 255, 0.03);
+            --gold-grad: linear-gradient(135deg, #D4AF37 0%, #F9E29D 50%, #B8860B 100%);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark);
+            color: white;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            width: 100%;
+        }
+        .serif { font-family: 'Playfair Display', serif; }
+        .glass {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .gold-text { color: var(--gold); }
+        .gold-gradient {
+            background: var(--gold-grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .btn-premium {
+            background: linear-gradient(135deg, #D4AF37 0%, #B8860B 100%);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            color: black;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+        }
+        .btn-premium:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+            filter: brightness(1.1);
+        }
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+            letter-spacing: 0.2em;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .nav-link:hover::after { width: 100%; }
+        
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+
+        .auth-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(20px);
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+        
+        .portal-card {
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .portal-card:hover {
+            border-color: rgba(212, 175, 55, 0.4);
+            transform: translateY(-8px);
+            background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%);
+        }
+
+        @keyframes heroFadeIn {
+            from { opacity: 0; transform: translateY(30px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .animate-hero { animation: heroFadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+        /* Responsive Text Scaling & Grid Fixes */
+        @media (max-width: 640px) {
+            .hero-title { font-size: 2.75rem; line-height: 1.1; }
+            .section-title { font-size: 2.25rem; }
+            .hero-para { font-size: 0.9rem; line-height: 1.6; }
+            .nav-compact { padding: 1rem !important; }
+        }
+        @media (min-width: 641px) and (max-width: 1024px) {
+            .hero-title { font-size: 5rem; }
+            .section-title { font-size: 4rem; }
+        }
+        @media (min-width: 1025px) {
+            .hero-title { font-size: 8rem; }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Landing Page Wrapper -->
+    <div id="landing-page">
+        <!-- Navigation -->
+        <nav class="fixed w-full z-50 px-4 md:px-10 lg:px-16 py-4 md:py-6 flex justify-between items-center transition-all duration-700 bg-transparent" id="navbar">
+            <div class="flex items-center gap-2 md:gap-4">
+                <img src="https://i.ibb.co/LzN2V2kS/logo.jpg" alt="Musicoul Logo" class="w-10 h-10 md:w-14 lg:w-16 md:h-14 lg:h-16 rounded-full border border-[#D4AF37]/40 shadow-lg shadow-black/50 object-cover">
+                <span class="serif text-lg md:text-xl lg:text-2xl tracking-[0.3em] font-bold uppercase hidden sm:block">Musicoul</span>
+            </div>
+            
+            <div class="hidden lg:flex gap-8 xl:gap-12">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#courses" class="nav-link">Academy</a>
+                <a href="javascript:void(0)" onclick="toggleAuthModal('login')" class="nav-link gold-text">Portal</a>
+            </div>
+
+            <div class="flex items-center gap-3 md:gap-6">
+                <button onclick="toggleAuthModal('login')" class="text-[9px] md:text-[10px] tracking-[0.2em] md:tracking-[0.3em] uppercase hover:text-[#D4AF37] transition-colors font-bold">Login</button>
+                <button onclick="toggleAuthModal('signup')" class="btn-premium px-5 md:px-8 py-2.5 md:py-4 rounded-full text-[9px] md:text-[10px] shadow-lg whitespace-nowrap">Enroll Now</button>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+            <!-- Dynamic Background -->
+            <div class="absolute inset-0 bg-gradient-to-b from-black/90 via-black/40 to-[#0A0A0A] z-10"></div>
+            <div class="absolute inset-0 z-0">
+                <img src="https://images.unsplash.com/photo-1514320298323-e06ac1523c5a?auto=format&fit=crop&q=80&w=2070" alt="Music atmosphere" class="w-full h-full object-cover scale-105 opacity-40">
+            </div>
+
+            <!-- Content Container with fixed Top Padding to avoid overlap -->
+            <div class="relative z-20 text-center px-6 max-w-7xl pt-24 md:pt-32 lg:pt-0">
+                <div class="animate-hero opacity-0" style="animation-delay: 0.2s">
+                    <span class="text-[#D4AF37] tracking-[0.4em] md:tracking-[0.7em] text-[9px] md:text-xs font-black uppercase mb-4 md:mb-8 block">The Premier Conservatory</span>
+                </div>
+                
+                <h1 class="serif hero-title mb-6 md:mb-10 leading-[1.1] animate-hero opacity-0" style="animation-delay: 0.4s">
+                    Master the <br> <span class="gold-gradient italic">Unspoken Language</span>
+                </h1>
+                
+                <p class="hero-para max-w-xl md:max-w-2xl mx-auto text-gray-400 mb-10 md:mb-16 font-light animate-hero opacity-0" style="animation-delay: 0.6s">
+                    An elite sanctuary where modern innovation meets timeless classical mastery. Join the global circle of Musicoul scholars.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 md:gap-6 lg:gap-8 justify-center items-center animate-hero opacity-0" style="animation-delay: 0.8s">
+                    <a href="#courses" class="btn-premium w-full sm:w-auto px-10 md:px-14 lg:px-16 py-4 md:py-5 rounded-full text-[10px] lg:text-[11px] text-center">Explore Tracks</a>
+                    <button onclick="toggleAuthModal('signup')" class="w-full sm:w-auto px-10 md:px-14 lg:px-16 py-4 md:py-5 rounded-full border border-white/10 hover:bg-white hover:text-black hover:border-white transition-all tracking-[0.2em] uppercase text-[10px] lg:text-[11px] font-bold">The Journey</button>
+                </div>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 z-20 opacity-30 animate-bounce hidden sm:block">
+                <div class="w-[1px] h-10 md:h-16 bg-gradient-to-b from-transparent via-white to-transparent"></div>
+            </div>
+        </section>
+
+        <!-- Academy/Courses Section -->
+        <section id="courses" class="py-20 md:py-32 lg:py-40 px-6 md:px-12 lg:px-16 max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-24 lg:mb-32 gap-6 md:gap-10">
+                <div class="max-w-xl text-left">
+                    <span class="text-[#D4AF37] uppercase tracking-[0.4em] md:tracking-[0.5em] text-[9px] md:text-[10px] font-black mb-3 md:mb-4 block">Curriculum</span>
+                    <h2 class="serif section-title leading-tight">Artistic <br><span class="italic opacity-50 text-white font-normal">Specializations</span></h2>
+                </div>
+                <p class="text-gray-500 max-w-xs text-xs md:text-sm leading-relaxed text-left md:text-right font-medium">Individualized paths tailored for the modern virtuoso and the technical pioneer.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 lg:gap-12">
+                <!-- Course Card 1 -->
+                <div class="portal-card p-6 md:p-10 lg:p-12 group rounded-3xl">
+                    <div class="overflow-hidden rounded-2xl mb-8 md:mb-10 aspect-[3/4]">
+                        <img src="https://images.unsplash.com/photo-1552422535-c45813c61732?auto=format&fit=crop&q=80" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000" alt="Piano">
+                    </div>
+                    <div class="flex justify-between items-start mb-4 md:mb-6">
+                        <h3 class="serif text-xl md:text-2xl lg:text-3xl italic">Piano <br>Forte</h3>
+                        <span class="text-[9px] font-bold gold-text tracking-widest mt-1.5 uppercase">Classical</span>
+                    </div>
+                    <p class="text-gray-400 text-xs md:text-sm leading-relaxed mb-8 md:mb-10">Mastery from Baroque precision to Contemporary expressionism.</p>
+                    <button onclick="toggleAuthModal('login')" class="text-[9px] md:text-[10px] font-bold tracking-[0.2em] md:tracking-[0.3em] uppercase border-b border-[#D4AF37]/30 pb-2 hover:border-[#D4AF37] transition-all">View Syllabus</button>
+                </div>
+
+                <!-- Course Card 2 -->
+                <div class="portal-card p-6 md:p-10 lg:p-12 group rounded-3xl">
+                    <div class="overflow-hidden rounded-2xl mb-8 md:mb-10 aspect-[3/4]">
+                        <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&q=80" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000" alt="Audio">
+                    </div>
+                    <div class="flex justify-between items-start mb-4 md:mb-6">
+                        <h3 class="serif text-xl md:text-2xl lg:text-3xl italic">Audio <br>Architecture</h3>
+                        <span class="text-[9px] font-bold gold-text tracking-widest mt-1.5 uppercase">Technical</span>
+                    </div>
+                    <p class="text-gray-400 text-xs md:text-sm leading-relaxed mb-8 md:mb-10">Advanced sound design, spatial audio, and elite mixing studio access.</p>
+                    <button onclick="toggleAuthModal('login')" class="text-[9px] md:text-[10px] font-bold tracking-[0.2em] md:tracking-[0.3em] uppercase border-b border-[#D4AF37]/30 pb-2 hover:border-[#D4AF37] transition-all">View Syllabus</button>
+                </div>
+
+                <!-- Course Card 3 -->
+                <div class="portal-card p-6 md:p-10 lg:p-12 group rounded-3xl sm:col-span-2 lg:col-span-1 max-sm:mx-auto">
+                    <div class="overflow-hidden rounded-2xl mb-8 md:mb-10 aspect-[3/4]">
+                        <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&q=80" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000" alt="Vocal">
+                    </div>
+                    <div class="flex justify-between items-start mb-4 md:mb-6">
+                        <h3 class="serif text-xl md:text-2xl lg:text-3xl italic">Vocal <br>Performance</h3>
+                        <span class="text-[9px] font-bold gold-text tracking-widest mt-1.5 uppercase">Practical</span>
+                    </div>
+                    <p class="text-gray-400 text-xs md:text-sm leading-relaxed mb-8 md:mb-10">Developing world-class resonance and stylistic versatility.</p>
+                    <button onclick="toggleAuthModal('login')" class="text-[9px] md:text-[10px] font-bold tracking-[0.2em] md:tracking-[0.3em] uppercase border-b border-[#D4AF37]/30 pb-2 hover:border-[#D4AF37] transition-all">View Syllabus</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-16 md:py-24 lg:py-32 border-t border-white/5 bg-black/30">
+            <div class="max-w-7xl mx-auto px-6 flex flex-col items-center gap-10 md:gap-14">
+                <div class="flex items-center gap-4 md:gap-5">
+                    <img src="https://i.ibb.co/LzN2V2kS/logo.jpg" class="w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/10 opacity-80" alt="Logo">
+                    <div class="text-left">
+                        <span class="serif text-xl md:text-2xl tracking-widest uppercase block">Musicoul</span>
+                        <span class="text-[8px] md:text-[9px] tracking-[0.4em] uppercase text-gray-500 font-bold">Conservatory of Excellence</span>
+                    </div>
+                </div>
+                <div class="flex flex-wrap justify-center gap-6 md:gap-12 text-[9px] md:text-[10px] tracking-[0.3em] md:tracking-[0.4em] uppercase font-bold text-gray-500">
+                    <a href="#" class="hover:text-white transition-colors">Instagram</a>
+                    <a href="#" class="hover:text-white transition-colors">Vimeo</a>
+                    <a href="#" class="hover:text-white transition-colors">Soundcloud</a>
+                    <a href="#" class="hover:text-white transition-colors">YouTube</a>
+                </div>
+                <div class="w-16 md:w-20 h-[1px] bg-white/10"></div>
+                <p class="text-[8px] md:text-[9px] tracking-[0.4em] md:tracking-[0.5em] uppercase text-gray-600 text-center">© 2024 Musicoul Institute • All Rights Reserved</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Premium Student Portal (Initial hidden) -->
+    <div id="student-portal" class="hidden min-h-screen bg-[#050505] flex flex-col lg:flex-row">
+        <!-- Mobile Portal Header -->
+        <div class="lg:hidden flex items-center justify-between p-5 bg-black/90 backdrop-blur-xl border-b border-white/10 sticky top-0 z-50">
+            <div class="flex items-center gap-3">
+                <img src="https://i.ibb.co/LzN2V2kS/logo.jpg" class="w-10 h-10 rounded-full border border-[#D4AF37]/40">
+                <span class="serif text-base tracking-widest font-bold">Portal</span>
+            </div>
+            <button onclick="handleLogout()" class="text-[9px] font-black tracking-widest uppercase text-red-500/80 px-4 py-2 border border-red-500/20 rounded-full">Sign Out</button>
+        </div>
+
+        <!-- Desktop Sidebar -->
+        <aside class="hidden lg:flex w-72 xl:w-80 h-screen sticky top-0 flex-col p-8 xl:p-10 border-r border-white/5 bg-black">
+            <div class="flex items-center gap-4 xl:gap-5 mb-16 xl:mb-20">
+                <img src="https://i.ibb.co/LzN2V2kS/logo.jpg" class="w-12 h-12 xl:w-14 xl:h-14 rounded-full border border-[#D4AF37]/40 shadow-xl">
+                <div>
+                    <h2 class="serif text-lg xl:text-xl gold-text font-bold">Musicoul</h2>
+                    <p class="text-[8px] xl:text-[9px] tracking-[0.2em] text-gray-500 uppercase font-bold">Elite Scholar</p>
+                </div>
+            </div>
+
+            <nav class="flex-1 space-y-3 xl:space-y-4">
+                <a href="#" class="flex items-center gap-4 xl:gap-5 p-4 xl:p-5 glass rounded-2xl gold-text shadow-xl">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                    <span class="text-xs font-bold tracking-[0.2em] uppercase">Dashboard</span>
+                </a>
+                <a href="#" class="flex items-center gap-4 xl:gap-5 p-4 xl:p-5 text-gray-500 hover:text-white transition-all group">
+                    <svg class="w-5 h-5 group-hover:text-[#D4AF37] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                    <span class="text-xs font-bold tracking-[0.2em] uppercase">Academy</span>
+                </a>
+            </nav>
+
+            <button onclick="handleLogout()" class="mt-auto flex items-center gap-4 xl:gap-5 p-4 xl:p-5 text-red-500/60 hover:text-red-500 transition-all border-t border-white/5 pt-8 group">
+                <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                <span class="text-xs font-bold tracking-[0.2em] uppercase">End Session</span>
+            </button>
+        </aside>
+
+        <!-- Main Portal Area -->
+        <main class="flex-1 p-6 md:p-12 lg:p-20 xl:p-24 max-w-7xl mx-auto w-full">
+            <header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 md:mb-20 gap-8">
+                <div class="text-left">
+                    <h1 class="serif text-4xl md:text-6xl xl:text-7xl mb-4 leading-tight">Welcome, <span id="user-name-portal" class="gold-gradient italic">Scholar</span></h1>
+                    <p class="text-gray-500 text-[9px] md:text-xs tracking-[0.4em] uppercase font-bold">Performance Track • Winter 2024</p>
+                </div>
+                <div class="glass px-6 md:px-8 py-4 rounded-3xl flex items-center gap-4 border-white/10 shadow-2xl">
+                    <div class="relative">
+                        <span class="w-2.5 h-2.5 rounded-full bg-green-500 block"></span>
+                        <span class="w-2.5 h-2.5 rounded-full bg-green-500 block absolute inset-0 animate-ping"></span>
+                    </div>
+                    <span class="text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em]">Institutional Access Active</span>
+                </div>
+            </header>
+
+            <!-- Stats Dashboard -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-16">
+                <div class="portal-card p-8 md:p-10 rounded-[2.5rem] shadow-xl">
+                    <p class="text-gray-500 text-[8px] md:text-[9px] uppercase tracking-[0.3em] md:tracking-[0.4em] mb-4 md:mb-6 font-black">Performance Grade</p>
+                    <h3 class="serif text-4xl md:text-5xl lg:text-6xl mb-3">A<span class="gold-text italic">+</span></h3>
+                    <p class="text-[9px] md:text-[10px] text-[#D4AF37] font-bold uppercase tracking-widest">Global Top 2%</p>
+                </div>
+                <div class="portal-card p-8 md:p-10 rounded-[2.5rem] shadow-xl">
+                    <p class="text-gray-500 text-[8px] md:text-[9px] uppercase tracking-[0.3em] md:tracking-[0.4em] mb-4 md:mb-6 font-black">Practice Volume</p>
+                    <h3 class="serif text-4xl md:text-5xl lg:text-6xl mb-3">128<span class="text-xl md:text-2xl opacity-50 ml-1 italic">hrs</span></h3>
+                    <div class="w-full bg-white/5 h-[3px] rounded-full overflow-hidden">
+                        <div class="bg-gradient-to-r from-[#D4AF37] to-[#F9E29D] h-full" style="width: 85%"></div>
+                    </div>
+                </div>
+                <div class="portal-card p-8 md:p-10 rounded-[2.5rem] shadow-xl sm:col-span-2 lg:col-span-1">
+                    <p class="text-gray-500 text-[8px] md:text-[9px] uppercase tracking-[0.3em] md:tracking-[0.4em] mb-4 md:mb-6 font-black">Recitals</p>
+                    <h3 class="serif text-4xl md:text-5xl lg:text-6xl mb-3">04</h3>
+                    <p class="text-[9px] md:text-[10px] text-gray-500 font-bold uppercase tracking-widest">Next Performance: 12 Days</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 xl:grid-cols-2 gap-10 lg:gap-16">
+                <section>
+                    <div class="flex items-center justify-between mb-8 md:mb-10 border-b border-white/10 pb-6">
+                        <h3 class="serif text-xl md:text-2xl tracking-wide italic">Institutional Resources</h3>
+                        <a href="#" class="text-[8px] md:text-[9px] gold-text uppercase font-black tracking-widest hover:brightness-125">Library</a>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="glass p-6 md:p-8 rounded-3xl flex items-center justify-between group cursor-pointer hover:bg-white/[0.08] transition-all border-white/5">
+                            <div class="flex items-center gap-4 md:gap-6">
+                                <div class="w-12 h-12 md:w-16 md:h-16 glass flex items-center justify-center rounded-2xl text-xl md:text-2xl shadow-inner shadow-black border-white/10">🎹</div>
+                                <div class="text-left">
+                                    <h4 class="text-[10px] md:text-[11px] font-black tracking-[0.15em] uppercase mb-1">Advanced Jazz Harmony</h4>
+                                    <p class="text-[8px] md:text-[9px] text-gray-500 uppercase font-bold">Maestro Elena • 42:15</p>
+                                </div>
+                            </div>
+                            <div class="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-[#D4AF37] group-hover:text-black transition-all shrink-0 ml-4">
+                                <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <div class="flex items-center justify-between mb-8 md:mb-10 border-b border-white/10 pb-6">
+                        <h3 class="serif text-xl md:text-2xl tracking-wide italic">Active Mentorship</h3>
+                        <span class="text-[8px] md:text-[9px] text-gray-500 uppercase font-black tracking-widest">Room 402</span>
+                    </div>
+                    <div class="glass p-8 md:p-10 rounded-[3rem] bg-gradient-to-br from-white/[0.05] to-transparent border-white/5 relative overflow-hidden group shadow-2xl">
+                        <span class="text-[9px] md:text-[10px] text-[#D4AF37] font-black uppercase tracking-[0.3em] mb-4 block">Private Session</span>
+                        <h4 class="serif text-2xl md:text-3xl lg:text-4xl mb-5 md:mb-6 italic text-left">Advanced Counterpoint</h4>
+                        <p class="text-xs md:text-sm text-gray-400 font-medium mb-10 md:mb-12 leading-relaxed max-w-sm text-left">Exclusive session with Maestro Elena concerning Baroque structural complexity.</p>
+                        <div class="flex items-center gap-8 md:gap-10">
+                            <div class="flex flex-col text-left">
+                                <span class="text-[8px] md:text-[9px] text-gray-600 font-bold uppercase tracking-widest mb-1">Time</span>
+                                <span class="text-xs md:text-sm font-bold tracking-widest uppercase">14:00 GMT</span>
+                            </div>
+                            <div class="w-[1px] h-10 md:h-12 bg-white/10"></div>
+                            <div class="flex flex-col text-left">
+                                <span class="text-[8px] md:text-[9px] text-gray-600 font-bold uppercase tracking-widest mb-1">Status</span>
+                                <span class="text-xs md:text-sm font-bold tracking-widest uppercase text-green-500/80">Scheduled</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Auth Modal -->
+    <div id="auth-modal" class="auth-modal">
+        <div class="glass max-w-md w-full p-10 md:p-14 relative rounded-[3rem] border-white/20 shadow-3xl">
+            <button onclick="toggleAuthModal()" class="absolute top-8 right-8 text-gray-500 hover:text-white transition-all text-4xl font-extralight">&times;</button>
+            
+            <div id="login-form">
+                <img src="https://i.ibb.co/LzN2V2kS/logo.jpg" class="w-20 h-20 rounded-full mx-auto mb-8 border border-[#D4AF37]/50 shadow-2xl object-cover" alt="Logo">
+                <h2 class="serif text-3xl md:text-4xl mb-2 text-center">Identity</h2>
+                <p class="text-gray-500 text-[10px] tracking-[0.4em] uppercase text-center mb-10 font-bold">Scholar Access Hub</p>
+                <div class="space-y-5">
+                    <input type="email" id="login-email" placeholder="INSTITUTIONAL EMAIL" class="w-full bg-white/5 border border-white/10 p-5 rounded-2xl focus:border-[#D4AF37]/50 outline-none transition-all text-[10px] font-bold tracking-[0.1em] placeholder:text-gray-600 uppercase">
+                    <input type="password" id="login-password" placeholder="PASSPHRASE" class="w-full bg-white/5 border border-white/10 p-5 rounded-2xl focus:border-[#D4AF37]/50 outline-none transition-all text-[10px] font-bold tracking-[0.1em] placeholder:text-gray-600 uppercase">
+                    <button id="btn-login" class="w-full btn-premium py-5 rounded-2xl text-[11px] shadow-xl mt-4">Verify Identity</button>
+                    <p class="text-center text-[10px] text-gray-600 mt-8 tracking-widest uppercase font-bold">New Prospect? <a href="javascript:void(0)" onclick="toggleAuthModal('signup')" class="text-[#D4AF37] hover:brightness-110">Apply Now</a></p>
+                </div>
+            </div>
+
+            <div id="signup-form" class="hidden">
+                <h2 class="serif text-3xl md:text-4xl mb-2 text-center italic">Enrollment</h2>
+                <p class="text-gray-500 text-[10px] tracking-[0.4em] uppercase text-center mb-10 font-bold">Begin Your Legacy</p>
+                <div class="space-y-5">
+                    <input type="text" id="signup-name" placeholder="FULL LEGAL NAME" class="w-full bg-white/5 border border-white/10 p-5 rounded-2xl focus:border-[#D4AF37]/50 outline-none transition-all text-[10px] font-bold tracking-[0.1em] placeholder:text-gray-600 uppercase">
+                    <input type="email" id="signup-email" placeholder="SECURE EMAIL" class="w-full bg-white/5 border border-white/10 p-5 rounded-2xl focus:border-[#D4AF37]/50 outline-none transition-all text-[10px] font-bold tracking-[0.1em] placeholder:text-gray-600 uppercase">
+                    <input type="password" id="signup-password" placeholder="CREATE PASSPHRASE" class="w-full bg-white/5 border border-white/10 p-5 rounded-2xl focus:border-[#D4AF37]/50 outline-none transition-all text-[10px] font-bold tracking-[0.1em] placeholder:text-gray-600 uppercase">
+                    <button id="btn-signup" class="w-full btn-premium py-5 rounded-2xl text-[11px] shadow-xl mt-4">Confirm Application</button>
+                    <p class="text-center text-[10px] text-gray-600 mt-8 tracking-widest uppercase font-bold">Already Enrolled? <a href="javascript:void(0)" onclick="toggleAuthModal('login')" class="text-[#D4AF37] hover:brightness-110">Sign In</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-container" class="fixed bottom-10 right-10 z-[200] pointer-events-none"></div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBaDBLoe2Wi2WgmJfPRXoEP-ZSgkVhMxVI",
+            authDomain: "musicoul-15025.firebaseapp.com",
+            projectId: "musicoul-15025",
+            storageBucket: "musicoul-15025.firebasestorage.app",
+            messagingSenderId: "863099041367",
+            appId: "1:863099041367:web:c3d61399489a219611d512"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        window.showToast = (msg, isError = false) => {
+            const toast = document.createElement('div');
+            toast.className = `glass px-8 md:px-10 py-5 md:py-6 mb-4 border-l-4 rounded-2xl ${isError ? 'border-red-500' : 'border-[#D4AF37]'} transition-all duration-700 opacity-0 translate-y-10 pointer-events-auto shadow-2xl backdrop-blur-2xl`;
+            toast.innerHTML = `<span class="text-[9px] md:text-[10px] font-black tracking-[0.2em] md:tracking-[0.3em] uppercase">${msg}</span>`;
+            document.getElementById('toast-container').appendChild(toast);
+            setTimeout(() => { toast.style.opacity = '1'; toast.style.transform = 'translateY(0)'; }, 50);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateY(10px)';
+                setTimeout(() => toast.remove(), 700);
+            }, 6000);
+        };
+
+        window.toggleAuthModal = (type) => {
+            const modal = document.getElementById('auth-modal');
+            const loginForm = document.getElementById('login-form');
+            const signupForm = document.getElementById('signup-form');
+            if (!type) { modal.style.display = 'none'; return; }
+            modal.style.display = 'flex';
+            if (type === 'login') {
+                loginForm.classList.remove('hidden'); signupForm.classList.add('hidden');
+            } else {
+                loginForm.classList.add('hidden'); signupForm.classList.remove('hidden');
+            }
+        };
+
+        document.getElementById('btn-login').onclick = async () => {
+            const email = document.getElementById('login-email').value;
+            const pass = document.getElementById('login-password').value;
+            if(!email || !pass) return showToast("Credentials required.", true);
+            try {
+                await signInWithEmailAndPassword(auth, email, pass);
+                showToast("Access granted.");
+                toggleAuthModal();
+            } catch (err) { showToast("Authentication error.", true); }
+        };
+
+        document.getElementById('btn-signup').onclick = async () => {
+            const name = document.getElementById('signup-name').value;
+            const email = document.getElementById('signup-email').value;
+            const pass = document.getElementById('signup-password').value;
+            if(!name || !email || !pass) return showToast("All fields required.", true);
+            try {
+                const cred = await createUserWithEmailAndPassword(auth, email, pass);
+                await updateProfile(cred.user, { displayName: name });
+                await setDoc(doc(db, "students", cred.user.uid), { name, email, enrolled: new Date().toISOString() });
+                showToast("Scholarship confirmed.");
+                toggleAuthModal();
+            } catch (err) { showToast(err.message, true); }
+        };
+
+        window.handleLogout = () => {
+            signOut(auth).then(() => showToast("Session terminated."));
+        };
+
+        onAuthStateChanged(auth, (user) => {
+            const landing = document.getElementById('landing-page');
+            const portal = document.getElementById('student-portal');
+            const userName = document.getElementById('user-name-portal');
+
+            if (user) {
+                landing.classList.add('hidden');
+                portal.classList.remove('hidden');
+                userName.textContent = user.displayName?.split(' ')[0] || "Scholar";
+                window.scrollTo(0,0);
+            } else {
+                landing.classList.remove('hidden');
+                portal.classList.add('hidden');
+            }
+        });
+
+        window.onscroll = () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 40) {
+                nav.classList.add('glass', 'py-4', 'md:py-5', 'border-b', 'border-white/10');
+            } else {
+                nav.classList.remove('glass', 'py-4', 'md:py-5', 'border-b', 'border-white/10');
+            }
+        };
+    </script>
+</body>
+</html>

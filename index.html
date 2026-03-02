@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="shortcut icon" href="Assets/Images/Logo.png" type="image/x-icon">
-  <title>Musicoul</title>
+  <title>Musicoul Conservatory</title>
 
   <!-- Tailwind CSS via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -25,10 +24,10 @@
 
   <!-- Application Styles -->
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;600;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;600;800&family=Tiro+Devanagari+Marathi:ital@0;1&family=Mukta:wght@300;400;600;800&display=swap');
     
-    .serif { font-family: 'Cormorant Garamond', serif; }
-    .sans { font-family: 'Inter', sans-serif; }
+    .serif { font-family: 'Cormorant Garamond', 'Tiro Devanagari Marathi', serif; }
+    .sans { font-family: 'Inter', 'Mukta', sans-serif; }
     
     .bg-app { background-color: #050505; }
     .text-gold { color: #D4AF37; }
@@ -86,11 +85,44 @@
       transform: translateY(-4px);
       box-shadow: 0 20px 40px -10px rgba(212, 175, 55, 0.15);
     }
+
+    /* Google Translate Custom Styling */
+    .goog-te-gadget { font-family: 'Inter', 'Mukta', sans-serif !important; color: transparent !important; }
+    .goog-te-gadget .goog-te-combo { 
+      background-color: rgba(0, 0, 0, 0.5); 
+      color: #D4AF37; 
+      border: 1px solid rgba(255, 255, 255, 0.1); 
+      padding: 8px 12px; 
+      border-radius: 8px; 
+      font-size: 10px; 
+      text-transform: uppercase; 
+      letter-spacing: 0.1em; 
+      outline: none;
+      width: 100%;
+      cursor: pointer;
+    }
+    .goog-te-gadget .goog-te-combo:focus { border-color: #D4AF37; }
+    .goog-logo-link { display: none !important; }
+    .goog-te-gadget span { display: none !important; }
+    .skiptranslate iframe { display: none !important; }
+    body { top: 0px !important; } /* Prevents top banner */
   </style>
 </head>
 <body class="bg-app text-white min-h-screen sans selection:bg-[#D4AF37] selection:text-black font-light text-gray-300">
   
   <div id="root"></div>
+
+  <!-- Google Translate Script -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en', 
+        includedLanguages: 'en,hi,mr', 
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
   <!-- Main Application Script -->
   <script type="text/babel" data-type="module">
@@ -545,6 +577,13 @@
                 </div>
               </div>
             )}
+
+            <div className="mt-8 mb-4 glass p-4 rounded-xl border-white/5 flex flex-col items-start gap-2">
+               <p className="text-[8px] text-gray-500 uppercase tracking-[0.2em] font-bold">
+                 Language
+               </p>
+               <div id="google_translate_element" className="w-full overflow-hidden"></div>
+            </div>
 
             <button onClick={logout} className="flex items-center gap-4 p-4 text-gray-500 hover:text-[#D4AF37] transition-all text-[10px] font-bold tracking-widest uppercase w-full rounded-xl hover:bg-white/5 mt-auto">
               <LogOut size={20}/> <span>Logout</span>
@@ -1757,6 +1796,7 @@
       const [showResourceModal, setShowResourceModal] = useState(false);
       const [showFolderModal, setShowFolderModal] = useState(false);
       const [showScheduleModal, setShowScheduleModal] = useState(false);
+      const [showEditCourseModal, setShowEditCourseModal] = useState(false);
       const [previewResource, setPreviewResource] = useState(null);
 
       const removeResource = async (resId) => {
@@ -1799,10 +1839,15 @@
                 <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505]/80 to-transparent"></div>
               </div>
             )}
-            <div className="relative z-10">
-              <span className="bg-[#D4AF37] text-black px-3 py-1 rounded text-[8px] font-bold uppercase tracking-widest mb-4 inline-block">Management Mode</span>
-              <h1 className="serif text-4xl md:text-5xl lg:text-6xl mb-4 text-white leading-tight">{course.title}</h1>
-              <p className="text-gray-400 text-sm max-w-3xl leading-relaxed font-light">{course.desc}</p>
+            <div className="relative z-10 flex flex-col md:flex-row md:justify-between md:items-start gap-4">
+              <div>
+                <span className="bg-[#D4AF37] text-black px-3 py-1 rounded text-[8px] font-bold uppercase tracking-widest mb-4 inline-block">Management Mode</span>
+                <h1 className="serif text-4xl md:text-5xl lg:text-6xl mb-4 text-white leading-tight">{course.title}</h1>
+                <p className="text-gray-400 text-sm max-w-3xl leading-relaxed font-light">{course.desc}</p>
+              </div>
+              <button onClick={() => setShowEditCourseModal(true)} className="bg-white/10 hover:bg-white/20 border border-white/20 text-white px-5 py-2.5 rounded-xl text-[10px] font-bold uppercase tracking-[0.2em] transition-colors flex items-center gap-2 shrink-0 backdrop-blur-md">
+                <Settings size={14} /> Edit Details
+              </button>
             </div>
           </header>
           
@@ -1900,7 +1945,43 @@
           {showResourceModal && <ResourceCreatorModal courseId={course.id} parentId={currentFolderId} onClose={() => setShowResourceModal(false)} />}
           {showFolderModal && <CreateFolderModal courseId={course.id} parentId={currentFolderId} courseResources={course.resources} onClose={() => setShowFolderModal(false)} />}
           {showScheduleModal && <ScheduleCreatorModal courseId={course.id} onClose={() => setShowScheduleModal(false)} />}
+          {showEditCourseModal && <EditCourseModal course={course} onClose={() => setShowEditCourseModal(false)} />}
           {previewResource && <ResourcePreviewer resource={previewResource} onClose={() => setPreviewResource(null)} />}
+        </div>
+      );
+    }
+    
+    function EditCourseModal({ course, onClose }) {
+      const handleEditSubmit = async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        try {
+          await updateDoc(doc(db, 'artifacts', appId, 'public', 'data', 'courses', course.id), {
+            title: form.title.value,
+            desc: form.desc.value,
+            coverImage: form.coverImage.value
+          });
+          toast("Course Updated Successfully");
+          onClose();
+        } catch(err) { toast("Error updating course"); }
+      };
+
+      return (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-[#050505]/90 backdrop-blur-md animate-in fade-in">
+          <div className="glass-premium p-6 md:p-10 rounded-[2rem] md:rounded-[3rem] w-full max-w-xl border border-[#D4AF37]/30 shadow-2xl relative">
+            <button onClick={onClose} className="absolute top-6 right-6 md:top-8 md:right-8 text-gray-500 hover:text-white text-xl md:text-2xl font-light">&times;</button>
+            <h2 className="serif text-3xl md:text-4xl mb-1 md:mb-2 text-white italic">Edit Course</h2>
+            <p className="text-[#D4AF37] text-[9px] md:text-[10px] uppercase tracking-widest font-bold mb-6 md:mb-10">Update Course Details</p>
+            <form onSubmit={handleEditSubmit} className="space-y-4 md:space-y-6">
+              <div><input name="title" defaultValue={course.title} type="text" placeholder="COURSE TITLE" required className="w-full bg-black/50 border border-white/10 p-4 md:p-5 rounded-xl md:rounded-2xl text-[10px] md:text-[12px] tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" /></div>
+              <div><input name="coverImage" defaultValue={course.coverImage} type="url" placeholder="COVER IMAGE URL (OPTIONAL)" className="w-full bg-black/50 border border-white/10 p-4 md:p-5 rounded-xl md:rounded-2xl text-[10px] md:text-[12px] tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" /></div>
+              <div><textarea name="desc" defaultValue={course.desc} placeholder="COURSE DESCRIPTION" required rows={4} className="w-full bg-black/50 border border-white/10 p-4 md:p-5 rounded-xl md:rounded-2xl text-xs md:text-sm outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600 resize-none font-light leading-relaxed custom-scrollbar" /></div>
+              <div className="flex gap-3 md:gap-4 pt-2 md:pt-4">
+                <button type="button" onClick={onClose} className="flex-1 py-4 md:py-5 border border-white/10 rounded-xl md:rounded-2xl text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-bold text-gray-400 hover:text-white transition-colors">Cancel</button>
+                <button type="submit" className="flex-1 bg-[#D4AF37] text-black rounded-xl md:rounded-2xl text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-[#F9E29D] transition-colors shadow-lg">Save Changes</button>
+              </div>
+            </form>
+          </div>
         </div>
       );
     }

@@ -37,8 +37,8 @@
     .glass { 
       background: rgba(255, 255, 255, 0.015); 
       border: 1px solid rgba(255, 255, 255, 0.05); 
-      -webkit-backdrop-filter: blur(16px); 
-      backdrop-filter: blur(16px);
+      backdrop-filter: blur(16px); 
+      -webkit-backdrop-filter: blur(16px);
     }
     
     .glass-premium {
@@ -1618,9 +1618,9 @@
             <h1 className="serif text-4xl md:text-5xl lg:text-6xl mb-2 md:mb-4 text-white">User <span className="gold-gradient-text italic">Directory</span></h1>
             <p className="text-gray-400 text-xs md:text-sm font-light">Manage accounts, roles, and course placements.</p>
           </header>
-          <div className="space-y-4">
+          <div className="space-y-4 pb-40">
             {users.map(u => (
-              <div key={u.id} className="glass-premium p-5 md:p-8 rounded-[1.5rem] md:rounded-[2rem] flex flex-col md:flex-row md:items-center justify-between gap-5 md:gap-6 border border-white/5">
+              <div key={u.id} className="relative z-0 hover:z-50 focus-within:z-50 glass-premium p-5 md:p-8 rounded-[1.5rem] md:rounded-[2rem] flex flex-col md:flex-row md:items-center justify-between gap-5 md:gap-6 border border-white/5">
                 <div className="flex items-center gap-4 md:gap-6">
                   <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-gray-800 to-black border border-white/10 flex items-center justify-center text-white serif text-xl md:text-2xl shadow-inner shrink-0 overflow-hidden">
                     {u.profilePic ? <img src={u.profilePic} className="w-full h-full object-cover" /> : u.name.charAt(0)}

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Musicoul Conservatory</title>
+  <title>Musicoul</title>
 
   <!-- Tailwind CSS via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -24,49 +24,51 @@
 
   <!-- Application Styles -->
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;600;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;600;800&family=Tiro+Devanagari+Marathi:ital@0;1&family=Mukta:wght@300;400;600;800&display=swap');
     
-    .serif { font-family: 'Cormorant Garamond', serif; }
-    .sans { font-family: 'Inter', sans-serif; }
+    .serif { font-family: 'Cormorant Garamond', 'Tiro Devanagari Marathi', serif; }
+    .sans { font-family: 'Inter', 'Mukta', sans-serif; }
     
     .bg-app { background-color: #050505; }
     .text-gold { color: #D4AF37; }
     .bg-gold { background-color: #D4AF37; }
     
-    .glass { 
-      background: rgba(255, 255, 255, 0.015); 
-      border: 1px solid rgba(255, 255, 255, 0.05); 
-      backdrop-filter: blur(16px); 
-      -webkit-backdrop-filter: blur(16px);
+    /* Premium Glassmorphism styling */
+    .glass {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
     }
     
     .glass-premium {
-      background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
-      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-      border: 1px solid rgba(212, 175, 55, 0.1);
+      background: linear-gradient(145deg, rgba(20,20,20,0.8) 0%, rgba(5,5,5,0.9) 100%);
       backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(212, 175, 55, 0.1);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
     }
-    
+
     .gold-gradient-text {
-      background: linear-gradient(to right, #D4AF37, #F9E29D, #D4AF37);
+      background: linear-gradient(to right, #D4AF37, #FFDF73, #D4AF37);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
     }
 
-    ::-webkit-scrollbar { width: 4px; height: 4px; }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.2); border-radius: 10px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(212, 175, 55, 0.5); }
+    ::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.2); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(212, 175, 55, 0.4); }
 
     input[type="file"]::file-selector-button {
-      border: none;
-      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      background: transparent;
       color: #D4AF37;
       padding: 8px 16px;
-      border-radius: 8px;
+      border-radius: 6px;
       font-size: 10px;
-      font-weight: bold;
+      font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.1em;
       cursor: pointer;
@@ -74,7 +76,7 @@
       transition: all 0.3s ease;
     }
     input[type="file"]::file-selector-button:hover {
-      background: rgba(212, 175, 55, 0.2);
+      background: rgba(212, 175, 55, 0.1);
     }
 
     /* Elegant Animations */
@@ -85,9 +87,48 @@
       transform: translateY(-4px);
       box-shadow: 0 20px 40px -10px rgba(212, 175, 55, 0.15);
     }
+
+    /* Fixed Google Translate Custom Styling */
+    .goog-te-gadget { 
+      font-family: 'Inter', 'Mukta', sans-serif !important; 
+      color: transparent !important; 
+      font-size: 0 !important;
+    }
+    .goog-te-gadget > span { display: none !important; } /* Hide Google Logo/Text */
+    .goog-te-combo { 
+      background-color: rgba(0,0,0,0.5) !important; 
+      color: #D4AF37 !important; 
+      border: 1px solid rgba(255, 255, 255, 0.1) !important; 
+      padding: 10px 12px !important; 
+      border-radius: 8px !important; 
+      font-size: 11px !important; 
+      text-transform: uppercase; 
+      letter-spacing: 0.05em; 
+      outline: none;
+      width: 100%;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23D4AF37%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px top 50%;
+      background-size: 8px auto;
+    }
+    .goog-te-combo:focus { border-color: #D4AF37 !important; }
+    .skiptranslate iframe { display: none !important; }
+    .goog-te-banner-frame.skiptranslate { display: none !important; }
+    body { top: 0px !important; } /* Prevents top banner shift */
+    
+    /* Hide the default Google Translate element securely so our custom dropdown takes over */
+    #google_translate_element_wrapper {
+      position: absolute;
+      opacity: 0;
+      z-index: -999;
+      pointer-events: none;
+    }
   </style>
 </head>
-<body class="bg-app text-white min-h-screen sans selection:bg-[#D4AF37] selection:text-black font-light text-gray-300">
+<body class="bg-app text-gray-300 min-h-screen sans selection:bg-[#D4AF37] selection:text-black font-light">
   
   <div id="root"></div>
 
@@ -100,7 +141,7 @@
       LayoutDashboard, BookOpen, Users, Settings, LogOut, Plus, Trash2, Calendar, FileText, PlayCircle, 
       Image as ImageIcon, ChevronRight, GraduationCap, Music, Link as LinkIcon, Menu, X, Mail, Lock, 
       User as UserIcon, UploadCloud, File as FileIcon, ImagePlus, Clock, Folder, FolderPlus, ChevronLeft,
-      FolderOpen, AlertCircle
+      FolderOpen, AlertCircle, Edit3
     } from 'lucide-react';
     
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js';
@@ -138,7 +179,7 @@
     // --- HELPERS ---
     const toast = (msg) => {
       const t = document.createElement('div');
-      t.className = "fixed bottom-6 right-6 md:top-10 md:right-10 md:bottom-auto glass-premium text-[#D4AF37] px-6 py-4 rounded-xl font-bold text-[10px] tracking-[0.2em] uppercase z-[9999] shadow-2xl transition-all duration-300 animate-in fade-in border border-[#D4AF37]/40";
+      t.className = "fixed bottom-6 right-6 md:top-10 md:right-10 md:bottom-auto bg-[#111] border border-[#D4AF37]/40 text-[#D4AF37] px-6 py-4 rounded-xl font-medium text-[11px] tracking-wide shadow-2xl transition-all duration-300 animate-in fade-in z-[9999]";
       t.innerText = msg;
       document.body.appendChild(t);
       setTimeout(() => {
@@ -184,6 +225,87 @@
         return path;
     };
 
+    // --- CUSTOM LANGUAGE SELECTOR & GOOGLE TRANSLATE COMPONENT ---
+    const CustomLanguageSelector = () => {
+      // Check cookies for existing language preference so it persists across reloads
+      const getInitialLang = () => {
+        const match = document.cookie.match(/googtrans=\/en\/([^;]+)/);
+        return match ? match[1] : 'en';
+      };
+      
+      const [lang, setLang] = useState(getInitialLang);
+
+      const handleLanguageChange = (e) => {
+        const newLang = e.target.value;
+        setLang(newLang);
+        
+        if (newLang === 'en') {
+          // To restore English properly, we clear the Google Translate cookie and reload
+          document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+          document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=' + window.location.hostname + '; path=/;';
+          window.location.reload();
+          return;
+        }
+
+        // Save to cookie so preference persists
+        document.cookie = `googtrans=/en/${newLang}; path=/`;
+
+        // Find the hidden Google Translate select element and trigger a change
+        const googleSelect = document.querySelector('.goog-te-combo');
+        if (googleSelect) {
+          googleSelect.value = newLang;
+          googleSelect.dispatchEvent(new Event('change', { bubbles: true }));
+        } else {
+          toast("Translator loading... rendering updates.");
+          window.location.reload();
+        }
+      };
+
+      return (
+        <select 
+          value={lang} 
+          onChange={handleLanguageChange} 
+          className="bg-black/80 border border-[#D4AF37]/50 text-[#D4AF37] text-[10px] md:text-xs font-bold uppercase tracking-widest rounded-lg px-2 py-1.5 md:px-3 md:py-2 outline-none cursor-pointer text-center shadow-[0_0_10px_rgba(212,175,55,0.2)] hover:bg-[#D4AF37]/10 transition-colors"
+        >
+          <option value="en">ENG</option>
+          <option value="hi">हिंदी (HI)</option>
+          <option value="mr">मराठी (MR)</option>
+        </select>
+      );
+    };
+
+    const GoogleTranslateWidget = React.memo(() => {
+      useEffect(() => {
+        const initTranslate = () => {
+          if (window.google && window.google.translate && window.google.translate.TranslateElement) {
+             const el = document.getElementById('google_translate_element');
+             if (el && el.innerHTML === '') {
+               new window.google.translate.TranslateElement(
+                 { pageLanguage: 'en', includedLanguages: 'hi,mr', layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE },
+                 'google_translate_element'
+               );
+             }
+          }
+        };
+
+        if (!document.getElementById('google-translate-script')) {
+          window.googleTranslateElementInit = initTranslate;
+          const script = document.createElement('script');
+          script.id = 'google-translate-script';
+          script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+          document.body.appendChild(script);
+        } else {
+          setTimeout(initTranslate, 300);
+        }
+      }, []);
+
+      return (
+        <div id="google_translate_element_wrapper">
+          <div id="google_translate_element"></div>
+        </div>
+      );
+    });
+
     // --- COLLAGE SLIDER COMPONENT ---
     function CollageSlider({ resource }) {
         const images = resource.url.split(',').map(u => u.trim()).filter(Boolean);
@@ -196,11 +318,11 @@
         if(images.length === 0) return <div className="text-gray-500 w-full h-full flex items-center justify-center">No images found.</div>;
 
         return (
-            <div className="w-full h-full relative flex flex-col bg-[#0a0a0a] overflow-hidden group items-center justify-center">
+            <div className="w-full h-full relative flex flex-col bg-[#050505] overflow-hidden group items-center justify-center">
                 <div className="relative w-full h-full flex items-center justify-center overflow-auto custom-scrollbar p-4">
                     <img 
                         src={images[currentIndex]} 
-                        className={`transition-all duration-300 ${isZoomed ? 'max-w-none cursor-zoom-out scale-[1.5] origin-center' : 'max-w-full max-h-full object-contain cursor-zoom-in shadow-2xl rounded-lg border border-white/5'}`} 
+                        className={`transition-all duration-300 ${isZoomed ? 'max-w-none cursor-zoom-out scale-[1.5] origin-center' : 'max-w-full max-h-full object-contain cursor-zoom-in rounded-[1.5rem] border border-white/5'}`} 
                         onClick={() => setIsZoomed(!isZoomed)}
                         alt={`Slide ${currentIndex + 1}`}
                     />
@@ -208,19 +330,19 @@
                 
                 {images.length > 1 && (
                     <>
-                        <button onClick={prev} className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-14 md:h-14 bg-black/60 text-white rounded-full flex items-center justify-center hover:bg-[#D4AF37] hover:text-black transition-all backdrop-blur-md border border-white/10 z-10 shadow-lg">
-                            <ChevronLeft size={24} className="md:w-8 md:h-8" />
+                        <button onClick={prev} className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-black/80 text-white rounded-full flex items-center justify-center hover:bg-[#D4AF37] hover:text-black transition-all border border-white/10 z-10 shadow-lg">
+                            <ChevronLeft size={20} />
                         </button>
-                        <button onClick={next} className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-14 md:h-14 bg-black/60 text-white rounded-full flex items-center justify-center hover:bg-[#D4AF37] hover:text-black transition-all backdrop-blur-md border border-white/10 z-10 shadow-lg">
-                            <ChevronRight size={24} className="md:w-8 md:h-8" />
+                        <button onClick={next} className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-black/80 text-white rounded-full flex items-center justify-center hover:bg-[#D4AF37] hover:text-black transition-all border border-white/10 z-10 shadow-lg">
+                            <ChevronRight size={20} />
                         </button>
                         
-                        <div className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-black/60 px-6 py-3 rounded-full backdrop-blur-md border border-white/10 z-10 overflow-x-auto max-w-[80vw] custom-scrollbar">
+                        <div className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-black/80 px-4 py-2 rounded-[1.5rem] border border-white/10 z-10 overflow-x-auto max-w-[80vw] custom-scrollbar">
                             {images.map((img, i) => (
                                 <button 
                                     key={i} 
                                     onClick={() => {setCurrentIndex(i); setIsZoomed(false);}} 
-                                    className={`shrink-0 rounded-md overflow-hidden transition-all border-2 ${i === currentIndex ? 'border-[#D4AF37] w-12 h-12 md:w-16 md:h-16 opacity-100 scale-110' : 'border-transparent w-10 h-10 md:w-12 md:h-12 opacity-50 hover:opacity-100'}`}
+                                    className={`shrink-0 rounded-md overflow-hidden transition-all border ${i === currentIndex ? 'border-[#D4AF37] w-12 h-12 opacity-100' : 'border-transparent w-10 h-10 opacity-50 hover:opacity-100'}`}
                                 >
                                     <img src={img} className="w-full h-full object-cover" />
                                 </button>
@@ -327,8 +449,8 @@
         return (
           <div className="bg-app text-white min-h-screen flex items-center justify-center font-sans">
             <div className="flex flex-col items-center gap-6">
-              <div className="w-16 h-16 border-2 border-[#D4AF37]/20 border-t-[#D4AF37] rounded-full animate-spin" />
-              <h2 className="serif text-2xl text-gold italic">Loading...</h2>
+              <div className="w-12 h-12 border-2 border-[#D4AF37]/20 border-t-[#D4AF37] rounded-full animate-spin" />
+              <h2 className="serif text-xl text-gold">Loading</h2>
             </div>
           </div>
         );
@@ -400,9 +522,8 @@
           } else if (err.code === 'auth/weak-password') {
             toast("Password should be at least 6 characters.");
           } else if (err.code === 'auth/network-request-failed') {
-            toast("Network error. Please check your connection or disable ad-blockers.");
+            toast("Network error. Please check your connection.");
           } else {
-            console.error("Authentication Error Details:", err);
             const simpleMsg = err.message ? err.message.replace('Firebase: ', '').split(' (')[0] : 'Unknown error';
             toast(`Auth Error: ${simpleMsg}`);
           }
@@ -411,41 +532,40 @@
       };
 
       return (
-        <div className="w-full min-h-screen flex items-center justify-center p-4 md:p-6 bg-[url('https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center">
-          <div className="absolute inset-0 bg-[#050505]/90 backdrop-blur-md z-0"></div>
+        <div className="w-full min-h-screen flex items-center justify-center p-4 md:p-6 bg-app">
           
-          <div className="glass-premium p-8 md:p-12 rounded-[2rem] w-full max-w-md z-10 relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent opacity-50"></div>
+          <div className="glass-premium p-8 md:p-12 w-full max-w-md z-10 relative overflow-hidden shadow-2xl rounded-[2rem]">
+            <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent opacity-40"></div>
             
-            <div className="text-center mb-8">
-              <Music size={40} className="text-[#D4AF37] mx-auto mb-4" />
-              <h1 className="serif text-4xl md:text-5xl mb-2 italic text-white">Musicoul</h1>
-              <p className="text-[#D4AF37] text-[9px] tracking-[0.4em] uppercase font-bold">Learning Portal</p>
+            <div className="text-center mb-10">
+              <Music size={32} className="text-[#D4AF37] mx-auto mb-4" />
+              <h1 className="serif text-4xl mb-1 text-white">Musicoul</h1>
+              <p className="text-[#D4AF37] text-[10px] tracking-widest uppercase font-bold">Conservatory Portal</p>
             </div>
             
             <form onSubmit={handleAuth} className="space-y-4">
               {!isLogin && (
                 <div className="relative">
                   <UserIcon size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" />
-                  <input name="name" type="text" placeholder="FULL NAME" required className="w-full bg-black/40 border border-white/10 py-3 pl-12 pr-4 rounded-xl text-[11px] tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600 focus:bg-white/5" />
+                  <input name="name" type="text" placeholder="Full Name" required className="w-full bg-black/50 border border-white/10 py-4 pl-12 pr-4 rounded-xl text-sm outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" />
                 </div>
               )}
               <div className="relative">
                 <Mail size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" />
-                <input name="email" type="email" placeholder="EMAIL ADDRESS" required className="w-full bg-black/40 border border-white/10 py-3 pl-12 pr-4 rounded-xl text-[11px] tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600 focus:bg-white/5" />
+                <input name="email" type="email" placeholder="Email Address" required className="w-full bg-black/50 border border-white/10 py-4 pl-12 pr-4 rounded-xl text-sm outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" />
               </div>
               <div className="relative">
                 <Lock size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" />
-                <input name="password" type="password" placeholder="PASSWORD" required minLength="6" className="w-full bg-black/40 border border-white/10 py-3 pl-12 pr-4 rounded-xl text-[11px] tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600 focus:bg-white/5" />
+                <input name="password" type="password" placeholder="Password" required minLength="6" className="w-full bg-black/50 border border-white/10 py-4 pl-12 pr-4 rounded-xl text-sm outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" />
               </div>
               
-              <button type="submit" className="w-full bg-[#D4AF37] py-3.5 rounded-xl text-black font-bold text-[10px] tracking-[0.3em] uppercase hover:bg-[#F9E29D] transition-colors mt-4 shadow-[0_0_20px_rgba(212,175,55,0.2)]">
-                {isLogin ? 'Login' : 'Sign Up'}
+              <button type="submit" className="w-full bg-[#D4AF37] py-4 rounded-xl text-black font-bold text-xs tracking-wider uppercase hover:bg-[#F9E29D] transition-colors mt-6 shadow-lg">
+                {isLogin ? 'Sign In' : 'Register Account'}
               </button>
             </form>
 
             <div className="mt-8 text-center">
-              <button onClick={() => setIsLogin(!isLogin)} className="text-gray-400 hover:text-white text-[10px] uppercase tracking-widest transition-colors border-b border-transparent hover:border-[#D4AF37] pb-1">
+              <button onClick={() => setIsLogin(!isLogin)} className="text-gray-400 hover:text-white text-[11px] font-bold tracking-widest uppercase transition-colors">
                 {isLogin ? "Don't have an account? Sign Up" : "Already have an account? Login"}
               </button>
             </div>
@@ -470,60 +590,68 @@
       };
 
       return (
-        <div className="flex flex-col lg:flex-row w-full h-screen overflow-hidden relative">
-          {/* MOBILE HEADER */}
-          <div className="lg:hidden flex items-center justify-between p-4 border-b border-white/5 bg-[#050505] z-40">
+        <div className="flex flex-col lg:flex-row w-full h-screen overflow-hidden bg-app">
+          {/* INVISIBLE TRANSLATOR MOUNT */}
+          <GoogleTranslateWidget />
+
+          {/* MOBILE HEADER - Highly Intuitive */}
+          <div className="lg:hidden flex items-center justify-between p-4 border-b border-[#D4AF37]/20 glass-premium z-40 sticky top-0 shadow-lg">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-[#D4AF37] rounded-full flex items-center justify-center overflow-hidden">
+              <div className="w-8 h-8 bg-[#D4AF37] rounded-full flex items-center justify-center overflow-hidden shadow-[0_0_10px_rgba(212,175,55,0.4)]">
                 {userData.profilePic ? <img src={userData.profilePic} className="w-full h-full object-cover"/> : <Music size={14} className="text-black" />}
               </div>
               <h4 className="serif text-xl font-bold text-white tracking-wide">Musicoul</h4>
             </div>
-            <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-2 text-gray-300 hover:text-white">
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+            <div className="flex items-center gap-3">
+              <CustomLanguageSelector />
+              {role !== 'student' && (
+                <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-2 text-[#D4AF37] hover:text-white transition-colors">
+                  {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                </button>
+              )}
+            </div>
           </div>
 
-          {isMobileMenuOpen && (
+          {isMobileMenuOpen && role !== 'student' && (
             <div className="fixed inset-0 bg-black/80 z-40 lg:hidden backdrop-blur-sm" onClick={() => setIsMobileMenuOpen(false)} />
           )}
 
           {/* SIDEBAR */}
-          <aside className={`fixed inset-y-0 left-0 z-50 transform ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} lg:relative lg:translate-x-0 transition-transform duration-300 w-64 lg:w-72 border-r border-white/5 bg-[#050505] flex flex-col p-6 shadow-2xl lg:shadow-none`}>
-            <div className="hidden lg:flex items-center gap-4 mb-12 px-2">
-              <div className="w-12 h-12 bg-[#D4AF37] rounded-full flex items-center justify-center shrink-0 shadow-[0_0_20px_rgba(212,175,55,0.3)] overflow-hidden">
-                {userData.profilePic ? <img src={userData.profilePic} className="w-full h-full object-cover"/> : <Music size={20} className="text-black" />}
+          <aside className={`fixed inset-y-0 left-0 z-50 transform ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} lg:relative lg:translate-x-0 transition-transform duration-300 w-64 border-r border-white/5 glass flex flex-col p-6`}>
+            <div className="hidden lg:flex items-center gap-4 mb-10 px-2">
+              <div className="w-10 h-10 bg-[#D4AF37] rounded-full flex items-center justify-center shrink-0 overflow-hidden shadow-[0_0_15px_rgba(212,175,55,0.4)]">
+                {userData.profilePic ? <img src={userData.profilePic} className="w-full h-full object-cover"/> : <Music size={18} className="text-black" />}
               </div>
               <div>
-                <h4 className="serif text-2xl font-bold text-white tracking-wide">Musicoul</h4>
-                <p className="text-[#D4AF37] text-[9px] tracking-[0.2em] uppercase font-bold">{role}</p>
+                <h4 className="serif text-xl font-medium text-white tracking-wide">Musicoul</h4>
+                <p className="gold-gradient-text text-[9px] tracking-widest uppercase font-bold">{role}</p>
               </div>
             </div>
 
-            <nav className="flex-1 space-y-2 overflow-y-auto pr-2 custom-scrollbar">
+            <nav className="flex-1 space-y-1 overflow-y-auto pr-2 custom-scrollbar">
               {role === 'student' && (
-                <SidebarItem icon={<LayoutDashboard size={20}/>} label="Dashboard" active={activeTab === 'dashboard'} onClick={() => handleTabChange('dashboard')} />
+                <SidebarItem icon={<LayoutDashboard size={18}/>} label="Dashboard" active={activeTab === 'dashboard'} onClick={() => handleTabChange('dashboard')} />
               )}
 
               {role === 'teacher' && (
                 <>
-                  <SidebarItem icon={<LayoutDashboard size={20}/>} label="Dashboard" active={activeTab === 'dashboard'} onClick={() => handleTabChange('dashboard')} />
-                  <SidebarItem icon={<Calendar size={20}/>} label="Attendance" active={activeTab === 'attendance'} onClick={() => handleTabChange('attendance')} />
+                  <SidebarItem icon={<LayoutDashboard size={18}/>} label="Dashboard" active={activeTab === 'dashboard'} onClick={() => handleTabChange('dashboard')} />
+                  <SidebarItem icon={<Calendar size={18}/>} label="Attendance" active={activeTab === 'attendance'} onClick={() => handleTabChange('attendance')} />
                 </>
               )}
 
               {role === 'admin' && (
                 <>
-                  <div className="text-[9px] text-gray-500 font-bold uppercase tracking-[0.3em] mt-4 lg:mt-8 mb-4 px-4">Admin</div>
-                  <SidebarItem icon={<LayoutDashboard size={20}/>} label="Dashboard" active={activeTab === 'dashboard'} onClick={() => handleTabChange('dashboard')} />
-                  <SidebarItem icon={<Calendar size={20}/>} label="Attendance" active={activeTab === 'attendance'} onClick={() => handleTabChange('attendance')} />
-                  <SidebarItem icon={<Users size={20}/>} label="Users" active={activeTab === 'manage-users'} onClick={() => handleTabChange('manage-users')} />
-                  <SidebarItem icon={<BookOpen size={20}/>} label="Courses" active={activeTab === 'manage-courses'} onClick={() => handleTabChange('manage-courses')} />
+                  <div className="text-[9px] text-gray-500 font-bold uppercase tracking-widest mt-6 mb-3 px-4">Admin</div>
+                  <SidebarItem icon={<LayoutDashboard size={18}/>} label="Dashboard" active={activeTab === 'dashboard'} onClick={() => handleTabChange('dashboard')} />
+                  <SidebarItem icon={<Calendar size={18}/>} label="Attendance" active={activeTab === 'attendance'} onClick={() => handleTabChange('attendance')} />
+                  <SidebarItem icon={<Users size={18}/>} label="Users" active={activeTab === 'manage-users'} onClick={() => handleTabChange('manage-users')} />
+                  <SidebarItem icon={<BookOpen size={18}/>} label="Courses" active={activeTab === 'manage-courses'} onClick={() => handleTabChange('manage-courses')} />
                 </>
               )}
 
-              <div className="text-[9px] text-gray-500 font-bold uppercase tracking-[0.3em] mt-4 lg:mt-8 mb-4 px-4">Personal</div>
-              <SidebarItem icon={<UserIcon size={20}/>} label="My Profile" active={activeTab === 'profile'} onClick={() => handleTabChange('profile')} />
+              <div className="text-[9px] text-gray-500 font-bold uppercase tracking-widest mt-6 mb-3 px-4">Personal</div>
+              <SidebarItem icon={<UserIcon size={18}/>} label="Profile" active={activeTab === 'profile'} onClick={() => handleTabChange('profile')} />
             </nav>
 
             {/* Simulator restricted to Admin only */}
@@ -545,14 +673,21 @@
               </div>
             )}
 
+            <div className="mt-8 mb-4 glass p-4 rounded-xl border-white/5 flex flex-col items-start gap-3 relative z-50">
+               <p className="text-[8px] text-gray-500 uppercase tracking-[0.2em] font-bold flex items-center gap-2">
+                 Site Language
+               </p>
+               <CustomLanguageSelector />
+            </div>
+
             <button onClick={logout} className="flex items-center gap-4 p-4 text-gray-500 hover:text-[#D4AF37] transition-all text-[10px] font-bold tracking-widest uppercase w-full rounded-xl hover:bg-white/5 mt-auto">
-              <LogOut size={20}/> <span>Logout</span>
+              <LogOut size={20}/> <span>Sign Out</span>
             </button>
           </aside>
 
           {/* MAIN CONTENT AREA */}
-          <main className="flex-1 h-[calc(100vh-65px)] lg:h-screen overflow-y-auto bg-app bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-[#111] via-[#050505] to-[#050505] relative">
-            <div className="p-4 sm:p-6 md:p-10 lg:p-14 max-w-7xl mx-auto min-h-full">
+          <main className="flex-1 h-[calc(100vh-65px)] lg:h-screen overflow-y-auto relative">
+            <div className={`p-4 sm:p-6 md:p-10 lg:p-14 max-w-7xl mx-auto min-h-full ${role === 'student' ? 'pb-32 sm:pb-32 md:pb-10 lg:pb-14' : 'pb-10 lg:pb-14'}`}>
               {(role === 'student' || role === 'admin') && activeTab === 'dashboard' && <StudentDashboard user={user} userData={userData} courses={allCourses} />}
               {role === 'teacher' && activeTab === 'dashboard' && <TeacherDashboard user={user} userData={userData} courses={allCourses} users={allUsers} showConfirm={showConfirm} />}
               {role === 'teacher' && activeTab === 'attendance' && <TeacherAttendance user={user} userData={userData} courses={allCourses} users={allUsers} isAdmin={false} showConfirm={showConfirm} />}
@@ -563,15 +698,33 @@
             </div>
           </main>
 
+          {/* MOBILE BOTTOM NAVIGATION FOR STUDENTS */}
+          {role === 'student' && (
+            <div className="lg:hidden fixed bottom-0 left-0 right-0 glass-premium border-t border-[#D4AF37]/30 flex justify-around items-center p-3 z-40 shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
+              <button onClick={() => handleTabChange('dashboard')} className={`flex flex-col items-center gap-1.5 p-2 transition-colors ${activeTab === 'dashboard' ? 'text-[#D4AF37]' : 'text-gray-500 hover:text-gray-300'}`}>
+                <LayoutDashboard size={22} />
+                <span className="text-[9px] uppercase tracking-widest font-bold">Dashboard</span>
+              </button>
+              <button onClick={() => handleTabChange('profile')} className={`flex flex-col items-center gap-1.5 p-2 transition-colors ${activeTab === 'profile' ? 'text-[#D4AF37]' : 'text-gray-500 hover:text-gray-300'}`}>
+                <UserIcon size={22} />
+                <span className="text-[9px] uppercase tracking-widest font-bold">Profile</span>
+              </button>
+              <button onClick={logout} className="flex flex-col items-center gap-1.5 p-2 transition-colors text-gray-500 hover:text-red-400">
+                <LogOut size={22} />
+                <span className="text-[9px] uppercase tracking-widest font-bold">Sign Out</span>
+              </button>
+            </div>
+          )}
+
           {confirmState.isOpen && (
             <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4 bg-[#050505]/90 backdrop-blur-md animate-in fade-in">
-              <div className="glass-premium p-6 md:p-8 rounded-[2rem] w-full max-w-sm border border-[#D4AF37]/30 shadow-2xl relative text-center">
-                <AlertCircle size={40} className="mx-auto text-red-500 mb-4" />
-                <h2 className="serif text-2xl mb-2 text-white">{confirmState.title}</h2>
-                <p className="text-gray-400 text-xs mb-8">{confirmState.message}</p>
-                <div className="flex gap-4">
-                  <button onClick={closeConfirm} className="flex-1 py-3 border border-white/10 rounded-xl text-[10px] uppercase tracking-widest font-bold text-gray-400 hover:text-white transition-colors">Cancel</button>
-                  <button onClick={() => { confirmState.onConfirm(); closeConfirm(); }} className="flex-1 bg-red-500 text-white rounded-xl text-[10px] uppercase tracking-widest font-bold hover:bg-red-600 transition-colors shadow-lg">Delete</button>
+              <div className="glass-premium p-8 md:p-12 w-full max-w-sm rounded-[2rem] border border-[#D4AF37]/30 shadow-2xl text-center">
+                <AlertCircle size={32} className="mx-auto text-red-500 mb-4" />
+                <h2 className="serif text-3xl mb-2 text-white italic">{confirmState.title}</h2>
+                <p className="text-gray-400 text-sm mb-8 font-light">{confirmState.message}</p>
+                <div className="flex gap-3">
+                  <button onClick={closeConfirm} className="flex-1 py-3 border border-white/10 rounded-xl text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-white transition-colors">Cancel</button>
+                  <button onClick={() => { confirmState.onConfirm(); closeConfirm(); }} className="flex-1 bg-red-900/40 text-red-400 border border-red-500/30 rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-red-500 hover:text-white transition-colors">Confirm Delete</button>
                 </div>
               </div>
             </div>
@@ -584,14 +737,14 @@
       return (
         <button 
           onClick={onClick} 
-          className={`w-full flex items-center gap-4 p-4 rounded-2xl transition-all duration-300 group ${
+          className={`w-full flex items-center gap-4 p-4 rounded-xl transition-all duration-300 group ${
             active 
-              ? 'bg-gradient-to-r from-[#D4AF37]/10 to-transparent text-[#D4AF37] border-l-2 border-[#D4AF37]' 
-              : 'text-gray-500 hover:text-gray-200 hover:bg-white/5 border-l-2 border-transparent'
+              ? 'bg-white/10 text-[#D4AF37] border border-white/10 shadow-[0_0_15px_rgba(212,175,55,0.1)]' 
+              : 'text-gray-500 hover:text-white hover:bg-white/5 border border-transparent'
           }`}
         >
           <span className={active ? 'text-[#D4AF37]' : 'group-hover:text-white transition-colors'}>{icon}</span>
-          <span className="text-[10px] md:text-[11px] font-bold tracking-[0.15em] uppercase">{label}</span>
+          <span className="text-[10px] font-bold uppercase tracking-widest">{label}</span>
         </button>
       );
     }
@@ -636,40 +789,40 @@
       if (activeLecture) {
         return (
           <div className="animate-in fade-in duration-500">
-            <button onClick={() => setSelectedLectureId(null)} className="text-[#D4AF37] text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] mb-6 md:mb-10 hover:text-white transition-colors flex items-center gap-2">
-              <ChevronRight size={14} className="rotate-180" /> Back to Lectures
+            <button onClick={() => setSelectedLectureId(null)} className="text-[#D4AF37] text-[10px] font-bold uppercase tracking-[0.2em] mb-8 hover:text-white transition-colors flex items-center gap-2">
+              <ChevronLeft size={14} /> Back to Lectures
             </button>
-            <header className="mb-10 md:mb-16">
-              <div className="bg-[#D4AF37]/10 text-[#D4AF37] px-3 py-1.5 rounded-lg text-[8px] font-bold uppercase tracking-widest mb-4 inline-flex items-center gap-2">
-                 <Calendar size={12} /> {activeLecture.date}
+            <header className="mb-10">
+              <div className="bg-[#D4AF37]/10 border border-[#D4AF37]/30 text-[#D4AF37] px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-widest mb-4 inline-flex items-center gap-2">
+                 <Calendar size={14} /> {activeLecture.date}
               </div>
-              <h1 className="serif text-4xl md:text-5xl lg:text-7xl mb-2 text-white">Lecture <span className="gold-gradient-text italic">Attendance</span></h1>
-              <p className="text-gray-400 text-sm md:text-lg font-light">{activeLecture.title}</p>
+              <h1 className="serif text-4xl md:text-6xl mb-2 text-white">Lecture Attendance</h1>
+              <p className="text-gray-400 text-sm font-light">{activeLecture.title}</p>
             </header>
-            <div className="glass p-5 md:p-8 rounded-[1.5rem] md:rounded-[2rem] border border-white/5">
-              <h3 className="serif text-2xl md:text-3xl text-white mb-6 md:mb-8 border-b border-white/10 pb-3 md:pb-4">Student List</h3>
+            <div className="glass-premium p-6 md:p-10 rounded-[2rem]">
+              <h3 className="serif text-2xl md:text-3xl text-white mb-6 border-b border-white/5 pb-4 italic">Student List</h3>
               {enrolledStudents.length === 0 ? (
-                <p className="text-gray-500 text-[10px] md:text-xs tracking-widest uppercase">No students enrolled.</p>
+                <p className="text-gray-500 text-[10px] font-bold tracking-[0.2em] uppercase">No students enrolled.</p>
               ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                   {enrolledStudents.map(student => {
                     const markedRecord = activeCourse.attendance?.find(a => a.userId === student.id && a.scheduleId === activeLecture.id);
                     return (
-                      <div key={student.id} className="bg-black/40 p-4 md:p-5 rounded-[1rem] md:rounded-[1.5rem] flex items-center justify-between border border-white/5 shadow-lg hover-lift">
-                        <div className="truncate pr-2 md:pr-4 flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#8B6508] flex items-center justify-center text-black serif font-bold text-sm shrink-0 overflow-hidden">
+                      <div key={student.id} className="glass border border-white/5 p-5 rounded-2xl flex items-center justify-between hover-lift">
+                        <div className="truncate pr-4 flex items-center gap-4">
+                          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-gray-800 to-black border border-white/10 flex items-center justify-center text-white serif text-xl shrink-0 overflow-hidden shadow-inner">
                             {student.profilePic ? <img src={student.profilePic} className="w-full h-full object-cover" /> : student.name.charAt(0)}
                           </div>
                           <div>
-                            <p className="text-white font-bold text-xs md:text-sm truncate">{student.name}</p>
-                            <p className="text-gray-500 text-[8px] md:text-[9px] uppercase tracking-[0.2em] mt-0.5">Student</p>
+                            <p className="text-white font-medium text-sm truncate">{student.name}</p>
+                            <p className="text-gray-500 text-[9px] uppercase tracking-widest mt-1 font-bold">Student</p>
                           </div>
                         </div>
                         <div className="flex gap-2 shrink-0">
-                          <button onClick={() => markAttendance(student.id, 'present')} className={`w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl flex items-center justify-center font-bold transition-all text-xs md:text-base ${markedRecord?.status === 'present' ? 'bg-green-500 text-black shadow-[0_0_15px_rgba(34,197,94,0.4)]' : 'bg-white/5 text-gray-400 hover:bg-green-500/20 hover:text-green-500'}`}>P</button>
-                          <button onClick={() => markAttendance(student.id, 'absent')} className={`w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl flex items-center justify-center font-bold transition-all text-xs md:text-base ${markedRecord?.status === 'absent' ? 'bg-red-500 text-black shadow-[0_0_15px_rgba(239,68,68,0.4)]' : 'bg-white/5 text-gray-400 hover:bg-red-500/20 hover:text-red-500'}`}>A</button>
+                          <button onClick={() => markAttendance(student.id, 'present')} className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold transition-all text-xs border ${markedRecord?.status === 'present' ? 'bg-green-900/30 text-green-400 border-green-500/50 shadow-[0_0_15px_rgba(34,197,94,0.2)]' : 'bg-transparent border-white/10 text-gray-500 hover:border-green-500/50 hover:text-green-400'}`}>P</button>
+                          <button onClick={() => markAttendance(student.id, 'absent')} className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold transition-all text-xs border ${markedRecord?.status === 'absent' ? 'bg-red-900/30 text-red-400 border-red-500/50 shadow-[0_0_15px_rgba(239,68,68,0.2)]' : 'bg-transparent border-white/10 text-gray-500 hover:border-red-500/50 hover:text-red-400'}`}>A</button>
                           {(isAdmin || markedRecord) && (
-                            <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); clearAttendance(student.id); }} title="Delete Record" className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl flex items-center justify-center font-bold transition-all text-xs md:text-base bg-white/5 text-gray-400 hover:bg-red-500/20 hover:text-red-500">
+                            <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); clearAttendance(student.id); }} title="Delete Record" className="w-10 h-10 rounded-xl flex items-center justify-center transition-all border bg-transparent border-white/10 text-gray-500 hover:border-red-500/50 hover:text-red-400 hover:shadow-[0_0_15px_rgba(239,68,68,0.2)]">
                               <Trash2 size={14} />
                             </button>
                           )}
@@ -687,22 +840,21 @@
       if (activeCourse) {
         return (
           <div className="animate-in fade-in duration-500">
-            <button onClick={() => setSelectedCourseId(null)} className="text-[#D4AF37] text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] mb-6 md:mb-10 hover:text-white transition-colors flex items-center gap-2">
-              <ChevronRight size={14} className="rotate-180" /> Back to Courses
+            <button onClick={() => setSelectedCourseId(null)} className="text-[#D4AF37] text-[10px] font-bold uppercase tracking-[0.2em] mb-8 hover:text-white transition-colors flex items-center gap-2">
+              <ChevronLeft size={14} /> Back to Courses
             </button>
-            <header className="mb-10 md:mb-16">
-              <h1 className="serif text-4xl md:text-5xl lg:text-7xl mb-2 text-white">Select <span className="gold-gradient-text italic">Lecture</span></h1>
-              <p className="text-gray-400 text-xs md:text-sm tracking-widest uppercase font-bold mt-4">{activeCourse.title}</p>
+            <header className="mb-10">
+              <h1 className="serif text-4xl md:text-6xl mb-2 text-white">Select <span className="gold-gradient-text italic">Lecture</span></h1>
+              <p className="text-gray-400 text-sm font-light mt-2">{activeCourse.title}</p>
             </header>
             {(!activeCourse.schedule || activeCourse.schedule.length === 0) ? (
-              <div className="glass p-8 md:p-12 rounded-[2rem] text-center text-gray-500 text-xs tracking-widest uppercase border-dashed border-white/10">No lectures scheduled yet.</div>
+              <div className="glass-premium rounded-[2rem] p-16 text-center text-gray-500 text-[10px] font-bold tracking-[0.2em] uppercase">No lectures scheduled yet.</div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                  {activeCourse.schedule.sort((a,b) => new Date(a.date) - new Date(b.date)).map((s, idx) => (
-                   <button key={s.id} onClick={() => setSelectedLectureId(s.id)} className="glass-premium p-6 md:p-8 rounded-[2rem] border-t-4 border-[#D4AF37] text-left hover:bg-white/5 transition-colors group relative overflow-hidden hover-lift">
-                     <div className="absolute -right-4 -top-4 text-7xl serif text-white/5 font-bold pointer-events-none group-hover:scale-110 transition-transform">{String(idx + 1).padStart(2, '0')}</div>
-                     <p className="text-[#D4AF37] text-[10px] uppercase tracking-widest font-bold mb-3 flex items-center gap-2"><Clock size={12}/> {s.date}</p>
-                     <h4 className="serif text-2xl text-white mb-2 group-hover:text-[#D4AF37] transition-colors">{s.title}</h4>
+                   <button key={s.id} onClick={() => setSelectedLectureId(s.id)} className="glass-premium p-6 md:p-8 rounded-[1.5rem] text-left hover:bg-white/5 transition-colors group relative overflow-hidden hover-lift border-t-[3px] border-t-[#D4AF37]/50">
+                     <p className="text-[#D4AF37] text-[10px] uppercase tracking-widest font-bold mb-4 flex items-center gap-2"><Clock size={14}/> {s.date}</p>
+                     <h4 className="serif text-2xl text-white mb-2">{s.title}</h4>
                      <p className="text-gray-400 text-xs leading-relaxed font-light line-clamp-2">{s.description}</p>
                    </button>
                  ))}
@@ -714,31 +866,29 @@
 
       return (
         <div className="animate-in fade-in duration-500">
-          <header className="mb-10 md:mb-16">
-            <h1 className="serif text-4xl md:text-5xl lg:text-7xl mb-2 text-white">Attendance</h1>
-            <p className="text-gray-400 text-xs md:text-sm font-light mt-4">Select a course to mark lecture attendance.</p>
+          <header className="mb-10 md:mb-12">
+            <h1 className="serif text-4xl md:text-5xl lg:text-6xl mb-2 text-white">Attendance <span className="gold-gradient-text italic">Ledger</span></h1>
+            <p className="text-gray-400 text-sm font-light mt-2">Select a course to mark lecture attendance.</p>
           </header>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {taughtCourses.map(c => (
-              <button key={c.id} onClick={() => setSelectedCourseId(c.id)} className="glass-premium p-6 md:p-8 rounded-[1.5rem] md:rounded-[2.5rem] flex flex-col border border-transparent hover:border-[#D4AF37]/40 transition-all text-left relative overflow-hidden group min-h-[200px] hover-lift">
+              <button key={c.id} onClick={() => setSelectedCourseId(c.id)} className="glass-premium p-6 md:p-8 rounded-[2rem] flex flex-col text-left relative overflow-hidden group min-h-[200px] hover-lift">
                 {c.coverImage ? (
-                  <div className="absolute inset-0 z-0">
-                    <img src={c.coverImage} className="w-full h-full object-cover opacity-30 group-hover:opacity-50 transition-opacity duration-500" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent"></div>
+                  <div className="absolute inset-0 z-0 opacity-[0.15] group-hover:opacity-30 transition-opacity duration-500">
+                    <img src={c.coverImage} className="w-full h-full object-cover" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#050505] to-transparent"></div>
                   </div>
-                ) : (
-                  <div className="absolute inset-0 z-0 bg-gradient-to-br from-white/5 to-transparent opacity-20 group-hover:opacity-40 transition-opacity duration-500"></div>
-                )}
+                ) : null}
                 <div className="relative z-10 flex flex-col h-full w-full">
-                  <h3 className="serif text-2xl md:text-3xl text-white group-hover:text-[#D4AF37] transition-colors mb-4">{c.title}</h3>
+                  <h3 className="serif text-3xl text-white mb-4">{c.title}</h3>
                   <div className="mt-auto flex items-center justify-between">
-                     <span className="text-gray-500 text-[9px] uppercase tracking-widest font-bold bg-black/40 px-3 py-1.5 rounded-lg border border-white/5">{c.schedule?.length || 0} Lectures</span>
-                     <ChevronRight size={18} className="text-[#D4AF37]" />
+                     <span className="text-gray-400 text-[10px] uppercase tracking-widest font-bold bg-black/50 px-4 py-2 rounded-lg border border-white/5 backdrop-blur-md">{c.schedule?.length || 0} Lectures</span>
+                     <ChevronRight size={20} className="text-gray-500 group-hover:text-[#D4AF37]" />
                   </div>
                 </div>
               </button>
             ))}
-            {taughtCourses.length === 0 && <p className="text-gray-500 text-xs md:text-sm tracking-widest uppercase col-span-full">No courses available.</p>}
+            {taughtCourses.length === 0 && <p className="text-gray-500 text-[10px] font-bold tracking-[0.2em] uppercase col-span-full">No courses available.</p>}
           </div>
         </div>
       );
@@ -771,42 +921,42 @@
       }
 
       return (
-        <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
-          <header className="mb-12 md:mb-16 flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+        <div className="animate-in fade-in duration-700">
+          <header className="mb-12 flex flex-col lg:flex-row lg:items-end justify-between gap-6">
             <div>
-              <p className="text-[#D4AF37] text-[9px] md:text-[11px] tracking-[0.4em] uppercase font-bold flex items-center gap-2 mb-3">
-                <GraduationCap size={14} /> {userData.roles.includes('admin') ? 'Admin View' : 'Student Dashboard'}
+              <p className="text-[#D4AF37] text-[10px] tracking-widest uppercase font-bold flex items-center gap-2 mb-3">
+                <GraduationCap size={16} /> {userData.roles.includes('admin') ? 'Admin View' : 'Student Dashboard'}
               </p>
-              <h1 className="serif text-4xl md:text-6xl lg:text-7xl text-white leading-tight">
+              <h1 className="serif text-4xl md:text-6xl text-white">
                 Welcome, <span className="gold-gradient-text italic">{userData.name?.includes('@') ? userData.name.split('@')[0] : userData.name || "Scholar"}</span>
               </h1>
             </div>
-            <div className="flex items-center gap-4">
-               <div className="text-right">
-                  <p className="text-gray-400 text-[10px] tracking-widest uppercase">My Courses</p>
-                  <p className="serif text-3xl text-white">{myCourses.length}</p>
+            <div className="flex items-center gap-6 glass px-8 py-5 rounded-2xl border border-[#D4AF37]/20 shadow-[0_0_20px_rgba(212,175,55,0.05)]">
+               <div className="text-center">
+                  <p className="text-gray-500 text-[10px] tracking-widest uppercase font-bold mb-1">Courses</p>
+                  <p className="serif text-3xl gold-gradient-text">{myCourses.length}</p>
                </div>
-               <div className="w-[1px] h-10 bg-white/10 mx-2"></div>
-               <div className="text-right">
-                  <p className="text-gray-400 text-[10px] tracking-widest uppercase">Standing</p>
-                  <p className="serif text-3xl text-[#D4AF37]">Active</p>
+               <div className="w-[1px] h-10 bg-white/10"></div>
+               <div className="text-center">
+                  <p className="text-gray-500 text-[10px] tracking-widest uppercase font-bold mb-1">Status</p>
+                  <p className="serif text-3xl gold-gradient-text">Active</p>
                </div>
             </div>
           </header>
 
-          <div className="mb-8 md:mb-10 flex items-center gap-4">
-            <h3 className="serif text-3xl md:text-4xl italic text-white">My Courses</h3>
-            <div className="h-[1px] flex-1 bg-gradient-to-r from-white/10 to-transparent"></div>
+          <div className="mb-8 flex items-center gap-6">
+            <h3 className="serif text-3xl md:text-4xl gold-gradient-text italic font-bold">My Curriculum</h3>
+            <div className="h-[1px] flex-1 bg-gradient-to-r from-[#D4AF37]/50 to-transparent"></div>
           </div>
 
           {myCourses.length === 0 ? (
-            <div className="glass-premium p-12 md:p-20 rounded-[2rem] text-center border-[#D4AF37]/10 flex flex-col items-center justify-center">
-              <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mb-6 border border-white/5">
-                <BookOpen size={32} className="text-[#D4AF37]/50" />
+            <div className="glass-premium rounded-[3rem] p-16 md:p-24 text-center flex flex-col items-center justify-center border border-white/5">
+              <div className="w-20 h-20 bg-black/50 rounded-full flex items-center justify-center mb-8 border border-white/10 shadow-inner">
+                <BookOpen size={32} className="text-gray-500" />
               </div>
-              <h4 className="serif text-2xl md:text-3xl mb-3 text-white">No Courses Assigned</h4>
-              <p className="text-gray-500 text-xs uppercase tracking-widest max-w-sm mx-auto leading-relaxed">
-                {userData.roles.includes('admin') ? 'Assign yourself courses in the Users tab.' : 'Your curriculum is being prepared. Please wait.'}
+              <h4 className="serif text-3xl mb-3 text-white">No Courses Assigned</h4>
+              <p className="text-gray-500 text-sm max-w-md mx-auto font-light leading-relaxed">
+                {userData.roles.includes('admin') ? 'Assign yourself courses in the Users tab.' : 'Your curriculum is being prepared. Please check back later.'}
               </p>
             </div>
           ) : (
@@ -815,30 +965,30 @@
                 <button 
                   key={course.id}
                   onClick={() => setActiveCourseId(course.id)}
-                  className="p-6 md:p-8 rounded-[2rem] text-left group relative overflow-hidden flex flex-col min-h-[300px] hover-lift border border-white/5"
+                  className="glass-premium rounded-[1.5rem] md:rounded-[2rem] p-5 md:p-8 text-left group relative overflow-hidden flex flex-col min-h-[250px] md:min-h-[300px] hover-lift border border-[#D4AF37]/20 shadow-lg"
                 >
                   {course.coverImage ? (
                     <div className="absolute inset-0 z-0">
-                      <img src={course.coverImage} alt={course.title} className="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity duration-700" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-[#050505]/40"></div>
+                      <img src={course.coverImage} alt={course.title} className="w-full h-full object-cover opacity-[0.25] group-hover:opacity-[0.4] transition-opacity duration-500" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/70 to-transparent"></div>
                     </div>
-                  ) : (
-                    <div className="absolute inset-0 z-0 glass-premium"></div>
-                  )}
+                  ) : null}
                   
                   <div className="relative z-10 flex-1 flex flex-col">
-                    <div className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-md flex items-center justify-center mb-6 border border-white/10 group-hover:bg-[#D4AF37] transition-colors duration-500">
-                      <Music size={16} className={course.coverImage ? 'text-white group-hover:text-black' : 'text-[#D4AF37] group-hover:text-black'} />
+                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-to-br from-[#D4AF37]/20 to-black border border-[#D4AF37]/30 flex items-center justify-center mb-4 md:mb-6 group-hover:border-[#D4AF37] transition-colors shadow-inner backdrop-blur-md">
+                      <Music size={18} className="text-[#D4AF37]" />
                     </div>
                     
-                    <h4 className="serif text-2xl md:text-3xl mb-3 text-white group-hover:text-[#D4AF37] transition-colors">{course.title}</h4>
-                    <p className="text-gray-300 text-xs md:text-sm mb-8 line-clamp-3 font-light leading-relaxed">{course.desc}</p>
+                    <h4 className="serif text-2xl md:text-3xl mb-2 text-white leading-tight font-bold drop-shadow-md">{course.title}</h4>
+                    <p className="text-gray-300 text-[11px] md:text-xs mb-6 md:mb-8 line-clamp-3 font-medium leading-relaxed drop-shadow-sm">{course.desc}</p>
                     
-                    <div className="flex items-center justify-between mt-auto pt-6 border-t border-white/10">
-                      <div className="flex items-center gap-2 text-[9px] md:text-[10px] text-gray-300 uppercase tracking-widest font-bold">
-                        <FolderOpen size={14} className="text-[#D4AF37]" /> {course.resources?.length || 0} Materials
+                    <div className="flex items-center justify-between mt-auto pt-4 md:pt-6 border-t border-white/10">
+                      <div className="flex items-center gap-2 text-[9px] md:text-[10px] text-black uppercase tracking-[0.2em] font-bold bg-gradient-to-r from-[#D4AF37] to-[#FFDF73] px-3 md:px-4 py-1.5 md:py-2 rounded-lg shadow-md">
+                        <FolderOpen size={14} /> {course.resources?.length || 0} Materials
                       </div>
-                      <ChevronRight size={18} className="text-gray-400 group-hover:text-white group-hover:translate-x-1 transition-all" />
+                      <div className="w-8 h-8 rounded-full bg-black/50 border border-white/10 flex items-center justify-center group-hover:bg-[#D4AF37] group-hover:text-black transition-colors backdrop-blur-md">
+                         <ChevronRight size={16} />
+                      </div>
                     </div>
                   </div>
                 </button>
@@ -863,12 +1013,12 @@
       const breadcrumbs = buildBreadcrumbs(currentFolderId, allResources);
 
       return (
-        <div className="animate-in fade-in slide-in-from-right-8 duration-500 flex flex-col h-full">
-          <button onClick={onBack} className="text-[#D4AF37] text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] mb-6 md:mb-8 hover:text-white transition-colors flex items-center gap-2 w-fit">
+        <div className="animate-in fade-in duration-500">
+          <button onClick={onBack} className="text-[#D4AF37] text-[10px] font-bold uppercase tracking-[0.2em] mb-8 hover:text-white transition-colors flex items-center gap-2 w-fit">
             <ChevronLeft size={14} /> Back to My Courses
           </button>
 
-          <header className="mb-8 relative rounded-[2.5rem] overflow-hidden glass-premium p-8 md:p-12 shrink-0 border border-white/5">
+          <header className="mb-10 relative rounded-[2.5rem] overflow-hidden glass-premium p-8 md:p-12 border border-[#D4AF37]/20 shadow-2xl">
             {course.coverImage && (
               <div className="absolute inset-0 z-0">
                 <img src={course.coverImage} alt="Cover" className="w-full h-full object-cover opacity-20 mix-blend-overlay" />
@@ -876,35 +1026,35 @@
               </div>
             )}
             <div className="relative z-10">
-              <h1 className="serif text-4xl md:text-5xl lg:text-7xl mb-4 text-white leading-tight">{course.title}</h1>
+              <h1 className="serif text-4xl md:text-5xl lg:text-6xl mb-4 text-white leading-tight">{course.title}</h1>
               <p className="text-gray-400 text-sm md:text-base max-w-3xl leading-relaxed font-light">{course.desc}</p>
             </div>
           </header>
 
-          <div className="flex items-center gap-6 border-b border-white/5 mb-8 overflow-x-auto custom-scrollbar shrink-0">
+          <div className="flex items-center gap-8 md:gap-12 border-b border-white/5 mb-8">
              {['materials', 'schedule', 'ledger'].map(tab => (
                <button 
                  key={tab} 
                  onClick={() => setActiveTab(tab)}
-                 className={`pb-4 text-[10px] md:text-xs uppercase tracking-widest font-bold transition-all whitespace-nowrap border-b-2 ${activeTab === tab ? 'text-[#D4AF37] border-[#D4AF37]' : 'text-gray-500 border-transparent hover:text-gray-300'}`}
+                 className={`pb-4 text-[10px] md:text-[11px] uppercase tracking-[0.2em] font-bold transition-all border-b-[3px] ${activeTab === tab ? 'text-[#D4AF37] border-[#D4AF37]' : 'text-gray-500 border-transparent hover:text-gray-300'}`}
                >
                  {tab === 'materials' ? 'Materials' : tab === 'schedule' ? 'Schedule' : 'Attendance'}
                </button>
              ))}
           </div>
 
-          <div className="flex-1 overflow-y-auto pb-10 custom-scrollbar pr-2">
+          <div>
             {activeTab === 'materials' && (
-              <div className="space-y-6">
+              <div className="space-y-6 md:space-y-8">
                 {/* Breadcrumbs */}
-                <div className="flex items-center gap-2 text-[10px] md:text-xs text-gray-400 uppercase tracking-widest font-bold">
-                  <button onClick={() => setCurrentFolderId(null)} className="hover:text-[#D4AF37] transition-colors flex items-center gap-1">
+                <div className="flex items-center gap-2 text-[10px] text-gray-400 uppercase tracking-[0.2em] font-bold bg-black/40 p-4 rounded-xl border border-white/5 backdrop-blur-md">
+                  <button onClick={() => setCurrentFolderId(null)} className="hover:text-white transition-colors flex items-center gap-2">
                     <FolderOpen size={14}/> Root
                   </button>
                   {breadcrumbs.map((f, i) => (
                     <React.Fragment key={f.id}>
-                      <ChevronRight size={12} className="text-gray-600" />
-                      <button onClick={() => setCurrentFolderId(f.id)} className={`hover:text-[#D4AF37] transition-colors truncate max-w-[100px] md:max-w-xs ${i === breadcrumbs.length-1 ? 'text-white' : ''}`}>
+                      <ChevronRight size={12} className="text-[#D4AF37]/50" />
+                      <button onClick={() => setCurrentFolderId(f.id)} className={`hover:text-white transition-colors truncate max-w-[100px] md:max-w-[200px] shrink-0 ${i === breadcrumbs.length-1 ? 'text-[#D4AF37]' : ''}`}>
                         {f.title}
                       </button>
                     </React.Fragment>
@@ -912,17 +1062,17 @@
                 </div>
 
                 {currentResources.length === 0 ? (
-                  <div className="glass-premium p-12 rounded-[2rem] text-center text-gray-500 text-xs tracking-widest uppercase border border-white/5 flex flex-col items-center">
-                    <FolderOpen size={32} className="mb-4 opacity-50" />
-                    This section is currently empty.
+                  <div className="glass-premium rounded-[2rem] p-16 text-center text-gray-500 text-[10px] font-bold tracking-[0.2em] uppercase flex flex-col items-center border border-white/5">
+                    <FolderOpen size={32} className="mb-4 opacity-30 text-[#D4AF37]" />
+                    Empty Section
                   </div>
                 ) : (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {currentResources.sort((a,b) => (b.isFolder ? 1 : 0) - (a.isFolder ? 1 : 0)).map(r => (
                       <button 
                         key={r.id}
                         onClick={() => r.isFolder ? setCurrentFolderId(r.id) : onViewResource(r)}
-                        className="glass p-5 rounded-[1.5rem] flex items-center justify-between group hover:border-[#D4AF37]/40 transition-all text-left overflow-hidden relative hover-lift border border-white/5 bg-black/20"
+                        className="glass p-5 rounded-2xl flex items-center justify-between group text-left hover-lift border border-white/5 hover:border-[#D4AF37]/30"
                       >
                         {(r.type === 'video' || r.type === 'youtube') && r.thumbnailUrl && (
                           <div className="absolute inset-0 opacity-[0.15] group-hover:opacity-[0.3] transition-opacity z-0 pointer-events-none">
@@ -932,7 +1082,7 @@
                         )}
 
                         <div className="flex items-center gap-4 relative z-10 overflow-hidden pr-2">
-                          <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border border-white/5 transition-transform group-hover:scale-110 shadow-lg ${r.isFolder ? 'bg-[#D4AF37]/10 text-[#D4AF37]' : 'bg-black/50 text-gray-300 group-hover:text-[#D4AF37]'}`}>
+                          <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border border-white/10 transition-colors shadow-inner ${r.isFolder ? 'bg-gradient-to-br from-[#D4AF37]/20 to-black text-[#D4AF37]' : 'bg-gradient-to-br from-gray-800 to-black text-gray-400 group-hover:text-white'}`}>
                             {r.isFolder ? <Folder size={20} className="fill-[#D4AF37]/20"/> : 
                              r.type === 'video' ? <PlayCircle size={20}/> : 
                              r.type === 'youtube' ? <PlayCircle size={20} className="text-red-400"/> : 
@@ -953,20 +1103,17 @@
             )}
 
             {activeTab === 'schedule' && (
-               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-in fade-in">
+               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 animate-in fade-in">
                   {(!course.schedule || course.schedule.length === 0) ? (
-                    <div className="col-span-full glass-premium p-12 rounded-[2rem] text-center text-gray-500 text-xs tracking-widest uppercase border border-white/5">
+                    <div className="col-span-full glass-premium rounded-[2rem] p-16 text-center text-gray-500 text-[10px] font-bold tracking-[0.2em] uppercase border border-white/5">
                       Schedule not yet published.
                     </div>
                   ) : (
                     course.schedule.sort((a,b) => new Date(a.date) - new Date(b.date)).map((s, i) => (
-                      <div key={s.id || i} className="glass-premium p-6 md:p-8 rounded-[2rem] border-t-4 border-[#D4AF37] relative overflow-hidden group hover:bg-white/5 transition-colors hover-lift">
-                        <div className="absolute -right-4 -top-4 text-7xl serif text-white/5 font-bold pointer-events-none group-hover:scale-110 transition-transform">
-                          {String(i + 1).padStart(2, '0')}
-                        </div>
-                        <p className="text-[#D4AF37] text-[10px] uppercase tracking-widest font-bold mb-3">{s.date}</p>
-                        <h4 className="serif text-2xl text-white mb-2">{s.title}</h4>
-                        <p className="text-gray-400 text-xs leading-relaxed font-light">{s.description}</p>
+                      <div key={s.id || i} className="glass p-6 md:p-8 rounded-2xl border-l-[4px] border-l-[#D4AF37] border-white/5 hover-lift">
+                        <p className="text-[#D4AF37] text-[10px] uppercase tracking-widest font-bold mb-3"><Clock size={12} className="inline mr-1 -mt-0.5"/> {s.date}</p>
+                        <h4 className="serif text-2xl text-white mb-3">{s.title}</h4>
+                        <p className="text-gray-400 text-sm font-light leading-relaxed">{s.description}</p>
                       </div>
                     ))
                   )}
@@ -974,30 +1121,30 @@
             )}
 
             {activeTab === 'ledger' && (
-              <div className="max-w-3xl glass-premium p-8 md:p-12 rounded-[2rem] border border-white/5 animate-in fade-in">
-                <div className="flex flex-col md:flex-row items-center gap-8 mb-10 pb-8 border-b border-white/10">
-                  <div className="w-32 h-32 rounded-full border-4 border-[#D4AF37]/20 border-t-[#D4AF37] flex flex-col items-center justify-center shrink-0 shadow-[0_0_30px_rgba(212,175,55,0.1)]">
-                    <span className="text-4xl serif text-white block">{rate}%</span>
+              <div className="max-w-2xl glass-premium p-8 md:p-12 rounded-[2rem] border border-[#D4AF37]/20 shadow-2xl animate-in fade-in">
+                <div className="flex items-center gap-6 md:gap-8 mb-10 pb-10 border-b border-white/5">
+                  <div className="w-24 h-24 md:w-32 md:h-32 rounded-full border-[3px] border-[#111] border-t-[#D4AF37] border-r-[#D4AF37] flex items-center justify-center shrink-0 shadow-[0_0_30px_rgba(212,175,55,0.15)] bg-black/50">
+                    <span className="text-3xl md:text-4xl serif text-white">{rate}%</span>
                   </div>
                   <div>
-                    <h3 className="serif text-3xl text-white mb-2">Attendance Standing</h3>
-                    <p className="text-sm text-gray-400 font-light leading-relaxed">Your current attendance rate for this specific course.</p>
+                    <h3 className="serif text-3xl md:text-4xl text-white mb-2 italic">Attendance Record</h3>
+                    <p className="text-sm md:text-base text-gray-400 font-light">Your current standing for this specific course.</p>
                   </div>
                 </div>
                 
-                <div className="space-y-3">
+                <div className="space-y-4">
                   {myAttendance.length === 0 ? (
-                    <p className="text-center text-xs text-gray-500 tracking-widest uppercase py-4">No records logged.</p>
+                    <p className="text-[10px] text-gray-500 font-bold tracking-[0.2em] uppercase text-center p-8">No records logged.</p>
                   ) : (
                     myAttendance.sort((a,b) => new Date(b.markedAt || 0) - new Date(a.markedAt || 0)).map((log, idx) => {
                       const lecture = course.schedule?.find(s => s.id === log.scheduleId);
                       return (
-                        <div key={idx} className="flex justify-between items-center bg-black/40 p-4 rounded-xl border border-white/5">
-                          <div className="flex flex-col pr-2">
-                             <span className="text-xs text-white tracking-widest font-bold mb-1 truncate">{lecture ? lecture.title : "Lecture Entry"}</span>
-                             {lecture && <span className="text-[9px] text-gray-500 uppercase tracking-widest">{lecture.date}</span>}
+                        <div key={idx} className="flex justify-between items-center glass p-5 rounded-xl border border-white/5">
+                          <div className="flex flex-col pr-4">
+                             <span className="text-sm text-white font-medium mb-1 truncate">{lecture ? lecture.title : "Lecture Entry"}</span>
+                             {lecture && <span className="text-[9px] text-gray-500 uppercase tracking-widest font-bold">{lecture.date}</span>}
                           </div>
-                          <span className={`text-[9px] uppercase tracking-widest font-black px-3 py-1.5 rounded-md shrink-0 ${log.status === 'present' ? 'bg-[#D4AF37]/20 text-[#D4AF37]' : 'bg-red-500/20 text-red-400'}`}>
+                          <span className={`text-[10px] uppercase tracking-[0.2em] font-bold px-4 py-2 rounded-lg shrink-0 border shadow-inner ${log.status === 'present' ? 'bg-green-900/20 text-green-400 border-green-500/30' : 'bg-red-900/20 text-red-400 border-red-500/30'}`}>
                             {log.status}
                           </span>
                         </div>
@@ -1017,24 +1164,24 @@
     // ==========================================
     function ResourcePreviewer({ resource, onClose }) {
       return (
-        <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center p-4 md:p-6 bg-[#050505]/98 backdrop-blur-3xl animate-in fade-in duration-300 pt-16 md:pt-20">
-          <button onClick={onClose} className="absolute top-4 right-4 md:top-6 md:right-8 text-gray-300 hover:text-white transition-colors uppercase text-[10px] tracking-widest font-bold flex items-center gap-2 bg-black/60 border border-white/10 md:bg-transparent md:border-transparent px-4 py-2 md:p-0 rounded-xl z-50 hover:bg-black/80">
-            <span className="hidden sm:inline">Close Player</span> <X size={20} className="md:w-6 md:h-6" />
+        <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center p-4 md:p-6 bg-[#050505]/95 backdrop-blur-xl animate-in fade-in pt-16 md:pt-20">
+          <button onClick={onClose} className="absolute top-6 right-6 md:top-8 md:right-8 text-[#D4AF37] hover:text-white transition-colors uppercase text-[10px] tracking-[0.2em] font-bold flex items-center gap-2 z-50">
+            <span className="hidden sm:inline">Close Player</span> <X size={28} />
           </button>
           
           <div className="w-full max-w-7xl h-[85vh] flex flex-col relative">
             
             {resource.type !== 'youtube' && (
-              <div className="mb-4 text-center px-4 relative z-10 shrink-0">
-                <p className="text-[#D4AF37] text-[9px] md:text-[10px] uppercase tracking-[0.3em] font-bold mb-1">{resource.type}</p>
-                <h2 className="serif text-2xl md:text-3xl text-white italic truncate max-w-3xl mx-auto">{resource.title}</h2>
+              <div className="mb-6 text-center px-4 relative z-10 shrink-0">
+                <p className="text-[#D4AF37] text-[10px] uppercase tracking-[0.2em] font-bold mb-2">{resource.type}</p>
+                <h2 className="serif text-4xl md:text-5xl text-white truncate max-w-4xl mx-auto">{resource.title}</h2>
               </div>
             )}
             
-            <div className="flex-1 glass-premium rounded-2xl md:rounded-[2.5rem] overflow-hidden border border-[#D4AF37]/30 relative shadow-[0_0_50px_rgba(212,175,55,0.05)] bg-[#050505] flex items-center justify-center">
+            <div className="flex-1 glass-premium rounded-[2rem] overflow-hidden relative border border-white/10 shadow-2xl flex items-center justify-center">
               
               {resource.type === 'youtube' && (
-                <div className="w-full h-full flex flex-col md:flex-row overflow-hidden bg-[#0a0a0a]">
+                <div className="w-full h-full flex flex-col md:flex-row overflow-hidden bg-[#050505]">
                   <div className={`w-full relative bg-black ${resource.description ? 'aspect-video md:aspect-auto md:h-full md:flex-1' : 'h-full flex-1'}`}>
                     <iframe 
                       className="absolute inset-0 w-full h-full" 
@@ -1047,11 +1194,11 @@
                     ></iframe>
                   </div>
                   {resource.description && (
-                    <div className="w-full md:w-[350px] lg:w-[400px] p-6 md:p-8 bg-[#050505] border-t md:border-t-0 md:border-l border-white/10 overflow-y-auto custom-scrollbar shrink-0 flex flex-col shadow-[-20px_0_50px_rgba(0,0,0,0.5)] z-10">
-                       <p className="text-[#D4AF37] text-[9px] uppercase tracking-[0.3em] font-bold mb-2 flex items-center gap-2"><FileText size={12}/> Notes & Materials</p>
-                       <h3 className="serif text-2xl text-white mb-6 italic">{resource.title}</h3>
-                       <div className="prose prose-invert prose-gold max-w-none">
-                           <p className="text-gray-300 whitespace-pre-wrap leading-relaxed font-light text-sm">
+                    <div className="w-full md:w-[400px] p-8 md:p-10 bg-[#0A0A0A] border-t md:border-t-0 md:border-l border-white/5 overflow-y-auto custom-scrollbar shrink-0 flex flex-col">
+                       <p className="text-[#D4AF37] text-[10px] uppercase tracking-[0.2em] font-bold mb-4 flex items-center gap-2"><FileText size={14}/> Notes & Materials</p>
+                       <h3 className="serif text-3xl text-white mb-6 italic">{resource.title}</h3>
+                       <div className="prose prose-invert max-w-none">
+                           <p className="text-gray-400 whitespace-pre-wrap leading-relaxed font-light text-sm">
                              {resource.description}
                            </p>
                        </div>
@@ -1068,37 +1215,38 @@
               )}
 
               {resource.type === 'pdf' && (
-                 <iframe src={`${resource.url}#toolbar=0`} className="w-full h-full bg-white rounded-b-[2rem]"></iframe>
+                 <iframe src={`${resource.url}#toolbar=0`} className="w-full h-full bg-[#111]"></iframe>
               )}
 
               {resource.type === 'image' && (
-                <div className="w-full h-full p-4 md:p-8 bg-[#0a0a0a] overflow-auto flex items-center justify-center custom-scrollbar">
-                   <img src={resource.url} alt={resource.title} className="max-w-full max-h-full object-contain rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/5" />
+                <div className="w-full h-full p-4 md:p-8 overflow-auto flex items-center justify-center custom-scrollbar">
+                   <img src={resource.url} alt={resource.title} className="max-w-full max-h-full object-contain rounded-[1.5rem] border border-white/5" />
                 </div>
               )}
 
               {resource.type === 'collage' && <CollageSlider resource={resource} />}
 
               {resource.type === 'text' && (
-                <div className="w-full h-full flex flex-col items-center p-6 md:p-16 overflow-y-auto custom-scrollbar bg-[#0a0a0a] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#D4AF37]/5 via-[#0a0a0a] to-[#0a0a0a]">
-                  <div className="max-w-3xl w-full">
-                    <FileText size={48} className="text-[#D4AF37]/20 mb-8 mx-auto" />
-                    <div className="prose prose-invert prose-gold max-w-none">
-                      <p className="text-gray-300 whitespace-pre-wrap leading-loose font-light text-sm md:text-lg lg:text-xl font-sans text-justify">
-                        {resource.url}
-                      </p>
-                    </div>
+                <div className="w-full h-full flex flex-col items-center p-8 md:p-16 overflow-y-auto custom-scrollbar bg-black/50">
+                  <div className="max-w-3xl w-full glass p-8 md:p-12 rounded-[2rem] border border-white/5">
+                    <FileText size={40} className="text-[#D4AF37] mb-8 mx-auto opacity-50" />
+                    <p className="text-gray-300 whitespace-pre-wrap leading-loose font-light text-base md:text-lg font-sans text-justify">
+                      {resource.url}
+                    </p>
                   </div>
                 </div>
               )}
 
               {resource.type === 'link' && (
-                <div className="w-full h-full flex flex-col items-center justify-center p-6 md:p-10 text-center bg-[#0a0a0a]">
-                  <LinkIcon size={48} className="text-[#D4AF37] mb-6 md:w-16 md:h-16 animate-pulse" />
-                  <p className="text-gray-300 mb-8 max-w-md text-sm md:text-lg font-light leading-relaxed">This resource points to an external link.</p>
-                  <a href={resource.url} target="_blank" rel="noreferrer" className="bg-[#D4AF37] text-black px-10 md:px-12 py-4 md:py-5 rounded-xl text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em] hover:bg-[#F9E29D] hover:shadow-[0_0_30px_rgba(212,175,55,0.4)] transition-all">
-                    Open Link
-                  </a>
+                <div className="w-full h-full flex flex-col items-center justify-center p-8 text-center bg-black/50">
+                  <div className="glass-premium p-12 rounded-[2rem] border border-white/10 max-w-md w-full">
+                    <LinkIcon size={48} className="text-[#D4AF37] mb-6 mx-auto" />
+                    <h3 className="serif text-3xl text-white mb-4">External Resource</h3>
+                    <p className="text-gray-400 mb-8 text-sm font-light leading-relaxed">This resource points to an external link. Click below to open it in a new tab securely.</p>
+                    <a href={resource.url} target="_blank" rel="noreferrer" className="inline-block bg-[#D4AF37] text-black px-8 py-4 rounded-xl text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-[#F9E29D] transition-colors shadow-lg">
+                      Open Link Now
+                    </a>
+                  </div>
                 </div>
               )}
             </div>
@@ -1135,18 +1283,18 @@
       };
 
       return (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-[#050505]/90 backdrop-blur-xl animate-in fade-in">
-          <div className="glass-premium p-8 md:p-10 rounded-[2rem] w-full max-w-md border border-[#D4AF37]/30 shadow-2xl relative">
-            <button onClick={onClose} className="absolute top-6 right-6 text-gray-500 hover:text-white"><X size={20}/></button>
-            <h2 className="serif text-3xl mb-2 text-white italic">Create Folder</h2>
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-[#050505]/90 backdrop-blur-md animate-in fade-in">
+          <div className="glass-premium p-8 md:p-12 w-full max-w-md rounded-[2.5rem] relative border border-[#D4AF37]/30 shadow-2xl">
+            <button onClick={onClose} className="absolute top-8 right-8 text-gray-500 hover:text-white"><X size={24}/></button>
+            <h2 className="serif text-4xl mb-2 text-white italic">Create Folder</h2>
             <p className="text-[#D4AF37] text-[9px] uppercase tracking-widest font-bold mb-8">Organize Material</p>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <input name="title" type="text" placeholder="FOLDER NAME" required className="w-full bg-black/50 border border-white/10 p-4 rounded-xl text-[10px] tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" />
+                <input name="title" type="text" placeholder="FOLDER NAME" required className="w-full bg-black/50 border border-white/10 p-4 md:p-5 rounded-xl text-[10px] tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" />
               </div>
-              <div className="flex gap-4">
-                <button type="button" onClick={onClose} className="flex-1 py-4 border border-white/10 rounded-xl text-[9px] uppercase tracking-widest font-bold text-gray-400 hover:text-white transition-colors">Cancel</button>
-                <button type="submit" className="flex-1 bg-[#D4AF37] text-black rounded-xl text-[9px] uppercase tracking-widest font-bold hover:bg-[#F9E29D] transition-colors shadow-lg">Create</button>
+              <div className="flex gap-4 pt-2">
+                <button type="button" onClick={onClose} className="flex-1 py-4 border border-white/10 rounded-xl text-[9px] font-bold tracking-[0.2em] uppercase text-gray-400 hover:text-white transition-colors">Cancel</button>
+                <button type="submit" className="flex-1 bg-[#D4AF37] text-black rounded-xl text-[9px] font-bold tracking-[0.2em] uppercase hover:bg-[#F9E29D] transition-colors shadow-lg">Create</button>
               </div>
             </form>
           </div>
@@ -1275,93 +1423,88 @@
       };
 
       return (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-[#050505]/90 backdrop-blur-xl animate-in fade-in">
-          <div className="glass-premium p-6 md:p-10 rounded-[2rem] md:rounded-[3rem] w-full max-w-2xl border border-[#D4AF37]/30 shadow-2xl relative max-h-[90vh] overflow-y-auto custom-scrollbar">
-            {!uploading && <button onClick={onClose} className="absolute top-6 right-6 md:top-8 md:right-8 text-gray-500 hover:text-white text-2xl font-light">&times;</button>}
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-[#050505]/90 backdrop-blur-md animate-in fade-in">
+          <div className="glass-premium p-6 md:p-10 w-full max-w-2xl relative max-h-[90vh] overflow-y-auto custom-scrollbar rounded-[2rem] md:rounded-[3rem] border border-[#D4AF37]/30 shadow-2xl">
+            {!uploading && <button onClick={onClose} className="absolute top-6 right-6 md:top-8 md:right-8 text-gray-500 hover:text-white"><X size={24}/></button>}
             <h2 className="serif text-3xl md:text-4xl mb-2 text-white italic">Upload Material</h2>
-            <p className="text-[#D4AF37] text-[9px] md:text-[10px] uppercase tracking-widest font-bold mb-8">Add to Course Folder</p>
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <p className="text-[#D4AF37] text-[9px] uppercase tracking-widest font-bold mb-8">Add to Course Folder</p>
+            <form onSubmit={handleSubmit} className="space-y-6 md:space-y-8">
               <div>
-                <label className="text-[8px] md:text-[9px] text-gray-500 uppercase tracking-widest font-bold mb-3 block ml-2">Material Type</label>
+                <label className="text-[9px] text-gray-400 uppercase tracking-widest font-bold mb-3 block">Material Type</label>
                 <div className="flex gap-2 overflow-x-auto pb-2 custom-scrollbar">
                   {['pdf', 'video', 'image', 'collage', 'youtube', 'text', 'link'].map(t => (
-                    <button key={t} type="button" onClick={() => setType(t)} disabled={uploading} className={`px-4 py-2.5 rounded-xl text-[9px] uppercase tracking-widest font-bold whitespace-nowrap transition-all ${type === t ? 'bg-[#D4AF37] text-black shadow-[0_0_15px_rgba(212,175,55,0.4)]' : 'bg-black/50 text-gray-400 border border-white/10 hover:border-[#D4AF37]/50'}`}>
+                    <button key={t} type="button" onClick={() => setType(t)} disabled={uploading} className={`px-4 py-2.5 rounded-lg text-[9px] uppercase tracking-widest font-bold whitespace-nowrap transition-all border ${type === t ? 'bg-[#D4AF37]/10 text-[#D4AF37] border-[#D4AF37]/50 shadow-[0_0_10px_rgba(212,175,55,0.2)]' : 'bg-black/30 text-gray-500 border-white/5 hover:border-white/20'}`}>
                       {t}
                     </button>
                   ))}
                 </div>
               </div>
               <div>
-                <label className="text-[8px] md:text-[9px] text-gray-500 uppercase tracking-widest font-bold mb-2 block ml-2">Title</label>
-                <input name="title" type="text" placeholder="e.g. Intro to Piano" required disabled={uploading} className="w-full bg-black/50 border border-white/10 p-4 md:p-5 rounded-xl md:rounded-2xl text-[10px] md:text-[12px] tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" />
+                <input name="title" type="text" placeholder="MATERIAL TITLE (e.g. Intro to Piano)" required disabled={uploading} className="w-full bg-black/50 border border-white/10 p-4 md:p-5 rounded-xl text-[10px] tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" />
               </div>
               
               {allowsUpload && (
-                <div className="flex bg-black/50 p-1 rounded-xl border border-white/10 w-fit">
-                   <button type="button" disabled={uploading} onClick={() => setInputMode('upload')} className={`px-6 py-2 rounded-lg text-[9px] uppercase tracking-widest font-bold transition-all ${inputMode === 'upload' ? 'bg-[#D4AF37] text-black' : 'text-gray-500 hover:text-white'}`}><UploadCloud size={14} className="inline mr-2 mb-0.5" /> Upload</button>
-                   <button type="button" disabled={uploading} onClick={() => setInputMode('url')} className={`px-6 py-2 rounded-lg text-[9px] uppercase tracking-widest font-bold transition-all ${inputMode === 'url' ? 'bg-[#D4AF37] text-black' : 'text-gray-500 hover:text-white'}`}><LinkIcon size={14} className="inline mr-2 mb-0.5" /> URL</button>
+                <div className="flex bg-black/40 border border-white/5 rounded-xl p-1.5 w-fit">
+                   <button type="button" disabled={uploading} onClick={() => setInputMode('upload')} className={`px-5 py-2 rounded-lg text-[9px] uppercase tracking-widest font-bold transition-all ${inputMode === 'upload' ? 'bg-[#D4AF37] text-black shadow-md' : 'text-gray-500 hover:text-white'}`}>Upload</button>
+                   <button type="button" disabled={uploading} onClick={() => setInputMode('url')} className={`px-5 py-2 rounded-lg text-[9px] uppercase tracking-widest font-bold transition-all ${inputMode === 'url' ? 'bg-[#D4AF37] text-black shadow-md' : 'text-gray-500 hover:text-white'}`}>URL</button>
                 </div>
               )}
               
-              <div className="bg-white/5 border border-white/10 rounded-2xl p-4 md:p-6">
+              <div className="glass border border-white/5 rounded-2xl p-5 md:p-8">
                 {inputMode === 'upload' && allowsUpload ? (
                   <div className="space-y-6">
                     <div>
-                      <label className="text-[8px] md:text-[9px] text-[#D4AF37] uppercase tracking-widest font-bold mb-3 block">{type === 'collage' ? 'Select Multiple Files' : 'Select Source File'}</label>
-                      <div className="relative border-2 border-dashed border-white/20 rounded-2xl p-8 text-center hover:border-[#D4AF37]/50 transition-colors bg-black/30 group">
+                      <label className="text-[9px] text-gray-400 uppercase tracking-widest font-bold mb-3 block">{type === 'collage' ? 'Select Multiple Files' : 'Select Source File'}</label>
+                      <div className="relative border border-dashed border-[#D4AF37]/30 rounded-2xl p-10 text-center hover:border-[#D4AF37]/60 transition-colors bg-black/30 group">
                         <input type="file" accept={getAcceptType()} multiple={type === 'collage'} required disabled={uploading} onChange={(e) => type === 'collage' ? setMultiFiles(e.target.files) : setSingleFile(e.target.files[0])} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" />
-                        <FileIcon size={32} className="mx-auto text-gray-600 group-hover:text-[#D4AF37] mb-3 transition-colors" />
-                        <p className="text-gray-300 text-xs font-bold uppercase tracking-widest mb-1">Drag & Drop or Click to Browse</p>
-                        <p className="text-gray-500 text-[10px]">{type === 'collage' ? (multiFiles.length > 0 ? `${multiFiles.length} files selected` : `Supported: Images (Multiple)`) : (singleFile ? singleFile.name : `Supported: ${type.toUpperCase()}`)}</p>
+                        <FileIcon size={32} className="mx-auto text-[#D4AF37] group-hover:scale-110 mb-4 transition-transform opacity-70" />
+                        <p className="text-[#D4AF37] text-[10px] font-bold tracking-[0.2em] uppercase mb-2">Drag & Drop or Browse</p>
+                        <p className="text-gray-500 text-[9px] font-medium">{type === 'collage' ? (multiFiles.length > 0 ? `${multiFiles.length} files selected` : `Supported: Images (Multiple)`) : (singleFile ? singleFile.name : `Supported: ${type.toUpperCase()}`)}</p>
                       </div>
                     </div>
                     {type === 'video' && (
-                      <div className="pt-4 border-t border-white/10">
-                        <label className="text-[8px] md:text-[9px] text-gray-400 uppercase tracking-widest font-bold mb-3 block flex items-center gap-2"><ImagePlus size={12}/> Video Cover Thumbnail (Optional)</label>
+                      <div className="pt-6 border-t border-white/5">
+                        <label className="text-[9px] text-gray-400 uppercase tracking-widest font-bold mb-3 flex items-center gap-2"><ImagePlus size={14}/> Video Cover Thumbnail (Optional)</label>
                         <input type="file" accept="image/*" disabled={uploading} onChange={(e) => setThumbnailFile(e.target.files[0])} className="w-full text-gray-400 text-xs" />
                       </div>
                     )}
                   </div>
                 ) : (
-                  <div className="space-y-4">
+                  <div className="space-y-5">
                     {type === 'text' ? (
-                      <textarea name="url" placeholder="TYPE OR PASTE FULL TEXT CONTENT HERE..." required disabled={uploading} rows={8} className="w-full bg-black/50 border border-white/10 p-4 md:p-5 rounded-xl md:rounded-2xl text-sm outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600 font-light resize-none custom-scrollbar" />
+                      <textarea name="url" placeholder="Type or paste text content here..." required disabled={uploading} rows={8} className="w-full bg-black/50 border border-white/10 p-4 md:p-5 rounded-xl text-[12px] outline-none focus:border-[#D4AF37] transition-all text-white font-light resize-none custom-scrollbar" />
                     ) : type === 'collage' ? (
-                      <textarea name="url" placeholder="COMMA SEPARATED IMAGE URLS" required disabled={uploading} rows={4} className="w-full bg-black/50 border border-white/10 p-4 md:p-5 rounded-xl md:rounded-2xl text-xs outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600 font-light resize-none custom-scrollbar" />
+                      <textarea name="url" placeholder="COMMA SEPARATED IMAGE URLS" required disabled={uploading} rows={4} className="w-full bg-black/50 border border-white/10 p-4 md:p-5 rounded-xl text-[10px] tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white font-light resize-none custom-scrollbar placeholder:text-gray-600" />
                     ) : type === 'youtube' ? (
                       <>
-                        <input name="url" type="url" placeholder="YOUTUBE URL (e.g. https://youtu.be/...)" required disabled={uploading} className="w-full bg-black/50 border border-white/10 p-4 md:p-5 rounded-xl md:rounded-2xl text-[10px] md:text-[12px] tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" />
-                        <div className="pt-4 border-t border-white/10">
-                          <label className="text-[8px] md:text-[9px] text-gray-400 uppercase tracking-widest font-bold mb-3 block flex items-center gap-2"><ImagePlus size={12}/> Custom Thumbnail (Optional - Auto-fetches if blank)</label>
+                        <input name="url" type="url" placeholder="YOUTUBE URL (e.g. https://youtu.be/...)" required disabled={uploading} className="w-full bg-black/50 border border-white/10 p-4 md:p-5 rounded-xl text-[10px] tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" />
+                        <div className="pt-5 border-t border-white/5">
+                          <label className="text-[9px] text-gray-400 uppercase tracking-widest font-bold mb-3 flex items-center gap-2"><ImagePlus size={14}/> Custom Thumbnail (Optional)</label>
                           <input type="file" accept="image/*" disabled={uploading} onChange={(e) => setThumbnailFile(e.target.files[0])} className="w-full text-gray-400 text-xs" />
                         </div>
-                        <div className="pt-4 border-t border-white/10">
-                          <label className="text-[8px] md:text-[9px] text-gray-400 uppercase tracking-widest font-bold mb-3 block flex items-center gap-2"><FileText size={12}/> Video Notes & Material Links (Optional)</label>
-                          <textarea name="desc" placeholder="ADDITIONAL NOTES..." disabled={uploading} rows={4} className="w-full bg-black/50 border border-white/10 p-4 md:p-5 rounded-xl md:rounded-2xl text-xs outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600 font-light resize-none custom-scrollbar" />
+                        <div className="pt-5 border-t border-white/5">
+                          <textarea name="desc" placeholder="ADDITIONAL NOTES OR DESCRIPTION..." disabled={uploading} rows={4} className="w-full bg-black/50 border border-white/10 p-4 md:p-5 rounded-xl text-[10px] tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white font-light resize-none custom-scrollbar placeholder:text-gray-600" />
                         </div>
                       </>
                     ) : (
-                      <input name="url" type="url" placeholder="DIRECT URL LINK" required disabled={uploading} className="w-full bg-black/50 border border-white/10 p-4 md:p-5 rounded-xl md:rounded-2xl text-[10px] md:text-[12px] tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" />
+                      <input name="url" type="url" placeholder="DIRECT URL LINK" required disabled={uploading} className="w-full bg-black/50 border border-white/10 p-4 md:p-5 rounded-xl text-[10px] tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" />
                     )}
                   </div>
                 )}
               </div>
               
               {uploading && (
-                <div className="w-full bg-white/5 rounded-2xl p-4 border border-[#D4AF37]/20 flex flex-col items-center justify-center animate-in fade-in">
-                  <div className="w-full bg-black/50 rounded-full h-2 mb-3 overflow-hidden border border-white/5">
-                    <div className="bg-[#D4AF37] h-2 rounded-full transition-all duration-300 relative overflow-hidden" style={{ width: `${progress}%` }}>
-                       <div className="absolute inset-0 bg-white/20 animate-[pulse_1s_ease-in-out_infinite]"></div>
-                    </div>
+                <div className="w-full bg-black/50 border border-[#D4AF37]/30 rounded-2xl p-6 flex flex-col items-center justify-center animate-in fade-in shadow-[0_0_20px_rgba(212,175,55,0.1)]">
+                  <div className="w-full bg-black rounded-full h-2 mb-3 overflow-hidden border border-white/5">
+                    <div className="bg-gradient-to-r from-[#D4AF37] to-[#FFDF73] h-2 rounded-full transition-all duration-300 shadow-[0_0_10px_#D4AF37]" style={{ width: `${progress}%` }}></div>
                   </div>
-                  <p className="text-center text-[10px] text-[#D4AF37] font-bold uppercase tracking-widest mb-1">Uploading {progress}%</p>
-                  {type === 'video' && <p className="text-[8px] text-gray-400 tracking-widest uppercase flex items-center gap-1"><AlertCircle size={10} className="text-[#D4AF37]"/> Video files take time. Keep window open.</p>}
+                  <p className="text-center text-[9px] text-[#D4AF37] font-bold uppercase tracking-[0.2em]">Uploading {progress}%</p>
                 </div>
               )}
               
-              <div className="flex gap-3 md:gap-4 pt-4">
-                <button type="button" onClick={onClose} disabled={uploading} className="flex-1 py-4 md:py-5 border border-white/10 rounded-xl md:rounded-2xl text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-bold text-gray-400 hover:text-white transition-colors disabled:opacity-50">Cancel</button>
-                <button type="submit" disabled={uploading} className="flex-1 bg-[#D4AF37] text-black rounded-xl md:rounded-2xl text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-[#F9E29D] transition-colors shadow-lg flex items-center justify-center gap-2 disabled:opacity-50">
+              <div className="flex gap-4 pt-4">
+                <button type="button" onClick={onClose} disabled={uploading} className="flex-1 py-4 border border-white/10 rounded-xl text-[9px] font-bold tracking-[0.2em] uppercase text-gray-400 hover:text-white transition-colors disabled:opacity-50">Cancel</button>
+                <button type="submit" disabled={uploading} className="flex-1 bg-[#D4AF37] text-black rounded-xl text-[9px] font-bold tracking-[0.2em] uppercase hover:bg-[#F9E29D] transition-colors flex items-center justify-center gap-2 disabled:opacity-50 shadow-lg">
                    {uploading ? <div className="w-4 h-4 border-2 border-black/20 border-t-black rounded-full animate-spin"></div> : <UploadCloud size={16} />}
                    {uploading ? 'Processing' : 'Publish Asset'}
                 </button>
@@ -1409,11 +1552,11 @@
 
         return (
           <div className="animate-in fade-in duration-500">
-            <button onClick={() => { setActiveCourseId(null); setCurrentFolderId(null); }} className="text-[#D4AF37] text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] mb-6 md:mb-10 hover:text-white transition-colors flex items-center gap-2">
+            <button onClick={() => { setActiveCourseId(null); setCurrentFolderId(null); }} className="text-[#D4AF37] text-[10px] font-bold uppercase tracking-[0.2em] mb-8 hover:text-white transition-colors flex items-center gap-2">
               <ChevronLeft size={14} /> Back to Dashboard
             </button>
             
-            <header className="mb-8 md:mb-12 relative rounded-[2rem] overflow-hidden glass-premium border border-white/5 p-8 md:p-12">
+            <header className="mb-10 md:mb-12 relative rounded-[2.5rem] overflow-hidden glass-premium p-8 md:p-12 border border-[#D4AF37]/20 shadow-2xl">
               {activeCourse.coverImage && (
                 <div className="absolute inset-0 z-0">
                   <img src={activeCourse.coverImage} alt="Cover" className="w-full h-full object-cover opacity-20 mix-blend-overlay" />
@@ -1421,70 +1564,62 @@
                 </div>
               )}
               <div className="relative z-10">
-                <h1 className="serif text-4xl md:text-5xl lg:text-6xl mb-4 text-white">Manage: <br className="md:hidden"/> {activeCourse.title}</h1>
-                <p className="text-gray-400 text-xs md:text-sm max-w-2xl font-light">{activeCourse.desc}</p>
+                <span className="bg-[#D4AF37] text-black px-3 py-1 rounded text-[8px] font-bold uppercase tracking-widest mb-4 inline-block">Management Mode</span>
+                <h1 className="serif text-4xl md:text-5xl lg:text-6xl mb-3 text-white leading-tight">Manage: {activeCourse.title}</h1>
+                <p className="text-gray-400 text-sm md:text-base max-w-2xl font-light">{activeCourse.desc}</p>
               </div>
             </header>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
               <div>
-                <div className="flex items-center justify-between mb-4">
-                   <h3 className="serif text-2xl md:text-3xl italic text-white flex items-center gap-3">
-                     <span className="w-4 h-[1px] bg-[#D4AF37]"></span> Syllabus 
-                   </h3>
-                   <div className="flex gap-2">
-                     <button onClick={() => setShowFolderModal(true)} title="New Folder" className="w-8 h-8 md:w-10 md:h-10 bg-white/5 text-gray-300 rounded-xl flex items-center justify-center hover:bg-[#D4AF37] hover:text-black transition-all border border-white/10">
-                       <FolderPlus size={16} />
+                <div className="flex items-center justify-between mb-8">
+                   <h3 className="serif text-3xl gold-gradient-text italic font-bold">Syllabus</h3>
+                   <div className="flex gap-3">
+                     <button onClick={() => setShowFolderModal(true)} title="New Folder" className="w-10 h-10 glass text-gray-400 rounded-xl flex items-center justify-center hover:text-white transition-colors border border-white/10 hover:border-[#D4AF37]/50">
+                       <FolderPlus size={18} />
                      </button>
-                     <button onClick={() => setShowResourceModal(true)} title="Upload Material" className="w-8 h-8 md:w-10 md:h-10 bg-[#D4AF37]/10 text-[#D4AF37] rounded-xl flex items-center justify-center hover:bg-[#D4AF37] hover:text-black transition-all border border-[#D4AF37]/20">
-                       <Plus size={18} />
+                     <button onClick={() => setShowResourceModal(true)} title="Upload Material" className="w-10 h-10 bg-gradient-to-br from-[#D4AF37] to-[#B38D22] text-black rounded-xl flex items-center justify-center hover:shadow-[0_0_15px_rgba(212,175,55,0.4)] transition-all">
+                       <Plus size={20} />
                      </button>
                    </div>
                 </div>
 
-                <div className="flex items-center gap-2 text-[9px] md:text-[10px] text-gray-400 uppercase tracking-widest font-bold mb-6 bg-black/40 p-3 rounded-xl border border-white/5 overflow-x-auto custom-scrollbar">
-                  <button onClick={() => setCurrentFolderId(null)} className="hover:text-[#D4AF37] transition-colors flex items-center gap-1 shrink-0">
-                    <FolderOpen size={12}/> Root
+                <div className="flex items-center gap-2 text-[10px] text-gray-400 uppercase tracking-[0.2em] font-bold mb-6 bg-black/40 p-4 rounded-xl border border-white/5 backdrop-blur-md overflow-x-auto custom-scrollbar">
+                  <button onClick={() => setCurrentFolderId(null)} className="hover:text-white transition-colors flex items-center gap-2 shrink-0">
+                    <FolderOpen size={14}/> Root
                   </button>
                   {breadcrumbs.map((f, i) => (
                     <React.Fragment key={f.id}>
-                      <ChevronRight size={10} className="text-gray-600 shrink-0" />
-                      <button onClick={() => setCurrentFolderId(f.id)} className={`hover:text-[#D4AF37] transition-colors truncate max-w-[80px] md:max-w-[150px] shrink-0 ${i === breadcrumbs.length-1 ? 'text-white' : ''}`}>
+                      <ChevronRight size={12} className="text-[#D4AF37]/50 shrink-0" />
+                      <button onClick={() => setCurrentFolderId(f.id)} className={`hover:text-white transition-colors truncate max-w-[80px] md:max-w-[150px] shrink-0 ${i === breadcrumbs.length-1 ? 'text-[#D4AF37]' : ''}`}>
                         {f.title}
                       </button>
                     </React.Fragment>
                   ))}
                 </div>
 
-                <div className="space-y-3">
+                <div className="space-y-4">
                    {currentResources.length === 0 ? (
-                     <div className="glass p-6 rounded-2xl text-center text-gray-500 text-[10px] tracking-widest uppercase border border-white/5">Empty Section</div>
+                     <div className="glass-premium rounded-[2rem] p-10 text-center text-gray-500 text-[10px] font-bold tracking-[0.2em] uppercase border border-white/5">Empty Section</div>
                    ) : (
                      currentResources.sort((a,b) => (b.isFolder ? 1 : 0) - (a.isFolder ? 1 : 0)).map(r => (
-                       <div key={r.id} onClick={() => r.isFolder ? setCurrentFolderId(r.id) : setPreviewResource(r)} className="glass p-4 rounded-2xl flex items-center justify-between group border border-transparent hover:border-[#D4AF37]/40 transition-all cursor-pointer relative overflow-hidden bg-black/20 hover-lift">
-                          {(r.type === 'video' || r.type === 'youtube') && r.thumbnailUrl && (
-                            <div className="absolute inset-0 opacity-[0.15] group-hover:opacity-[0.3] transition-opacity z-0 pointer-events-none">
-                              <img src={r.thumbnailUrl} className="w-full h-full object-cover" />
-                              <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-transparent"></div>
-                            </div>
-                          )}
-
-                          <div className="flex items-center gap-3 pr-2 overflow-hidden relative z-10">
-                            <div className={`shrink-0 w-10 h-10 rounded-xl flex items-center justify-center border border-white/5 ${r.isFolder ? 'bg-[#D4AF37]/10 text-[#D4AF37]' : 'bg-black/50 text-gray-300'}`}>
-                              {r.isFolder ? <Folder size={16} className="fill-[#D4AF37]/20"/> : 
-                               r.type === 'video' ? <PlayCircle size={16} /> : 
-                               r.type === 'youtube' ? <PlayCircle size={16} className="text-red-500"/> : 
-                               r.type === 'link' ? <LinkIcon size={16}/> : 
-                               r.type === 'image' || r.type === 'collage' ? <ImageIcon size={16}/> : 
-                               <FileText size={16}/>}
+                       <div key={r.id} onClick={() => r.isFolder ? setCurrentFolderId(r.id) : setPreviewResource(r)} className="glass p-5 rounded-2xl flex items-center justify-between group cursor-pointer hover-lift border border-white/5 hover:border-[#D4AF37]/30">
+                          <div className="flex items-center gap-5 pr-2 overflow-hidden relative z-10">
+                            <div className={`shrink-0 w-12 h-12 rounded-xl flex items-center justify-center border border-white/10 shadow-inner ${r.isFolder ? 'bg-gradient-to-br from-[#D4AF37]/20 to-black text-[#D4AF37]' : 'bg-gradient-to-br from-gray-800 to-black text-gray-400 group-hover:text-white'}`}>
+                              {r.isFolder ? <Folder size={20} className="fill-[#D4AF37]/20"/> : 
+                               r.type === 'video' ? <PlayCircle size={20} /> : 
+                               r.type === 'youtube' ? <PlayCircle size={20} /> : 
+                               r.type === 'link' ? <LinkIcon size={20}/> : 
+                               r.type === 'image' || r.type === 'collage' ? <ImageIcon size={20}/> : 
+                               <FileText size={20}/>}
                             </div>
                             <div className="truncate">
-                              <h4 className="text-white text-[10px] md:text-xs font-bold tracking-widest uppercase truncate mb-1">{r.title}</h4>
-                              <span className="text-gray-500 text-[8px] uppercase tracking-widest">{r.isFolder ? 'Folder' : r.type}</span>
+                              <h4 className="text-white text-sm font-medium tracking-wide truncate mb-1">{r.title}</h4>
+                              <span className="text-[#D4AF37] opacity-80 text-[8px] uppercase tracking-widest font-bold">{r.isFolder ? 'Folder' : r.type}</span>
                             </div>
                           </div>
-                          <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); removeResource(r.id); }} className="text-gray-600 hover:text-red-500 p-2 rounded-lg hover:bg-red-500/10 transition-colors shrink-0 relative z-10">
-                            <Trash2 size={14} />
+                          <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); removeResource(r.id); }} className="text-gray-600 hover:text-red-400 p-3 rounded-xl hover:bg-red-500/10 transition-colors shrink-0">
+                            <Trash2 size={16} />
                           </button>
                        </div>
                      ))
@@ -1493,22 +1628,19 @@
               </div>
 
               <div>
-                <h3 className="serif text-2xl md:text-3xl italic text-white flex items-center gap-3 md:gap-4 mb-6 md:mb-8">
-                  <span className="w-4 md:w-6 h-[1px] bg-[#D4AF37]"></span> Enrolled Students
-                </h3>
-                <div className="glass-premium p-4 md:p-6 rounded-[1.5rem] md:rounded-[2rem] border border-white/5">
+                <h3 className="serif text-3xl gold-gradient-text italic font-bold mb-8">Enrolled Students</h3>
+                <div className="glass-premium p-6 md:p-8 rounded-[2rem] border border-white/5">
                    {enrolledStudents.length === 0 ? (
-                     <p className="text-gray-500 text-center text-[10px] md:text-xs tracking-widest uppercase p-4 md:p-6">No students assigned.</p>
+                     <p className="text-gray-500 text-center text-[10px] font-bold tracking-[0.2em] uppercase py-8">No students assigned.</p>
                    ) : (
-                     <div className="space-y-2 max-h-[300px] md:max-h-[400px] overflow-y-auto custom-scrollbar pr-2">
+                     <div className="space-y-4 max-h-[400px] overflow-y-auto custom-scrollbar pr-2">
                        {enrolledStudents.map(student => (
-                         <div key={student.id} className="flex items-center gap-3 md:gap-4 p-3 md:p-4 rounded-xl bg-black/40 border border-white/5">
-                            <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#8B6508] flex items-center justify-center text-black serif font-bold text-base md:text-lg shrink-0 overflow-hidden">
+                         <div key={student.id} className="flex items-center gap-4 p-4 rounded-2xl glass border border-white/5">
+                            <div className="w-10 h-10 md:w-12 h-12 rounded-full bg-gradient-to-br from-gray-800 to-black border border-white/10 flex items-center justify-center text-white serif font-medium shrink-0 overflow-hidden shadow-inner">
                               {student.profilePic ? <img src={student.profilePic} className="w-full h-full object-cover" /> : student.name.charAt(0)}
                             </div>
                             <div className="truncate">
-                              <h4 className="text-white text-xs md:text-sm font-bold truncate">{student.name}</h4>
-                              <p className="text-[8px] md:text-[9px] text-gray-400 tracking-[0.2em] uppercase">Student</p>
+                              <h4 className="text-white text-sm font-medium truncate">{student.name}</h4>
                             </div>
                          </div>
                        ))}
@@ -1527,40 +1659,38 @@
 
       return (
         <div className="animate-in fade-in duration-700">
-          <header className="mb-10 md:mb-16">
-            <h1 className="serif text-4xl md:text-5xl lg:text-7xl mb-4 text-white">Teacher <br className="md:hidden"/><span className="gold-gradient-text italic">Dashboard</span></h1>
-            <p className="text-gray-400 text-[9px] md:text-[11px] tracking-[0.4em] uppercase font-bold flex items-center gap-2">
-              Welcome, {userData.name}
-            </p>
+          <header className="mb-10 md:mb-12">
+            <h1 className="serif text-4xl md:text-5xl lg:text-6xl mb-2 text-white">Teacher <span className="gold-gradient-text italic">Dashboard</span></h1>
+            <p className="text-gray-400 text-sm font-light">Welcome back, <span className="text-white">{userData.name}</span></p>
           </header>
 
-          <div className="mb-8 md:mb-12 flex items-center gap-4">
-            <h3 className="serif text-2xl md:text-3xl italic text-white">Assigned Courses</h3>
-            <div className="h-[1px] flex-1 bg-gradient-to-r from-white/10 to-transparent"></div>
+          <div className="mb-8 flex items-center gap-6">
+            <h3 className="serif text-3xl gold-gradient-text italic font-bold">Assigned Courses</h3>
+            <div className="h-[1px] flex-1 bg-gradient-to-r from-[#D4AF37]/50 to-transparent"></div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {taughtCourses.map(course => (
-              <div key={course.id} className="glass-premium p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] border border-white/5 flex flex-col relative overflow-hidden group hover-lift">
+              <div key={course.id} className="glass-premium p-6 md:p-8 rounded-[2rem] flex flex-col relative overflow-hidden group hover-lift min-h-[260px] border border-[#D4AF37]/10">
                 {course.coverImage && (
-                  <div className="absolute inset-0 z-0 opacity-10 group-hover:opacity-20 transition-opacity duration-500">
+                  <div className="absolute inset-0 z-0 opacity-[0.15] group-hover:opacity-30 transition-opacity duration-500">
                     <img src={course.coverImage} className="w-full h-full object-cover" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#050505] to-transparent"></div>
                   </div>
                 )}
                 <div className="relative z-10 flex flex-col h-full">
-                  <h4 className="serif text-2xl md:text-3xl text-white mb-2">{course.title}</h4>
-                  <p className="text-gray-500 text-[9px] md:text-[10px] uppercase tracking-widest font-bold mb-4 md:mb-6 border-b border-white/10 pb-4">
+                  <h4 className="serif text-3xl text-white mb-3">{course.title}</h4>
+                  <p className="text-[#D4AF37] text-[10px] uppercase tracking-[0.2em] font-bold mb-8 border-b border-white/10 pb-4 inline-block w-fit">
                     {course.resources?.length || 0} Assets
                   </p>
-                  <button onClick={() => setActiveCourseId(course.id)} className="mt-auto w-full py-3 md:py-4 bg-black/40 hover:bg-[#D4AF37] hover:text-black rounded-xl text-[9px] md:text-[10px] uppercase tracking-widest font-bold transition-all text-white border border-white/10 backdrop-blur-md">
+                  <button onClick={() => setActiveCourseId(course.id)} className="mt-auto w-full py-4 bg-black/50 hover:bg-[#D4AF37] rounded-xl text-[10px] font-bold uppercase tracking-[0.2em] transition-all text-white hover:text-black border border-white/10 hover:border-[#D4AF37] shadow-lg">
                     Manage Syllabus
                   </button>
                 </div>
               </div>
             ))}
             {taughtCourses.length === 0 && (
-              <p className="text-gray-500 text-xs md:text-sm tracking-widest uppercase col-span-full">No courses assigned to your profile.</p>
+              <p className="text-gray-500 text-[10px] font-bold tracking-[0.2em] uppercase col-span-full">No courses assigned to your profile.</p>
             )}
           </div>
         </div>
@@ -1613,7 +1743,7 @@
 
       return (
         <div className="animate-in fade-in duration-500">
-          <header className="mb-8 md:mb-12">
+          <header className="mb-10 md:mb-12">
             <h1 className="serif text-4xl md:text-5xl lg:text-6xl mb-2 md:mb-4 text-white">User <span className="gold-gradient-text italic">Directory</span></h1>
             <p className="text-gray-400 text-xs md:text-sm font-light">Manage accounts, roles, and course placements.</p>
           </header>
@@ -1625,35 +1755,35 @@
                     {u.profilePic ? <img src={u.profilePic} className="w-full h-full object-cover" /> : u.name.charAt(0)}
                   </div>
                   <div className="overflow-hidden">
-                    <h4 className="text-lg md:text-xl font-bold text-white mb-1 truncate">{u.name}</h4>
+                    <h4 className="text-sm md:text-base font-medium text-white mb-2 truncate">{u.name}</h4>
                     <div className="flex flex-wrap gap-2">
-                      {u.roles?.map(r => <span key={r} className="text-[7px] md:text-[8px] bg-[#D4AF37]/10 text-[#D4AF37] px-2 py-1 rounded uppercase tracking-widest font-bold">{r}</span>)}
+                      {u.roles?.map(r => <span key={r} className="text-[8px] md:text-[9px] bg-black text-[#D4AF37] border border-[#D4AF37]/30 px-2 py-1 rounded font-bold uppercase tracking-[0.2em]">{r}</span>)}
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-col sm:flex-row md:flex-row gap-3 md:gap-4 items-stretch md:items-center w-full md:w-auto mt-2 md:mt-0">
-                  <div className="flex bg-black/50 p-1 rounded-xl border border-white/5 w-full md:w-auto">
+                <div className="flex flex-col sm:flex-row gap-3 md:gap-4 items-stretch md:items-center">
+                  <div className="flex bg-black/50 p-1 md:p-1.5 rounded-xl border border-white/10">
                     {['student', 'teacher', 'admin'].map(r => (
-                       <button key={r} onClick={() => toggleRole(u.id, u.roles || [], r)} className={`flex-1 md:flex-none px-3 md:px-4 py-2 text-[8px] md:text-[9px] uppercase tracking-widest font-bold rounded-lg transition-all ${u.roles?.includes(r) ? 'bg-[#D4AF37] text-black' : 'text-gray-500 hover:text-white'}`}>{r.substring(0,3)}</button>
+                       <button key={r} onClick={() => toggleRole(u.id, u.roles || [], r)} className={`px-3 md:px-4 py-2 md:py-2.5 text-[8px] md:text-[9px] font-bold uppercase tracking-[0.2em] rounded-lg transition-all ${u.roles?.includes(r) ? 'bg-[#D4AF37] text-black shadow-md' : 'text-gray-500 hover:text-white'}`}>{r.substring(0,3)}</button>
                     ))}
                   </div>
-                  <div className="relative group w-full sm:w-auto">
-                    <button className="w-full bg-white/5 border border-white/10 px-4 md:px-6 py-2.5 md:py-3 rounded-xl text-[9px] md:text-[10px] uppercase tracking-widest font-bold text-gray-300 hover:text-white hover:border-white/30 transition-all">Courses</button>
-                    <div className="absolute right-0 top-full mt-2 w-full sm:w-56 md:w-64 glass-premium p-3 md:p-4 rounded-xl md:rounded-2xl border border-white/10 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all z-20 max-h-48 md:max-h-64 overflow-y-auto shadow-2xl custom-scrollbar">
-                       <p className="text-[7px] md:text-[8px] text-gray-500 uppercase tracking-widest font-bold mb-2 md:mb-3 border-b border-white/10 pb-2">Available Courses</p>
-                       {courses.length === 0 ? <p className="text-[9px] md:text-[10px] text-gray-400">No courses exist.</p> : courses.map(c => {
+                  <div className="relative group">
+                    <button className="w-full bg-black/50 border border-white/10 px-5 py-3 md:py-3.5 rounded-xl text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] text-gray-300 hover:text-white hover:border-[#D4AF37]/50 transition-all">Courses</button>
+                    <div className="absolute right-0 top-full mt-2 w-full sm:w-64 glass-premium p-4 md:p-5 rounded-[1.5rem] opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all z-20 max-h-56 overflow-y-auto shadow-2xl border border-[#D4AF37]/30 custom-scrollbar">
+                       <p className="text-[9px] text-[#D4AF37] uppercase tracking-[0.2em] font-bold mb-3 border-b border-white/10 pb-3">Available Courses</p>
+                       {courses.length === 0 ? <p className="text-[10px] text-gray-400">No courses exist.</p> : courses.map(c => {
                          const isEnrolled = u.enrolledCourses?.includes(c.id);
                          return (
-                           <label key={c.id} className="flex items-center gap-2 md:gap-3 p-2 hover:bg-white/5 rounded-lg cursor-pointer">
-                             <input type="checkbox" checked={isEnrolled} onChange={() => handleEnrollment(u.id, u.enrolledCourses, c.id)} className="accent-[#D4AF37] w-3 h-3 md:w-4 md:h-4 rounded" />
-                             <span className="text-[10px] md:text-xs text-white truncate font-light">{c.title}</span>
+                           <label key={c.id} className="flex items-center gap-3 p-2.5 hover:bg-white/5 rounded-xl cursor-pointer transition-colors">
+                             <input type="checkbox" checked={isEnrolled} onChange={() => handleEnrollment(u.id, u.enrolledCourses, c.id)} className="accent-[#D4AF37] w-4 h-4 rounded" />
+                             <span className="text-xs md:text-sm text-white truncate font-light">{c.title}</span>
                            </label>
                          )
                        })}
                     </div>
                   </div>
-                  <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); removeUser(u.id); }} className="w-full sm:w-auto md:w-10 md:h-10 px-4 md:px-0 py-2.5 md:py-0 bg-white/5 hover:bg-red-500/20 text-gray-500 hover:text-red-500 border border-white/10 rounded-xl transition-all flex items-center justify-center mt-2 sm:mt-0 shrink-0">
-                    <Trash2 size={16} className="md:w-5 md:h-5" />
+                  <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); removeUser(u.id); }} className="px-4 py-3 bg-black/50 hover:bg-red-500/20 text-gray-500 hover:text-red-400 border border-white/10 rounded-xl transition-all flex items-center justify-center shrink-0">
+                    <Trash2 size={18} />
                   </button>
                 </div>
               </div>
@@ -1699,31 +1829,31 @@
 
       return (
         <div className="animate-in fade-in duration-500 relative min-h-full">
-          <header className="flex flex-col md:flex-row md:justify-between md:items-end gap-4 md:gap-6 mb-8 md:mb-12">
+          <header className="flex flex-col md:flex-row md:justify-between md:items-end gap-6 mb-10 md:mb-12">
             <div>
               <h1 className="serif text-4xl md:text-5xl lg:text-6xl mb-2 md:mb-4 text-white">Course <span className="gold-gradient-text italic">Registry</span></h1>
-              <p className="text-gray-400 text-xs md:text-sm font-light">Create and manage courses.</p>
+              <p className="text-gray-400 text-sm font-light">Create and manage courses.</p>
             </div>
-            <button onClick={() => setShowModal(true)} className="bg-[#D4AF37] text-black px-6 md:px-8 py-3 md:py-4 rounded-xl text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em] hover:bg-[#F9E29D] transition-colors flex items-center justify-center gap-2 shrink-0 shadow-[0_0_20px_rgba(212,175,55,0.2)]"><Plus size={16} /> New Course</button>
+            <button onClick={() => setShowModal(true)} className="bg-gradient-to-br from-[#D4AF37] to-[#B38D22] text-black px-6 py-4 rounded-xl text-[10px] font-bold uppercase tracking-[0.2em] transition-all shadow-[0_0_20px_rgba(212,175,55,0.3)] hover:scale-105 flex items-center justify-center gap-2 shrink-0"><Plus size={18} /> New Course</button>
           </header>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {courses.map(c => (
-              <div key={c.id} onClick={() => setManagingCourseId(c.id)} className="glass-premium p-6 md:p-8 rounded-[1.5rem] md:rounded-[2.5rem] flex flex-col border border-white/5 hover:border-[#D4AF37]/40 transition-all cursor-pointer group hover-lift relative overflow-hidden min-h-[300px]">
+              <div key={c.id} onClick={() => setManagingCourseId(c.id)} className="glass-premium p-6 md:p-8 rounded-[2rem] flex flex-col cursor-pointer hover-lift relative overflow-hidden min-h-[300px] border border-[#D4AF37]/10">
                 {c.coverImage && (
-                  <div className="absolute inset-0 z-0 opacity-20 group-hover:opacity-40 transition-opacity duration-500">
-                    <img src={c.coverImage} alt={c.title} className="w-full h-full object-cover" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-[#050505]/20"></div>
+                  <div className="absolute inset-0 z-0 opacity-20 group-hover:opacity-30 transition-opacity duration-500">
+                    <img src={c.coverImage} alt={c.title} className="w-full h-full object-cover mix-blend-overlay" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent"></div>
                   </div>
                 )}
                 <div className="relative z-10 flex flex-col h-full">
-                  <div className="flex justify-between items-start mb-3 md:mb-4">
-                    <h3 className="serif text-2xl md:text-3xl text-white group-hover:text-[#D4AF37] transition-colors pr-4">{c.title}</h3>
-                    <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); deleteCourseRecord(c.id); }} className="w-8 h-8 rounded-full bg-black/40 flex items-center justify-center text-gray-400 hover:text-red-500 hover:bg-red-500/20 transition-colors shrink-0 backdrop-blur-md"><Trash2 size={14} /></button>
+                  <div className="flex justify-between items-start mb-4 md:mb-6">
+                    <h3 className="serif text-3xl text-white pr-4 leading-tight">{c.title}</h3>
+                    <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); deleteCourseRecord(c.id); }} className="w-10 h-10 rounded-xl bg-black/50 border border-white/10 flex items-center justify-center text-gray-500 hover:text-red-400 transition-colors shrink-0"><Trash2 size={16} /></button>
                   </div>
-                  <p className="text-gray-300 text-xs md:text-sm mb-6 md:mb-8 line-clamp-3 font-light leading-relaxed">{c.desc}</p>
-                  <div className="mt-auto pt-4 md:pt-6 border-t border-white/10 flex items-center justify-between text-[#D4AF37] text-[9px] md:text-[10px] uppercase tracking-widest font-bold">
-                     <span className="bg-black/40 px-3 py-1.5 rounded-lg backdrop-blur-md">{c.resources?.length || 0} Assets</span>
-                     <span className="bg-black/40 px-3 py-1.5 rounded-lg backdrop-blur-md">{c.schedule?.length || 0} Lectures</span>
+                  <p className="text-gray-400 text-xs md:text-sm mb-6 md:mb-8 line-clamp-3 font-light leading-relaxed">{c.desc}</p>
+                  <div className="mt-auto pt-5 border-t border-white/5 flex items-center justify-between text-[#D4AF37] text-[9px] font-bold uppercase tracking-[0.2em]">
+                     <span className="bg-[#D4AF37]/10 px-3 py-1.5 rounded-lg">{c.resources?.length || 0} Assets</span>
+                     <span className="bg-[#D4AF37]/10 px-3 py-1.5 rounded-lg">{c.schedule?.length || 0} Lectures</span>
                   </div>
                 </div>
               </div>
@@ -1731,17 +1861,17 @@
           </div>
           {showModal && (
             <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-[#050505]/90 backdrop-blur-md animate-in fade-in">
-              <div className="glass-premium p-6 md:p-10 rounded-[2rem] md:rounded-[3rem] w-full max-w-xl border border-[#D4AF37]/30 shadow-2xl relative">
-                <button onClick={() => setShowModal(false)} className="absolute top-6 right-6 md:top-8 md:right-8 text-gray-500 hover:text-white text-xl md:text-2xl font-light">&times;</button>
-                <h2 className="serif text-3xl md:text-4xl mb-1 md:mb-2 text-white italic">Create Course</h2>
-                <p className="text-[#D4AF37] text-[9px] md:text-[10px] uppercase tracking-widest font-bold mb-6 md:mb-10">Add to Course Registry</p>
-                <form onSubmit={createCourse} className="space-y-4 md:space-y-6">
-                  <div><input name="title" type="text" placeholder="COURSE TITLE" required className="w-full bg-black/50 border border-white/10 p-4 md:p-5 rounded-xl md:rounded-2xl text-[10px] md:text-[12px] tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" /></div>
-                  <div><input name="coverImage" type="url" placeholder="COVER IMAGE URL (OPTIONAL)" className="w-full bg-black/50 border border-white/10 p-4 md:p-5 rounded-xl md:rounded-2xl text-[10px] md:text-[12px] tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" /></div>
-                  <div><textarea name="desc" placeholder="COURSE DESCRIPTION" required rows={4} className="w-full bg-black/50 border border-white/10 p-4 md:p-5 rounded-xl md:rounded-2xl text-xs md:text-sm outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600 resize-none font-light leading-relaxed custom-scrollbar" /></div>
-                  <div className="flex gap-3 md:gap-4 pt-2 md:pt-4">
-                    <button type="button" onClick={() => setShowModal(false)} className="flex-1 py-4 md:py-5 border border-white/10 rounded-xl md:rounded-2xl text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-bold text-gray-400 hover:text-white transition-colors">Cancel</button>
-                    <button type="submit" className="flex-1 bg-[#D4AF37] text-black rounded-xl md:rounded-2xl text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-[#F9E29D] transition-colors shadow-lg">Create</button>
+              <div className="glass-premium p-8 md:p-10 rounded-[2.5rem] w-full max-w-xl relative border border-[#D4AF37]/30 shadow-2xl">
+                <button onClick={() => setShowModal(false)} className="absolute top-8 right-8 text-gray-500 hover:text-white"><X size={24}/></button>
+                <h2 className="serif text-4xl mb-2 text-white italic">Create Course</h2>
+                <p className="text-[#D4AF37] text-[9px] uppercase tracking-widest font-bold mb-8">Add to Course Registry</p>
+                <form onSubmit={createCourse} className="space-y-6">
+                  <div><input name="title" type="text" placeholder="COURSE TITLE" required className="w-full bg-black/50 border border-white/10 p-4 md:p-5 rounded-xl text-[10px] tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" /></div>
+                  <div><input name="coverImage" type="url" placeholder="COVER IMAGE URL (OPTIONAL)" className="w-full bg-black/50 border border-white/10 p-4 md:p-5 rounded-xl text-[10px] tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" /></div>
+                  <div><textarea name="desc" placeholder="COURSE DESCRIPTION" required rows={4} className="w-full bg-black/50 border border-white/10 p-4 md:p-5 rounded-xl text-xs md:text-sm outline-none focus:border-[#D4AF37] transition-all text-white font-light resize-none custom-scrollbar placeholder:text-gray-600" /></div>
+                  <div className="flex gap-4 pt-2">
+                    <button type="button" onClick={() => setShowModal(false)} className="flex-1 py-4 border border-white/10 rounded-xl text-[9px] font-bold tracking-[0.2em] uppercase text-gray-400 hover:text-white transition-colors">Cancel</button>
+                    <button type="submit" className="flex-1 bg-[#D4AF37] text-black rounded-xl text-[9px] font-bold tracking-[0.2em] uppercase hover:bg-[#F9E29D] transition-colors shadow-lg">Create</button>
                   </div>
                 </form>
               </div>
@@ -1756,6 +1886,7 @@
       const [showResourceModal, setShowResourceModal] = useState(false);
       const [showFolderModal, setShowFolderModal] = useState(false);
       const [showScheduleModal, setShowScheduleModal] = useState(false);
+      const [showEditCourseModal, setShowEditCourseModal] = useState(false);
       const [previewResource, setPreviewResource] = useState(null);
 
       const removeResource = async (resId) => {
@@ -1791,17 +1922,23 @@
           <button onClick={() => { onBack(); setCurrentFolderId(null); }} className="text-[#D4AF37] text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] mb-6 md:mb-10 hover:text-white transition-colors flex items-center gap-2 relative z-10">
              <ChevronLeft size={14} /> Back to Courses
           </button>
-          <header className="mb-10 md:mb-16 relative rounded-[2.5rem] overflow-hidden glass-premium border border-white/5 p-8 md:p-12">
+          
+          <header className="mb-10 md:mb-16 relative rounded-[2.5rem] overflow-hidden glass-premium border border-[#D4AF37]/20 p-8 md:p-12 shadow-2xl">
             {course.coverImage && (
               <div className="absolute inset-0 z-0">
                 <img src={course.coverImage} alt="Cover" className="w-full h-full object-cover opacity-20 mix-blend-overlay" />
                 <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505]/80 to-transparent"></div>
               </div>
             )}
-            <div className="relative z-10">
-              <span className="bg-[#D4AF37] text-black px-3 py-1 rounded text-[8px] font-bold uppercase tracking-widest mb-4 inline-block">Management Mode</span>
-              <h1 className="serif text-4xl md:text-5xl lg:text-6xl mb-4 text-white leading-tight">{course.title}</h1>
-              <p className="text-gray-400 text-sm max-w-3xl leading-relaxed font-light">{course.desc}</p>
+            <div className="relative z-10 flex flex-col md:flex-row md:justify-between md:items-start gap-4">
+              <div>
+                <span className="bg-[#D4AF37] text-black px-3 py-1 rounded text-[8px] font-bold uppercase tracking-widest mb-4 inline-block">Management Mode</span>
+                <h1 className="serif text-4xl md:text-5xl lg:text-6xl mb-4 text-white leading-tight">{course.title}</h1>
+                <p className="text-gray-400 text-sm max-w-3xl leading-relaxed font-light">{course.desc}</p>
+              </div>
+              <button onClick={() => setShowEditCourseModal(true)} className="bg-white/10 hover:bg-white/20 border border-white/20 text-white px-5 py-2.5 rounded-xl text-[10px] font-bold uppercase tracking-[0.2em] transition-colors flex items-center gap-2 shrink-0 backdrop-blur-md">
+                <Edit3 size={14} /> Edit Details
+              </button>
             </div>
           </header>
           
@@ -1810,25 +1947,25 @@
             {/* RESOURCES PANEL */}
             <div className="space-y-6 md:space-y-8">
               <div className="flex items-center justify-between">
-                <h3 className="serif text-2xl md:text-3xl italic text-white flex items-center gap-4"><span className="w-4 md:w-6 h-[1px] bg-[#D4AF37]"></span> Notes & Resources</h3>
-                <div className="flex gap-2">
-                   <button onClick={() => setShowFolderModal(true)} title="New Folder" className="w-10 h-10 bg-white/5 text-gray-300 rounded-xl flex items-center justify-center hover:bg-[#D4AF37] hover:text-black transition-all border border-white/10 shadow-lg">
+                <h3 className="serif text-3xl text-white italic">Materials</h3>
+                <div className="flex gap-3">
+                   <button onClick={() => setShowFolderModal(true)} title="New Folder" className="w-10 h-10 glass text-gray-400 rounded-xl flex items-center justify-center hover:text-white transition-all border border-white/10 hover:border-[#D4AF37]/50">
                      <FolderPlus size={18} />
                    </button>
-                   <button onClick={() => setShowResourceModal(true)} title="Upload Material" className="w-10 h-10 bg-[#D4AF37]/10 text-[#D4AF37] rounded-xl flex items-center justify-center hover:bg-[#D4AF37] hover:text-black transition-all shadow-lg border border-[#D4AF37]/20">
+                   <button onClick={() => setShowResourceModal(true)} title="Upload Material" className="w-10 h-10 bg-gradient-to-br from-[#D4AF37] to-[#B38D22] text-black rounded-xl flex items-center justify-center hover:shadow-[0_0_15px_rgba(212,175,55,0.4)] transition-all">
                      <Plus size={20} />
                    </button>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 text-[10px] md:text-xs text-gray-400 uppercase tracking-widest font-bold bg-black/40 p-3 md:p-4 rounded-xl border border-white/5 overflow-x-auto custom-scrollbar">
-                <button onClick={() => setCurrentFolderId(null)} className="hover:text-[#D4AF37] transition-colors flex items-center gap-1 shrink-0">
+              <div className="flex items-center gap-2 text-[10px] text-gray-400 uppercase tracking-[0.2em] font-bold bg-black/40 p-4 rounded-xl border border-white/5 backdrop-blur-md overflow-x-auto custom-scrollbar">
+                <button onClick={() => setCurrentFolderId(null)} className="hover:text-white transition-colors flex items-center gap-2 shrink-0">
                   <FolderOpen size={14}/> Root
                 </button>
                 {breadcrumbs.map((f, i) => (
                   <React.Fragment key={f.id}>
-                    <ChevronRight size={12} className="text-gray-600 shrink-0" />
-                    <button onClick={() => setCurrentFolderId(f.id)} className={`hover:text-[#D4AF37] transition-colors truncate max-w-[100px] md:max-w-[200px] shrink-0 ${i === breadcrumbs.length-1 ? 'text-white' : ''}`}>
+                    <ChevronRight size={12} className="text-[#D4AF37]/50 shrink-0" />
+                    <button onClick={() => setCurrentFolderId(f.id)} className={`hover:text-white transition-colors truncate max-w-[100px] md:max-w-[200px] shrink-0 ${i === breadcrumbs.length-1 ? 'text-[#D4AF37]' : ''}`}>
                       {f.title}
                     </button>
                   </React.Fragment>
@@ -1837,31 +1974,25 @@
 
               <div className="space-y-4">
                 {currentResources.length === 0 ? (
-                  <div className="glass p-8 rounded-[1.5rem] text-center text-gray-500 text-[10px] tracking-widest uppercase border border-white/5 bg-black/20">Empty Section</div>
+                  <div className="glass-premium rounded-[2rem] p-10 text-center text-gray-500 text-[10px] font-bold tracking-[0.2em] uppercase border border-white/5">Empty Section</div>
                 ) : (
                   currentResources.sort((a,b) => (b.isFolder ? 1 : 0) - (a.isFolder ? 1 : 0)).map(r => (
-                    <div key={r.id} onClick={() => r.isFolder ? setCurrentFolderId(r.id) : setPreviewResource(r)} className="glass p-4 md:p-5 rounded-[1.5rem] flex items-center justify-between group hover:border-[#D4AF37]/30 transition-all border border-white/5 relative overflow-hidden cursor-pointer bg-black/20 hover-lift">
-                      {(r.type === 'video' || r.type === 'youtube') && r.thumbnailUrl && (
-                        <div className="absolute inset-0 opacity-[0.15] group-hover:opacity-[0.3] transition-opacity z-0 pointer-events-none">
-                          <img src={r.thumbnailUrl} className="w-full h-full object-cover" />
-                          <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-transparent"></div>
-                        </div>
-                      )}
-                      <div className="flex items-center gap-4 pr-2 overflow-hidden relative z-10">
-                        <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border border-white/5 ${r.isFolder ? 'bg-[#D4AF37]/10 text-[#D4AF37]' : 'bg-black/40 text-gray-300'}`}>
+                    <div key={r.id} onClick={() => r.isFolder ? setCurrentFolderId(r.id) : setPreviewResource(r)} className="glass p-5 rounded-2xl flex items-center justify-between group cursor-pointer hover-lift border border-white/5 hover:border-[#D4AF37]/30">
+                      <div className="flex items-center gap-5 pr-2 overflow-hidden relative z-10">
+                        <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border border-white/10 shadow-inner ${r.isFolder ? 'bg-gradient-to-br from-[#D4AF37]/20 to-black text-[#D4AF37]' : 'bg-gradient-to-br from-gray-800 to-black text-gray-400 group-hover:text-white'}`}>
                            {r.isFolder ? <Folder size={20} className="fill-[#D4AF37]/20"/> : 
-                            r.type === 'video' ? <PlayCircle size={18}/> : 
-                            r.type === 'youtube' ? <PlayCircle size={18} className="text-red-500"/> : 
-                            r.type === 'image' || r.type === 'collage' ? <ImageIcon size={18}/> : 
-                            r.type === 'link' ? <LinkIcon size={18}/> : 
-                            <FileText size={18}/>}
+                            r.type === 'video' ? <PlayCircle size={20}/> : 
+                            r.type === 'youtube' ? <PlayCircle size={20}/> : 
+                            r.type === 'image' || r.type === 'collage' ? <ImageIcon size={20}/> : 
+                            r.type === 'link' ? <LinkIcon size={20}/> : 
+                            <FileText size={20}/>}
                         </div>
                         <div className="truncate">
-                          <h4 className="text-white text-sm font-bold tracking-wider uppercase mb-1 truncate">{r.title}</h4>
-                          <span className="text-gray-500 text-[8px] uppercase tracking-widest font-bold">{r.isFolder ? 'Folder' : r.type}</span>
+                          <h4 className="text-white text-sm font-medium tracking-wide mb-1 truncate">{r.title}</h4>
+                          <span className="text-[#D4AF37] opacity-80 text-[8px] uppercase tracking-widest font-bold">{r.isFolder ? 'Folder' : r.type}</span>
                         </div>
                       </div>
-                      <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); removeResource(r.id); }} className="text-gray-600 hover:text-red-500 p-3 rounded-xl hover:bg-red-500/10 transition-colors shrink-0 relative z-10"><Trash2 size={16} /></button>
+                      <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); removeResource(r.id); }} className="text-gray-600 hover:text-red-400 p-3 rounded-xl hover:bg-red-500/10 transition-colors shrink-0"><Trash2 size={16} /></button>
                     </div>
                   ))
                 )}
@@ -1871,23 +2002,23 @@
             {/* SCHEDULE PANEL */}
             <div className="space-y-6 md:space-y-8">
               <div className="flex items-center justify-between">
-                <h3 className="serif text-2xl md:text-3xl italic text-white flex items-center gap-4"><span className="w-4 md:w-6 h-[1px] bg-[#D4AF37]"></span> Lecture Schedule</h3>
-                <button onClick={() => setShowScheduleModal(true)} className="w-10 h-10 bg-[#D4AF37]/10 text-[#D4AF37] rounded-xl flex items-center justify-center hover:bg-[#D4AF37] hover:text-black transition-all shadow-lg border border-[#D4AF37]/20"><Plus size={20} /></button>
+                <h3 className="serif text-3xl text-white italic">Lecture Schedule</h3>
+                <button onClick={() => setShowScheduleModal(true)} className="w-10 h-10 glass border border-white/10 text-gray-300 rounded-xl flex items-center justify-center hover:text-white hover:border-[#D4AF37]/50 transition-all"><Plus size={18} /></button>
               </div>
               <div className="space-y-4">
                 {(!course.schedule || course.schedule.length === 0) ? (
-                  <div className="glass-premium p-8 rounded-[1.5rem] text-center text-gray-500 text-[10px] tracking-widest uppercase border border-white/5">No schedule created.</div>
+                  <div className="glass-premium rounded-[2rem] p-10 text-center text-gray-500 text-[10px] font-bold tracking-[0.2em] uppercase border border-white/5">No schedule created.</div>
                 ) : (
                   course.schedule.sort((a,b) => new Date(a.date) - new Date(b.date)).map((s, idx) => (
-                    <div key={s.id} className="glass-premium p-6 rounded-[1.5rem] border-l-4 border-[#D4AF37] relative group hover-lift">
-                      <div className="flex justify-between items-start mb-2">
+                    <div key={s.id} className="glass p-6 border-l-[4px] border-l-[#D4AF37] rounded-2xl hover-lift">
+                      <div className="flex justify-between items-start mb-3">
                         <div>
-                          <p className="text-[#D4AF37] text-[9px] uppercase tracking-widest font-bold mb-1">Lecture {idx + 1} • {s.date}</p>
-                          <h4 className="serif text-xl text-white">{s.title}</h4>
+                          <p className="text-[#D4AF37] text-[9px] uppercase tracking-widest font-bold mb-2">Lecture {idx + 1} • {s.date}</p>
+                          <h4 className="serif text-2xl text-white">{s.title}</h4>
                         </div>
-                        <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); removeSchedule(s.id); }} className="text-gray-600 hover:text-red-500 p-2 rounded-lg hover:bg-red-500/10 transition-colors shrink-0"><Trash2 size={16} /></button>
+                        <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); removeSchedule(s.id); }} className="text-gray-600 hover:text-red-400 p-2 rounded-lg hover:bg-red-500/10 transition-colors shrink-0"><Trash2 size={16} /></button>
                       </div>
-                      <p className="text-gray-400 text-xs leading-relaxed font-light">{s.description}</p>
+                      <p className="text-gray-400 text-xs md:text-sm leading-relaxed font-light">{s.description}</p>
                     </div>
                   ))
                 )}
@@ -1899,7 +2030,43 @@
           {showResourceModal && <ResourceCreatorModal courseId={course.id} parentId={currentFolderId} onClose={() => setShowResourceModal(false)} />}
           {showFolderModal && <CreateFolderModal courseId={course.id} parentId={currentFolderId} courseResources={course.resources} onClose={() => setShowFolderModal(false)} />}
           {showScheduleModal && <ScheduleCreatorModal courseId={course.id} onClose={() => setShowScheduleModal(false)} />}
+          {showEditCourseModal && <EditCourseModal course={course} onClose={() => setShowEditCourseModal(false)} />}
           {previewResource && <ResourcePreviewer resource={previewResource} onClose={() => setPreviewResource(null)} />}
+        </div>
+      );
+    }
+    
+    function EditCourseModal({ course, onClose }) {
+      const handleEditSubmit = async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        try {
+          await updateDoc(doc(db, 'artifacts', appId, 'public', 'data', 'courses', course.id), {
+            title: form.title.value,
+            desc: form.desc.value,
+            coverImage: form.coverImage.value
+          });
+          toast("Course Updated Successfully");
+          onClose();
+        } catch(err) { toast("Error updating course"); }
+      };
+
+      return (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-[#050505]/90 backdrop-blur-md animate-in fade-in">
+          <div className="glass-premium p-6 md:p-10 rounded-[2rem] md:rounded-[3rem] w-full max-w-xl border border-[#D4AF37]/30 shadow-2xl relative">
+            <button onClick={onClose} className="absolute top-6 right-6 md:top-8 md:right-8 text-gray-500 hover:text-white text-xl md:text-2xl font-light">&times;</button>
+            <h2 className="serif text-3xl md:text-4xl mb-1 md:mb-2 text-white italic">Edit Course</h2>
+            <p className="text-[#D4AF37] text-[9px] md:text-[10px] uppercase tracking-widest font-bold mb-6 md:mb-10">Update Course Details</p>
+            <form onSubmit={handleEditSubmit} className="space-y-4 md:space-y-6">
+              <div><input name="title" defaultValue={course.title} type="text" placeholder="COURSE TITLE" required className="w-full bg-black/50 border border-white/10 p-4 md:p-5 rounded-xl md:rounded-2xl text-[10px] md:text-[12px] tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" /></div>
+              <div><input name="coverImage" defaultValue={course.coverImage} type="url" placeholder="COVER IMAGE URL (OPTIONAL)" className="w-full bg-black/50 border border-white/10 p-4 md:p-5 rounded-xl md:rounded-2xl text-[10px] md:text-[12px] tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" /></div>
+              <div><textarea name="desc" defaultValue={course.desc} placeholder="COURSE DESCRIPTION" required rows={4} className="w-full bg-black/50 border border-white/10 p-4 md:p-5 rounded-xl md:rounded-2xl text-xs md:text-sm outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600 resize-none font-light leading-relaxed custom-scrollbar" /></div>
+              <div className="flex gap-3 md:gap-4 pt-2 md:pt-4">
+                <button type="button" onClick={onClose} className="flex-1 py-4 md:py-5 border border-white/10 rounded-xl md:rounded-2xl text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-bold text-gray-400 hover:text-white transition-colors">Cancel</button>
+                <button type="submit" className="flex-1 bg-[#D4AF37] text-black rounded-xl md:rounded-2xl text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-[#F9E29D] transition-colors shadow-lg">Save Changes</button>
+              </div>
+            </form>
+          </div>
         </div>
       );
     }
@@ -1919,27 +2086,25 @@
 
       return (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-[#050505]/90 backdrop-blur-md animate-in fade-in">
-          <div className="glass-premium p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] w-full max-w-xl border border-[#D4AF37]/30 shadow-2xl relative">
-            <button onClick={onClose} className="absolute top-6 right-6 md:top-8 md:right-8 text-gray-500 hover:text-white text-2xl font-light">&times;</button>
-            <h2 className="serif text-3xl md:text-4xl mb-2 text-white italic">Schedule Lecture</h2>
-            <p className="text-[#D4AF37] text-[9px] md:text-[10px] uppercase tracking-widest font-bold mb-8">Add to Course Itinerary</p>
-            <form onSubmit={handleSubmit} className="space-y-5 md:space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+          <div className="glass-premium p-8 md:p-12 w-full max-w-xl rounded-[2.5rem] relative border border-[#D4AF37]/30 shadow-2xl">
+            <button onClick={onClose} className="absolute top-8 right-8 text-gray-500 hover:text-white"><X size={24}/></button>
+            <h2 className="serif text-4xl mb-2 text-white italic">Schedule Lecture</h2>
+            <p className="text-[#D4AF37] text-[9px] uppercase tracking-widest font-bold mb-8">Add to Course Itinerary</p>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                  <div>
-                   <label className="text-[8px] md:text-[9px] text-gray-500 uppercase tracking-widest font-bold mb-2 block ml-2">Lecture Date</label>
-                   <input name="date" type="date" required className="w-full bg-black/50 border border-white/10 p-4 md:p-5 rounded-xl md:rounded-2xl text-[10px] md:text-[12px] tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white" />
+                   <input name="date" type="date" required className="w-full bg-black/50 border border-white/10 p-4 md:p-5 rounded-xl text-[10px] tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" />
                  </div>
                  <div>
-                   <label className="text-[8px] md:text-[9px] text-gray-500 uppercase tracking-widest font-bold mb-2 block ml-2">Lecture Title</label>
-                   <input name="title" type="text" placeholder="e.g. Masterclass on Scales" required className="w-full bg-black/50 border border-white/10 p-4 md:p-5 rounded-xl md:rounded-2xl text-[10px] md:text-[12px] tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" />
+                   <input name="title" type="text" placeholder="LECTURE TITLE" required className="w-full bg-black/50 border border-white/10 p-4 md:p-5 rounded-xl text-[10px] tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" />
                  </div>
               </div>
               <div>
-                <textarea name="desc" placeholder="BRIEF LECTURE DESCRIPTION OR AGENDA" required rows={3} className="w-full bg-black/50 border border-white/10 p-4 md:p-5 rounded-xl md:rounded-2xl text-xs outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600 font-light resize-none custom-scrollbar" />
+                <textarea name="desc" placeholder="BRIEF LECTURE DESCRIPTION..." required rows={3} className="w-full bg-black/50 border border-white/10 p-4 md:p-5 rounded-xl text-xs outline-none focus:border-[#D4AF37] transition-all text-white font-light resize-none custom-scrollbar placeholder:text-gray-600" />
               </div>
-              <div className="flex gap-4 pt-2">
-                <button type="button" onClick={onClose} className="flex-1 py-4 md:py-5 border border-white/10 rounded-xl md:rounded-2xl text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-bold text-gray-400 hover:text-white transition-colors">Cancel</button>
-                <button type="submit" className="flex-1 bg-[#D4AF37] text-black rounded-xl md:rounded-2xl text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-[#F9E29D] transition-colors shadow-lg">Schedule</button>
+              <div className="flex gap-4 pt-4">
+                <button type="button" onClick={onClose} className="flex-1 py-4 border border-white/10 rounded-xl text-[9px] font-bold tracking-[0.2em] uppercase text-gray-400 hover:text-white transition-colors">Cancel</button>
+                <button type="submit" className="flex-1 bg-[#D4AF37] text-black rounded-xl text-[9px] font-bold tracking-[0.2em] uppercase hover:bg-[#F9E29D] transition-colors shadow-lg">Schedule</button>
               </div>
             </form>
           </div>
@@ -1999,18 +2164,18 @@
       };
 
       return (
-         <div className="animate-in fade-in duration-500 max-w-4xl mx-auto pb-10">
-            <header className="mb-10 md:mb-16">
-              <h1 className="serif text-4xl md:text-5xl lg:text-7xl mb-2 text-white">My <span className="gold-gradient-text italic">Profile</span></h1>
-              <p className="text-gray-400 text-xs md:text-sm font-light mt-4">Manage your personal information.</p>
+         <div className="animate-in fade-in duration-500 max-w-4xl mx-auto pb-12">
+            <header className="mb-10 md:mb-12">
+              <h1 className="serif text-4xl md:text-5xl lg:text-6xl mb-2 text-white">My <span className="gold-gradient-text italic">Profile</span></h1>
+              <p className="text-gray-400 text-sm font-light">Manage your personal information.</p>
             </header>
 
-            <div className="glass-premium p-6 md:p-12 rounded-[2rem] border border-white/5">
-               <form onSubmit={handleSubmit} className="space-y-8">
-                  <div className="flex items-center gap-6 md:gap-10 pb-8 border-b border-white/10">
+            <div className="glass-premium p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] border border-[#D4AF37]/20 shadow-2xl">
+               <form onSubmit={handleSubmit} className="space-y-8 md:space-y-10">
+                  <div className="flex items-center gap-6 md:gap-10 pb-10 border-b border-white/5">
                      <div className="relative group cursor-pointer">
-                       <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden bg-black/50 border-2 border-[#D4AF37]/30 flex items-center justify-center shrink-0 shadow-xl">
-                          {profilePic ? <img src={profilePic} className="w-full h-full object-cover" /> : <UserIcon size={40} className="text-gray-500" />}
+                       <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden bg-gradient-to-br from-gray-800 to-black border border-white/10 flex items-center justify-center shrink-0 shadow-inner">
+                          {profilePic ? <img src={profilePic} className="w-full h-full object-cover" /> : <UserIcon size={40} className="text-gray-600" />}
                        </div>
                        <label className="absolute inset-0 bg-black/60 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer backdrop-blur-sm">
                          <ImagePlus size={24} className="text-white" />
@@ -2018,34 +2183,34 @@
                        </label>
                      </div>
                      <div>
-                       <h3 className="serif text-2xl text-white mb-1">Portrait</h3>
-                       <p className="text-gray-400 text-xs font-light">Max size: 2MB.</p>
-                       {loading && <p className="text-[#D4AF37] text-[10px] uppercase tracking-widest font-bold mt-2 animate-pulse">Processing...</p>}
+                       <h3 className="serif text-3xl text-white mb-2 italic">Portrait</h3>
+                       <p className="text-gray-500 text-xs font-light leading-relaxed">Max size: 2MB. 1:1 ratio recommended.</p>
+                       {loading && <p className="text-[#D4AF37] text-[9px] uppercase tracking-widest font-bold mt-3 animate-pulse">Processing...</p>}
                      </div>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
                      <div>
-                       <label className="text-[8px] md:text-[9px] text-gray-500 uppercase tracking-widest font-bold mb-2 block ml-2">Full Name</label>
-                       <input name="name" value={formData.name} onChange={handleChange} required disabled={loading} className="w-full bg-black/50 border border-white/10 p-4 rounded-xl text-xs outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" />
+                       <label className="text-[9px] text-gray-500 uppercase tracking-widest font-bold mb-3 block">Full Name</label>
+                       <input name="name" value={formData.name} onChange={handleChange} required disabled={loading} className="w-full bg-black/50 border border-white/10 p-4 md:p-5 rounded-xl text-sm outline-none focus:border-[#D4AF37] transition-all text-white" />
                      </div>
                      <div>
-                       <label className="text-[8px] md:text-[9px] text-gray-500 uppercase tracking-widest font-bold mb-2 block ml-2">Email Address (Read-Only)</label>
-                       <input value={userData.email} disabled className="w-full bg-black/20 border border-white/5 p-4 rounded-xl text-xs outline-none text-gray-500 cursor-not-allowed" />
+                       <label className="text-[9px] text-gray-500 uppercase tracking-widest font-bold mb-3 block">Email Address (Read-Only)</label>
+                       <input value={userData.email} disabled className="w-full bg-black/30 border border-white/5 p-4 md:p-5 rounded-xl text-sm text-gray-600 cursor-not-allowed" />
                      </div>
                      <div className="md:col-span-2">
-                       <label className="text-[8px] md:text-[9px] text-gray-500 uppercase tracking-widest font-bold mb-2 block ml-2">Phone Number</label>
-                       <input name="phone" value={formData.phone} onChange={handleChange} disabled={loading} placeholder="+1 234 567 8900" className="w-full bg-black/50 border border-white/10 p-4 rounded-xl text-xs outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" />
+                       <label className="text-[9px] text-gray-500 uppercase tracking-widest font-bold mb-3 block">Phone Number</label>
+                       <input name="phone" value={formData.phone} onChange={handleChange} disabled={loading} placeholder="+1 234 567 8900" className="w-full bg-black/50 border border-white/10 p-4 md:p-5 rounded-xl text-sm outline-none focus:border-[#D4AF37] transition-all text-white" />
                      </div>
                   </div>
 
                   <div>
-                     <label className="text-[8px] md:text-[9px] text-gray-500 uppercase tracking-widest font-bold mb-2 block ml-2">Biography / Background</label>
-                     <textarea name="bio" value={formData.bio} onChange={handleChange} disabled={loading} rows="4" placeholder="Tell us about yourself..." className="w-full bg-black/50 border border-white/10 p-4 rounded-xl text-xs outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600 resize-none custom-scrollbar"></textarea>
+                     <label className="text-[9px] text-gray-500 uppercase tracking-widest font-bold mb-3 block">Biography / Background</label>
+                     <textarea name="bio" value={formData.bio} onChange={handleChange} disabled={loading} rows="5" placeholder="Tell us about yourself..." className="w-full bg-black/50 border border-white/10 p-4 md:p-5 rounded-xl text-sm outline-none focus:border-[#D4AF37] transition-all text-white font-light resize-none custom-scrollbar"></textarea>
                   </div>
 
-                  <div className="pt-4 flex justify-end">
-                     <button type="submit" disabled={loading} className="bg-[#D4AF37] text-black px-8 py-4 rounded-xl text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-[#F9E29D] transition-colors shadow-lg disabled:opacity-50">
+                  <div className="pt-6 flex justify-end">
+                     <button type="submit" disabled={loading} className="bg-gradient-to-r from-[#D4AF37] to-[#B38D22] text-black px-10 py-4 md:py-5 rounded-xl text-[10px] font-bold uppercase tracking-[0.2em] hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-all hover:scale-105 disabled:opacity-50">
                        {loading ? 'Saving...' : 'Save Profile'}
                      </button>
                   </div>

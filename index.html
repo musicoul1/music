@@ -240,6 +240,14 @@
         const newLang = e.target.value;
         setLang(newLang);
         
+        if (newLang === 'en') {
+          // To restore English properly, we clear the Google Translate cookie and reload
+          document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+          document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=' + window.location.hostname + '; path=/;';
+          window.location.reload();
+          return;
+        }
+
         // Save to cookie so preference persists
         document.cookie = `googtrans=/en/${newLang}; path=/`;
 
@@ -247,10 +255,10 @@
         const googleSelect = document.querySelector('.goog-te-combo');
         if (googleSelect) {
           googleSelect.value = newLang;
-          // CRITICAL FIX: Google Translate requires the 'bubbles' flag to be true to detect the synthetic event
           googleSelect.dispatchEvent(new Event('change', { bubbles: true }));
         } else {
-          toast("Translator loading... please try again in a moment.");
+          toast("Translator loading... rendering updates.");
+          window.location.reload();
         }
       };
 
@@ -274,7 +282,7 @@
              const el = document.getElementById('google_translate_element');
              if (el && el.innerHTML === '') {
                new window.google.translate.TranslateElement(
-                 { pageLanguage: 'en', includedLanguages: 'en,hi,mr', layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE },
+                 { pageLanguage: 'en', includedLanguages: 'hi,mr', layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE },
                  'google_translate_element'
                );
              }
@@ -1047,7 +1055,7 @@
                   {breadcrumbs.map((f, i) => (
                     <React.Fragment key={f.id}>
                       <ChevronRight size={12} className="text-[#D4AF37]/50" />
-                      <button onClick={() => setCurrentFolderId(f.id)} className={`hover:text-white transition-colors truncate max-w-[100px] md:max-w-xs ${i === breadcrumbs.length-1 ? 'text-[#D4AF37]' : ''}`}>
+                      <button onClick={() => setCurrentFolderId(f.id)} className={`hover:text-white transition-colors truncate max-w-[100px] md:max-w-[200px] shrink-0 ${i === breadcrumbs.length-1 ? 'text-[#D4AF37]' : ''}`}>
                         {f.title}
                       </button>
                     </React.Fragment>

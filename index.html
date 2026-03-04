@@ -219,7 +219,7 @@
 
     const toast = (msg) => {
       const t = document.createElement('div');
-      t.className = "fixed bottom-28 right-4 md:top-10 md:right-10 md:bottom-auto bg-[#111] border border-[#D4AF37]/40 text-[#D4AF37] px-6 py-4 rounded-xl font-medium text-sm md:text-base tracking-wide shadow-2xl transition-all duration-300 animate-in fade-in z-[99999]";
+      t.className = "fixed bottom-28 right-4 md:top-10 md:right-10 md:bottom-auto bg-[#111] border border-[#D4AF37]/40 text-[#D4AF37] px-6 py-4 rounded-xl font-medium text-sm md:text-xs tracking-wide shadow-2xl transition-all duration-300 animate-in fade-in z-[99999]";
       t.innerText = msg;
       document.body.appendChild(t);
       setTimeout(() => {
@@ -271,7 +271,7 @@
       const handleBack = () => window.history.back();
       
       return (
-        <button onClick={handleBack} className="text-[#D4AF37] text-xs md:text-sm font-bold uppercase tracking-wider mb-6 md:mb-8 hover:text-white transition-colors flex items-center gap-2 w-fit relative z-10 hover-lift bg-black/40 px-4 py-2.5 rounded-xl border border-[#D4AF37]/20 backdrop-blur-md">
+        <button onClick={handleBack} className="text-[#D4AF37] text-xs md:text-[11px] font-bold uppercase tracking-wider mb-6 md:mb-8 hover:text-white transition-colors flex items-center gap-2 w-fit relative z-10 hover-lift bg-black/40 px-4 py-2.5 rounded-xl border border-[#D4AF37]/20 backdrop-blur-md">
           <ChevronLeft size={18} /> {label || 'Back'}
         </button>
       );
@@ -313,7 +313,7 @@
         <select 
           value={lang} 
           onChange={handleLanguageChange} 
-          className="bg-black/80 border border-[#D4AF37]/50 text-[#D4AF37] text-sm md:text-base font-bold uppercase tracking-wider rounded-xl px-4 py-2.5 outline-none cursor-pointer text-center shadow-[0_0_15px_rgba(212,175,55,0.2)] hover:bg-[#D4AF37]/10 transition-colors"
+          className="bg-black/80 border border-[#D4AF37]/50 text-[#D4AF37] text-xs md:text-[10px] font-bold uppercase tracking-wider rounded-xl px-4 py-2.5 outline-none cursor-pointer text-center shadow-[0_0_15px_rgba(212,175,55,0.2)] hover:bg-[#D4AF37]/10 transition-colors"
         >
           <option value="en">ENG</option>
           <option value="hi">हिंदी (HI)</option>
@@ -362,7 +362,7 @@
         const next = () => { setCurrentIndex((i) => (i + 1) % images.length); setIsZoomed(false); };
         const prev = () => { setCurrentIndex((i) => (i - 1 + images.length) % images.length); setIsZoomed(false); };
 
-        if(images.length === 0) return <div className="text-gray-500 text-base w-full h-full flex items-center justify-center">No images found.</div>;
+        if(images.length === 0) return <div className="text-gray-500 text-sm md:text-base w-full h-full flex items-center justify-center">No images found.</div>;
 
         return (
             <div className="w-full h-full relative flex flex-col bg-[#050505] overflow-hidden group items-center justify-center">
@@ -585,32 +585,32 @@
             <div className="text-center mb-12">
               <img src="Assets/Images/Logo.png" alt="Musicoul Logo" className="w-24 h-24 mx-auto mb-5 object-contain" />
               <h1 className="serif text-5xl md:text-6xl mb-3 text-white">Musicoul</h1>
-              <p className="text-[#D4AF37] text-sm tracking-[0.2em] uppercase font-bold">Conservatory Portal</p>
+              <p className="text-[#D4AF37] text-sm md:text-xs tracking-[0.2em] uppercase font-bold">Conservatory Portal</p>
             </div>
             
             <form onSubmit={handleAuth} className="space-y-6">
               {!isLogin && (
                 <div className="relative">
                   <UserIcon size={20} className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-500" />
-                  <input name="name" type="text" placeholder="Full Name" required className="w-full bg-black/60 border border-white/10 p-5 pl-14 rounded-2xl text-base md:text-lg outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-500" />
+                  <input name="name" type="text" placeholder="Full Name" required className="w-full bg-black/60 border border-white/10 p-5 pl-14 rounded-2xl text-base md:text-sm outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-500" />
                 </div>
               )}
               <div className="relative">
                 <Mail size={20} className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-500" />
-                <input name="email" type="email" placeholder="Email Address" required className="w-full bg-black/60 border border-white/10 p-5 pl-14 rounded-2xl text-base md:text-lg outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-500" />
+                <input name="email" type="email" placeholder="Email Address" required className="w-full bg-black/60 border border-white/10 p-5 pl-14 rounded-2xl text-base md:text-sm outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-500" />
               </div>
               <div className="relative">
                 <Lock size={20} className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-500" />
-                <input name="password" type="password" placeholder="Password" required minLength="6" className="w-full bg-black/60 border border-white/10 p-5 pl-14 rounded-2xl text-base md:text-lg outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-500" />
+                <input name="password" type="password" placeholder="Password" required minLength="6" className="w-full bg-black/60 border border-white/10 p-5 pl-14 rounded-2xl text-base md:text-sm outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-500" />
               </div>
               
-              <button type="submit" className="w-full bg-[#D4AF37] p-5 rounded-2xl text-black font-bold text-base md:text-lg tracking-wider uppercase hover:bg-[#F9E29D] transition-colors mt-8 shadow-xl">
+              <button type="submit" className="w-full bg-[#D4AF37] p-5 rounded-2xl text-black font-bold text-base md:text-xs tracking-wider uppercase hover:bg-[#F9E29D] transition-colors mt-8 shadow-xl">
                 {isLogin ? 'Sign In' : 'Register Account'}
               </button>
             </form>
 
             <div className="mt-10 text-center">
-              <button onClick={() => setIsLogin(!isLogin)} className="text-gray-400 hover:text-white text-sm md:text-base font-bold tracking-wider uppercase transition-colors">
+              <button onClick={() => setIsLogin(!isLogin)} className="text-gray-400 hover:text-white text-sm md:text-xs font-bold tracking-wider uppercase transition-colors">
                 {isLogin ? "Don't have an account? Sign Up" : "Already have an account? Login"}
               </button>
             </div>
@@ -675,8 +675,8 @@
                 <img src="Assets/Images/Logo.png" alt="Musicoul" className="w-full h-full object-contain" />
               </div>
               <div>
-                <h4 className="serif text-3xl font-bold text-white tracking-wide">Musicoul</h4>
-                <p className="gold-gradient-text text-xs md:text-sm tracking-widest uppercase font-bold mt-1">{role}</p>
+                <h4 className="serif text-3xl md:text-4xl font-bold text-white tracking-wide">Musicoul</h4>
+                <p className="gold-gradient-text text-xs md:text-[10px] tracking-widest uppercase font-bold mt-1">{role}</p>
               </div>
             </div>
 
@@ -694,7 +694,7 @@
 
               {role === 'admin' && (
                 <>
-                  <div className="text-xs md:text-sm text-gray-500 font-bold uppercase tracking-widest mt-8 mb-4 px-4 border-b border-white/10 pb-2">Admin</div>
+                  <div className="text-xs md:text-[10px] text-gray-500 font-bold uppercase tracking-widest mt-8 mb-4 px-4 border-b border-white/10 pb-2">Admin</div>
                   <SidebarItem icon={<LayoutDashboard size={22}/>} label="Dashboard" active={activeTab === 'dashboard'} onClick={() => handleTabChange('dashboard')} />
                   <SidebarItem icon={<Calendar size={22}/>} label="Attendance" active={activeTab === 'attendance'} onClick={() => handleTabChange('attendance')} />
                   <SidebarItem icon={<Users size={22}/>} label="Users" active={activeTab === 'manage-users'} onClick={() => handleTabChange('manage-users')} />
@@ -702,20 +702,20 @@
                 </>
               )}
 
-              <div className="text-xs md:text-sm text-gray-500 font-bold uppercase tracking-widest mt-8 mb-4 px-4 border-b border-white/10 pb-2">Personal</div>
+              <div className="text-xs md:text-[10px] text-gray-500 font-bold uppercase tracking-widest mt-8 mb-4 px-4 border-b border-white/10 pb-2">Personal</div>
               <SidebarItem icon={<UserIcon size={22}/>} label="Profile" active={activeTab === 'profile'} onClick={() => handleTabChange('profile')} />
             </nav>
 
             {userData.email?.toLowerCase() === 'chandrashekharkolhe7@gmail.com' && (
               <div className="mt-8 mb-4 glass p-5 rounded-2xl border-[#D4AF37]/20 shadow-lg">
-                <p className="text-xs md:text-sm text-[#D4AF37] uppercase tracking-widest mb-4 font-bold flex items-center gap-2">
+                <p className="text-xs md:text-[10px] text-[#D4AF37] uppercase tracking-widest mb-4 font-bold flex items-center gap-2">
                   <Settings size={18} /> View As
                 </p>
                 <div className="flex gap-2 bg-black/60 p-2 rounded-xl">
                   {['student', 'teacher', 'admin'].map(r => (
                     <button 
                       key={r} onClick={() => updateLocalRole(r)}
-                      className={`flex-1 py-3 rounded-lg text-[10px] md:text-xs tracking-wider font-bold transition-all uppercase ${role === r ? 'bg-[#D4AF37] text-black shadow-md' : 'text-gray-400 hover:text-white hover:bg-white/5'}`}
+                      className={`flex-1 py-3 rounded-lg text-[10px] md:text-[9px] tracking-wider font-bold transition-all uppercase ${role === r ? 'bg-[#D4AF37] text-black shadow-md' : 'text-gray-400 hover:text-white hover:bg-white/5'}`}
                     >
                       {r.substring(0,3)}
                     </button>
@@ -725,20 +725,20 @@
             )}
 
             <div className="mt-8 mb-6 glass p-5 rounded-2xl border-white/5 flex flex-col items-start gap-4 relative z-50">
-               <p className="text-xs md:text-sm text-gray-400 uppercase tracking-widest font-bold flex items-center gap-2">
+               <p className="text-xs md:text-[10px] text-gray-400 uppercase tracking-widest font-bold flex items-center gap-2">
                  Site Language
                </p>
                <div className="w-full"><CustomLanguageSelector /></div>
             </div>
 
-            <button onClick={logout} className="flex items-center gap-4 p-5 text-gray-500 hover:text-[#D4AF37] transition-all text-xs md:text-sm font-bold tracking-widest uppercase w-full rounded-2xl hover:bg-white/5 mt-auto border border-transparent hover:border-[#D4AF37]/30">
+            <button onClick={logout} className="flex items-center gap-4 p-5 text-gray-500 hover:text-[#D4AF37] transition-all text-xs md:text-[11px] font-bold tracking-widest uppercase w-full rounded-2xl hover:bg-white/5 mt-auto border border-transparent hover:border-[#D4AF37]/30">
               <LogOut size={24}/> <span>Sign Out</span>
             </button>
           </aside>
 
           {/* MAIN CONTENT AREA */}
           <main className="flex-1 overflow-y-auto relative w-full h-full pb-8 lg:pb-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-black via-[#050505] to-[#050505]">
-            <div className="p-5 sm:p-8 md:p-12 w-full max-w-7xl mx-auto h-full">
+            <div className="p-5 sm:p-8 md:p-12 pb-32 sm:pb-32 md:pb-32 w-full max-w-7xl mx-auto min-h-full">
               {(role === 'student' || role === 'admin') && activeTab === 'dashboard' && <StudentDashboard user={user} userData={userData} courses={allCourses} />}
               {role === 'teacher' && activeTab === 'dashboard' && <TeacherDashboard user={user} userData={userData} courses={allCourses} users={allUsers} showConfirm={showConfirm} />}
               {role === 'teacher' && activeTab === 'attendance' && <TeacherAttendance user={user} userData={userData} courses={allCourses} users={allUsers} isAdmin={false} showConfirm={showConfirm} />}
@@ -755,10 +755,10 @@
                 <div className="absolute top-0 left-0 w-full h-1 bg-red-500/50"></div>
                 <AlertCircle size={56} className="mx-auto text-red-500 mb-6" />
                 <h2 className="serif text-3xl md:text-4xl mb-4 text-white italic break-words">{confirmState.title}</h2>
-                <p className="text-gray-300 text-sm md:text-base mb-10 font-light leading-relaxed">{confirmState.message}</p>
+                <p className="text-gray-300 text-sm md:text-xs mb-10 font-light leading-relaxed">{confirmState.message}</p>
                 <div className="flex gap-4">
-                  <button onClick={closeConfirm} className="flex-1 py-4 md:py-5 border border-white/10 rounded-xl md:rounded-2xl text-xs md:text-sm font-bold uppercase tracking-widest text-gray-400 hover:text-white transition-colors bg-black/40">Cancel</button>
-                  <button onClick={() => { confirmState.onConfirm(); closeConfirm(); }} className="flex-1 bg-red-900/40 text-red-400 border border-red-500/30 rounded-xl md:rounded-2xl text-xs md:text-sm font-bold uppercase tracking-widest hover:bg-red-500 hover:text-white transition-colors shadow-lg">Confirm</button>
+                  <button onClick={closeConfirm} className="flex-1 py-4 md:py-5 border border-white/10 rounded-xl md:rounded-2xl text-xs md:text-[11px] font-bold uppercase tracking-widest text-gray-400 hover:text-white transition-colors bg-black/40">Cancel</button>
+                  <button onClick={() => { confirmState.onConfirm(); closeConfirm(); }} className="flex-1 bg-red-900/40 text-red-400 border border-red-500/30 rounded-xl md:rounded-2xl text-xs md:text-[11px] font-bold uppercase tracking-widest hover:bg-red-500 hover:text-white transition-colors shadow-lg">Confirm</button>
                 </div>
               </div>
             </div>
@@ -778,7 +778,7 @@
           }`}
         >
           <span className={active ? 'text-[#D4AF37]' : 'group-hover:text-white transition-colors'}>{icon}</span>
-          <span className="text-sm md:text-base font-bold uppercase tracking-wider">{label}</span>
+          <span className="text-sm md:text-[11px] font-bold uppercase tracking-widest">{label}</span>
         </button>
       );
     }
@@ -800,21 +800,21 @@
                <div className="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-[#D4AF37] to-[#B38D22] md:hidden"></div>
                
                <div className="flex md:flex-col items-center gap-3 md:gap-0">
-                 <span className="text-[#D4AF37] text-4xl md:text-5xl serif leading-none mb-0 md:mb-2">{day}</span>
-                 <span className="text-gray-400 text-xs font-bold tracking-[0.2em] uppercase text-center">{month}-{year}</span>
+                 <span className="text-[#D4AF37] text-3xl md:text-4xl serif leading-none mb-0 md:mb-2">{day}</span>
+                 <span className="text-gray-400 text-xs md:text-[10px] font-bold tracking-[0.2em] uppercase text-center">{month}-{year}</span>
                </div>
                
                <div className="md:mt-4 bg-[#D4AF37]/10 px-3 py-2 rounded-xl border border-[#D4AF37]/20 flex items-center gap-2 backdrop-blur-md">
                   <Clock size={16} className="text-[#D4AF37]" />
-                  <span className="text-[#D4AF37] text-[10px] md:text-xs font-bold tracking-widest whitespace-nowrap">{formatTime(s.time) || 'TBA'}</span>
+                  <span className="text-[#D4AF37] text-[10px] md:text-[9px] font-bold tracking-widest whitespace-nowrap">{formatTime(s.time) || 'TBA'}</span>
                </div>
             </div>
             
             <div className="p-5 md:p-8 flex-1 flex flex-col justify-center min-w-0">
                <div className="flex justify-between items-start mb-3 gap-4">
                   <div className="flex-1">
-                     <span className="text-gray-500 text-[10px] md:text-xs uppercase tracking-[0.2em] font-bold mb-2 block">Lecture {index + 1}</span>
-                     <h4 className="serif text-2xl md:text-3xl text-white group-hover:text-[#D4AF37] transition-colors leading-tight break-words line-clamp-2">{s.title}</h4>
+                     <span className="text-gray-500 text-[10px] md:text-[9px] uppercase tracking-[0.2em] font-bold mb-2 block">Lecture {index + 1}</span>
+                     <h4 className="serif text-xl md:text-2xl text-white group-hover:text-[#D4AF37] transition-colors leading-tight break-words line-clamp-2">{s.title}</h4>
                   </div>
                   {onRemove && (
                     <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); onRemove(s.id); }} className="text-gray-500 hover:text-red-400 p-3 rounded-xl hover:bg-red-500/10 transition-colors shrink-0 bg-black/30 border border-white/5">
@@ -822,12 +822,11 @@
                     </button>
                   )}
                </div>
-               <p className="text-gray-400 text-sm md:text-base leading-relaxed font-light break-words">{s.description}</p>
+               <p className="text-gray-400 text-sm md:text-xs leading-relaxed font-light break-words">{s.description}</p>
             </div>
          </div>
        );
     }
-
 
     // ==========================================
     // STUDENT VIEW COMPONENTS
@@ -871,28 +870,28 @@
         <div className="animate-in fade-in duration-700">
           <header className="mb-8 md:mb-14 flex flex-col lg:flex-row lg:items-end justify-between gap-8">
             <div className="flex-1">
-              <p className="text-[#D4AF37] text-sm md:text-base tracking-widest uppercase font-bold flex items-center gap-3 mb-4">
-                <GraduationCap size={24} /> {userData.roles.includes('admin') ? 'Admin View' : 'Student Dashboard'}
+              <p className="text-[#D4AF37] text-sm md:text-[10px] tracking-widest uppercase font-bold flex items-center gap-3 mb-4">
+                <GraduationCap size={24} className="md:w-5 md:h-5" /> {userData.roles.includes('admin') ? 'Admin View' : 'Student Dashboard'}
               </p>
-              <h1 className="serif text-4xl md:text-6xl text-white break-words">
+              <h1 className="serif text-3xl md:text-5xl lg:text-6xl text-white break-words">
                 Welcome, <br className="hidden md:block lg:hidden" /><span className="gold-gradient-text italic">{userData.name?.includes('@') ? userData.name.split('@')[0] : userData.name || "Scholar"}</span>
               </h1>
             </div>
             <div className="flex items-center justify-around md:justify-start gap-6 md:gap-8 glass px-6 py-5 md:px-10 md:py-6 rounded-3xl border border-[#D4AF37]/20 shadow-xl w-full lg:w-auto">
                <div className="text-center">
-                  <p className="text-gray-400 text-[11px] md:text-sm tracking-widest uppercase font-bold mb-2">Courses</p>
-                  <p className="serif text-3xl md:text-5xl gold-gradient-text">{myCourses.length}</p>
+                  <p className="text-gray-400 text-xs md:text-[10px] tracking-widest uppercase font-bold mb-2">Courses</p>
+                  <p className="serif text-2xl md:text-4xl gold-gradient-text">{myCourses.length}</p>
                </div>
                <div className="w-[1px] h-10 md:h-14 bg-white/10"></div>
                <div className="text-center">
-                  <p className="text-gray-400 text-[11px] md:text-sm tracking-widest uppercase font-bold mb-2">Status</p>
-                  <p className="serif text-3xl md:text-5xl gold-gradient-text">Active</p>
+                  <p className="text-gray-400 text-xs md:text-[10px] tracking-widest uppercase font-bold mb-2">Status</p>
+                  <p className="serif text-2xl md:text-4xl gold-gradient-text">Active</p>
                </div>
             </div>
           </header>
 
           <div className="mb-6 md:mb-10 flex items-center gap-5 md:gap-8">
-            <h3 className="serif text-3xl md:text-4xl gold-gradient-text italic font-bold">My Curriculum</h3>
+            <h3 className="serif text-2xl md:text-3xl gold-gradient-text italic font-bold">My Curriculum</h3>
             <div className="h-[2px] flex-1 bg-gradient-to-r from-[#D4AF37]/50 to-transparent"></div>
           </div>
 
@@ -901,13 +900,13 @@
               <div className="w-20 h-20 bg-black/50 rounded-full flex items-center justify-center mb-8 border border-white/10 shadow-inner">
                 <BookOpen size={36} className="text-gray-500" />
               </div>
-              <h4 className="serif text-3xl md:text-4xl mb-4 text-white">No Courses Assigned</h4>
-              <p className="text-gray-400 text-sm md:text-base max-w-lg mx-auto font-light leading-relaxed">
+              <h4 className="serif text-2xl md:text-3xl mb-4 text-white">No Courses Assigned</h4>
+              <p className="text-gray-400 text-sm md:text-xs max-w-lg mx-auto font-light leading-relaxed">
                 {userData.roles.includes('admin') ? 'Assign yourself courses in the Users tab.' : 'Your curriculum is being prepared. Please check back later.'}
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-10 pb-12">
               {myCourses.map(course => (
                 <button 
                   key={course.id}
@@ -926,11 +925,11 @@
                       <Music size={28} className="text-[#D4AF37]" />
                     </div>
                     
-                    <h4 className="serif text-3xl md:text-4xl mb-3 text-white leading-tight font-bold drop-shadow-lg break-words line-clamp-2">{course.title}</h4>
-                    <p className="text-gray-300 text-sm md:text-base mb-8 line-clamp-3 font-medium leading-relaxed drop-shadow-md">{course.desc}</p>
+                    <h4 className="serif text-2xl md:text-3xl mb-3 text-white leading-tight font-bold drop-shadow-lg break-words line-clamp-2">{course.title}</h4>
+                    <p className="text-gray-300 text-sm md:text-xs mb-8 line-clamp-3 font-medium leading-relaxed drop-shadow-md">{course.desc}</p>
                     
                     <div className="flex items-center justify-between mt-auto pt-6 border-t border-white/10">
-                      <div className="flex items-center gap-3 text-[10px] md:text-xs text-black uppercase tracking-widest font-bold bg-gradient-to-r from-[#D4AF37] to-[#FFDF73] px-4 py-2.5 rounded-xl shadow-lg">
+                      <div className="flex items-center gap-3 text-xs md:text-[10px] text-black uppercase tracking-widest font-bold bg-gradient-to-r from-[#D4AF37] to-[#FFDF73] px-4 py-2.5 rounded-xl shadow-lg">
                         <FolderOpen size={16} /> {course.resources?.length || 0} Materials
                       </div>
                       <div className="w-10 h-10 rounded-full bg-black/50 border border-white/10 flex items-center justify-center group-hover:bg-[#D4AF37] group-hover:text-black transition-colors backdrop-blur-md">
@@ -969,16 +968,16 @@
       return (
         <div className="animate-in fade-in duration-700">
           <header className="mb-8 md:mb-14">
-            <h1 className="serif text-5xl md:text-7xl mb-3 text-white">Teacher <span className="gold-gradient-text italic">Dashboard</span></h1>
-            <p className="text-gray-300 text-base md:text-lg font-light">Welcome back, <span className="text-white font-medium">{userData.name}</span></p>
+            <h1 className="serif text-4xl md:text-5xl lg:text-6xl mb-3 text-white">Teacher <span className="gold-gradient-text italic">Dashboard</span></h1>
+            <p className="text-gray-300 text-sm font-light">Welcome back, <span className="text-white font-medium">{userData.name}</span></p>
           </header>
 
           <div className="mb-6 md:mb-10 flex items-center gap-5 md:gap-8">
-            <h3 className="serif text-3xl md:text-4xl gold-gradient-text italic font-bold">Assigned Courses</h3>
+            <h3 className="serif text-2xl md:text-3xl gold-gradient-text italic font-bold">Assigned Courses</h3>
             <div className="h-[2px] flex-1 bg-gradient-to-r from-[#D4AF37]/50 to-transparent"></div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 pb-12">
             {taughtCourses.map(course => (
               <div key={course.id} className="glass-premium p-6 md:p-10 rounded-[2rem] md:rounded-[2.5rem] flex flex-col relative overflow-hidden group hover-lift min-h-[250px] md:min-h-[300px] border border-[#D4AF37]/10">
                 {course.coverImage && (
@@ -988,11 +987,11 @@
                   </div>
                 )}
                 <div className="relative z-10 flex flex-col h-full">
-                  <h4 className="serif text-3xl md:text-4xl text-white mb-4 break-words line-clamp-2">{course.title}</h4>
-                  <p className="text-[#D4AF37] text-xs md:text-sm uppercase tracking-widest font-bold mb-8 border-b border-white/10 pb-4 inline-block w-fit">
+                  <h4 className="serif text-2xl md:text-3xl text-white mb-4 break-words line-clamp-2">{course.title}</h4>
+                  <p className="text-[#D4AF37] text-xs md:text-[10px] uppercase tracking-widest font-bold mb-8 border-b border-white/10 pb-4 inline-block w-fit">
                     {course.resources?.length || 0} Assets
                   </p>
-                  <button onClick={() => handleOpenCourse(course.id)} className="mt-auto w-full py-4 bg-black/50 hover:bg-[#D4AF37] rounded-xl text-xs md:text-sm font-bold uppercase tracking-widest transition-all text-white hover:text-black border border-white/10 hover:border-[#D4AF37] shadow-xl">
+                  <button onClick={() => handleOpenCourse(course.id)} className="mt-auto w-full py-4 bg-black/50 hover:bg-[#D4AF37] rounded-xl text-xs md:text-[10px] font-bold uppercase tracking-widest transition-all text-white hover:text-black border border-white/10 hover:border-[#D4AF37] shadow-xl">
                     Manage Syllabus
                   </button>
                 </div>
@@ -1050,10 +1049,10 @@
       return (
         <div className="animate-in fade-in duration-500">
           <header className="mb-8 md:mb-14">
-            <h1 className="serif text-5xl md:text-7xl mb-3 text-white">User <span className="gold-gradient-text italic">Directory</span></h1>
-            <p className="text-gray-300 text-base md:text-lg font-light">Manage accounts, roles, and course placements.</p>
+            <h1 className="serif text-4xl md:text-5xl lg:text-6xl mb-3 text-white">User <span className="gold-gradient-text italic">Directory</span></h1>
+            <p className="text-gray-300 text-sm font-light">Manage accounts, roles, and course placements.</p>
           </header>
-          <div className="space-y-5 pb-10">
+          <div className="space-y-5 pb-12">
             {users.map(u => (
               <div key={u.id} className="relative z-0 hover:z-50 focus-within:z-50 glass-premium p-5 md:p-8 rounded-[1.5rem] flex flex-col xl:flex-row xl:items-center justify-between gap-6 border border-white/5">
                 <div className="flex items-center gap-5">
@@ -1061,28 +1060,28 @@
                     {u.profilePic ? <img src={u.profilePic} className="w-full h-full object-cover" /> : u.name.charAt(0)}
                   </div>
                   <div className="overflow-hidden flex-1">
-                    <h4 className="text-base md:text-lg font-medium text-white mb-2 break-words line-clamp-1">{u.name}</h4>
+                    <h4 className="text-base font-medium text-white mb-2 break-words line-clamp-1">{u.name}</h4>
                     <div className="flex flex-wrap gap-2">
-                      {u.roles?.map(r => <span key={r} className="text-[10px] md:text-xs bg-black text-[#D4AF37] border border-[#D4AF37]/30 px-3 py-1 rounded-md font-bold uppercase tracking-[0.2em]">{r}</span>)}
+                      {u.roles?.map(r => <span key={r} className="text-[10px] md:text-[9px] bg-black text-[#D4AF37] border border-[#D4AF37]/30 px-3 py-1 rounded-md font-bold uppercase tracking-[0.2em]">{r}</span>)}
                     </div>
                   </div>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
                   <div className="flex bg-black/50 p-1.5 rounded-xl border border-white/10 flex-1 sm:flex-none">
                     {['student', 'teacher', 'admin'].map(r => (
-                       <button key={r} onClick={() => toggleRole(u.id, u.roles || [], r)} className={`flex-1 sm:flex-none px-4 py-3 text-xs md:text-sm font-bold uppercase tracking-widest rounded-lg transition-all ${u.roles?.includes(r) ? 'bg-[#D4AF37] text-black shadow-md' : 'text-gray-500 hover:text-white'}`}>{r.substring(0,3)}</button>
+                       <button key={r} onClick={() => toggleRole(u.id, u.roles || [], r)} className={`flex-1 sm:flex-none px-4 py-3 text-xs md:text-[10px] font-bold uppercase tracking-widest rounded-lg transition-all ${u.roles?.includes(r) ? 'bg-[#D4AF37] text-black shadow-md' : 'text-gray-500 hover:text-white'}`}>{r.substring(0,3)}</button>
                     ))}
                   </div>
                   <div className="relative group flex-1 sm:flex-none">
-                    <button className="w-full bg-black/50 border border-white/10 px-6 py-3 rounded-xl text-xs md:text-sm font-bold uppercase tracking-widest text-gray-300 hover:text-white hover:border-[#D4AF37]/50 transition-all">Courses</button>
+                    <button className="w-full bg-black/50 border border-white/10 px-6 py-3 rounded-xl text-xs md:text-[10px] font-bold uppercase tracking-widest text-gray-300 hover:text-white hover:border-[#D4AF37]/50 transition-all">Courses</button>
                     <div className="absolute right-0 top-full mt-2 w-full sm:w-72 glass-premium p-5 rounded-2xl opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all z-20 max-h-64 overflow-y-auto shadow-2xl border border-[#D4AF37]/30 custom-scrollbar">
-                       <p className="text-xs md:text-sm text-[#D4AF37] uppercase tracking-widest font-bold mb-4 border-b border-white/10 pb-3">Available Courses</p>
+                       <p className="text-xs md:text-[10px] text-[#D4AF37] uppercase tracking-widest font-bold mb-4 border-b border-white/10 pb-3">Available Courses</p>
                        {courses.length === 0 ? <p className="text-xs text-gray-400">No courses exist.</p> : courses.map(c => {
                          const isEnrolled = u.enrolledCourses?.includes(c.id);
                          return (
                            <label key={c.id} className="flex items-center gap-3 p-3 hover:bg-white/5 rounded-xl cursor-pointer transition-colors mb-1">
                              <input type="checkbox" checked={isEnrolled} onChange={() => handleEnrollment(u.id, u.enrolledCourses, c.id)} className="accent-[#D4AF37] w-5 h-5 rounded shrink-0" />
-                             <span className="text-sm md:text-base text-white break-words font-light">{c.title}</span>
+                             <span className="text-sm md:text-sm text-white break-words font-light">{c.title}</span>
                            </label>
                          )
                        })}
@@ -1143,12 +1142,12 @@
         <div className="animate-in fade-in duration-500 relative min-h-full">
           <header className="flex flex-col md:flex-row md:justify-between md:items-end gap-6 mb-8 md:mb-14">
             <div>
-              <h1 className="serif text-5xl md:text-7xl mb-3 text-white">Course <span className="gold-gradient-text italic">Registry</span></h1>
-              <p className="text-gray-300 text-base md:text-lg font-light">Create and manage courses.</p>
+              <h1 className="serif text-4xl md:text-5xl lg:text-6xl mb-3 text-white">Course <span className="gold-gradient-text italic">Registry</span></h1>
+              <p className="text-gray-300 text-sm font-light">Create and manage courses.</p>
             </div>
-            <button onClick={() => setShowModal(true)} className="bg-gradient-to-br from-[#D4AF37] to-[#B38D22] text-black px-6 md:px-8 py-4 md:py-5 rounded-xl text-xs md:text-sm font-bold uppercase tracking-widest transition-all shadow-xl flex items-center justify-center gap-3 shrink-0 hover:scale-105 active:scale-95"><Plus size={20} /> New Course</button>
+            <button onClick={() => setShowModal(true)} className="bg-gradient-to-br from-[#D4AF37] to-[#B38D22] text-black px-6 md:px-8 py-4 md:py-5 rounded-xl text-xs md:text-[11px] font-bold uppercase tracking-widest transition-all shadow-xl flex items-center justify-center gap-3 shrink-0 hover:scale-105 active:scale-95"><Plus size={20} /> New Course</button>
           </header>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 pb-12">
             {courses.map(c => (
               <div key={c.id} onClick={() => handleOpenCourse(c.id)} className="glass-premium p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] flex flex-col cursor-pointer hover-lift relative overflow-hidden min-h-[280px] md:min-h-[320px] border border-[#D4AF37]/10">
                 {c.coverImage && (
@@ -1159,11 +1158,11 @@
                 )}
                 <div className="relative z-10 flex flex-col h-full">
                   <div className="flex justify-between items-start mb-4 gap-4">
-                    <h3 className="serif text-3xl md:text-4xl text-white leading-tight break-words line-clamp-2 flex-1">{c.title}</h3>
+                    <h3 className="serif text-2xl md:text-3xl text-white leading-tight break-words line-clamp-2 flex-1">{c.title}</h3>
                     <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); deleteCourseRecord(c.id); }} className="w-10 h-10 rounded-xl bg-black/50 border border-white/10 flex items-center justify-center text-gray-400 hover:text-red-400 transition-colors shrink-0"><Trash2 size={20} /></button>
                   </div>
-                  <p className="text-gray-300 text-sm md:text-base mb-6 line-clamp-3 font-light leading-relaxed">{c.desc}</p>
-                  <div className="mt-auto pt-5 border-t border-white/5 flex items-center justify-between text-[#D4AF37] text-[10px] md:text-xs font-bold uppercase tracking-widest">
+                  <p className="text-gray-300 text-sm md:text-xs mb-6 line-clamp-3 font-light leading-relaxed">{c.desc}</p>
+                  <div className="mt-auto pt-5 border-t border-white/5 flex items-center justify-between text-[#D4AF37] text-xs md:text-[10px] font-bold uppercase tracking-widest">
                      <span className="bg-[#D4AF37]/10 px-3 py-2 rounded-lg">{c.resources?.length || 0} Assets</span>
                      <span className="bg-[#D4AF37]/10 px-3 py-2 rounded-lg">{c.schedule?.length || 0} Lectures</span>
                   </div>
@@ -1175,15 +1174,15 @@
             <div className="fixed inset-0 z-[100] flex items-center justify-center p-5 bg-[#050505]/90 backdrop-blur-xl animate-in fade-in">
               <div className="glass-premium p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] w-full max-w-2xl relative border border-[#D4AF37]/30 shadow-2xl">
                 <button onClick={() => setShowModal(false)} className="absolute top-6 right-6 md:top-8 md:right-8 text-gray-500 hover:text-white"><X size={28}/></button>
-                <h2 className="serif text-4xl md:text-5xl mb-3 text-white italic">Create Course</h2>
-                <p className="text-[#D4AF37] text-xs md:text-sm uppercase tracking-widest font-bold mb-8">Add to Course Registry</p>
+                <h2 className="serif text-3xl md:text-4xl mb-3 text-white italic">Create Course</h2>
+                <p className="text-[#D4AF37] text-xs md:text-[10px] uppercase tracking-widest font-bold mb-8">Add to Course Registry</p>
                 <form onSubmit={createCourse} className="space-y-6">
-                  <div><input name="title" type="text" placeholder="COURSE TITLE" required className="w-full bg-black/50 border border-white/10 p-5 rounded-2xl text-sm tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-500" /></div>
-                  <div><input name="coverImage" type="url" placeholder="COVER IMAGE URL (OPTIONAL)" className="w-full bg-black/50 border border-white/10 p-5 rounded-2xl text-sm tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-500" /></div>
-                  <div><textarea name="desc" placeholder="COURSE DESCRIPTION" required rows={4} className="w-full bg-black/50 border border-white/10 p-5 rounded-2xl text-base outline-none focus:border-[#D4AF37] transition-all text-white font-light resize-none custom-scrollbar placeholder:text-gray-500" /></div>
+                  <div><input name="title" type="text" placeholder="COURSE TITLE" required className="w-full bg-black/50 border border-white/10 p-5 rounded-2xl text-sm md:text-xs tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-500" /></div>
+                  <div><input name="coverImage" type="url" placeholder="COVER IMAGE URL (OPTIONAL)" className="w-full bg-black/50 border border-white/10 p-5 rounded-2xl text-sm md:text-xs tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-500" /></div>
+                  <div><textarea name="desc" placeholder="COURSE DESCRIPTION" required rows={4} className="w-full bg-black/50 border border-white/10 p-5 rounded-2xl text-sm md:text-xs outline-none focus:border-[#D4AF37] transition-all text-white font-light resize-none custom-scrollbar placeholder:text-gray-500" /></div>
                   <div className="flex gap-4 pt-4">
-                    <button type="button" onClick={() => setShowModal(false)} className="flex-1 py-4 md:py-5 border border-white/10 rounded-2xl text-xs md:text-sm font-bold tracking-widest uppercase text-gray-400 hover:text-white transition-colors">Cancel</button>
-                    <button type="submit" className="flex-1 bg-[#D4AF37] text-black rounded-2xl text-xs md:text-sm font-bold tracking-widest uppercase hover:bg-[#F9E29D] transition-colors shadow-xl">Create</button>
+                    <button type="button" onClick={() => setShowModal(false)} className="flex-1 py-4 md:py-5 border border-white/10 rounded-2xl text-xs md:text-[11px] font-bold tracking-widest uppercase text-gray-400 hover:text-white transition-colors">Cancel</button>
+                    <button type="submit" className="flex-1 bg-[#D4AF37] text-black rounded-2xl text-xs md:text-[11px] font-bold tracking-widest uppercase hover:bg-[#F9E29D] transition-colors shadow-xl">Create</button>
                   </div>
                 </form>
               </div>
@@ -1262,11 +1261,11 @@
             )}
             <div className="relative z-10 flex flex-col md:flex-row md:justify-between md:items-start gap-6">
               <div className="flex-1">
-                <span className="bg-[#D4AF37] text-black px-3 py-1.5 rounded-lg text-[10px] md:text-xs font-bold uppercase tracking-widest mb-4 inline-block">Management</span>
-                <h1 className="serif text-4xl md:text-6xl lg:text-7xl mb-4 text-white leading-tight break-words">{course.title}</h1>
-                <p className="text-gray-300 text-sm md:text-lg max-w-4xl leading-relaxed font-light break-words">{course.desc}</p>
+                <span className="bg-[#D4AF37] text-black px-3 py-1.5 rounded-lg text-[10px] md:text-[9px] font-bold uppercase tracking-widest mb-4 inline-block">Management</span>
+                <h1 className="serif text-3xl md:text-5xl lg:text-6xl mb-4 text-white leading-tight break-words">{course.title}</h1>
+                <p className="text-gray-300 text-sm md:text-base max-w-4xl leading-relaxed font-light break-words">{course.desc}</p>
               </div>
-              <button onClick={() => setShowEditCourseModal(true)} className="bg-white/10 hover:bg-white/20 border border-white/20 text-white px-5 py-3 md:py-4 rounded-xl md:rounded-2xl text-xs md:text-sm font-bold uppercase tracking-widest transition-colors flex items-center justify-center gap-3 shrink-0 backdrop-blur-md w-full md:w-auto">
+              <button onClick={() => setShowEditCourseModal(true)} className="bg-white/10 hover:bg-white/20 border border-white/20 text-white px-5 py-3 md:py-4 rounded-xl md:rounded-2xl text-xs md:text-[11px] font-bold uppercase tracking-widest transition-colors flex items-center justify-center gap-3 shrink-0 backdrop-blur-md w-full md:w-auto">
                 <Edit3 size={20} /> Edit Details
               </button>
             </div>
@@ -1277,7 +1276,7 @@
             {/* RESOURCES PANEL */}
             <div className="space-y-6 md:space-y-8">
               <div className="flex items-center justify-between">
-                <h3 className="serif text-3xl md:text-4xl text-white italic">Materials</h3>
+                <h3 className="serif text-2xl md:text-3xl text-white italic">Materials</h3>
                 <div className="hidden md:flex gap-3">
                    <button onClick={() => setShowFolderModal(true)} title="New Folder" className="w-12 h-12 glass text-gray-300 rounded-xl flex items-center justify-center hover:text-white transition-all border border-white/10 hover:border-[#D4AF37]/50">
                      <FolderPlus size={22} />
@@ -1297,7 +1296,7 @@
                  </button>
               </div>
 
-              <div className="flex items-center gap-3 text-xs md:text-sm text-gray-400 uppercase tracking-widest font-bold bg-black/40 p-4 md:p-5 rounded-xl border border-white/5 backdrop-blur-md overflow-x-auto custom-scrollbar">
+              <div className="flex items-center gap-3 text-xs md:text-[10px] text-gray-400 uppercase tracking-widest font-bold bg-black/40 p-4 md:p-5 rounded-xl border border-white/5 backdrop-blur-md overflow-x-auto custom-scrollbar">
                 <button onClick={() => setCurrentFolderId(null)} className="hover:text-white transition-colors flex items-center gap-2 shrink-0">
                   <FolderOpen size={18}/> Root
                 </button>
@@ -1313,7 +1312,7 @@
 
               <div className="space-y-4">
                 {currentResources.length === 0 ? (
-                  <div className="glass-premium rounded-2xl md:rounded-[2rem] p-10 md:p-16 text-center text-gray-500 text-xs md:text-sm font-bold tracking-[0.2em] uppercase border border-white/5">Empty Section</div>
+                  <div className="glass-premium rounded-2xl md:rounded-[2rem] p-10 md:p-16 text-center text-gray-500 text-xs md:text-[10px] font-bold tracking-[0.2em] uppercase border border-white/5">Empty Section</div>
                 ) : (
                   currentResources.sort((a,b) => (b.isFolder ? 1 : 0) - (a.isFolder ? 1 : 0)).map(r => (
                     <div key={r.id} onClick={() => r.isFolder ? openFolder(r.id) : handleViewResource(r)} className="glass p-4 md:p-5 rounded-2xl md:rounded-[1.5rem] flex items-center justify-between group cursor-pointer hover-lift border border-white/5 hover:border-[#D4AF37]/30">
@@ -1327,8 +1326,8 @@
                             <FileText size={24}/>}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h4 className="text-white text-sm md:text-lg font-medium tracking-wide mb-1 break-words line-clamp-2">{r.title}</h4>
-                          <span className="text-[#D4AF37] opacity-80 text-[10px] md:text-xs uppercase tracking-widest font-bold block">{r.isFolder ? 'Folder' : r.type}</span>
+                          <h4 className="text-white text-sm md:text-base font-bold tracking-wide mb-1 break-words line-clamp-2">{r.title}</h4>
+                          <span className="text-[#D4AF37] opacity-80 text-[10px] md:text-[9px] uppercase tracking-widest font-bold block">{r.isFolder ? 'Folder' : r.type}</span>
                         </div>
                       </div>
                       <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); removeResource(r.id); }} className="text-gray-500 hover:text-red-400 p-3 rounded-xl hover:bg-red-500/10 transition-colors shrink-0 ml-2"><Trash2 size={20} /></button>
@@ -1341,12 +1340,12 @@
             {/* SCHEDULE PANEL */}
             <div className="space-y-6 md:space-y-8">
               <div className="flex items-center justify-between">
-                <h3 className="serif text-3xl md:text-4xl text-white italic">Lecture Schedule</h3>
+                <h3 className="serif text-2xl md:text-3xl text-white italic">Lecture Schedule</h3>
                 <button onClick={() => setShowScheduleModal(true)} className="w-12 h-12 glass border border-white/10 text-gray-300 rounded-xl flex items-center justify-center hover:text-white hover:border-[#D4AF37]/50 transition-all shadow-lg"><Plus size={24} /></button>
               </div>
               <div className="space-y-5">
                 {(!course.schedule || course.schedule.length === 0) ? (
-                  <div className="glass-premium rounded-2xl md:rounded-[2rem] p-10 md:p-16 text-center text-gray-500 text-xs md:text-sm font-bold tracking-[0.2em] uppercase border border-white/5">No schedule created.</div>
+                  <div className="glass-premium rounded-2xl md:rounded-[2rem] p-10 md:p-16 text-center text-gray-500 text-xs md:text-[10px] font-bold tracking-[0.2em] uppercase border border-white/5">No schedule created.</div>
                 ) : (
                   course.schedule.sort((a,b) => new Date(a.date) - new Date(b.date)).map((s, idx) => (
                     <ScheduleCard key={s.id} schedule={s} index={idx} onRemove={removeSchedule} />
@@ -1400,8 +1399,8 @@
               </div>
             )}
             <div className="relative z-10">
-              <h1 className="serif text-4xl md:text-6xl lg:text-7xl mb-4 md:mb-6 text-white leading-tight break-words">{course.title}</h1>
-              <p className="text-gray-300 text-sm md:text-lg max-w-4xl leading-relaxed font-light break-words">{course.desc}</p>
+              <h1 className="serif text-3xl md:text-5xl lg:text-6xl mb-4 md:mb-6 text-white leading-tight break-words">{course.title}</h1>
+              <p className="text-gray-300 text-sm md:text-base max-w-4xl leading-relaxed font-light break-words">{course.desc}</p>
             </div>
           </header>
 
@@ -1410,7 +1409,7 @@
                <button 
                  key={tab} 
                  onClick={() => setActiveTab(tab)}
-                 className={`pb-4 text-xs md:text-sm uppercase tracking-widest font-bold transition-all border-b-[3px] md:border-b-[4px] shrink-0 whitespace-nowrap ${activeTab === tab ? 'text-[#D4AF37] border-[#D4AF37]' : 'text-gray-500 border-transparent hover:text-gray-300'}`}
+                 className={`pb-4 text-xs md:text-[11px] uppercase tracking-widest font-bold transition-all border-b-[3px] md:border-b-[4px] shrink-0 whitespace-nowrap ${activeTab === tab ? 'text-[#D4AF37] border-[#D4AF37]' : 'text-gray-500 border-transparent hover:text-gray-300'}`}
                >
                  {tab === 'materials' ? 'Materials' : tab === 'schedule' ? 'Schedule' : 'Attendance'}
                </button>
@@ -1420,7 +1419,7 @@
           <div>
             {activeTab === 'materials' && (
               <div className="space-y-6 md:space-y-8">
-                <div className="flex items-center gap-3 text-xs md:text-sm text-gray-400 uppercase tracking-widest font-bold bg-black/40 p-4 md:p-5 rounded-xl border border-white/5 backdrop-blur-md overflow-x-auto custom-scrollbar">
+                <div className="flex items-center gap-3 text-xs md:text-[10px] text-gray-400 uppercase tracking-widest font-bold bg-black/40 p-4 md:p-5 rounded-xl border border-white/5 backdrop-blur-md overflow-x-auto custom-scrollbar">
                   <button onClick={() => setCurrentFolderId(null)} className="hover:text-white transition-colors flex items-center gap-2 shrink-0">
                     <FolderOpen size={18}/> Root
                   </button>
@@ -1435,12 +1434,12 @@
                 </div>
 
                 {currentResources.length === 0 ? (
-                  <div className="glass-premium rounded-2xl md:rounded-[3rem] p-12 md:p-24 text-center text-gray-500 text-xs md:text-sm tracking-widest uppercase flex flex-col items-center border border-white/5 font-bold">
+                  <div className="glass-premium rounded-2xl md:rounded-[3rem] p-12 md:p-24 text-center text-gray-500 text-xs md:text-[10px] tracking-widest uppercase flex flex-col items-center border border-white/5 font-bold">
                     <FolderOpen size={48} className="mb-4 opacity-30 text-[#D4AF37]" />
                     Empty Section
                   </div>
                 ) : (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 pb-12">
                     {currentResources.sort((a,b) => (b.isFolder ? 1 : 0) - (a.isFolder ? 1 : 0)).map(r => (
                       <button 
                         key={r.id}
@@ -1463,8 +1462,8 @@
                              r.type === 'link' ? <LinkIcon size={24}/> : <FileText size={24}/>}
                           </div>
                           <div className="flex-1 min-w-0">
-                            <h4 className="text-white text-base md:text-lg font-bold tracking-wider mb-1 break-words line-clamp-2">{r.title}</h4>
-                            <p className="text-gray-400 text-[10px] md:text-xs uppercase tracking-widest font-bold block">{r.isFolder ? 'Folder' : `${r.type}`}</p>
+                            <h4 className="text-white text-sm md:text-[13px] font-bold tracking-wider mb-1 break-words line-clamp-2">{r.title}</h4>
+                            <p className="text-gray-400 text-[10px] md:text-[9px] uppercase tracking-widest font-bold block">{r.isFolder ? 'Folder' : `${r.type}`}</p>
                           </div>
                         </div>
                         <ChevronRight size={24} className={`${r.isFolder ? 'text-[#D4AF37]' : 'text-gray-600 group-hover:text-white'} transition-colors shrink-0 relative z-10 ml-2`} />
@@ -1476,9 +1475,9 @@
             )}
 
             {activeTab === 'schedule' && (
-               <div className="flex flex-col gap-5 md:gap-8 animate-in fade-in">
+               <div className="flex flex-col gap-5 md:gap-8 animate-in fade-in pb-12">
                   {(!course.schedule || course.schedule.length === 0) ? (
-                    <div className="glass-premium rounded-2xl md:rounded-[3rem] p-12 md:p-20 text-center text-gray-500 text-xs md:text-sm font-bold tracking-widest uppercase border border-white/5">
+                    <div className="glass-premium rounded-2xl md:rounded-[3rem] p-12 md:p-20 text-center text-gray-500 text-xs md:text-[10px] font-bold tracking-widest uppercase border border-white/5">
                       Schedule not yet published.
                     </div>
                   ) : (
@@ -1490,30 +1489,30 @@
             )}
 
             {activeTab === 'ledger' && (
-              <div className="max-w-3xl glass-premium p-6 md:p-14 rounded-3xl md:rounded-[3rem] border border-[#D4AF37]/20 shadow-2xl animate-in fade-in">
+              <div className="max-w-3xl glass-premium p-6 md:p-14 rounded-3xl md:rounded-[3rem] border border-[#D4AF37]/20 shadow-2xl animate-in fade-in mb-12">
                 <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 md:gap-10 mb-8 pb-8 border-b border-white/5 text-center sm:text-left">
                   <div className="w-24 h-24 md:w-32 md:h-32 rounded-full border-[4px] border-[#111] border-t-[#D4AF37] border-r-[#D4AF37] flex items-center justify-center shrink-0 shadow-[0_0_40px_rgba(212,175,55,0.15)] bg-black/50">
-                    <span className="text-3xl md:text-5xl serif text-white">{rate}%</span>
+                    <span className="text-3xl md:text-4xl serif text-white">{rate}%</span>
                   </div>
                   <div className="flex-1">
-                    <h3 className="serif text-3xl md:text-5xl text-white mb-2 md:mb-3 italic">Attendance Record</h3>
+                    <h3 className="serif text-2xl md:text-4xl text-white mb-2 md:mb-3 italic">Attendance Record</h3>
                     <p className="text-sm md:text-base text-gray-400 font-light">Your current standing for this specific course.</p>
                   </div>
                 </div>
                 
                 <div className="space-y-4">
                   {myAttendance.length === 0 ? (
-                    <p className="text-xs md:text-sm text-gray-500 font-bold tracking-widest uppercase text-center p-6">No records logged.</p>
+                    <p className="text-xs md:text-[10px] text-gray-500 font-bold tracking-widest uppercase text-center p-6">No records logged.</p>
                   ) : (
                     myAttendance.sort((a,b) => new Date(b.markedAt || 0) - new Date(a.markedAt || 0)).map((log, idx) => {
                       const lecture = course.schedule?.find(s => s.id === log.scheduleId);
                       return (
                         <div key={idx} className="flex flex-col sm:flex-row justify-between sm:items-center gap-4 glass p-4 md:p-5 rounded-xl border border-white/5">
                           <div className="flex flex-col pr-4 flex-1">
-                             <span className="text-sm md:text-base text-white font-medium mb-1 break-words line-clamp-2">{lecture ? lecture.title : "Lecture Entry"}</span>
-                             {lecture && <span className="text-[10px] md:text-xs text-gray-400 uppercase tracking-widest font-bold">{formatDDMMYYYY(lecture.date)}</span>}
+                             <span className="text-sm md:text-sm text-white font-medium mb-1 break-words line-clamp-2">{lecture ? lecture.title : "Lecture Entry"}</span>
+                             {lecture && <span className="text-[10px] md:text-[9px] text-gray-400 uppercase tracking-widest font-bold">{formatDDMMYYYY(lecture.date)}</span>}
                           </div>
-                          <span className={`text-[10px] md:text-xs uppercase tracking-widest font-bold px-4 py-2 rounded-lg shrink-0 border shadow-inner text-center sm:w-auto w-full ${log.status === 'present' ? 'bg-green-900/20 text-green-400 border-green-500/30' : 'bg-red-900/20 text-red-400 border-red-500/30'}`}>
+                          <span className={`text-[10px] md:text-[9px] uppercase tracking-widest font-bold px-4 py-2 rounded-lg shrink-0 border shadow-inner text-center sm:w-auto w-full ${log.status === 'present' ? 'bg-green-900/20 text-green-400 border-green-500/30' : 'bg-red-900/20 text-red-400 border-red-500/30'}`}>
                             {log.status}
                           </span>
                         </div>
@@ -1609,10 +1608,10 @@
                
                {/* Tabs Header */}
                <div className="flex border-b border-white/10 bg-black shrink-0 relative z-10">
-                 <button onClick={() => setActiveTab('overview')} className={`flex-1 py-5 text-xs md:text-sm font-bold uppercase tracking-widest transition-all ${activeTab === 'overview' ? 'text-[#D4AF37] border-b-[4px] border-[#D4AF37] bg-white/5' : 'text-gray-500 hover:text-gray-300'}`}>
+                 <button onClick={() => setActiveTab('overview')} className={`flex-1 py-5 text-xs md:text-[11px] font-bold uppercase tracking-widest transition-all ${activeTab === 'overview' ? 'text-[#D4AF37] border-b-[4px] border-[#D4AF37] bg-white/5' : 'text-gray-500 hover:text-gray-300'}`}>
                    Info
                  </button>
-                 <button onClick={() => setActiveTab('attachments')} className={`flex-1 py-5 text-xs md:text-sm font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-2 ${activeTab === 'attachments' ? 'text-[#D4AF37] border-b-[4px] border-[#D4AF37] bg-white/5' : 'text-gray-500 hover:text-gray-300'}`}>
+                 <button onClick={() => setActiveTab('attachments')} className={`flex-1 py-5 text-xs md:text-[11px] font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-2 ${activeTab === 'attachments' ? 'text-[#D4AF37] border-b-[4px] border-[#D4AF37] bg-white/5' : 'text-gray-500 hover:text-gray-300'}`}>
                    Notes ({attachments.length})
                  </button>
                </div>
@@ -1621,11 +1620,11 @@
                <div className="flex-1 overflow-y-auto p-6 md:p-8 custom-scrollbar bg-[#080808]">
                   {activeTab === 'overview' && (
                     <div className="animate-in fade-in pb-20">
-                      <p className="text-[#D4AF37] text-xs font-bold uppercase tracking-widest mb-3 flex items-center gap-2"><PlayCircle size={16}/> {resource.type}</p>
-                      <h2 className="serif text-3xl md:text-4xl text-white mb-5 leading-tight break-words">{resource.title}</h2>
+                      <p className="text-[#D4AF37] text-xs md:text-[10px] font-bold uppercase tracking-widest mb-3 flex items-center gap-2"><PlayCircle size={16}/> {resource.type}</p>
+                      <h2 className="serif text-2xl md:text-3xl text-white mb-5 leading-tight break-words">{resource.title}</h2>
                       <div className="prose prose-invert max-w-none">
                          {resource.description ? (
-                           <p className="text-gray-300 whitespace-pre-wrap leading-relaxed font-light text-sm md:text-base">
+                           <p className="text-gray-300 whitespace-pre-wrap leading-relaxed font-light text-sm md:text-sm">
                              {resource.description}
                            </p>
                          ) : (
@@ -1638,7 +1637,7 @@
                   {activeTab === 'attachments' && (
                     <div className="animate-in fade-in space-y-4 pb-24">
                        {isTeacher && (
-                         <button onClick={() => setShowCreator(true)} className="w-full bg-gradient-to-r from-[#D4AF37] to-[#B38D22] text-black py-4 rounded-xl text-xs md:text-sm font-bold uppercase tracking-widest flex items-center justify-center gap-2 hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-all mb-6">
+                         <button onClick={() => setShowCreator(true)} className="w-full bg-gradient-to-r from-[#D4AF37] to-[#B38D22] text-black py-4 rounded-xl text-xs md:text-[11px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-all mb-6">
                            <Plus size={18} /> Add Note / Link / File
                          </button>
                        )}
@@ -1646,7 +1645,7 @@
                        {attachments.length === 0 ? (
                          <div className="text-center py-10 border border-dashed border-white/10 rounded-2xl bg-black/40">
                            <Paperclip size={32} className="mx-auto text-gray-600 mb-4" />
-                           <p className="text-gray-500 text-xs font-bold uppercase tracking-widest">No notes attached.</p>
+                           <p className="text-gray-500 text-xs md:text-[10px] font-bold uppercase tracking-widest">No notes attached.</p>
                          </div>
                        ) : (
                          attachments.sort((a,b) => new Date(a.createdAt) - new Date(b.createdAt)).map(att => (
@@ -1662,8 +1661,8 @@
                                    att.type === 'link' ? <LinkIcon size={20}/> : <Paperclip size={20}/>}
                                 </div>
                                 <div className="truncate flex-1">
-                                  <h4 className="text-white text-sm md:text-base font-medium break-words line-clamp-1 mb-1 group-hover:text-[#D4AF37] transition-colors">{att.title}</h4>
-                                  <span className="text-gray-500 text-[10px] md:text-xs uppercase tracking-widest font-bold">
+                                  <h4 className="text-white text-sm md:text-[13px] font-medium break-words line-clamp-1 mb-1 group-hover:text-[#D4AF37] transition-colors">{att.title}</h4>
+                                  <span className="text-gray-500 text-[10px] md:text-[9px] uppercase tracking-widest font-bold">
                                     {att.type === 'link' ? 'External Link' : att.type === 'text' ? 'Note' : att.type}
                                   </span>
                                 </div>
@@ -1697,8 +1696,8 @@
           </div>
           
           <div className="mb-6 text-left relative z-10 shrink-0 px-5 md:px-8 pt-6">
-            <p className="text-[#D4AF37] text-xs md:text-sm uppercase tracking-widest font-bold mb-2">Viewing {resource.type}</p>
-            <h2 className="serif text-3xl md:text-5xl text-white break-words line-clamp-2 max-w-5xl">{resource.title}</h2>
+            <p className="text-[#D4AF37] text-xs md:text-[10px] uppercase tracking-widest font-bold mb-2">Viewing {resource.type}</p>
+            <h2 className="serif text-3xl md:text-4xl text-white break-words line-clamp-2 max-w-5xl">{resource.title}</h2>
           </div>
           
           <div className="flex-1 w-full lg:max-w-[calc(100%-4rem)] lg:mx-auto lg:glass-premium lg:rounded-[3rem] overflow-hidden relative lg:border border-white/10 lg:shadow-2xl flex items-center justify-center bg-[#050505]">
@@ -1719,7 +1718,7 @@
               <div className="w-full h-full flex flex-col items-center p-6 md:p-14 overflow-y-auto custom-scrollbar bg-black/50">
                 <div className="max-w-5xl w-full glass p-8 md:p-16 rounded-2xl md:rounded-[3rem] border border-white/5 shadow-2xl">
                   <FileText size={48} className="text-[#D4AF37] mb-8 mx-auto opacity-50" />
-                  <p className="text-gray-200 whitespace-pre-wrap leading-relaxed font-light text-base md:text-lg font-sans">
+                  <p className="text-gray-200 whitespace-pre-wrap leading-relaxed font-light text-base md:text-sm font-sans">
                     {resource.url}
                   </p>
                 </div>
@@ -1730,9 +1729,9 @@
               <div className="w-full h-full flex flex-col items-center justify-center p-8 text-center bg-black/50">
                 <div className="glass-premium p-10 md:p-14 rounded-3xl md:rounded-[3rem] border border-white/10 max-w-lg w-full shadow-2xl">
                   <LinkIcon size={56} className="text-[#D4AF37] mb-6 mx-auto" />
-                  <h3 className="serif text-3xl md:text-4xl text-white mb-4">External Link</h3>
-                  <p className="text-gray-300 mb-8 text-sm md:text-base font-light leading-relaxed">This points to an external site. Click to open securely.</p>
-                  <a href={resource.url} target="_blank" rel="noreferrer" className="inline-block bg-[#D4AF37] text-black px-8 py-4 rounded-xl text-xs md:text-sm font-bold uppercase tracking-widest hover:bg-[#F9E29D] transition-colors shadow-xl">
+                  <h3 className="serif text-2xl md:text-3xl text-white mb-4">External Link</h3>
+                  <p className="text-gray-300 mb-8 text-sm md:text-sm font-light leading-relaxed">This points to an external site. Click to open securely.</p>
+                  <a href={resource.url} target="_blank" rel="noreferrer" className="inline-block bg-[#D4AF37] text-black px-8 py-4 rounded-xl text-xs md:text-[11px] font-bold uppercase tracking-widest hover:bg-[#F9E29D] transition-colors shadow-xl">
                     Open Link Now
                   </a>
                 </div>
@@ -1798,17 +1797,17 @@
           <div className="animate-in fade-in duration-500">
             <SmartBackButton label="Back to Lectures" />
             <header className="mb-8 md:mb-12">
-              <div className="bg-[#D4AF37]/10 border border-[#D4AF37]/30 text-[#D4AF37] px-4 py-2 rounded-xl text-xs md:text-sm font-bold uppercase tracking-widest mb-4 inline-flex items-center gap-2">
+              <div className="bg-[#D4AF37]/10 border border-[#D4AF37]/30 text-[#D4AF37] px-4 py-2 rounded-xl text-xs md:text-[10px] font-bold uppercase tracking-widest mb-4 inline-flex items-center gap-2">
                  <Calendar size={16} /> {formatDDMMYYYY(activeLecture.date)}
                  {activeLecture.time && <><Clock size={16} className="ml-2"/> {formatTime(activeLecture.time)}</>}
               </div>
-              <h1 className="serif text-4xl md:text-6xl mb-3 text-white break-words">Lecture Attendance</h1>
-              <p className="text-gray-300 text-sm md:text-base font-light break-words">{activeLecture.title}</p>
+              <h1 className="serif text-3xl md:text-5xl lg:text-6xl mb-3 text-white break-words">Lecture Attendance</h1>
+              <p className="text-gray-300 text-sm font-light break-words">{activeLecture.title}</p>
             </header>
-            <div className="glass-premium p-5 md:p-12 rounded-[2rem] md:rounded-[3rem]">
+            <div className="glass-premium p-5 md:p-12 rounded-[2rem] md:rounded-[3rem] mb-12">
               <h3 className="serif text-2xl md:text-3xl text-white mb-6 border-b border-white/5 pb-4 italic">Student List</h3>
               {enrolledStudents.length === 0 ? (
-                <p className="text-gray-500 text-xs md:text-sm font-bold tracking-[0.2em] uppercase p-4">No students enrolled.</p>
+                <p className="text-gray-500 text-xs md:text-[10px] font-bold tracking-[0.2em] uppercase p-4">No students enrolled.</p>
               ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
                   {enrolledStudents.map(student => {
@@ -1820,13 +1819,13 @@
                             {student.profilePic ? <img src={student.profilePic} className="w-full h-full object-cover" /> : student.name.charAt(0)}
                           </div>
                           <div>
-                            <p className="text-white font-medium text-sm md:text-base truncate">{student.name}</p>
-                            <p className="text-gray-500 text-[10px] md:text-xs uppercase tracking-widest mt-1 font-bold">Student</p>
+                            <p className="text-white font-medium text-sm truncate">{student.name}</p>
+                            <p className="text-gray-500 text-[10px] md:text-[9px] uppercase tracking-widest mt-1 font-bold">Student</p>
                           </div>
                         </div>
                         <div className="flex gap-2 shrink-0">
-                          <button onClick={() => markAttendance(student.id, 'present')} className={`w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center font-bold transition-all text-sm md:text-base border ${markedRecord?.status === 'present' ? 'bg-green-900/30 text-green-400 border-green-500/50 shadow-[0_0_15px_rgba(34,197,94,0.2)]' : 'bg-transparent border-white/10 text-gray-500 hover:border-green-500/50 hover:text-green-400'}`}>P</button>
-                          <button onClick={() => markAttendance(student.id, 'absent')} className={`w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center font-bold transition-all text-sm md:text-base border ${markedRecord?.status === 'absent' ? 'bg-red-900/30 text-red-400 border-red-500/50 shadow-[0_0_15px_rgba(239,68,68,0.2)]' : 'bg-transparent border-white/10 text-gray-500 hover:border-red-500/50 hover:text-red-400'}`}>A</button>
+                          <button onClick={() => markAttendance(student.id, 'present')} className={`w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center font-bold transition-all text-sm border ${markedRecord?.status === 'present' ? 'bg-green-900/30 text-green-400 border-green-500/50 shadow-[0_0_15px_rgba(34,197,94,0.2)]' : 'bg-transparent border-white/10 text-gray-500 hover:border-green-500/50 hover:text-green-400'}`}>P</button>
+                          <button onClick={() => markAttendance(student.id, 'absent')} className={`w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center font-bold transition-all text-sm border ${markedRecord?.status === 'absent' ? 'bg-red-900/30 text-red-400 border-red-500/50 shadow-[0_0_15px_rgba(239,68,68,0.2)]' : 'bg-transparent border-white/10 text-gray-500 hover:border-red-500/50 hover:text-red-400'}`}>A</button>
                           {(isAdmin || markedRecord) && (
                             <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); clearAttendance(student.id); }} title="Delete Record" className="w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center transition-all border bg-transparent border-white/10 text-gray-500 hover:border-red-500/50 hover:text-red-400 hover:shadow-[0_0_15px_rgba(239,68,68,0.2)] ml-2">
                               <Trash2 size={18} />
@@ -1848,13 +1847,13 @@
           <div className="animate-in fade-in duration-500">
             <SmartBackButton label="Back to Courses" />
             <header className="mb-8 md:mb-12">
-              <h1 className="serif text-4xl md:text-6xl mb-3 text-white break-words">Select <span className="gold-gradient-text italic">Lecture</span></h1>
-              <p className="text-gray-300 text-sm md:text-base font-light break-words">{activeCourse.title}</p>
+              <h1 className="serif text-3xl md:text-5xl lg:text-6xl mb-3 text-white break-words">Select <span className="gold-gradient-text italic">Lecture</span></h1>
+              <p className="text-gray-300 text-sm font-light break-words">{activeCourse.title}</p>
             </header>
             {(!activeCourse.schedule || activeCourse.schedule.length === 0) ? (
-              <div className="glass-premium rounded-2xl md:rounded-[3rem] p-12 md:p-20 text-center text-gray-500 text-xs md:text-sm tracking-widest uppercase font-bold">No lectures scheduled yet.</div>
+              <div className="glass-premium rounded-2xl md:rounded-[3rem] p-12 md:p-20 text-center text-gray-500 text-xs md:text-[10px] tracking-widest uppercase font-bold">No lectures scheduled yet.</div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8 pb-12">
                  {activeCourse.schedule.sort((a,b) => new Date(a.date) - new Date(b.date)).map((s, idx) => {
                    const dateParts = s.date ? s.date.split('-') : ['','',''];
                    const year = dateParts[0];
@@ -1867,17 +1866,17 @@
                             <div className="bg-black/40 p-4 md:p-6 flex flex-col items-center justify-center border-r border-white/5 shrink-0 w-24 md:w-28 relative overflow-hidden">
                                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#D4AF37] to-[#B38D22]"></div>
                                <span className="text-[#D4AF37] text-3xl md:text-4xl serif leading-none mb-1">{day}</span>
-                               <span className="text-gray-400 text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase mt-1 text-center">{month}-{year}</span>
+                               <span className="text-gray-400 text-[10px] md:text-[9px] font-bold tracking-[0.2em] uppercase mt-1 text-center">{month}-{year}</span>
                             </div>
                             <div className="p-4 md:p-6 flex-1 flex flex-col justify-center min-w-0">
                                <h4 className="serif text-xl md:text-2xl text-white group-hover:text-[#D4AF37] transition-colors break-words line-clamp-2 mb-2">{s.title}</h4>
-                               <span className="text-[#D4AF37] text-[10px] md:text-xs font-bold tracking-widest uppercase flex items-center gap-2">
+                               <span className="text-[#D4AF37] text-[10px] md:text-[9px] font-bold tracking-widest uppercase flex items-center gap-2">
                                   <Clock size={14} /> {formatTime(s.time) || "TBA"}
                                </span>
                             </div>
                         </div>
                         <div className="p-4 md:p-6 bg-white/[0.02] flex-1">
-                            <p className="text-gray-400 text-sm font-light line-clamp-2 break-words">{s.description}</p>
+                            <p className="text-gray-400 text-sm md:text-xs font-light line-clamp-2 break-words">{s.description}</p>
                         </div>
                      </button>
                    );
@@ -1891,8 +1890,8 @@
       return (
         <div className="animate-in fade-in duration-500 pb-12">
           <header className="mb-8 md:mb-14">
-            <h1 className="serif text-5xl md:text-7xl mb-3 text-white break-words">Attendance <span className="gold-gradient-text italic">Ledger</span></h1>
-            <p className="text-gray-300 text-base md:text-lg font-light">Select a course to mark lecture attendance.</p>
+            <h1 className="serif text-4xl md:text-5xl lg:text-7xl mb-3 text-white break-words">Attendance <span className="gold-gradient-text italic">Ledger</span></h1>
+            <p className="text-gray-300 text-sm font-light">Select a course to mark lecture attendance.</p>
           </header>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
             {taughtCourses.map(c => (
@@ -1904,9 +1903,9 @@
                   </div>
                 ) : null}
                 <div className="relative z-10 flex flex-col h-full w-full">
-                  <h3 className="serif text-3xl md:text-4xl text-white mb-4 break-words line-clamp-2">{c.title}</h3>
+                  <h3 className="serif text-2xl md:text-3xl text-white mb-4 break-words line-clamp-2">{c.title}</h3>
                   <div className="mt-auto flex items-center justify-between">
-                     <span className="text-gray-300 text-xs md:text-sm uppercase tracking-widest font-bold bg-black/50 px-4 py-2 rounded-xl border border-white/5 backdrop-blur-md">{c.schedule?.length || 0} Lectures</span>
+                     <span className="text-gray-300 text-xs md:text-[10px] uppercase tracking-widest font-bold bg-black/50 px-4 py-2 rounded-xl border border-white/5 backdrop-blur-md">{c.schedule?.length || 0} Lectures</span>
                      <ChevronRight size={24} className="text-gray-400 group-hover:text-[#D4AF37]" />
                   </div>
                 </div>
@@ -1966,8 +1965,8 @@
       return (
         <div className="animate-in fade-in duration-500 max-w-3xl mx-auto pb-12">
           <header className="mb-8 md:mb-14 text-center">
-            <h1 className="serif text-5xl md:text-7xl mb-3 text-white">Your <span className="gold-gradient-text italic">Profile</span></h1>
-            <p className="text-gray-300 text-sm md:text-base font-light">Manage your conservatory identity.</p>
+            <h1 className="serif text-4xl md:text-5xl lg:text-6xl mb-3 text-white">Your <span className="gold-gradient-text italic">Profile</span></h1>
+            <p className="text-gray-300 text-sm font-light">Manage your conservatory identity.</p>
           </header>
 
           <div className="glass-premium p-8 md:p-14 rounded-[2rem] md:rounded-[3rem] border border-[#D4AF37]/20 shadow-2xl relative overflow-hidden">
@@ -1982,14 +1981,14 @@
                      <input type="file" accept="image/*" className="hidden" onChange={handleImageUpload} disabled={uploading} />
                      <ImageIcon size={36} className="text-[#D4AF37]" />
                    </label>
-                   {uploading && <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 text-[10px] md:text-xs text-[#D4AF37] uppercase tracking-widest font-bold bg-black px-4 py-2 rounded-xl border border-[#D4AF37]/30">Processing...</div>}
+                   {uploading && <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 text-[10px] md:text-[9px] text-[#D4AF37] uppercase tracking-widest font-bold bg-black px-4 py-2 rounded-xl border border-[#D4AF37]/30">Processing...</div>}
                 </div>
                 <div className="text-center md:text-left w-full">
-                  <h3 className="text-2xl md:text-4xl font-medium text-white mb-2 md:mb-3 break-words">{userData.name}</h3>
-                  <p className="text-gray-400 text-sm md:text-base mb-4 md:mb-6 font-light break-words">{userData.email}</p>
+                  <h3 className="text-2xl md:text-3xl font-medium text-white mb-2 md:mb-3 break-words">{userData.name}</h3>
+                  <p className="text-gray-400 text-sm md:text-xs mb-4 md:mb-6 font-light break-words">{userData.email}</p>
                   <div className="flex flex-wrap justify-center md:justify-start gap-3">
                     {userData.roles?.map(r => (
-                       <span key={r} className="text-xs md:text-sm bg-black text-[#D4AF37] border border-[#D4AF37]/30 px-4 py-2 rounded-lg font-bold uppercase tracking-[0.2em]">{r}</span>
+                       <span key={r} className="text-xs md:text-[10px] bg-black text-[#D4AF37] border border-[#D4AF37]/30 px-4 py-2 rounded-lg font-bold uppercase tracking-[0.2em]">{r}</span>
                     ))}
                   </div>
                 </div>
@@ -1997,12 +1996,12 @@
 
              <form onSubmit={handleUpdate} className="space-y-6">
                <div>
-                 <label className="text-xs md:text-sm text-gray-400 uppercase tracking-widest font-bold mb-3 block">Display Name</label>
-                 <input type="text" value={name} onChange={(e) => setName(e.target.value)} required disabled={uploading} className="w-full bg-black/50 border border-white/10 p-5 md:p-6 rounded-2xl text-sm md:text-base outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" />
+                 <label className="text-xs md:text-[10px] text-gray-400 uppercase tracking-widest font-bold mb-3 block">Display Name</label>
+                 <input type="text" value={name} onChange={(e) => setName(e.target.value)} required disabled={uploading} className="w-full bg-black/50 border border-white/10 p-5 md:p-6 rounded-2xl text-sm outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" />
                </div>
                
                <div className="pt-4">
-                 <button type="submit" disabled={uploading || name === userData.name} className="w-full bg-[#D4AF37] text-black py-5 rounded-2xl text-xs md:text-sm font-bold tracking-widest uppercase hover:bg-[#F9E29D] transition-colors disabled:opacity-50 shadow-xl flex items-center justify-center gap-3">
+                 <button type="submit" disabled={uploading || name === userData.name} className="w-full bg-[#D4AF37] text-black py-5 rounded-2xl text-xs md:text-[11px] font-bold tracking-widest uppercase hover:bg-[#F9E29D] transition-colors disabled:opacity-50 shadow-xl flex items-center justify-center gap-3">
                    {uploading ? <div className="w-5 h-5 border-2 border-black/20 border-t-black rounded-full animate-spin"></div> : <Edit3 size={20} />}
                    {uploading ? 'Updating Profile' : 'Save Changes'}
                  </button>
@@ -2043,15 +2042,15 @@
         <div className="fixed inset-0 z-[10000] flex items-center justify-center p-5 bg-[#050505]/90 backdrop-blur-xl animate-in fade-in">
           <div className="glass-premium p-8 md:p-12 w-full max-w-lg rounded-[2rem] md:rounded-[3rem] relative border border-[#D4AF37]/30 shadow-2xl">
             <button onClick={onClose} className="absolute top-6 right-6 md:top-8 md:right-8 text-gray-500 hover:text-white"><X size={28}/></button>
-            <h2 className="serif text-4xl md:text-5xl mb-3 text-white italic">Create Folder</h2>
-            <p className="text-[#D4AF37] text-xs md:text-sm uppercase tracking-widest font-bold mb-8">Organize Material</p>
+            <h2 className="serif text-3xl md:text-5xl mb-3 text-white italic">Create Folder</h2>
+            <p className="text-[#D4AF37] text-xs md:text-[10px] uppercase tracking-widest font-bold mb-8">Organize Material</p>
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
-                <input name="title" type="text" placeholder="FOLDER NAME" required className="w-full bg-black/50 border border-white/10 p-5 rounded-2xl text-sm md:text-base tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" />
+                <input name="title" type="text" placeholder="FOLDER NAME" required className="w-full bg-black/50 border border-white/10 p-5 rounded-2xl text-sm md:text-sm tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" />
               </div>
               <div className="flex gap-4 pt-4">
-                <button type="button" onClick={onClose} className="flex-1 py-4 md:py-5 border border-white/10 rounded-2xl text-xs md:text-sm font-bold tracking-widest uppercase text-gray-400 hover:text-white transition-colors">Cancel</button>
-                <button type="submit" className="flex-1 bg-[#D4AF37] text-black rounded-2xl text-xs md:text-sm font-bold tracking-widest uppercase hover:bg-[#F9E29D] transition-colors shadow-xl">Create</button>
+                <button type="button" onClick={onClose} className="flex-1 py-4 md:py-5 border border-white/10 rounded-2xl text-xs md:text-[11px] font-bold tracking-widest uppercase text-gray-400 hover:text-white transition-colors">Cancel</button>
+                <button type="submit" className="flex-1 bg-[#D4AF37] text-black rounded-2xl text-xs md:text-[11px] font-bold tracking-widest uppercase hover:bg-[#F9E29D] transition-colors shadow-xl">Create</button>
               </div>
             </form>
           </div>
@@ -2206,71 +2205,71 @@
         <div className="fixed inset-0 z-[10000] flex items-center justify-center p-5 bg-[#050505]/90 backdrop-blur-xl animate-in fade-in">
           <div className="glass-premium p-6 md:p-12 w-full max-w-3xl relative max-h-[90vh] overflow-y-auto custom-scrollbar rounded-[2rem] md:rounded-[3rem] border border-[#D4AF37]/30 shadow-2xl">
             {!uploading && <button onClick={onClose} className="absolute top-6 right-6 md:top-8 md:right-8 text-gray-500 hover:text-white"><X size={28}/></button>}
-            <h2 className="serif text-4xl md:text-5xl mb-2 text-white italic">Upload Material</h2>
-            <p className="text-[#D4AF37] text-xs md:text-sm uppercase tracking-widest font-bold mb-8">Add to Course Asset Library</p>
+            <h2 className="serif text-3xl md:text-5xl mb-2 text-white italic">Upload Material</h2>
+            <p className="text-[#D4AF37] text-xs md:text-[10px] uppercase tracking-widest font-bold mb-8">Add to Course Asset Library</p>
             <form onSubmit={handleSubmit} className="space-y-6 md:space-y-8">
               <div>
-                <label className="text-xs md:text-sm text-gray-400 uppercase tracking-widest font-bold mb-3 block">Material Type</label>
+                <label className="text-xs md:text-[10px] text-gray-400 uppercase tracking-widest font-bold mb-3 block">Material Type</label>
                 <div className="flex gap-3 overflow-x-auto pb-3 custom-scrollbar">
                   {['pdf', 'video', 'image', 'collage', 'youtube', 'text', 'link'].map(t => (
-                    <button key={t} type="button" onClick={() => setType(t)} disabled={uploading} className={`px-4 md:px-5 py-2.5 md:py-3 rounded-xl text-xs md:text-sm uppercase tracking-widest font-bold whitespace-nowrap transition-all border ${type === t ? 'bg-[#D4AF37]/10 text-[#D4AF37] border-[#D4AF37]/50 shadow-[0_0_15px_rgba(212,175,55,0.2)]' : 'bg-black/30 text-gray-500 border-white/5 hover:border-white/20'}`}>
+                    <button key={t} type="button" onClick={() => setType(t)} disabled={uploading} className={`px-4 md:px-5 py-2.5 md:py-3 rounded-xl text-xs md:text-[11px] uppercase tracking-widest font-bold whitespace-nowrap transition-all border ${type === t ? 'bg-[#D4AF37]/10 text-[#D4AF37] border-[#D4AF37]/50 shadow-[0_0_15px_rgba(212,175,55,0.2)]' : 'bg-black/30 text-gray-500 border-white/5 hover:border-white/20'}`}>
                       {t}
                     </button>
                   ))}
                 </div>
               </div>
               <div>
-                <input name="title" type="text" placeholder="MATERIAL TITLE" required disabled={uploading} className="w-full bg-black/50 border border-white/10 p-4 md:p-6 rounded-2xl text-sm md:text-base tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" />
+                <input name="title" type="text" placeholder="MATERIAL TITLE" required disabled={uploading} className="w-full bg-black/50 border border-white/10 p-4 md:p-6 rounded-2xl text-sm md:text-sm tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" />
               </div>
               
               {allowsUpload && (
                 <div className="flex bg-black/40 border border-white/5 rounded-xl p-1.5 w-fit">
-                   <button type="button" disabled={uploading} onClick={() => setInputMode('upload')} className={`px-5 py-2.5 rounded-lg text-xs md:text-sm uppercase tracking-widest font-bold transition-all ${inputMode === 'upload' ? 'bg-[#D4AF37] text-black shadow-md' : 'text-gray-500 hover:text-white'}`}>Upload</button>
-                   <button type="button" disabled={uploading} onClick={() => setInputMode('url')} className={`px-5 py-2.5 rounded-lg text-xs md:text-sm uppercase tracking-widest font-bold transition-all ${inputMode === 'url' ? 'bg-[#D4AF37] text-black shadow-md' : 'text-gray-500 hover:text-white'}`}>URL</button>
+                   <button type="button" disabled={uploading} onClick={() => setInputMode('upload')} className={`px-5 py-2.5 rounded-lg text-xs md:text-[11px] uppercase tracking-widest font-bold transition-all ${inputMode === 'upload' ? 'bg-[#D4AF37] text-black shadow-md' : 'text-gray-500 hover:text-white'}`}>Upload</button>
+                   <button type="button" disabled={uploading} onClick={() => setInputMode('url')} className={`px-5 py-2.5 rounded-lg text-xs md:text-[11px] uppercase tracking-widest font-bold transition-all ${inputMode === 'url' ? 'bg-[#D4AF37] text-black shadow-md' : 'text-gray-500 hover:text-white'}`}>URL</button>
                 </div>
               )}
               
               <div className="glass border border-white/5 rounded-3xl p-5 md:p-8">
-                {type === 'text' && <div className="text-[#D4AF37] text-xs md:text-sm uppercase tracking-widest font-bold mb-4 bg-[#D4AF37]/10 p-4 rounded-xl border border-[#D4AF37]/20 flex items-center gap-3"><FileText size={18}/> Create a formatted text note for students to read.</div>}
-                {type === 'link' && <div className="text-[#D4AF37] text-xs md:text-sm uppercase tracking-widest font-bold mb-4 bg-[#D4AF37]/10 p-4 rounded-xl border border-[#D4AF37]/20 flex items-center gap-3"><LinkIcon size={18}/> Add an external link that will open securely in a new tab.</div>}
+                {type === 'text' && <div className="text-[#D4AF37] text-xs md:text-[10px] uppercase tracking-widest font-bold mb-4 bg-[#D4AF37]/10 p-4 rounded-xl border border-[#D4AF37]/20 flex items-center gap-3"><FileText size={18}/> Create a formatted text note for students to read.</div>}
+                {type === 'link' && <div className="text-[#D4AF37] text-xs md:text-[10px] uppercase tracking-widest font-bold mb-4 bg-[#D4AF37]/10 p-4 rounded-xl border border-[#D4AF37]/20 flex items-center gap-3"><LinkIcon size={18}/> Add an external link that will open securely in a new tab.</div>}
 
                 {inputMode === 'upload' && allowsUpload ? (
                   <div className="space-y-5">
                     <div>
-                      <label className="text-xs md:text-sm text-gray-400 uppercase tracking-widest font-bold mb-3 block">{type === 'collage' ? 'Select Multiple Files' : 'Select Source File'}</label>
+                      <label className="text-xs md:text-[10px] text-gray-400 uppercase tracking-widest font-bold mb-3 block">{type === 'collage' ? 'Select Multiple Files' : 'Select Source File'}</label>
                       <div className="relative border-2 border-dashed border-[#D4AF37]/30 rounded-[2rem] p-8 md:p-14 text-center hover:border-[#D4AF37]/60 transition-colors bg-black/30 group">
                         <input type="file" accept={getAcceptType()} multiple={type === 'collage'} required disabled={uploading} onChange={(e) => type === 'collage' ? setMultiFiles(e.target.files) : setSingleFile(e.target.files[0])} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" />
                         <FileIcon size={40} className="mx-auto text-[#D4AF37] group-hover:scale-110 mb-4 transition-transform opacity-70" />
-                        <p className="text-[#D4AF37] text-xs md:text-sm font-bold tracking-widest uppercase mb-2">Drag & Drop or Browse</p>
+                        <p className="text-[#D4AF37] text-xs md:text-[11px] font-bold tracking-widest uppercase mb-2">Drag & Drop or Browse</p>
                         <p className="text-gray-400 text-xs md:text-sm font-light">{type === 'collage' ? (multiFiles.length > 0 ? `${multiFiles.length} files selected` : `Supported: Images (Multiple)`) : (singleFile ? singleFile.name : `Supported: ${type.toUpperCase()}`)}</p>
                       </div>
                     </div>
                     {type === 'video' && (
                       <div className="pt-5 border-t border-white/5">
-                        <label className="text-xs md:text-sm text-gray-400 uppercase tracking-widest font-bold mb-3 flex items-center gap-2"><ImagePlus size={18}/> Video Cover Thumbnail (Optional)</label>
-                        <input type="file" accept="image/*" disabled={uploading} onChange={(e) => setThumbnailFile(e.target.files[0])} className="w-full text-gray-400 text-sm md:text-base" />
+                        <label className="text-xs md:text-[10px] text-gray-400 uppercase tracking-widest font-bold mb-3 flex items-center gap-2"><ImagePlus size={18}/> Video Cover Thumbnail (Optional)</label>
+                        <input type="file" accept="image/*" disabled={uploading} onChange={(e) => setThumbnailFile(e.target.files[0])} className="w-full text-gray-400 text-sm" />
                       </div>
                     )}
                   </div>
                 ) : (
                   <div className="space-y-5">
                     {type === 'text' ? (
-                      <textarea name="url" placeholder="Type or paste formatted text notes here..." required disabled={uploading} rows={8} className="w-full bg-black/50 border border-white/10 p-5 md:p-6 rounded-2xl text-sm md:text-base outline-none focus:border-[#D4AF37] transition-all text-white font-light resize-none custom-scrollbar" />
+                      <textarea name="url" placeholder="Type or paste formatted text notes here..." required disabled={uploading} rows={8} className="w-full bg-black/50 border border-white/10 p-5 md:p-6 rounded-2xl text-sm md:text-sm outline-none focus:border-[#D4AF37] transition-all text-white font-light resize-none custom-scrollbar" />
                     ) : type === 'collage' ? (
-                      <textarea name="url" placeholder="COMMA SEPARATED IMAGE URLS" required disabled={uploading} rows={4} className="w-full bg-black/50 border border-white/10 p-5 md:p-6 rounded-2xl text-sm md:text-base tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white font-light resize-none custom-scrollbar placeholder:text-gray-600" />
+                      <textarea name="url" placeholder="COMMA SEPARATED IMAGE URLS" required disabled={uploading} rows={4} className="w-full bg-black/50 border border-white/10 p-5 md:p-6 rounded-2xl text-sm md:text-sm tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white font-light resize-none custom-scrollbar placeholder:text-gray-600" />
                     ) : type === 'youtube' ? (
                       <>
-                        <input name="url" type="url" placeholder="YOUTUBE URL (e.g. https://youtu.be/...)" required disabled={uploading} className="w-full bg-black/50 border border-white/10 p-5 md:p-6 rounded-2xl text-sm md:text-base tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" />
+                        <input name="url" type="url" placeholder="YOUTUBE URL (e.g. https://youtu.be/...)" required disabled={uploading} className="w-full bg-black/50 border border-white/10 p-5 md:p-6 rounded-2xl text-sm md:text-sm tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" />
                         <div className="pt-5 border-t border-white/5">
-                          <label className="text-xs md:text-sm text-gray-400 uppercase tracking-widest font-bold mb-3 flex items-center gap-2"><ImagePlus size={18}/> Custom Thumbnail (Optional)</label>
-                          <input type="file" accept="image/*" disabled={uploading} onChange={(e) => setThumbnailFile(e.target.files[0])} className="w-full text-gray-400 text-sm md:text-base" />
+                          <label className="text-xs md:text-[10px] text-gray-400 uppercase tracking-widest font-bold mb-3 flex items-center gap-2"><ImagePlus size={18}/> Custom Thumbnail (Optional)</label>
+                          <input type="file" accept="image/*" disabled={uploading} onChange={(e) => setThumbnailFile(e.target.files[0])} className="w-full text-gray-400 text-sm" />
                         </div>
                         <div className="pt-5 border-t border-white/5">
-                          <textarea name="desc" placeholder="ADDITIONAL NOTES OR DESCRIPTION FOR THIS VIDEO..." disabled={uploading} rows={4} className="w-full bg-black/50 border border-white/10 p-5 md:p-6 rounded-2xl text-sm md:text-base tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white font-light resize-none custom-scrollbar placeholder:text-gray-600" />
+                          <textarea name="desc" placeholder="ADDITIONAL NOTES OR DESCRIPTION FOR THIS VIDEO..." disabled={uploading} rows={4} className="w-full bg-black/50 border border-white/10 p-5 md:p-6 rounded-2xl text-sm md:text-sm tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white font-light resize-none custom-scrollbar placeholder:text-gray-600" />
                         </div>
                       </>
                     ) : (
-                      <input name="url" type="url" placeholder="DIRECT URL LINK" required disabled={uploading} className="w-full bg-black/50 border border-white/10 p-5 md:p-6 rounded-2xl text-sm md:text-base tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" />
+                      <input name="url" type="url" placeholder="DIRECT URL LINK" required disabled={uploading} className="w-full bg-black/50 border border-white/10 p-5 md:p-6 rounded-2xl text-sm md:text-sm tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" />
                     )}
                   </div>
                 )}
@@ -2281,13 +2280,13 @@
                   <div className="w-full bg-black rounded-full h-2 mb-3 overflow-hidden border border-white/5">
                     <div className="bg-gradient-to-r from-[#D4AF37] to-[#FFDF73] h-2 rounded-full transition-all duration-300 shadow-[0_0_10px_#D4AF37]" style={{ width: `${progress}%` }}></div>
                   </div>
-                  <p className="text-center text-xs md:text-sm text-[#D4AF37] font-bold uppercase tracking-widest">Uploading {progress}%</p>
+                  <p className="text-center text-xs md:text-[10px] text-[#D4AF37] font-bold uppercase tracking-widest">Uploading {progress}%</p>
                 </div>
               )}
               
               <div className="flex gap-4 pt-4">
-                <button type="button" onClick={onClose} disabled={uploading} className="flex-1 py-4 md:py-5 border border-white/10 rounded-2xl text-xs md:text-sm font-bold tracking-widest uppercase text-gray-400 hover:text-white transition-colors disabled:opacity-50">Cancel</button>
-                <button type="submit" disabled={uploading} className="flex-1 bg-[#D4AF37] text-black rounded-2xl text-xs md:text-sm font-bold tracking-widest uppercase hover:bg-[#F9E29D] transition-colors flex items-center justify-center gap-2 disabled:opacity-50 shadow-xl">
+                <button type="button" onClick={onClose} disabled={uploading} className="flex-1 py-4 md:py-5 border border-white/10 rounded-2xl text-xs md:text-[11px] font-bold tracking-widest uppercase text-gray-400 hover:text-white transition-colors disabled:opacity-50">Cancel</button>
+                <button type="submit" disabled={uploading} className="flex-1 bg-[#D4AF37] text-black rounded-2xl text-xs md:text-[11px] font-bold tracking-widest uppercase hover:bg-[#F9E29D] transition-colors flex items-center justify-center gap-2 disabled:opacity-50 shadow-xl">
                    {uploading ? <div className="w-5 h-5 border-2 border-black/20 border-t-black rounded-full animate-spin"></div> : <UploadCloud size={20} />}
                    {uploading ? 'Processing' : 'Publish Asset'}
                 </button>
@@ -2317,15 +2316,15 @@
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-5 bg-[#050505]/90 backdrop-blur-xl animate-in fade-in">
           <div className="glass-premium p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] w-full max-w-2xl border border-[#D4AF37]/30 shadow-2xl relative">
             <button onClick={onClose} className="absolute top-6 right-6 md:top-8 md:right-8 text-gray-500 hover:text-white text-3xl font-light">&times;</button>
-            <h2 className="serif text-4xl md:text-5xl mb-2 text-white italic">Edit Course</h2>
-            <p className="text-[#D4AF37] text-xs md:text-sm uppercase tracking-widest font-bold mb-8">Update Course Details</p>
+            <h2 className="serif text-3xl md:text-5xl mb-2 text-white italic">Edit Course</h2>
+            <p className="text-[#D4AF37] text-xs md:text-[10px] uppercase tracking-widest font-bold mb-8">Update Course Details</p>
             <form onSubmit={handleEditSubmit} className="space-y-5">
-              <div><input name="title" defaultValue={course.title} type="text" placeholder="COURSE TITLE" required className="w-full bg-black/50 border border-white/10 p-5 rounded-2xl text-sm md:text-base tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" /></div>
-              <div><input name="coverImage" defaultValue={course.coverImage} type="url" placeholder="COVER IMAGE URL (OPTIONAL)" className="w-full bg-black/50 border border-white/10 p-5 rounded-2xl text-sm md:text-base tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" /></div>
-              <div><textarea name="desc" defaultValue={course.desc} placeholder="COURSE DESCRIPTION" required rows={5} className="w-full bg-black/50 border border-white/10 p-5 rounded-2xl text-sm md:text-base outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600 resize-none font-light leading-relaxed custom-scrollbar" /></div>
+              <div><input name="title" defaultValue={course.title} type="text" placeholder="COURSE TITLE" required className="w-full bg-black/50 border border-white/10 p-5 rounded-2xl text-sm md:text-sm tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" /></div>
+              <div><input name="coverImage" defaultValue={course.coverImage} type="url" placeholder="COVER IMAGE URL (OPTIONAL)" className="w-full bg-black/50 border border-white/10 p-5 rounded-2xl text-sm md:text-sm tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" /></div>
+              <div><textarea name="desc" defaultValue={course.desc} placeholder="COURSE DESCRIPTION" required rows={5} className="w-full bg-black/50 border border-white/10 p-5 rounded-2xl text-sm md:text-sm outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600 resize-none font-light leading-relaxed custom-scrollbar" /></div>
               <div className="flex gap-4 pt-4">
-                <button type="button" onClick={onClose} className="flex-1 py-4 md:py-5 border border-white/10 rounded-2xl text-xs md:text-sm uppercase tracking-widest font-bold text-gray-400 hover:text-white transition-colors">Cancel</button>
-                <button type="submit" className="flex-1 bg-[#D4AF37] text-black rounded-2xl text-xs md:text-sm uppercase tracking-widest font-bold hover:bg-[#F9E29D] transition-colors shadow-xl">Save Changes</button>
+                <button type="button" onClick={onClose} className="flex-1 py-4 md:py-5 border border-white/10 rounded-2xl text-xs md:text-[11px] uppercase tracking-widest font-bold text-gray-400 hover:text-white transition-colors">Cancel</button>
+                <button type="submit" className="flex-1 bg-[#D4AF37] text-black rounded-2xl text-xs md:text-[11px] uppercase tracking-widest font-bold hover:bg-[#F9E29D] transition-colors shadow-xl">Save Changes</button>
               </div>
             </form>
           </div>
@@ -2356,28 +2355,28 @@
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-5 bg-[#050505]/90 backdrop-blur-xl animate-in fade-in">
           <div className="glass-premium p-8 md:p-12 w-full max-w-2xl rounded-[2rem] md:rounded-[3rem] relative border border-[#D4AF37]/30 shadow-2xl">
             <button onClick={onClose} className="absolute top-6 right-6 md:top-8 md:right-8 text-gray-500 hover:text-white"><X size={28}/></button>
-            <h2 className="serif text-4xl md:text-5xl mb-2 text-white italic">Schedule Lecture</h2>
-            <p className="text-[#D4AF37] text-xs md:text-sm uppercase tracking-widest font-bold mb-8">Add to Course Itinerary</p>
+            <h2 className="serif text-3xl md:text-5xl mb-2 text-white italic">Schedule Lecture</h2>
+            <p className="text-[#D4AF37] text-xs md:text-[10px] uppercase tracking-widest font-bold mb-8">Add to Course Itinerary</p>
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                  <div>
-                   <label className="text-xs md:text-sm text-gray-400 uppercase tracking-widest font-bold mb-2 block">Lecture Date</label>
-                   <input name="date" type="date" required className="w-full bg-black/50 border border-white/10 p-5 rounded-2xl text-sm md:text-base tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" />
+                   <label className="text-xs md:text-[10px] text-gray-400 uppercase tracking-widest font-bold mb-2 block">Lecture Date</label>
+                   <input name="date" type="date" required className="w-full bg-black/50 border border-white/10 p-5 rounded-2xl text-sm md:text-sm tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" />
                  </div>
                  <div>
-                   <label className="text-xs md:text-sm text-gray-400 uppercase tracking-widest font-bold mb-2 block">Lecture Time</label>
-                   <input name="time" type="time" required className="w-full bg-black/50 border border-white/10 p-5 rounded-2xl text-sm md:text-base tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" />
+                   <label className="text-xs md:text-[10px] text-gray-400 uppercase tracking-widest font-bold mb-2 block">Lecture Time</label>
+                   <input name="time" type="time" required className="w-full bg-black/50 border border-white/10 p-5 rounded-2xl text-sm md:text-sm tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" />
                  </div>
               </div>
               <div>
-                <input name="title" type="text" placeholder="LECTURE TITLE" required className="w-full bg-black/50 border border-white/10 p-5 rounded-2xl text-sm md:text-base tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" />
+                <input name="title" type="text" placeholder="LECTURE TITLE" required className="w-full bg-black/50 border border-white/10 p-5 rounded-2xl text-sm md:text-sm tracking-widest uppercase outline-none focus:border-[#D4AF37] transition-all text-white placeholder:text-gray-600" />
               </div>
               <div>
-                <textarea name="desc" placeholder="BRIEF LECTURE DESCRIPTION..." required rows={4} className="w-full bg-black/50 border border-white/10 p-5 rounded-2xl text-sm md:text-base outline-none focus:border-[#D4AF37] transition-all text-white font-light resize-none custom-scrollbar placeholder:text-gray-600" />
+                <textarea name="desc" placeholder="BRIEF LECTURE DESCRIPTION..." required rows={4} className="w-full bg-black/50 border border-white/10 p-5 rounded-2xl text-sm md:text-sm outline-none focus:border-[#D4AF37] transition-all text-white font-light resize-none custom-scrollbar placeholder:text-gray-600" />
               </div>
               <div className="flex gap-4 pt-4">
-                <button type="button" onClick={onClose} className="flex-1 py-4 md:py-5 border border-white/10 rounded-2xl text-xs md:text-sm font-bold tracking-widest uppercase text-gray-400 hover:text-white transition-colors">Cancel</button>
-                <button type="submit" className="flex-1 bg-[#D4AF37] text-black rounded-2xl text-xs md:text-sm font-bold tracking-widest uppercase hover:bg-[#F9E29D] transition-colors shadow-xl">Schedule</button>
+                <button type="button" onClick={onClose} className="flex-1 py-4 md:py-5 border border-white/10 rounded-2xl text-xs md:text-[11px] font-bold tracking-widest uppercase text-gray-400 hover:text-white transition-colors">Cancel</button>
+                <button type="submit" className="flex-1 bg-[#D4AF37] text-black rounded-2xl text-xs md:text-[11px] font-bold tracking-widest uppercase hover:bg-[#F9E29D] transition-colors shadow-xl">Schedule</button>
               </div>
             </form>
           </div>

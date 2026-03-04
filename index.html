@@ -313,7 +313,7 @@
         <select 
           value={lang} 
           onChange={handleLanguageChange} 
-          className="bg-black/80 border border-[#D4AF37]/50 text-[#D4AF37] text-xs md:text-[10px] font-bold uppercase tracking-wider rounded-xl px-4 py-2.5 outline-none cursor-pointer text-center shadow-[0_0_15px_rgba(212,175,55,0.2)] hover:bg-[#D4AF37]/10 transition-colors"
+          className="bg-black/80 border border-[#D4AF37]/50 text-[#D4AF37] text-[10px] md:text-[10px] font-bold uppercase tracking-wider rounded-lg md:rounded-xl px-2 py-1.5 md:px-4 md:py-2.5 outline-none cursor-pointer text-center shadow-[0_0_15px_rgba(212,175,55,0.2)] hover:bg-[#D4AF37]/10 transition-colors"
         >
           <option value="en">ENG</option>
           <option value="hi">हिंदी (HI)</option>
@@ -648,18 +648,18 @@
         <div className="flex flex-col lg:flex-row w-full h-screen overflow-hidden bg-app">
           <GoogleTranslateWidget />
 
-          {/* MOBILE HEADER */}
-          <div className="lg:hidden flex items-center justify-between p-4 md:p-5 border-b border-[#D4AF37]/20 glass-premium z-40 sticky top-0 shadow-lg min-h-[70px]">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 flex items-center justify-center overflow-hidden shrink-0">
+          {/* MOBILE HEADER - Redesigned to be smaller */}
+          <div className="lg:hidden flex items-center justify-between p-3 md:p-5 border-b border-[#D4AF37]/20 glass-premium z-40 sticky top-0 shadow-lg min-h-[56px]">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 flex items-center justify-center overflow-hidden shrink-0">
                 <img src="Assets/Images/Logo.png" alt="Musicoul" className="w-full h-full object-contain" />
               </div>
-              <h4 className="serif text-3xl font-bold text-white tracking-wide">Musicoul</h4>
+              <h4 className="serif text-2xl font-bold text-white tracking-wide">Musicoul</h4>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
               <CustomLanguageSelector />
-              <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-3 bg-white/5 rounded-xl text-[#D4AF37] hover:bg-white/10 transition-colors">
-                {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+              <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-2 bg-white/5 rounded-lg text-[#D4AF37] hover:bg-white/10 transition-colors">
+                {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
               </button>
             </div>
           </div>
@@ -668,8 +668,8 @@
             <div className="fixed inset-0 bg-black/80 z-40 lg:hidden backdrop-blur-md" onClick={() => setIsMobileMenuOpen(false)} />
           )}
 
-          {/* SIDEBAR */}
-          <aside className={`fixed inset-y-0 left-0 z-50 transform ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} lg:relative lg:translate-x-0 transition-transform duration-300 w-80 lg:w-80 border-r border-white/5 glass flex flex-col p-6 shadow-[20px_0_50px_rgba(0,0,0,0.5)] lg:shadow-none`}>
+          {/* SIDEBAR - Compact navigation on mobile */}
+          <aside className={`fixed inset-y-0 left-0 z-50 transform ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} lg:relative lg:translate-x-0 transition-transform duration-300 w-[260px] lg:w-80 border-r border-white/5 glass flex flex-col p-4 lg:p-6 shadow-[20px_0_50px_rgba(0,0,0,0.5)] lg:shadow-none`}>
             <div className="hidden lg:flex items-center gap-5 mb-12 px-2">
               <div className="w-16 h-16 flex items-center justify-center shrink-0 overflow-hidden">
                 <img src="Assets/Images/Logo.png" alt="Musicoul" className="w-full h-full object-contain" />
@@ -680,42 +680,42 @@
               </div>
             </div>
 
-            <nav className="flex-1 space-y-3 overflow-y-auto pr-3 custom-scrollbar">
+            <nav className="flex-1 space-y-2 lg:space-y-3 overflow-y-auto pr-2 lg:pr-3 custom-scrollbar">
               {role === 'student' && (
-                <SidebarItem icon={<LayoutDashboard size={22}/>} label="Dashboard" active={activeTab === 'dashboard'} onClick={() => handleTabChange('dashboard')} />
+                <SidebarItem icon={<LayoutDashboard size={20} className="lg:w-[22px] lg:h-[22px]" />} label="Dashboard" active={activeTab === 'dashboard'} onClick={() => handleTabChange('dashboard')} />
               )}
 
               {role === 'teacher' && (
                 <>
-                  <SidebarItem icon={<LayoutDashboard size={22}/>} label="Dashboard" active={activeTab === 'dashboard'} onClick={() => handleTabChange('dashboard')} />
-                  <SidebarItem icon={<Calendar size={22}/>} label="Attendance" active={activeTab === 'attendance'} onClick={() => handleTabChange('attendance')} />
+                  <SidebarItem icon={<LayoutDashboard size={20} className="lg:w-[22px] lg:h-[22px]" />} label="Dashboard" active={activeTab === 'dashboard'} onClick={() => handleTabChange('dashboard')} />
+                  <SidebarItem icon={<Calendar size={20} className="lg:w-[22px] lg:h-[22px]" />} label="Attendance" active={activeTab === 'attendance'} onClick={() => handleTabChange('attendance')} />
                 </>
               )}
 
               {role === 'admin' && (
                 <>
-                  <div className="text-xs md:text-[10px] text-gray-500 font-bold uppercase tracking-widest mt-8 mb-4 px-4 border-b border-white/10 pb-2">Admin</div>
-                  <SidebarItem icon={<LayoutDashboard size={22}/>} label="Dashboard" active={activeTab === 'dashboard'} onClick={() => handleTabChange('dashboard')} />
-                  <SidebarItem icon={<Calendar size={22}/>} label="Attendance" active={activeTab === 'attendance'} onClick={() => handleTabChange('attendance')} />
-                  <SidebarItem icon={<Users size={22}/>} label="Users" active={activeTab === 'manage-users'} onClick={() => handleTabChange('manage-users')} />
-                  <SidebarItem icon={<BookOpen size={22}/>} label="Courses" active={activeTab === 'manage-courses'} onClick={() => handleTabChange('manage-courses')} />
+                  <div className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mt-6 lg:mt-8 mb-3 lg:mb-4 px-3 lg:px-4 border-b border-white/10 pb-2">Admin</div>
+                  <SidebarItem icon={<LayoutDashboard size={20} className="lg:w-[22px] lg:h-[22px]" />} label="Dashboard" active={activeTab === 'dashboard'} onClick={() => handleTabChange('dashboard')} />
+                  <SidebarItem icon={<Calendar size={20} className="lg:w-[22px] lg:h-[22px]" />} label="Attendance" active={activeTab === 'attendance'} onClick={() => handleTabChange('attendance')} />
+                  <SidebarItem icon={<Users size={20} className="lg:w-[22px] lg:h-[22px]" />} label="Users" active={activeTab === 'manage-users'} onClick={() => handleTabChange('manage-users')} />
+                  <SidebarItem icon={<BookOpen size={20} className="lg:w-[22px] lg:h-[22px]" />} label="Courses" active={activeTab === 'manage-courses'} onClick={() => handleTabChange('manage-courses')} />
                 </>
               )}
 
-              <div className="text-xs md:text-[10px] text-gray-500 font-bold uppercase tracking-widest mt-8 mb-4 px-4 border-b border-white/10 pb-2">Personal</div>
-              <SidebarItem icon={<UserIcon size={22}/>} label="Profile" active={activeTab === 'profile'} onClick={() => handleTabChange('profile')} />
+              <div className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mt-6 lg:mt-8 mb-3 lg:mb-4 px-3 lg:px-4 border-b border-white/10 pb-2">Personal</div>
+              <SidebarItem icon={<UserIcon size={20} className="lg:w-[22px] lg:h-[22px]" />} label="Profile" active={activeTab === 'profile'} onClick={() => handleTabChange('profile')} />
             </nav>
 
             {userData.email?.toLowerCase() === 'chandrashekharkolhe7@gmail.com' && (
-              <div className="mt-8 mb-4 glass p-5 rounded-2xl border-[#D4AF37]/20 shadow-lg">
-                <p className="text-xs md:text-[10px] text-[#D4AF37] uppercase tracking-widest mb-4 font-bold flex items-center gap-2">
-                  <Settings size={18} /> View As
+              <div className="mt-6 lg:mt-8 mb-4 glass p-4 lg:p-5 rounded-xl lg:rounded-2xl border-[#D4AF37]/20 shadow-lg">
+                <p className="text-[10px] text-[#D4AF37] uppercase tracking-widest mb-3 lg:mb-4 font-bold flex items-center gap-2">
+                  <Settings size={16} className="lg:w-[18px] lg:h-[18px]" /> View As
                 </p>
-                <div className="flex gap-2 bg-black/60 p-2 rounded-xl">
+                <div className="flex gap-2 bg-black/60 p-2 rounded-lg lg:rounded-xl">
                   {['student', 'teacher', 'admin'].map(r => (
                     <button 
                       key={r} onClick={() => updateLocalRole(r)}
-                      className={`flex-1 py-3 rounded-lg text-[10px] md:text-[9px] tracking-wider font-bold transition-all uppercase ${role === r ? 'bg-[#D4AF37] text-black shadow-md' : 'text-gray-400 hover:text-white hover:bg-white/5'}`}
+                      className={`flex-1 py-2 lg:py-3 rounded-md lg:rounded-lg text-[9px] tracking-wider font-bold transition-all uppercase ${role === r ? 'bg-[#D4AF37] text-black shadow-md' : 'text-gray-400 hover:text-white hover:bg-white/5'}`}
                     >
                       {r.substring(0,3)}
                     </button>
@@ -724,15 +724,15 @@
               </div>
             )}
 
-            <div className="mt-8 mb-6 glass p-5 rounded-2xl border-white/5 flex flex-col items-start gap-4 relative z-50">
-               <p className="text-xs md:text-[10px] text-gray-400 uppercase tracking-widest font-bold flex items-center gap-2">
+            <div className="mt-4 lg:mt-8 mb-4 lg:mb-6 glass p-4 lg:p-5 rounded-xl lg:rounded-2xl border-white/5 flex flex-col items-start gap-3 relative z-50">
+               <p className="text-[10px] text-gray-400 uppercase tracking-widest font-bold flex items-center gap-2">
                  Site Language
                </p>
                <div className="w-full"><CustomLanguageSelector /></div>
             </div>
 
-            <button onClick={logout} className="flex items-center gap-4 p-5 text-gray-500 hover:text-[#D4AF37] transition-all text-xs md:text-[11px] font-bold tracking-widest uppercase w-full rounded-2xl hover:bg-white/5 mt-auto border border-transparent hover:border-[#D4AF37]/30">
-              <LogOut size={24}/> <span>Sign Out</span>
+            <button onClick={logout} className="flex items-center gap-3 lg:gap-4 p-4 lg:p-5 text-gray-500 hover:text-[#D4AF37] transition-all text-[10px] lg:text-[11px] font-bold tracking-widest uppercase w-full rounded-xl lg:rounded-2xl hover:bg-white/5 mt-auto border border-transparent hover:border-[#D4AF37]/30">
+              <LogOut size={20} className="lg:w-[24px] lg:h-[24px]"/> <span>Sign Out</span>
             </button>
           </aside>
 
@@ -771,14 +771,14 @@
       return (
         <button 
           onClick={onClick} 
-          className={`w-full flex items-center gap-4 p-4 md:p-5 rounded-2xl transition-all duration-300 group ${
+          className={`w-full flex items-center gap-3 md:gap-4 p-3 md:p-5 rounded-xl md:rounded-2xl transition-all duration-300 group ${
             active 
               ? 'bg-white/10 text-[#D4AF37] border border-white/10 shadow-[0_0_20px_rgba(212,175,55,0.15)]' 
               : 'text-gray-400 hover:text-white hover:bg-white/5 border border-transparent'
           }`}
         >
           <span className={active ? 'text-[#D4AF37]' : 'group-hover:text-white transition-colors'}>{icon}</span>
-          <span className="text-sm md:text-[11px] font-bold uppercase tracking-widest">{label}</span>
+          <span className="text-[10px] md:text-[11px] font-bold uppercase tracking-widest">{label}</span>
         </button>
       );
     }
@@ -827,6 +827,7 @@
          </div>
        );
     }
+
 
     // ==========================================
     // STUDENT VIEW COMPONENTS
@@ -2384,7 +2385,7 @@
       );
     }
 
-    // Initialize React
+    // Initialize React Root
     const root = createRoot(document.getElementById('root'));
     root.render(<App />);
 

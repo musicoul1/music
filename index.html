@@ -580,7 +580,7 @@
             <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent opacity-40"></div>
             
             <div className="text-center mb-10">
-              <Music size={40} className="text-[#D4AF37] mx-auto mb-4" />
+              <img src="Assets/Images/Logo.png" alt="Musicoul Logo" className="w-20 h-20 mx-auto mb-4 object-contain" />
               <h1 className="serif text-4xl md:text-5xl mb-2 text-white">Musicoul</h1>
               <p className="text-[#D4AF37] text-xs tracking-widest uppercase font-bold">Conservatory Portal</p>
             </div>
@@ -648,8 +648,8 @@
           {/* MOBILE HEADER */}
           <div className="lg:hidden flex items-center justify-between p-4 border-b border-[#D4AF37]/20 glass-premium z-40 sticky top-0 shadow-lg">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-[#D4AF37] rounded-full flex items-center justify-center overflow-hidden shadow-[0_0_10px_rgba(212,175,55,0.4)]">
-                {userData.profilePic ? <img src={userData.profilePic} className="w-full h-full object-cover"/> : <Music size={18} className="text-black" />}
+              <div className="w-10 h-10 flex items-center justify-center overflow-hidden shrink-0">
+                <img src="Assets/Images/Logo.png" alt="Musicoul" className="w-full h-full object-contain" />
               </div>
               <h4 className="serif text-2xl font-bold text-white tracking-wide">Musicoul</h4>
             </div>
@@ -668,8 +668,8 @@
           {/* SIDEBAR */}
           <aside className={`fixed inset-y-0 left-0 z-50 transform ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} lg:relative lg:translate-x-0 transition-transform duration-300 w-72 border-r border-white/5 glass flex flex-col p-6`}>
             <div className="hidden lg:flex items-center gap-4 mb-10 px-2">
-              <div className="w-12 h-12 bg-[#D4AF37] rounded-full flex items-center justify-center shrink-0 overflow-hidden shadow-[0_0_15px_rgba(212,175,55,0.4)]">
-                {userData.profilePic ? <img src={userData.profilePic} className="w-full h-full object-cover"/> : <Music size={22} className="text-black" />}
+              <div className="w-12 h-12 flex items-center justify-center shrink-0 overflow-hidden">
+                <img src="Assets/Images/Logo.png" alt="Musicoul" className="w-full h-full object-contain" />
               </div>
               <div>
                 <h4 className="serif text-2xl font-medium text-white tracking-wide">Musicoul</h4>
